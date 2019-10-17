@@ -14,3 +14,15 @@ vim/bundle/vim-endwise/
 vim/bundle/vim-latex-live-preview/
 vim/bundle/vim-markdown/
 vim/bundle/vimtex/
+config/obs-studio/
+config/Android\ Open\ Source\ Project/
+config/QtProject.conf
+config/dconf/
+config/enchant/
+config/gtk-2.0/
+config/menus/
+config/mimeapps.list
+config/obs-studio/
+config/pavucontrol.ini
+config/pulse/
+config/vlc/vlc-qt-interface.conf
