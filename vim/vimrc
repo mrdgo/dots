@@ -1,0 +1,153 @@
+let myfiletypefile = "~/.vim/filetypes.vim"
+
+set tabstop=4
+set softtabstop=4
+set expandtab
+set hls is
+source ~/.vim/ftplugins/java_getset.vim
+
+" UI
+set number
+set showcmd
+set wildmenu
+set lazyredraw
+
+" solid underscore
+let &t_SI .= "\<Esc>[4 q"
+" solid block
+let &t_EI .= "\<Esc>[2 q"
+
+" copy paste to other programs via buffer '+'
+vnoremap <C-S-c> "+y
+map <C-S-v> "+p
+map <C-p> "+P
+"map <S-o> ko
+
+" insert mode
+imap <C-S-v> <ESC>"+pa
+imap <C-S-c> <ESC>"+yiWEa
+
+let loaded_matchparen = 1
+
+" Note: Skip initialization for vim-tiny or vim-small.
+if 0 | endif
+
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+set rtp+=~/.vim/bundle/Vundle.vim
+
+call vundle#begin()
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'miyakogi/conoline.vim'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'xuhdev/vim-latex-live-preview'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'tpope/vim-endwise'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'NLKNguyen/c-syntax.vim'
+Plugin 'morhetz/gruvbox'
+Plugin 'lervag/vimtex'
+Plugin 'vim-scripts/gnuplot-syntax-highlighting'
+Plugin 'mboughaba/i3config.vim'
+Plugin 'sngn/vim-i3blocks-syntax'
+Plugin 'lilydjwg/colorizer'
+Plugin 'dart-lang/dart-vim-plugin'
+call vundle#end()
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+set background=dark               " or light
+colorscheme gruvbox
+set laststatus=2
+
+let g:gruvbox_contrast_dark = 'dark'
+let g:gruvbox_termcolors = 256
+
+" some YouCompleteMe config
+let g:ycm_server_python_interpreter = '/usr/bin/python3'
+
+" airline
+let g:airline_theme='gruvbox'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_section_z = ''
+let g:airline_skip_empty_sections = 1
+let g:airline#extensions#wordcount#enabled = 0
+let g:airline#extensions#ycm#enabled = 0
+let g:airline#extensions#whitespace#enabled = 0
+
+" easymotion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" autodetect i3config
+"aug i3config_ft_detection
+  "au!
+  "au BufNewFile,BufRead ~/.config/i3/config set filetype=i3config
+"aug end
+
+" autodetect i3blocks config
+"aug i3blocks_ft_detection
+  "au!
+  "au BufNewFile,BufRead ~/.config/i3blocks/config set filetype=i3blocks
+"aug end
+
+" close all brackets with one keystroke
+let g:AutoPairsFlyMode = 1
+" define auto pairs
+autocmd FileType java let b:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''", '\w\zs<' : '>'}
+autocmd FileType java inoremap sysout System.out.println();<ESC>hi
+
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+" nmap s <Plug>(easymotion-overwin-f)
+" or
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
+" conoline config
+let g:conoline_auto_enable=1
+let g:conoline_use_colorscheme_default_normal=1
+let g:conoline_use_colorscheme_default_insert=1
+
+"""LATEX
+let g:livepreview_previewer = 'zathura'
+
+" Decide
+"let g:livepreview_engine = 'xelatex'
+let g:livepreview_engine = 'pdflatex'
+
+" Navigating with guides
+	inoremap ,, <Esc>/<++><Enter>"_c4l
+	vnoremap ,, <Esc>/<++><Enter>"_c4l
+    map ,, <Esc>/<++><Enter>"_c4l
+" Word count:
+	autocmd FileType tex map <F3> :w !detex \| wc -w<CR>
+	autocmd FileType tex inoremap <F3> <Esc>:w !detex \| wc -w<CR>
+" Code snippets
+	autocmd FileType tex inoremap ,fr \begin{frame}<Enter>\frametitle{}<Enter><Enter><++><Enter><Enter>\end{frame}<Enter><Enter><++><Esc>6kf}i
+	autocmd FileType tex inoremap ,ct \textcite{}<++><Esc>T{i
+	autocmd FileType tex inoremap ,cp \parencite{}<++><Esc>T{i
+	autocmd FileType tex inoremap ,en \begin{enumerate}<Enter><Enter>\end{enumerate}<Enter><Enter><++><Esc>3kA\item<Space>
+	autocmd FileType tex inoremap ,it \begin{itemize}<Enter><Enter>\end{itemize}<Enter><Enter><++><Esc>3kA\item<Space>
+	autocmd FileType tex inoremap ,im \item<Space>
+	autocmd FileType tex inoremap ,tab \begin{tabular}<Enter><++><Enter>\end{tabular}<Enter><Enter><++><Esc>4kA{}<Esc>i
+	autocmd FileType tex inoremap ,chap \chapter{}<Enter><Enter><++><Esc>2kf}i
+	autocmd FileType tex inoremap ,sec \section{}<Enter><Enter><++><Esc>2kf}i
+	autocmd FileType tex inoremap ,ssec \subsection{}<Enter><Enter><++><Esc>2kf}i
+	autocmd FileType tex inoremap ,sssec \subsubsection{}<Enter><Enter><++><Esc>2kf}i
