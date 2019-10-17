@@ -54,8 +54,6 @@ Plugin 'NLKNguyen/c-syntax.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'lervag/vimtex'
 Plugin 'vim-scripts/gnuplot-syntax-highlighting'
-Plugin 'mboughaba/i3config.vim'
-Plugin 'sngn/vim-i3blocks-syntax'
 Plugin 'lilydjwg/colorizer'
 Plugin 'dart-lang/dart-vim-plugin'
 call vundle#end()
@@ -86,18 +84,6 @@ let g:airline#extensions#whitespace#enabled = 0
 
 " easymotion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
-
-" autodetect i3config
-"aug i3config_ft_detection
-  "au!
-  "au BufNewFile,BufRead ~/.config/i3/config set filetype=i3config
-"aug end
-
-" autodetect i3blocks config
-"aug i3blocks_ft_detection
-  "au!
-  "au BufNewFile,BufRead ~/.config/i3blocks/config set filetype=i3blocks
-"aug end
 
 " close all brackets with one keystroke
 let g:AutoPairsFlyMode = 1
