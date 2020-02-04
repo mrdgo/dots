@@ -16,15 +16,17 @@
 
 window {
     background-color: @background;
-    border:           1;
-    padding:          200;
-    fullscreen:       true;
+    border:           0;
+    padding:          50;
+    fullscreen:       false;
+    width:            1400;
+    height:           900;
 }
 
 mainbox {
     border:  0;
     padding: 0;
-    lines:   5;
+    lines:   2;
 }
 
 message {
@@ -39,16 +41,16 @@ textbox {
 }
 
 listview {
-    border:       2px solid 0 0;
-    padding:      2px 0 0;
+    border:       0px solid 0 0;
+    padding:      0px 0 0;
     border-color: @separatorcolor;
-    spacing:      2px;
+    spacing:      0px;
     scrollbar:    @scrollbar;
 }
 
 element {
     border:  0;
-    padding: 15px;
+    padding: 10px;
 }
 
 element.normal.normal {

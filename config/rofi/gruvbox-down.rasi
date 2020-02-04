@@ -60,4 +60,4 @@
     selected-urgent-foreground:  @urgent-foreground;
 }
 
-@import "gruvbox-down1.rasi"
+@import "gruvbox-common.rasi"

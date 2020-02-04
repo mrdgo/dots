@@ -125,8 +125,23 @@ BOLD="\[$(tput bold)\]"
 export PS1="${LGRAY}[${GREEN}${BOLD}\u${RESET}${LGRAY}] [${BOLD}${LRED}\w${RESET}${LGRAY}] \n> ${RESET}"
 export MPD_HOST="/home/maxim/.mpd/socket"
 
-export PATH="$PATH:/home/maxim/.cargo/bin"
+export PATH="$PATH:/home/maxim/.cargo/bin:/home/maxim/Android/flutter/bin"
 
 rmd () {
     pandoc $1 | lynx -stdin
 }
+
+lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        if [ -d "$dir" ]; then
+            if [ "$dir" != "$(pwd)" ]; then
+                cd "$dir"
+            fi
+        fi
+    fi
+}
+

@@ -36,27 +36,35 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
-set rtp+=~/.vim/bundle/Vundle.vim
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-call vundle#begin()
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'miyakogi/conoline.vim'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'xuhdev/vim-latex-live-preview'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'tpope/vim-endwise'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'NLKNguyen/c-syntax.vim'
-Plugin 'morhetz/gruvbox'
-Plugin 'lervag/vimtex'
-Plugin 'vim-scripts/gnuplot-syntax-highlighting'
-Plugin 'lilydjwg/colorizer'
-Plugin 'dart-lang/dart-vim-plugin'
-call vundle#end()
+call plug#begin('~/.vim/plugged')
+
+Plug 'VundleVim/Vundle.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'miyakogi/conoline.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-endwise'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'NLKNguyen/c-syntax.vim'
+Plug 'morhetz/gruvbox'
+Plug 'lervag/vimtex'
+Plug 'vim-scripts/gnuplot-syntax-highlighting'
+Plug 'lilydjwg/colorizer'
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+Plug 'neovimhaskell/haskell-vim'
+Plug 'nbouscal/vim-stylish-haskell'
+
+call plug#end()
 
 " Required:
 filetype plugin indent on
@@ -65,14 +73,15 @@ syntax enable
 set background=dark               " or light
 colorscheme gruvbox
 set laststatus=2
+" transparent background
+hi Normal guibg=NONE ctermbg=NONE
 
-let g:gruvbox_contrast_dark = 'dark'
+"""""""""""""" theme
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_contrast_light = 'hard'
 let g:gruvbox_termcolors = 256
 
-" some YouCompleteMe config
-let g:ycm_server_python_interpreter = '/usr/bin/python3'
-
-" airline
+"""""""""""""" airline
 let g:airline_theme='gruvbox'
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tabline#enabled = 1
@@ -82,7 +91,16 @@ let g:airline#extensions#wordcount#enabled = 0
 let g:airline#extensions#ycm#enabled = 0
 let g:airline#extensions#whitespace#enabled = 0
 
-" easymotion
+" ALE support
+let g:airline#extensions#ale#enabled = 1
+
+"""""""""""""" ALE
+" switch off all auto linting and only lint on save.
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_enter = 0
+
+"""""""""""""" easymotion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
 " close all brackets with one keystroke
@@ -106,12 +124,56 @@ let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
-" conoline config
+"""""""""""""" conoline config
 let g:conoline_auto_enable=1
 let g:conoline_use_colorscheme_default_normal=1
 let g:conoline_use_colorscheme_default_insert=1
 
-"""LATEX
+"""""""""""""" Markdown config 
+let g:vim_markdown_folding_disabled = 1
+
+"""""""""""""" markdown preview
+" specify browser to open preview page
+" default: ''
+let g:mkdp_browser = 'firefox'
+
+" options for markdown render
+" mkit: markdown-it options for render
+" katex: katex options for math
+" uml: markdown-it-plantuml options
+" maid: mermaid options
+" disable_sync_scroll: if disable sync scroll, default 0
+" sync_scroll_type: 'middle', 'top' or 'relative', default value is 'middle'
+"   middle: mean the cursor position alway show at the middle of the preview page
+"   top: mean the vim top viewport alway show at the top of the preview page
+"   relative: mean the cursor position alway show at the relative positon of the preview page
+" hide_yaml_meta: if hide yaml metadata, default is 1
+" sequence_diagrams: js-sequence-diagrams options
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1,
+    \ 'sequence_diagrams': {}
+    \ }
+
+" use a custom markdown style must be absolute path
+let g:mkdp_markdown_css = ''
+
+" use a custom highlight style must absolute path
+let g:mkdp_highlight_css = ''
+
+" use a custom port to start server or random for empty
+let g:mkdp_port = ''
+
+" preview page title
+" ${name} will be replace with the file name
+let g:mkdp_page_title = '「${name}」'
+
+"""""""""""""" LATEX
 let g:livepreview_previewer = 'zathura'
 
 " Decide

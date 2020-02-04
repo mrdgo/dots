@@ -1,13 +1,3 @@
-! URXVT GENERAL CONFIG
-!------------------------------------------------
-URxvt*iconFile: /usr/share/icons/Faenza/apps/32/utilities-terminal.png
-IRC*iconFile: /usr/share/icons/Faenza/apps/32/xchat.png
-! URXVT FONTS
-!------------------------------------------------
-URxvt*font:xft:DejaVu Sans Mono:size=13
-!URxvt*font:xft:Roboto Thin:size=11
-!URxvt*letterSpace: 1
-URxvt*allow_bold: true
 ! URXVT FONT SETTINGS
 !------------------------------------------------
 Xft.autohint: true
@@ -17,23 +7,6 @@ Xft.hintstyle: hintslight
 !Xft.rgba: rgb
 Xft.lcdfilter: lcddefault
 
-! URXVT COPY PASTE SHORTCUTS
-!------------------------------------------------
-!URxvt.keysym.Shift-C: perl:clipboard:copy
-!URxvt.keysym.Shift-V: perl:clipboard:paste
-URxvt.perl-ext-common: selection-to-clipboard
-! URXVT SCROLLBAR AND CURSOR STYLE
-!------------------------------------------------
-URxvt*saveLines: 300000
-URxvt.scrollBar: false
-!URxvt*scrollstyle: plain
-URxvt*cursorBlink: false
-! blinking is really bad in terms of energy consumption
-URxvt*cursorUnderline: true
-
-! URXVT FULLSCREEN TOGGLE
-!------------------------------------------------
-URxvt.keysym.F11: perl:fullscreen:switch
 ! URXVT COLORS
 !------------------------------------------------
 URxvt.color24:  #076678

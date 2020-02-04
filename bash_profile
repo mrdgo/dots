@@ -9,4 +9,4 @@ if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 	startx
 fi
 
-export PATH="$PATH:$HOME/.cargo/bin:$HOME/Android/bin/flutter"
+export PATH="$PATH:$HOME/.cargo/bin"

@@ -1,27 +1,29 @@
 [KFileDialog Settings]
-Recent Files[$e]=20190927_133517.mp4,file:$HOME/videos/youtube/2019_10_18/yt/sprachfehler.png,file:$HOME/videos/youtube/2019_10_18/yt/pause1.png,file:$HOME/videos/youtube/2019_10_18/yt/background.mp3,file:$HOME/videos/youtube/2019_10_18/yt/20191013_143848.mp4,file:$HOME/videos/youtube/2019_10_18/yt/20191013_095233.mp4,file:$HOME/videos/youtube/2019_10_18/yt/20191013_092943.mp4,file:$HOME/videos/youtube/2019_10_18/yt/20191012_213157.mp4,file:$HOME/videos/youtube/2019_10_18/yt/20191012_213032.mp4,file:$HOME/videos/youtube/2019_10_11/Abspann.png,file:$HOME/videos/youtube/2019_10_11/_-XusnUBYzDVY.mp4,file:$HOME/videos/youtube/2019_10_11/20191011_150150.mp4,file:$HOME/videos/youtube/2019_10_02/20191004_101225.mp4,file:$HOME/videos/youtube/2019_10_02/welche_kunst.kdenlive,file:$HOME/videos/youtube/2019_10_02/k3_2.png,file:$HOME/videos/youtube/2019_10_02/k3_1.png
-Recent URLs[$e]=file:$HOME/videos/youtube/2019_10_02/,file:$HOME/videos/youtube/2019_10_11/,file:$HOME/videos/youtube/2019_10_18/yt/
+Recent Files[$e]=20190927_133517.mp4,file:$HOME/videos/youtube/9/20191121_102011.mp4,file:$HOME/videos/youtube/9/20191121_095724.mp4,file:$HOME/videos/youtube/9/20191120_123341.mp4,file:$HOME/videos/youtube/9/20191120_122207.mp4,file:$HOME/videos/youtube/8/20191114_114224.mp4,file:$HOME/videos/youtube/5/like.png,file:$HOME/videos/youtube/4/yt/background.mp3,file:$HOME/videos/youtube/7/geld1/outtake.png,file:$HOME/videos/youtube/7/geld1/geld_verdienen.png,file:$HOME/videos/youtube/7/geld1/app_station.png,file:$HOME/videos/youtube/7/geld1/nichts_tun_zu_geld.png,file:$HOME/videos/youtube/7/geld1/nichts_tun.png,file:$HOME/videos/youtube/7/geld1/20191108_172118.mp4,file:$HOME/videos/youtube/7/geld1/20191108_170420.mp4,file:$HOME/videos/youtube/7/geld1/20191108_170313.mp4,file:$HOME/videos/youtube/6/Squishy.wav,file:$HOME/videos/youtube/6/verwirren.png,file:$HOME/videos/youtube/6/20191029_083233.mp4
+Recent URLs[$e]=file:$HOME/videos/youtube/5/,file:$HOME/videos/youtube/4/yt/,file:$HOME/videos/youtube/,file:$HOME/videos/youtube/6/,file:$HOME/videos/youtube/7/geld1/,file:$HOME/videos/youtube/4/,file:$HOME/videos/youtube/8/,file:$HOME/videos/youtube/9/
 
 [MainWindow]
 Height 1080=1061
-State=AAAA/wAAAAD9AAAAAQAAAAIAAAd+AAACHvwBAAAADPsAAAAYAG4AbwB0AGUAcwBfAHcAaQBkAGcAZQB0AAAAAAD/////AAAARgD////7AAAADgBsAGkAYgByAGEAcgB5AAAAAAD/////AAAAWAD////7AAAAGgBhAHUAZABpAG8AcwBwAGUAYwB0AHIAdQBtAAAAAAD/////AAAAaQD////7AAAAFgBwAHIAbwBqAGUAYwB0AF8AYgBpAG4BAAAAAAAAAS4AAABYAP////wAAAE0AAABeAAAAHsA////+gAAAAABAAAAAvsAAAAYAGUAZgBmAGUAYwB0AF8AcwB0AGEAYwBrAQAAAAD/////AAAAVgD////7AAAAHgBjAGwAaQBwAF8AcAByAG8AcABlAHIAdABpAGUAcwEAAAAA/////wAAAEQA/////AAAArIAAAGRAAAAugD////6AAAAAQEAAAAC+wAAAB4AdAByAGEAbgBzAGkAdABpAG8AbgBfAGwAaQBzAHQBAAAAAP////8AAABWAP////sAAAAWAGUAZgBmAGUAYwB0AF8AbABpAHMAdAEAAAAA/////wAAALoA/////AAABEkAAAM1AAABQAD////6AAAAAQEAAAAC+wAAABgAYwBsAGkAcABfAG0AbwBuAGkAdABvAHIBAAAAAP////8AAAFAAP////sAAAAeAHAAcgBvAGoAZQBjAHQAXwBtAG8AbgBpAHQAbwByAQAAAAD/////AAABQAD////7AAAAGAB1AG4AZABvAF8AaABpAHMAdABvAHIAeQAAAAAA/////wAAAEYA////+wAAABYAdgBlAGMAdABvAHIAcwBjAG8AcABlAAAAAAD/////AAABUQD////7AAAAEAB3AGEAdgBlAGYAbwByAG0AAAAAAP////8AAACsAP////sAAAAUAHIAZwBiAF8AcABhAHIAYQBkAGUAAAAAAP////8AAACsAP////sAAAASAGgAaQBzAHQAbwBnAHIAYQBtAAAAAAD/////AAABVQD///8AAAd+AAAByAAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAACAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAAAAAAAAAABgAZQB4AHQAcgBhAFQAbwBvAGwAQgBhAHIBAAAC4P////8AAAAAAAAAAA==
+State=AAAA/wAAAAD9AAAAAQAAAAIAAAd+AAAClfwBAAAADPsAAAAYAG4AbwB0AGUAcwBfAHcAaQBkAGcAZQB0AAAAAAD/////AAAARgD////7AAAADgBsAGkAYgByAGEAcgB5AAAAAAD/////AAAAWAD////7AAAAGgBhAHUAZABpAG8AcwBwAGUAYwB0AHIAdQBtAAAAAAD/////AAAAaQD////7AAAAFgBwAHIAbwBqAGUAYwB0AF8AYgBpAG4BAAAAAAAAANkAAABYAP////wAAADfAAAB0wAAAHsA////+gAAAAABAAAAAvsAAAAYAGUAZgBmAGUAYwB0AF8AcwB0AGEAYwBrAQAAAAD/////AAAAVgD////7AAAAHgBjAGwAaQBwAF8AcAByAG8AcABlAHIAdABpAGUAcwEAAAAA/////wAAAEQA/////AAAArgAAADSAAAAugD////6AAAAAQEAAAAC+wAAAB4AdAByAGEAbgBzAGkAdABpAG8AbgBfAGwAaQBzAHQBAAAAAP////8AAABWAP////sAAAAWAGUAZgBmAGUAYwB0AF8AbABpAHMAdAEAAAAA/////wAAALoA/////AAAA5AAAAPuAAABQAD////6AAAAAQEAAAAC+wAAABgAYwBsAGkAcABfAG0AbwBuAGkAdABvAHIBAAAAAP////8AAAFAAP////sAAAAeAHAAcgBvAGoAZQBjAHQAXwBtAG8AbgBpAHQAbwByAQAAAAD/////AAABQAD////7AAAAGAB1AG4AZABvAF8AaABpAHMAdABvAHIAeQAAAAAA/////wAAAEYA////+wAAABYAdgBlAGMAdABvAHIAcwBjAG8AcABlAAAAAAD/////AAABUQD////7AAAAEAB3AGEAdgBlAGYAbwByAG0AAAAAAP////8AAACsAP////sAAAAUAHIAZwBiAF8AcABhAHIAYQBkAGUAAAAAAP////8AAACsAP////sAAAASAGgAaQBzAHQAbwBnAHIAYQBtAAAAAAD/////AAABVQD///8AAAd+AAABUQAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAACAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAAAAAAAAAABgAZQB4AHQAcgBhAFQAbwBvAGwAQgBhAHIBAAAC4P////8AAAAAAAAAAA==
 StatusBar=Disabled
 ToolBarsMovable=Disabled
 Width 1920=1918
 
 [Recent Dirs]
-KdenliveClipFolder[$e]=$HOME/videos/youtube/2019_10_18/yt/,$HOME/videos/youtube/2019_10_11/,$HOME/videos/youtube/2019_10_02/
-KdenliveProjectsFolder[$e]=$HOME/videos/youtube/2019_10_18/yt,$HOME/videos/youtube/2019_10_18/yt/,$HOME/videos/youtube/2019_10_11
+KdenliveClipFolder[$e]=$HOME/videos/youtube/9/,$HOME/videos/youtube/8/,$HOME/videos/youtube/5/
+KdenliveProjectsFolder[$e]=$HOME/videos/youtube/9,$HOME/videos/youtube/9/,$HOME/videos/youtube/8
 
 [Recent Files]
-File1[$e]=$HOME/videos/youtube/2019_10_02/welche_kunst.kdenlive
-File2[$e]=$HOME/videos/youtube/2019_10_02/welche_kunst_mitEnde.kdenlive
-File3[$e]=$HOME/videos/youtube/2019_10_11/mt.kdenlive
-File4[$e]=$HOME/videos/youtube/2019_10_18/yt/projekt.kdenlive
-Name1[$e]=welche_kunst.kdenlive
-Name2[$e]=welche_kunst_mitEnde.kdenlive
-Name3[$e]=mt.kdenlive
-Name4[$e]=projekt.kdenlive
+File1[$e]=$HOME/videos/youtube/5/video5.kdenlive
+File2[$e]=$HOME/videos/youtube/6/vid6.kdenlive
+File3[$e]=$HOME/videos/youtube/7/geld1/vid7.kdenlive
+File4[$e]=$HOME/videos/youtube/8/top7.kdenlive
+File5[$e]=$HOME/videos/youtube/9/ki1.kdenlive
+Name1[$e]=video5.kdenlive
+Name2[$e]=vid6.kdenlive
+Name3[$e]=vid7.kdenlive
+Name4[$e]=top7.kdenlive
+Name5[$e]=ki1.kdenlive
 
 [Scope_Histogram]
 autoRefresh=true
@@ -58,7 +60,7 @@ realtime=false
 rec601=false
 
 [bin]
-treeviewheaders=AAAA/wAAAAAAAAABAAAAAQAAAAABAAAAAAAAAAAAAAADBgAAAAIAAAACAAAAZAAAAAEAAABGAAAAfgAAAAMBAQABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAMAAAB+AAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAPoAAAAAEA=
+treeviewheaders=AAAA/wAAAAAAAAABAAAAAQAAAAABAAAAAAAAAAAAAAADBgAAAAIAAAACAAAAZAAAAAEAAABGAAAAxAAAAAMBAQABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAMAAADEAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAPoAAAAAEA=
 
 [capture]
 decklink_extension=mov
