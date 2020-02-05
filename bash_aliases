@@ -24,9 +24,9 @@ alias dl="cd ~/github/dl_course/Deep_Learning_A_Z"
 alias pres="xrandr --output HDMI1 --mode 1024x768 --same-as eDP1"
 
 # only second monitor
-alias big="xrandr --output eDP1 --off --output HDMI1 --auto && feh --bg-fill $HOME/bilder/wallpaper/saitama_ok_gruv.jpg"
+alias big="xrandr --output eDP1 --off --output HDMI1 --auto && feh --bg-fill $HOME/bilder/wallpaper/liebe.jpg"
 
-alias sml="xrandr --output HDMI1 --off --output eDP1 --auto && feh --bg-fill $HOME/bilder/wallpaper/saitama_ok_gruv.jpg"
+alias sml="xrandr --output HDMI1 --off --output eDP1 --auto && feh --bg-fill $HOME/bilder/wallpaper/liebe.jpg"
 
 alias rst="cd ~/github/learnRest"
 alias dfs="cd ~/github/dfs"

@@ -15,7 +15,7 @@
 
 
 window {
-    background-color: #28282800;
+    background-color: #28282880;
     border:           0;
     padding:          100;
     fullscreen:       false;
