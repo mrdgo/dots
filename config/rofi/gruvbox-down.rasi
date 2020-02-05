@@ -17,7 +17,8 @@
     scrollbar: true;
 
     /* Gruvbox dark colors */
-    gruvbox-dark-bg0-soft:     #32302f;
+    gruvbox-dark-bg0-soft:     #32302f80;
+    gruvbox-dark-bg-soft:      #32302f;
     gruvbox-dark-bg1:          #3c3836;
     gruvbox-dark-bg3:          #665c54;
     gruvbox-dark-fg0:          #fbf1c7;
@@ -43,7 +44,7 @@
     alternate-normal-background: @gruvbox-dark-bg1;
     alternate-normal-foreground: @foreground;
     selected-normal-background:  @gruvbox-green;
-    selected-normal-foreground:  @background;
+    selected-normal-foreground:  @gruvbox-dark-bg-soft;
 
     active-background:           @gruvbox-dark-green;
     active-foreground:           @background;
@@ -60,4 +61,4 @@
     selected-urgent-foreground:  @urgent-foreground;
 }
 
-@import "gruvbox-common.rasi"
+@import "gruvbox-down1.rasi"

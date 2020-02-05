@@ -3,4 +3,4 @@ dunst &
 compton &
 $HOME/dokumente/proj/slstatus/slstatus &
 export _JAVA_AWT_WM_NONREPARENTING=1
-feh --bg-fill $HOME/bilder/wallpaper/deer.jpg
+feh --bg-fill $HOME/bilder/wallpaper/liebe.jpg

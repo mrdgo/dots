@@ -9,35 +9,38 @@
 
 * {
 
-    font: "System San Francisco Display 21";
+    font: "System San Francisco Display 28";
 
 }
 
 
 window {
-    background-color: @background;
+    background-color: #28282800;
     border:           0;
-    padding:          50;
+    padding:          100;
     fullscreen:       false;
     width:            1400;
-    height:           900;
+    height:           904;
 }
 
 mainbox {
     border:  0;
     padding: 0;
-    lines:   2;
 }
 
 message {
-    border:       2px 0 0;
+    border:       0px 0 0;
     border-color: @separatorcolor;
-    padding:      1px;
+    padding:      0px;
 }
 
 textbox {
     highlight:  @highlight;
     text-color: @foreground;
+}
+
+inputbar {
+    enabled: false;
 }
 
 listview {

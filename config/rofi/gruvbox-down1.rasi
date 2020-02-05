@@ -16,9 +16,11 @@
 
 window {
     background-color: @background;
-    border:           1;
-    padding:          200;
-    fullscreen:       true;
+    border:           0;
+    padding:          100;
+    height:           452;
+    width:            600;
+    fullscreen:       false;
 }
 
 mainbox {
@@ -36,6 +38,7 @@ message {
 textbox {
     highlight:  @highlight;
     text-color: @foreground;
+    height: 0;
 }
 
 inputbar {
@@ -43,10 +46,10 @@ inputbar {
 }
 
 listview {
-    border:       2px solid 0 0;
-    padding:      2px 0 0;
+    border:       0px solid 0 0;
+    padding:      0px 0 0;
     border-color: @separatorcolor;
-    spacing:      2px;
+    spacing:      0px;
     scrollbar:    @scrollbar;
 }
 

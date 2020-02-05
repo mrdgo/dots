@@ -7,7 +7,8 @@
 
 OPTIONS=" Lock\n Logout\n Reboot system\n Power-off system"
 
-LAUNCHER="rofi -width 30 -theme gruvbox-dark-soft -dmenu -i -p rofi-power"
+LAUNCHER="rofi -width 30 -theme gruvbox-down -dmenu -i -p rofi-power"
+
 USE_LOCKER="false"
 LOCKER="/home/maxim/.config/blurlock"
 
