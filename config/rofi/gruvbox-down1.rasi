@@ -21,12 +21,14 @@ window {
     height:           452;
     width:            600;
     fullscreen:       false;
+    border-radius:      12px;
 }
 
 mainbox {
     border:  0;
     padding: 0;
     lines:   0;
+    border-radius:      12px;
 }
 
 message {
@@ -56,6 +58,7 @@ listview {
 element {
     border:  0;
     padding: 15px;
+    border-radius:      12px;
 }
 
 element.normal.normal {

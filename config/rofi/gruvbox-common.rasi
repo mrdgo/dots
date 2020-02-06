@@ -15,17 +15,19 @@
 
 
 window {
-    background-color: #28282880;
-    border:           0;
-    padding:          100;
-    fullscreen:       false;
-    width:            1400;
-    height:           904;
+    background-color:   #28282880;
+    border:             0;
+    padding:            100;
+    fullscreen:         false;
+    width:              1400;
+    height:             904;
+    border-radius:      12px;
 }
 
 mainbox {
     border:  0;
     padding: 0;
+    border-radius:      12px;
 }
 
 message {
@@ -54,6 +56,7 @@ listview {
 element {
     border:  0;
     padding: 10px;
+    border-radius:      12px;
 }
 
 element.normal.normal {
