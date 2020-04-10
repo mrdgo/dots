@@ -125,7 +125,8 @@ BOLD="\[$(tput bold)\]"
 export PS1="${LGRAY}[${GREEN}${BOLD}\u${RESET}${LGRAY}] [${BOLD}${LRED}\w${RESET}${LGRAY}] \n> ${RESET}"
 export MPD_HOST="/home/maxim/.mpd/socket"
 
-export PATH="$PATH:/home/maxim/.cargo/bin:/home/maxim/Android/flutter/bin"
+export PATH="$PATH:/home/maxim/Android/flutter/bin"
+# /home/maxim/.cargo/bin:
 
 rmd () {
     pandoc $1 | lynx -stdin
