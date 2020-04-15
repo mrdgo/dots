@@ -21,7 +21,6 @@ window {
     fullscreen:         false;
     width:              1400;
     height:             904;
-    border-radius:      12px;
 }
 
 mainbox {

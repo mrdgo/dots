@@ -1,3 +1,4 @@
+alias ..="cd .."
 alias screencast="ffmpeg -f x11grab -s 1920x1080 -i :0.0 out.mkv"
 alias webcast="ffmpeg -i /dev/video1 -c:v libx264 out.mkv"
 
@@ -8,36 +9,30 @@ alias pi2='ssh -J ty82xile@i4lab1.cs.fau.de pi@10.188.42.172'
 
 alias vpn='/opt/cisco/anyconnect/bin/vpnui'
 
-alias spic="cd ~/dokumente/hiwi/i4/unittests/uebungen"
-alias sü="cd ~/dokumente/hiwi/i4/SPIC_WS19/folien"
 alias mp="cd ~/dokumente/uni/masterprojekt/pi_files/polar_rs/"
 alias ma="cd ~/dokumente/uni/marbeit"
 alias moc="cd ~/dokumente/uni/WS19/modcrypt"
-alias ru="cd ~/dokumente/uni/misc/rust/learn"
 alias hs="cd ~/dokumente/uni/haskell"
+
+alias tms="~/dokumente/isento/tms.sh"
 
 # non uni shortcut
 alias yt="cd ~/videos/youtube"
 alias dl="cd ~/github/dl_course/Deep_Learning_A_Z"
 
 # enable second monitor
-alias pres="xrandr --output HDMI1 --mode 1024x768 --same-as eDP1"
+alias pres="xrandr --output HDMI1 --mode 1920x1080 --left-of eDP1 && feh --bg-fill $HOME/bilder/wallpaper/liebe.jpg --bg-fill $HOME/bilder/wallpaper/liebe.jpg"
+alias proff="xrandr --output HDMI1 --off && feh --bg-fill $HOME/bilder/wallpaper/liebe.jpg"
 
 # only second monitor
 alias big="xrandr --output eDP1 --off --output HDMI1 --auto && feh --bg-fill $HOME/bilder/wallpaper/liebe.jpg"
-
 alias sml="xrandr --output HDMI1 --off --output eDP1 --auto && feh --bg-fill $HOME/bilder/wallpaper/liebe.jpg"
-
-alias rst="cd ~/github/learnRest"
-alias dfs="cd ~/github/dfs"
 
 alias ud="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 
-alias mail="neomutt"
-
 alias tv="vim +LLPStartPreview"
-alias ctv="~/.config/tv.sh"
 alias mdv="vim +MarkdownPreview"
+alias ctv="~/.config/tv.sh"
 
 alias tor="~/util/tor-browser_en-US/Browser/start-tor-browser --detach"
 
@@ -60,13 +55,14 @@ alias gpc="git push -u custom"
 alias ydl="~/.config/ydl.sh"
 alias vba="vim ~/.bash_aliases; . ~/.bash_aliases"
 alias vrc="vim ~/.bashrc; . ~/.bashrc"
+alias vvrc="vim ~/.vim/vimrc"
 alias clean_file='sed -i.bak "/^s*[#;]/d;/^$/d"'
 
 alias :q="exit"
-alias fup="sudo updatedb"
-alias f="locate"
-alias lo="locate"
 
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+
+alias alt='make massdrop/alt:maxim'
+alias kb='setxkbmap'
