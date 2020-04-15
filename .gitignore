@@ -26,3 +26,16 @@ config/obs-studio/
 config/pavucontrol.ini
 config/pulse/
 config/vlc/vlc-qt-interface.conf
+config/Microsoft/
+config/Trolltech.conf
+config/Unity Hub/
+config/UnityHub/
+config/autostart/
+config/blender/
+config/picom.conf
+config/teams/
+config/unity3d/
+config/vlc/
+config/zoomus.conf
+vim/autoload/
+vim/plugged/
