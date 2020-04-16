@@ -1,4 +1,3 @@
-alias ..="cd .."
 alias screencast="ffmpeg -f x11grab -s 1920x1080 -i :0.0 out.mkv"
 alias webcast="ffmpeg -i /dev/video1 -c:v libx264 out.mkv"
 
@@ -59,6 +58,7 @@ alias vvrc="vim ~/.vim/vimrc"
 alias clean_file='sed -i.bak "/^s*[#;]/d;/^$/d"'
 
 alias :q="exit"
+alias ..="cd .."
 
 alias ll='ls -alF'
 alias la='ls -A'

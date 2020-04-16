@@ -45,8 +45,6 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'VundleVim/Vundle.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'miyakogi/conoline.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
@@ -107,25 +105,6 @@ hi Normal guibg=NONE ctermbg=NONE
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_contrast_light = 'hard'
 let g:gruvbox_termcolors = 256
-
-"""""""""""""" airline
-let g:airline_theme='gruvbox'
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_section_z = ''
-let g:airline_skip_empty_sections = 1
-let g:airline#extensions#wordcount#enabled = 0
-let g:airline#extensions#ycm#enabled = 0
-let g:airline#extensions#whitespace#enabled = 0
-
-" ALE support
-let g:airline#extensions#ale#enabled = 1
-
-"""""""""""""" ALE
-" switch off all auto linting and only lint on save.
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_enter = 0
 
 """""""""""""" easymotion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
