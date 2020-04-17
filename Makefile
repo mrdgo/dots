@@ -1,4 +1,4 @@
-d=~/github/dotfiles
+d=~/dots
 
 bashrc=bashrc
 brc=~/.$(bashrc)

@@ -55,6 +55,7 @@ alias ydl="~/.config/ydl.sh"
 alias vba="vim ~/.bash_aliases; . ~/.bash_aliases"
 alias vrc="vim ~/.bashrc; . ~/.bashrc"
 alias vvrc="vim ~/.vim/vimrc"
+alias vi3="vim ~/.config/i3/config"
 alias clean_file='sed -i.bak "/^s*[#;]/d;/^$/d"'
 
 alias :q="exit"
@@ -65,4 +66,5 @@ alias la='ls -A'
 alias l='ls -CF'
 
 alias alt='make massdrop/alt:maxim'
-alias kb='setxkbmap'
+alias de='setxkbmap de'
+alias us='setxkbmap us -variant intl'
