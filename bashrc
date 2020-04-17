@@ -146,3 +146,15 @@ lfcd () {
     fi
 }
 
+tms () {
+    file="$HOME/dokumente/isento/tms.md"
+    dt=`date +'%d.%m.%Y'`
+    last=`tail -n 3 $file | awk '/# *.*.*/ {print $2}'`
+
+    if [ "$dt" = "$last" ]; then
+        vim +`wc -l $file`
+    else
+        echo -e "# $dt\n00:00 00:00\n- 00:00" >> $file
+        vim +`wc -l $file`
+    fi
+}
