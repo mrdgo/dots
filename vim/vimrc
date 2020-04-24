@@ -44,7 +44,6 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'VundleVim/Vundle.vim'
 Plug 'miyakogi/conoline.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
