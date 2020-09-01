@@ -26,4 +26,5 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-export PATH="$PATH:/snap/bin/:$HOME/.cargo/bin:$HOME/Android/flutter/bin"
+export EDITOR="vim"
+export PATH="$PATH:/usr/lib/dart/bin"

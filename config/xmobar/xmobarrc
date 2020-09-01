@@ -1,0 +1,50 @@
+Config { font = "xft:Mononoki:size=12:antialias=true:hinting=true"
+       , additionalFonts = [ "xft:Mononoki:pixelsize=11:antialias=true:hinting=true"
+                           , "xft:Mononoki:pixelsize=16:antialias=true:hinting=true"
+                           , "FontAwesome:pixelsize=13"
+                            ]
+       , borderColor = "#282828"
+       , border = TopB
+       , bgColor = "#282828"
+       , fgColor = "#ebdbb2"
+       -- , alpha = 250
+       , position = Top
+       , textOffset = -1
+       , iconOffset = -1
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = False
+       , hideOnStart = False
+       , iconRoot = "."
+       , allDesktops = True
+       , overrideRedirect = True
+       , commands = [ Run Network "enp0s31f6" ["-L","0","-H","32",
+                                          "--normal","#b8bb26","--high","#9d0006"] 10
+                    , Run Network "wlp6s0" ["-L","0","-H","32",
+                                          "--normal","#b8bb26","--high","#9d0006"] 10
+                    , Run Cpu ["-L","3","-H","50",
+                               "--normal","#b8bb26","--high","#9d0006"] 10
+                    , Run Date "%b %_d %Y %H:%M:%S" "date" 10
+                    -- battery monitor
+                    , Run Battery        [ "--template" , "Batt: <acstatus>"
+                                , "--Low"      , "10"        -- units: %
+                                , "--High"     , "80"        -- units: %
+                                , "--low"      , "#9d0006"
+                                , "--normal"   , "#fe8019"
+                                , "--high"     , "#b8bb26"
+
+                                , "--" -- battery specific options
+                                -- discharging status
+                                , "-o"  , "<left>% (<timeleft>)"
+                                -- AC "on" status
+                                , "-O"    , "<fc=#fe8019>Charging</fc>"
+                                -- charged status
+                                , "-i"  , "<fc=#b8bb26>Charged</fc>"
+                            ] 50
+                    , Run UnsafeStdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = " λ | %battery% | %UnsafeStdinReader% | }\
+                    \{ | %cpu% | %enp0s31f6% - %wlp6s0% | <fc=#fe8019>%date%</fc>"
+       }
