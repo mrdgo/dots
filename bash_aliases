@@ -4,7 +4,7 @@ alias webcast="ffmpeg -i /dev/video1 -c:v libx264 out.mkv"
 alias uni="ssh ty82xile@faui0sr0.cs.fau.de"
 
 alias pi1='ssh -J ty82xile@i4lab1.cs.fau.de pi@10.188.42.164'
-alias pi2='ssh -J ty82xile@i4lab1.cs.fau.de pi@10.188.42.174'
+alias pi2='ssh -J ty82xile@i4lab1.cs.fau.de pi@10.188.42.172'
 
 alias vpn='/opt/cisco/anyconnect/bin/vpnui'
 
@@ -29,6 +29,7 @@ alias r="lfcd"
 alias i="devour sxiv -rfb"
 alias z="devour zathura"
 alias ydl="~/.config/ydl.sh"
+alias fix="echo 218.8"
 
 # youtube-dl
 alias yta-aac="youtube-dl --extract-audio --audio-format aac "

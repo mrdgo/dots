@@ -37,6 +37,10 @@ BOLD="\[$(tput bold)\]"
 export PS1="${LGRAY}[${GREEN}${BOLD}\w${RESET}${LGRAY}]\n ${ORANGE}λ${RESET} "
 
 export PATH="$PATH:/home/maxim/flutter/bin:/home/maxim/.local/bin"
+export EDITOR="vim"
+
+# Configure pfetch
+export PF_INFO="ascii title os kernel uptime pkgs shell wm editor memory palette"
 
 lfcd () {
     tmp="$(mktemp)"

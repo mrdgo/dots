@@ -1,6 +1,0 @@
-#!/bin/bash
-scrot /tmp/screenshot.png
-convert /tmp/screenshot.png -blur 0x7 /tmp/screenshotblur.png
-rm /tmp/screenshot.png
-i3lock -u -i /tmp/screenshotblur.png && systemctl suspend
-rm /tmp/screenshotblur.png
