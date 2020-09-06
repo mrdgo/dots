@@ -1,5 +1,5 @@
-#env:
-#TERM: Alacritty
+env:
+  TERM: st
 
 window:
   padding:
@@ -7,7 +7,7 @@ window:
     y: 10
   dynamic_padding: false
   decorations: none
-  startup_mode: Windowed
+  #startup_mode: Fullscreen
   title: alacritty
   dynamic_title: true
   class:

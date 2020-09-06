@@ -106,6 +106,8 @@ searchList :: [(String, S.SearchEngine)]
 searchList = [ ("a", archwiki)
              , ("d", S.duckduckgo)
              , ("g", S.google)
+             , ("s", S.scholar) -- google scholar
+             , ("w", S.alpha) -- wolfram alpha
              , ("h", S.hoogle)
              , ("y", S.youtube)
              , ("z", S.amazon)
@@ -141,7 +143,8 @@ myKeys = [
     , ("S-<XF86AudioRaiseVolume>", spawn "light -A 5")
 
     -- Controls for mocp music player.
-    , ("M-u o", spawn "/home/maxim/.cargo/bin/alacritty -e mocp")
+    -- -d: dimensions, -t: title
+    , ("M-u o", spawn "/home/maxim/.cargo/bin/alacritty -d 100 26 --position 100 30 -t \"mocp\" -e mocp")
     , ("M-u p", spawn "mocp --play")
     , ("M-u l", spawn "mocp --next")
     , ("M-u h", spawn "mocp --previous")
@@ -167,6 +170,7 @@ myManageHook :: XMonad.Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
     [ title =? "Mozilla Firefox"     --> doShift ( myWorkspaces !! 1 )
     , (className =? "Mozilla Firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
+    , title =? "mocp" --> doFloat
     ] 
 
 main = do
