@@ -1,11 +1,12 @@
-# Dotfiles for i3wm machine
+# Dotfiles for xmonad machine
 
-Here you can easily see my i3wm setup.
+Here you can easily see and reproduce my setup.
 
 I also added some other configs:
 - Vim setup
 - rofi config (originally from: https://github.com/bardisty/gruvbox-rofi)
 - lf config (terminal file browser, sadly doesn't support 24bit colors)
 - Bash setup (mainly aliases)
-- i3blocks currently displays: 
-        WiFi | audio volume | xbacklight -get | cpu temperature | cpu clock speed | battery status | date & time (only with precision to minutes, which saves energy)
+- XMonad window manager config
+- XMobar top panel config
+- Alacritty terminal emulator config

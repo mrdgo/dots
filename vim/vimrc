@@ -2,9 +2,13 @@ let myfiletypefile = "~/.vim/filetypes.vim"
 
 set tabstop=4
 set softtabstop=4
+set shiftwidth=4
 set expandtab
 set hls is
+set smartindent
+set clipboard=unnamed
 source ~/.vim/ftplugins/java_getset.vim
+set hidden
 
 " UI
 set number
@@ -19,13 +23,7 @@ let &t_EI .= "\<Esc>[2 q"
 
 " copy paste to other programs via buffer '+'
 vnoremap <C-S-c> "+y
-map <C-S-v> "+p
-map <C-p> "+P
-"map <S-o> ko
-
-" insert mode
-imap <C-S-v> <ESC>"+pa
-imap <C-S-c> <ESC>"+yiWEa
+imap <C-S-v> "+p
 
 let loaded_matchparen = 1
 
@@ -58,8 +56,6 @@ Plug 'vim-scripts/gnuplot-syntax-highlighting'
 Plug 'lilydjwg/colorizer'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-Plug 'neovimhaskell/haskell-vim'
-Plug 'nbouscal/vim-stylish-haskell'
 
 call plug#end()
 
@@ -178,14 +174,6 @@ let g:mkdp_port = ''
 " ${name} will be replace with the file name
 let g:mkdp_page_title = '「${name}」'
 
-"""""""""""""" Haskell
-let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
-let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
-let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
-let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
-let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
-let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
-let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 """""""""""""" LATEX
 let g:livepreview_previewer = 'zathura'
 

@@ -5,7 +5,7 @@
 
 # 2016 Oliver Kraitschy - http://okraits.de
 
-OPTIONS=" Lock\n Logout\n Reboot system\n Power-off system"
+OPTIONS=" Lock\n Logout\n Reboot system\n Power-off system"
 
 LAUNCHER="rofi -width 30 -theme gruvbox-down -dmenu -i -p rofi-power"
 
@@ -26,7 +26,7 @@ then
         $LOCKER
         ;;
       Logout)
-        xdotool keydown super keydown shift key e keyup super keyup shift
+        sudo pkill -u $USER
         ;;
       Reboot)
         systemctl reboot
