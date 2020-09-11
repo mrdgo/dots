@@ -174,6 +174,9 @@ myManageHook = insertPosition Below Newer <+> composeAll
     [ title =? "Mozilla Firefox"     --> doShift ( myWorkspaces !! 1 )
     , (className =? "Mozilla Firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
     , title =? "mocp" --> doFloat
+    , title =? "Emulator" --> doFloat
+    , title =? "Android Virtual Device Manager" --> doFloat
+    , className =? "Android Emulator" --> doFloat
     ] 
 
 main = do
