@@ -11,6 +11,7 @@ import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
 import XMonad.Hooks.ManageDocks (avoidStruts, docks, docksEventHook, manageDocks, ToggleStruts(..))
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.InsertPosition
 
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Renamed (renamed, Rename(Replace))
@@ -32,7 +33,7 @@ import XMonad.Prompt.DirExec
 import qualified XMonad.Actions.Search as S
 
 modm :: KeyMask
-modm = mod4Mask
+modm = mod1Mask
 
 myWorkspaces :: [WorkspaceId]
 myWorkspaces = ["dev", "www"] ++ map show [3..9]
@@ -41,13 +42,13 @@ myFont :: String
 myFont = "Mononoki:size=14:antialias=true:hinting=true"
 
 myTerminal :: String
-myTerminal = "/home/maxim/.cargo/bin/alacritty"
+myTerminal = "st"
 
 myStartupHook :: X ()
 myStartupHook = do
     setWMName "XMonad"
     spawn "exec /home/maxim/.fehbg"
-    spawn "compton &"
+    spawn "picom &"
     spawn "dunst &"
     spawn "/home/maxim/.config/init_wm.sh"
 
@@ -97,8 +98,9 @@ myXPConfig' = myXPConfig
       , searchPredicate     = fuzzyMatch
       }
 
-archwiki :: S.SearchEngine
+archwiki, fontawesome:: S.SearchEngine
 archwiki = S.searchEngine "archwiki" "https://wiki.archlinux.org/index.php?search="
+fontawesome = S.searchEngine "fontawesome" "https://fontawesome.com/icons?d=gallery&q="
 
 -- This is the list of search engines that I want to use. Some are from
 -- XMonad.Actions.Search, and some are the ones that I added above.
@@ -106,9 +108,10 @@ searchList :: [(String, S.SearchEngine)]
 searchList = [ ("a", archwiki)
              , ("d", S.duckduckgo)
              , ("g", S.google)
+             , ("h", S.hoogle)
+             , ("i", fontawesome)
              , ("s", S.scholar) -- google scholar
              , ("w", S.alpha) -- wolfram alpha
-             , ("h", S.hoogle)
              , ("y", S.youtube)
              , ("z", S.amazon)
              ]
@@ -136,15 +139,15 @@ myKeys = [
     -- Media Keys
     , ("<XF86AudioLowerVolume>", spawn "amixer -q sset Master 5%-")
     , ("<XF86AudioRaiseVolume>", spawn "amixer -q sset Master 5%+")
-    , ("<XF86MonBrightnessDown>", spawn "light -U 5")
-    , ("<XF86MonBrightnessUp>", spawn "light -A 5")
+    , ("<XF86MonBrightnessDown>", spawn "doas light -U 5")
+    , ("<XF86MonBrightnessUp>", spawn "doas light -A 5")
     -- For the Alt Keyboard
-    , ("S-<XF86AudioLowerVolume>", spawn "light -U 5")
-    , ("S-<XF86AudioRaiseVolume>", spawn "light -A 5")
+    , ("S-<XF86AudioLowerVolume>", spawn "doas light -U 5")
+    , ("S-<XF86AudioRaiseVolume>", spawn "doas light -A 5")
 
     -- Controls for mocp music player.
     -- -d: dimensions, -t: title
-    , ("M-u o", spawn "/home/maxim/.cargo/bin/alacritty -d 100 26 --position 100 30 -t \"mocp\" -e mocp")
+    , ("M-u o", spawn "alacritty -d 100 26 --position 100 30 -t \"mocp\" -e mocp")
     , ("M-u p", spawn "mocp --play")
     , ("M-u l", spawn "mocp --next")
     , ("M-u h", spawn "mocp --previous")
@@ -167,14 +170,14 @@ windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
 myManageHook :: XMonad.Query (Data.Monoid.Endo WindowSet)
-myManageHook = composeAll
+myManageHook = insertPosition Below Newer <+> composeAll
     [ title =? "Mozilla Firefox"     --> doShift ( myWorkspaces !! 1 )
     , (className =? "Mozilla Firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
     , title =? "mocp" --> doFloat
     ] 
 
 main = do
-    xmproc0 <- spawnPipe "xmobar -x 0"
+    xmproc0 <- spawnPipe "xmobar"
     xmonad $ docks $ def {
         modMask              = modm
         , focusFollowsMouse  = False
@@ -184,7 +187,7 @@ main = do
         , normalBorderColor  = "#f2e5bc"
         , layoutHook         = myLayoutHook
         , startupHook        = myStartupHook
-        , insertWindow       = W.insertDown
+        -- , insertWindow       = W.insertDown
         , workspaces         = myWorkspaces
         , manageHook         = myManageHook
         , logHook = dynamicLogWithPP xmobarPP
@@ -195,7 +198,7 @@ main = do
                     , ppHidden = xmobarColor "#debba5" "" . wrap "[" "]"  -- Hidden workspaces in xmobar
                     , ppHiddenNoWindows = xmobarColor "#debba5" ""        -- Hidden workspaces (no windows)
                     , ppTitle = xmobarColor "#928374" "" . shorten 60     -- Title of active window
-                    , ppSep =  "<fc=#f2e5bc> <fn=2>|</fn> </fc>"          -- Separators in xmobar
+                    , ppSep =  " | "          -- Separators in xmobar
                     , ppUrgent = xmobarColor "#fb4934" "" . wrap "!" "!"  -- Urgent workspace
                     , ppExtras  = [windowCount]                           -- # of windows current workspace
                     , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]

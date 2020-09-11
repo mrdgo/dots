@@ -4,21 +4,21 @@ all: bash conf xmo
 
 bash: bashrc bash_aliases bash_profile
 	@rm -f ~/.bashrc ~/.bash_aliases ~/.bash_profile
-	@ln bashrc ~/.bashrc
-	@ln bash_aliases ~/.bash_aliases
-	@ln bash_profile ~/.bash_profile
+	@ln /opt/dots/bashrc ~/.bashrc
+	@ln /opt/dots/bash_aliases ~/.bash_aliases
+	@ln /opt/dots/bash_profile ~/.bash_profile
 
 xmo: xmonad/xmonad.hs xinitrc profile
-	@rm -f ~/.xinitrc ~/.profile
-	@ln profile ~/.profile
-	@ln xinitrc ~/.xinitrc
+	@rm -rf ~/.xinitrc ~/.profile ~/.xmonad
+	@ln /opt/dots/profile ~/.profile
+	@ln /opt/dots/xinitrc ~/.xinitrc
 	@mkdir ~/.xmonad
-	@cp -lu xmonad/xmonad.hs ~/.xmonad/xmonad.hs
+	@cp -lu /opt/dots/xmonad/xmonad.hs ~/.xmonad/xmonad.hs
 
 conf: config Xresources inputrc vim moc
 	@rm -f ~/.inputrc ~/.Xresources ~/.config ~/.vim ~/.moc
-	@ln inputrc ~/.inputrc
-	@ln Xresources ~/.Xresources
-	@ln -s config/ ~/.config
-	@ln -s vim ~/.vim
-	@ln -s moc ~/.moc
+	@ln /opt/dots/inputrc ~/.inputrc
+	@ln /opt/dots/Xresources ~/.Xresources
+	@ln -s /opt/dots/config/ ~/.config
+	@ln -s /opt/dots/vim ~/.vim
+	@ln -s /opt/dots/moc ~/.moc
