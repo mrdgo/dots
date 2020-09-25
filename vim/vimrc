@@ -15,6 +15,10 @@ set number
 set showcmd
 set wildmenu
 set lazyredraw
+set cursorline
+hi CursorLine   cterm=NONE ctermbg=8 ctermfg=NONE
+hi Cursorline term=NONE cterm=NONE
+hi LineNr ctermfg=grey
 
 " solid underscore
 let &t_SI .= "\<Esc>[4 q"
@@ -23,7 +27,7 @@ let &t_EI .= "\<Esc>[2 q"
 
 " copy paste to other programs via buffer '+'
 vnoremap <C-S-c> "+y
-imap <C-S-v> "+p
+imap <C-v> <ESC>"+pi
 
 let loaded_matchparen = 1
 
@@ -180,6 +184,7 @@ let g:livepreview_previewer = 'zathura'
 " Decide
 "let g:livepreview_engine = 'xelatex'
 let g:livepreview_engine = 'pdflatex'
+let g:tex_flavor = 'pdflatex'
 
 " Navigating with guides
 	inoremap ,, <Esc>/<++><Enter>"_c4l

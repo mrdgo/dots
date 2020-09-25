@@ -12,11 +12,11 @@ alias mp="cd ~/dokumente/uni/masterprojekt/pi_files/experiment/"
 
 # enable second monitor
 # alias pres="xrandr --output HDMI-1 --mode 1920x1080 --left-of eDP-1 && feh --bg-fill $HOME/bilder/wallpaper/liebe.jpg --bg-fill $HOME/bilder/wallpaper/liebe.jpg"
-# alias proff="xrandr --output HDMI-1 --off && feh --bg-fill $HOME/bilder/wallpaper/liebe.jpg"
+# alias proff="xrandr --output HDMI-1 --off && /home/maxim/.fehbg"
 
 # only second monitor
-alias big="xrandr --output eDP-1 --off --output HDMI-1 --auto && feh --bg-fill $HOME/bilder/wallpaper/liebe.jpg"
-alias sml="xrandr --output HDMI-1 --off --output eDP-1 --auto && feh --bg-fill $HOME/bilder/wallpaper/liebe.jpg"
+alias big="xrandr --output eDP-1 --off --output HDMI-1 --auto && /home/maxim/.fehbg"
+alias sml="xrandr --output HDMI-1 --off --output eDP-1 --auto && /home/maxim/.fehbg"
 
 alias ud="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 
@@ -30,6 +30,7 @@ alias i="devour sxiv -rfb"
 alias z="devour zathura"
 alias ydl="~/.config/ydl.sh"
 alias fix="echo 218.8"
+alias sudo="echo Please use: doas "
 
 # youtube-dl
 alias yta-aac="youtube-dl --extract-audio --audio-format aac "
@@ -44,7 +45,7 @@ alias ytv-best="youtube-dl -f bestvideo+bestaudio "
 
 # Dev
 alias v="vim"
-alias sv="sudoedit"
+alias se="doas vim"
 alias m="make"
 alias g="git"
 alias ga="git add"
