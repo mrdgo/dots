@@ -14,6 +14,7 @@ import XMonad.Hooks.SetWMName
 import XMonad.Hooks.InsertPosition
 
 import XMonad.Layout.NoBorders
+import XMonad.Layout.Spacing
 import XMonad.Layout.Renamed (renamed, Rename(Replace))
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), (??))
@@ -36,29 +37,29 @@ modm :: KeyMask
 modm = mod1Mask
 
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = ["dev", "www"] ++ map show [3..9]
+myWorkspaces = ["dev", "www"] ++ map show [3..7] ++ ["avd", "flutter"]
 
 myFont :: String
-myFont = "Mononoki:size=14:antialias=true:hinting=true"
+myFont = "Mononoki:size=14:antialias=true:hinting=true,xft:FontAwesome:size=12"
 
 myTerminal :: String
-myTerminal = "st"
+myTerminal = "alacritty"
 
 myStartupHook :: X ()
 myStartupHook = do
     setWMName "XMonad"
-    spawn "exec /home/maxim/.fehbg"
-    spawn "picom &"
-    spawn "dunst &"
     spawn "/home/maxim/.config/init_wm.sh"
 
 tall     = renamed [Replace "tall"]
+        $ spacing 7
+        $ noBorders
         $ limitWindows 12
         $ ResizableTall 1 (3/100) (1/2) []
 monocle  = renamed [Replace "monocle"]
         $ noBorders
         $ limitWindows 20 Full
 floats = renamed [Replace "floats"]
+        $ noBorders
         $ limitWindows 20 simplestFloat
 
 -- The layout hook
@@ -126,6 +127,8 @@ myKeys = [
     , ("M-b", sendMessage ToggleStruts)         -- Toggle xmobar
     , ("M-t", withFocused $ windows . W.sink)   -- Tile client again
     , ("M-m", windows W.swapMaster)             -- Set master
+    , ("M-n", sendMessage MirrorExpand)       -- expand tile
+    , ("M-S-n", sendMessage MirrorShrink)       -- shrink tile
 
     -- Lock, Reboot, Poweroff
     , ("M-p", dirExecPrompt myXPConfig spawn "/home/maxim/.config/down_scripts")
@@ -147,7 +150,7 @@ myKeys = [
 
     -- Controls for mocp music player.
     -- -d: dimensions, -t: title
-    , ("M-u o", spawn "alacritty -d 100 26 --position 100 30 -t \"mocp\" -e mocp")
+    , ("M-u o", spawn "alacritty -d 120 32 --position 60 40 -t \"mocp\" -e mocp")
     , ("M-u p", spawn "mocp --play")
     , ("M-u l", spawn "mocp --next")
     , ("M-u h", spawn "mocp --previous")
@@ -171,12 +174,15 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 
 myManageHook :: XMonad.Query (Data.Monoid.Endo WindowSet)
 myManageHook = insertPosition Below Newer <+> composeAll
-    [ title =? "Mozilla Firefox"     --> doShift ( myWorkspaces !! 1 )
+    [ title =? "Mozilla Firefox"        --> doShift ( myWorkspaces !! 1 )
+    , title =? "Emulator"               --> doShift ( myWorkspaces !! 7 )
+    , className =? "Android Emulator"   --> doShift ( myWorkspaces !! 7 )
+    , className =? "jetbrains-studio"   --> doShift ( myWorkspaces !! 8 )
     , (className =? "Mozilla Firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
-    , title =? "mocp" --> doFloat
-    , title =? "Emulator" --> doFloat
+    , title =? "mocp"                           --> doFloat
     , title =? "Android Virtual Device Manager" --> doFloat
-    , className =? "Android Emulator" --> doFloat
+    , title =? "Emulator"                       --> doFloat
+    , className =? "Android Emulator"           --> doFloat
     ] 
 
 main = do
@@ -190,7 +196,6 @@ main = do
         , normalBorderColor  = "#f2e5bc"
         , layoutHook         = myLayoutHook
         , startupHook        = myStartupHook
-        -- , insertWindow       = W.insertDown
         , workspaces         = myWorkspaces
         , manageHook         = myManageHook
         , logHook = dynamicLogWithPP xmobarPP
@@ -201,7 +206,7 @@ main = do
                     , ppHidden = xmobarColor "#debba5" "" . wrap "[" "]"  -- Hidden workspaces in xmobar
                     , ppHiddenNoWindows = xmobarColor "#debba5" ""        -- Hidden workspaces (no windows)
                     , ppTitle = xmobarColor "#928374" "" . shorten 60     -- Title of active window
-                    , ppSep =  " | "          -- Separators in xmobar
+                    , ppSep =  " | "                                      -- Separators in xmobar
                     , ppUrgent = xmobarColor "#fb4934" "" . wrap "!" "!"  -- Urgent workspace
                     , ppExtras  = [windowCount]                           -- # of windows current workspace
                     , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
