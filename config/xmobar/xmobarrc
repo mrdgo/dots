@@ -17,35 +17,11 @@ Config { font = "xft:Mononoki:pixelsize=14:antialias=true:hinting=true,xft:FontA
        , iconRoot = "."
        , allDesktops = True
        , overrideRedirect = True
-       , commands = [ Run Wireless "wlp6s0" ["-L","0","-H","1024",
-                                          "--high","#fb4934"
-                                          , "-t", "<quality>%"] 100
-                    , Run Cpu ["-L","3","-H","50",
-                               "--high","#fb4934"
-                               , "-t", "<total>%"] 10
-                    , Run Date "%b %d %Y %H:%M:%S" "date" 10
-                    -- battery monitor
-                    , Run Battery        [ "--template" , "<acstatus>"
-                                , "--Low"      , "10"        -- units: %
-                                , "--High"     , "95"        -- units: %
-                                , "--low"      , "#fb4934"
-                                , "--high"     , "#b8bb26"
-
-                                -- send message when low
-                                , "-a", "notify-send -u critical battery"
-                                --, "-A", "5"
-                                , "--" -- battery specific options
-                                -- discharging status
-                                , "-o"  , "<left>% <timeleft>"
-                                -- AC "on" status
-                                , "-O"    , "<left>% <fc=#fabd2f><fn=1></fn></fc>"
-                                -- charged status
-                                , "-i"  , "<fc=#b8bb26><fn=2></fn></fc>"
-                            ] 150
+       , commands = [ Run Date "%b %d %Y %H:%M:%S" "date" 10
                     , Run UnsafeStdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " <fc=#fe8019>λ</fc> | <fc=#83a598>%battery%</fc> | %UnsafeStdinReader% | }\
-                    \{ | <fc=#83a598><fn=2></fn> %cpu%</fc> | <fc=#d3869b> %wlp6s0wi%</fc> | <fc=#fabd2f> %date%</fc>"
+       , template = " <fc=#fe8019>λ</fc> | %UnsafeStdinReader% | }\
+                    \{ | <fc=#fabd2f>%date%</fc>"
        }
