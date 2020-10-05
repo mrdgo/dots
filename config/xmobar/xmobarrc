@@ -25,3 +25,4 @@ Config { font = "xft:Mononoki:pixelsize=14:antialias=true:hinting=true,xft:FontA
        , template = " <fc=#fe8019>λ</fc> | %UnsafeStdinReader% | }\
                     \{ | <fc=#fabd2f>%date%</fc>"
        }
+       --     

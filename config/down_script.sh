@@ -10,7 +10,7 @@ OPTIONS=" Lock\n Logout\n Reboot system\n Power-off system"
 LAUNCHER="rofi -width 30 -theme gruvbox-down -dmenu -i -p rofi-power"
 
 USE_LOCKER="false"
-LOCKER="/home/maxim/.config/blurlock"
+LOCKER=slock
 
 # Show exit wm option if exit command is provided as an argument
 if [ ${#1} -gt 0 ]; then

@@ -25,6 +25,9 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48:2;%lu;%lu;%lum"
+
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 3
@@ -33,10 +36,8 @@ let g:netrw_winsize = 15
 
 nnoremap ,v :Vex<cr>
 
-augroup ProjectDrawer
-    autocmd!
-    autocmd VimEnter * :Vexplore
-augroup END
+" To have <C-l> not overridden
+nmap <unique> <C-r> <Plug>NetrwRefresh
 
 " solid underscore
 let &t_SI .= "\<Esc>[4 q"
@@ -75,7 +76,7 @@ Plug 'NLKNguyen/c-syntax.vim'
 Plug 'morhetz/gruvbox'
 Plug 'lervag/vimtex'
 Plug 'vim-scripts/gnuplot-syntax-highlighting'
-Plug 'lilydjwg/colorizer'
+Plug 'chrisbra/Colorizer'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
@@ -103,9 +104,7 @@ function! LF()
 endfunction
 command! -bar LF call LF()
 
-"
-" You may also like to assign a key to this command:
-"
+" Call lf
 nnoremap ,l :LF<cr>
 
 " Required:
@@ -115,13 +114,22 @@ syntax enable
 set background=dark               " or light
 colorscheme gruvbox
 set laststatus=2
+
 " transparent background
 hi Normal guibg=NONE ctermbg=NONE
 
+set termguicolors
+
+" Toggle cool colors
+nnoremap ,c :set invtermguicolors<cr>
+
+" HighlightColors
+let g:colorizer_auto_color = 1
 """""""""""""" theme
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_contrast_light = 'hard'
 let g:gruvbox_termcolors = 256
+let g:gruvbox_hls_cursor = 'green'
 
 set termguicolors
 nmap ,c :set invtermguicolors<cr>
@@ -150,6 +158,7 @@ let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
+nmap ,t /TODO<cr>
 """""""""""""" conoline config
 let g:conoline_auto_enable=1
 let g:conoline_use_colorscheme_default_normal=1

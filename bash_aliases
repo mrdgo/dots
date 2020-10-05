@@ -1,10 +1,12 @@
 alias screencast="ffmpeg -f x11grab -s 1920x1080 -i :0.0 out.mkv"
 alias webcast="ffmpeg -i /dev/video1 -c:v libx264 out.mkv"
+alias bat="cat /sys/class/power_supply/BAT0/capacity"
+alias tf="cd ~/dokumente/isento/tf/cnn && source ../venv_tf/bin/activate"
 
 alias uni="ssh ty82xile@faui0sr0.cs.fau.de"
 
 alias pi1='ssh -J ty82xile@i4lab1.cs.fau.de pi@10.188.42.164'
-alias pi2='ssh -J ty82xile@i4lab1.cs.fau.de pi@10.188.42.172'
+alias pi2='ssh -J ty82xile@i4lab1.cs.fau.de pi@10.188.42.174'
 
 alias vpn='/opt/cisco/anyconnect/bin/vpnui'
 
@@ -30,7 +32,6 @@ alias i="devour sxiv -rfb"
 alias z="devour zathura"
 alias ydl="~/.config/ydl.sh"
 alias fix="echo 218.8"
-alias sudo="echo Please use: doas "
 
 # youtube-dl
 alias yta-aac="youtube-dl --extract-audio --audio-format aac "
