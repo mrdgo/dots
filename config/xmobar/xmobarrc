@@ -17,13 +17,11 @@ Config { font = "xft:Mononoki:pixelsize=14:antialias=true:hinting=true,xft:FontA
        , iconRoot = "."
        , allDesktops = True
        , overrideRedirect = True
-       , commands = [ Run Wireless "wlp6s0" ["-L","0","-H","1024",
-                                          "--high","#fb4934"
-                                          , "-t", "<quality>%"] 100
+       , commands = [ Run DynNetwork ["--", "--devices", "wlp6s0,enp0s31f6"] 50
                     , Run Cpu ["-L","3","-H","50",
                                "--high","#fb4934"
-                               , "-t", "<total>%"] 10
-                    , Run Date "%b %d %Y %H:%M:%S" "date" 10
+                               , "-t", "<total>%"] 20
+                    , Run Date "%b %d %Y %H:%M" "date" 300
                     -- battery monitor
                     , Run Battery        [ "--template" , "<acstatus>"
                                 , "--Low"      , "10"        -- units: %
@@ -47,6 +45,6 @@ Config { font = "xft:Mononoki:pixelsize=14:antialias=true:hinting=true,xft:FontA
        , sepChar = "%"
        , alignSep = "}{"
        , template = " <fc=#fe8019>λ</fc> | <fc=#83a598>%battery%</fc> | %UnsafeStdinReader% | }\
-                    \{ | <fc=#83a598>CPU %cpu%</fc> | <fc=#d3869b>W: %wlp6s0wi%</fc> | <fc=#fabd2f>%date%</fc>"
+                    \{ | <fc=#83a598>CPU %cpu%</fc> | <fc=#d3869b>%dynnetwork%</fc> | <fc=#fabd2f>%date%</fc>"
        }
        --     
