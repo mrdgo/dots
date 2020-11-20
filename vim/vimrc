@@ -1,4 +1,7 @@
-let myfiletypefile = "~/.vim/filetypes.vim"
+set runtimepath^=~/.config/nvim runtimepath+=~/.config/nvim/after
+let &packpath = &runtimepath
+
+let myfiletypefile = "~/.config/nvim/filetypes.vim"
 
 set tabstop=4
 set softtabstop=4
@@ -7,7 +10,7 @@ set expandtab
 set hls is
 set smartindent
 set clipboard=unnamed
-source ~/.vim/ftplugins/java_getset.vim
+source ~/.config/nvim/ftplugins/java_getset.vim
 set hidden
 
 " UI
@@ -20,10 +23,33 @@ hi CursorLine   cterm=NONE ctermbg=8 ctermfg=NONE
 hi Cursorline term=NONE cterm=NONE
 hi LineNr ctermfg=grey
 
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+let mapleader = ";"
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>l <C-w>l
+
+"nnoremap <leader>1 :b1<cr>
+"nnoremap <leader>2 :b2<cr>
+"nnoremap <leader>3 :b3<cr>
+"nnoremap <leader>4 :b4<cr>
+"nnoremap <leader>5 :b5<cr>
+"nnoremap <leader>6 :b6<cr>
+"nnoremap <leader>7 :b7<cr>
+"nnoremap <leader>8 :b8<cr>
+"nnoremap <leader>9 :b9<cr>
+
+" SpaceVim nice ones
+nnoremap <leader>fvc :e ~/.config/nvim/init.vim<cr>
+nnoremap <leader>fvf :e ~/.config/nvim/autoload/defx_config.vim<cr>
+nnoremap <leader>fvd :e ~/.config/nvim/autoload/denite_conf.vim<cr>
+nnoremap <leader>w :w<cr>
+nnoremap <leader>x :x<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader>n :noh<cr>
+nnoremap <leader>b :Denite buffer<cr>
+nnoremap <leader>e :Defx<cr>
+inoremap jk <Esc>
 
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48:2;%lu;%lu;%lum"
@@ -34,10 +60,6 @@ let g:netrw_browse_split = 3
 let g:netrw_altv = 1
 let g:netrw_winsize = 15
 
-nnoremap ,v :Vex<cr>
-
-" To have <C-l> not overridden
-nmap <unique> <C-r> <Plug>NetrwRefresh
 
 " solid underscore
 let &t_SI .= "\<Esc>[4 q"
@@ -57,18 +79,18 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
-if empty(glob('~/.vim/autoload/plug.vim'))
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
-Plug 'miyakogi/conoline.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
-Plug 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs' " automatically close brackets
+Plug 'luochen1990/rainbow' " differentiate bracket levels by color
 Plug 'tpope/vim-endwise'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
@@ -76,36 +98,22 @@ Plug 'NLKNguyen/c-syntax.vim'
 Plug 'morhetz/gruvbox'
 Plug 'lervag/vimtex'
 Plug 'vim-scripts/gnuplot-syntax-highlighting'
-Plug 'chrisbra/Colorizer'
-Plug 'dart-lang/dart-vim-plugin'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'vim-airline/vim-airline'
+Plug 'Shougo/neomru.vim'
 
 call plug#end()
 
+let g:airline#extensions#tabline#enabled = 0
+" let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_alt_sep = '|'
+" let g:airline#extensions#tabline#formatter = 'unique_tail'
+" let g:airline#extensions#tabline#buffer_nr_show = 0
 
-" Use lf for vim!
-function! LF()
-    let temp = tempname()
-    exec 'silent !lf -selection-path=' . shellescape(temp)
-    if !filereadable(temp)
-        redraw!
-        return
-    endif
-    let names = readfile(temp)
-    if empty(names)
-        redraw!
-        return
-    endif
-    exec 'edit ' . fnameescape(names[0])
-    for name in names[1:]
-        exec 'argadd ' . fnameescape(name)
-    endfor
-    redraw!
-endfunction
-command! -bar LF call LF()
-
-" Call lf
-nnoremap ,l :LF<cr>
+" Defx
+source ~/.config/nvim/autoload/defx_config.vim
+source ~/.config/nvim/autoload/denite_conf.vim
 
 " Required:
 filetype plugin indent on
@@ -118,13 +126,6 @@ set laststatus=2
 " transparent background
 hi Normal guibg=NONE ctermbg=NONE
 
-set termguicolors
-
-" Toggle cool colors
-nnoremap ,c :set invtermguicolors<cr>
-
-" HighlightColors
-let g:colorizer_auto_color = 1
 """""""""""""" theme
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_contrast_light = 'hard'
@@ -132,24 +133,17 @@ let g:gruvbox_termcolors = 256
 let g:gruvbox_hls_cursor = 'green'
 
 set termguicolors
-nmap ,c :set invtermguicolors<cr>
+nmap <leader>c :set invtermguicolors<cr>
 
 """""""""""""" easymotion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
-" close all brackets with one keystroke
-let g:AutoPairsFlyMode = 1
 " define auto pairs
 autocmd FileType java let b:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''", '\w\zs<' : '>'}
 autocmd FileType java inoremap sysout System.out.println();<ESC>hi
 
-" Jump to anywhere you want with minimal keystrokes, with just one key binding.
-" `s{char}{label}`
-" nmap s <Plug>(easymotion-overwin-f)
-" or
-" `s{char}{char}{label}`
-" Need one more keystroke, but on average, it may be more comfortable.
-nmap s <Plug>(easymotion-overwin-f2)
+nmap <leader>jj <Plug>(easymotion-overwin-f)
+nmap <leader>jJ <Plug>(easymotion-overwin-f2)
 
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
@@ -158,80 +152,31 @@ let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
-nmap ,t /TODO<cr>
-"""""""""""""" conoline config
-let g:conoline_auto_enable=1
-let g:conoline_use_colorscheme_default_normal=1
-let g:conoline_use_colorscheme_default_insert=1
-
-"""""""""""""" Markdown config 
-let g:vim_markdown_folding_disabled = 1
-
-"""""""""""""" markdown preview
-" specify browser to open preview page
-" default: ''
-let g:mkdp_browser = 'firefox'
-
-" options for markdown render
-" mkit: markdown-it options for render
-" katex: katex options for math
-" uml: markdown-it-plantuml options
-" maid: mermaid options
-" disable_sync_scroll: if disable sync scroll, default 0
-" sync_scroll_type: 'middle', 'top' or 'relative', default value is 'middle'
-"   middle: mean the cursor position alway show at the middle of the preview page
-"   top: mean the vim top viewport alway show at the top of the preview page
-"   relative: mean the cursor position alway show at the relative positon of the preview page
-" hide_yaml_meta: if hide yaml metadata, default is 1
-" sequence_diagrams: js-sequence-diagrams options
-let g:mkdp_preview_options = {
-    \ 'mkit': {},
-    \ 'katex': {},
-    \ 'uml': {},
-    \ 'maid': {},
-    \ 'disable_sync_scroll': 0,
-    \ 'sync_scroll_type': 'middle',
-    \ 'hide_yaml_meta': 1,
-    \ 'sequence_diagrams': {}
-    \ }
-
-" use a custom markdown style must be absolute path
-let g:mkdp_markdown_css = ''
-
-" use a custom highlight style must absolute path
-let g:mkdp_highlight_css = ''
-
-" use a custom port to start server or random for empty
-let g:mkdp_port = ''
-
-" preview page title
-" ${name} will be replace with the file name
-let g:mkdp_page_title = '「${name}」'
+nmap <leader>t /TODO<cr>
 
 """""""""""""" LATEX
 let g:livepreview_previewer = 'zathura'
 
 " Decide
-"let g:livepreview_engine = 'xelatex'
-let g:livepreview_engine = 'pdflatex'
-let g:tex_flavor = 'pdflatex'
+let g:livepreview_engine = 'xelatex'
+"let g:livepreview_engine = 'pdflatex'
+"let g:tex_flavor = 'pdflatex'
+let g:tex_flavor = 'xelatex'
 
 " Navigating with guides
-	inoremap ,, <Esc>/<++><Enter>"_c4l
-	vnoremap ,, <Esc>/<++><Enter>"_c4l
-    map ,, <Esc>/<++><Enter>"_c4l
+inoremap ,, <Esc>/<++><Enter>"_c4l
+vnoremap ,, <Esc>/<++><Enter>"_c4l
+map ,, <Esc>/<++><Enter>"_c4l
 " Word count:
-	autocmd FileType tex map <F3> :w !detex \| wc -w<CR>
-	autocmd FileType tex inoremap <F3> <Esc>:w !detex \| wc -w<CR>
+autocmd FileType tex map <F3> :w !detex \| wc -w<CR>
+autocmd FileType tex inoremap <F3> <Esc>:w !detex \| wc -w<CR>
 " Code snippets
-	autocmd FileType tex inoremap ,fr \begin{frame}<Enter>\frametitle{}<Enter><Enter><++><Enter><Enter>\end{frame}<Enter><Enter><++><Esc>6kf}i
-	autocmd FileType tex inoremap ,ct \textcite{}<++><Esc>T{i
-	autocmd FileType tex inoremap ,cp \parencite{}<++><Esc>T{i
-	autocmd FileType tex inoremap ,en \begin{enumerate}<Enter><Enter>\end{enumerate}<Enter><Enter><++><Esc>3kA\item<Space>
-	autocmd FileType tex inoremap ,it \begin{itemize}<Enter><Enter>\end{itemize}<Enter><Enter><++><Esc>3kA\item<Space>
-	autocmd FileType tex inoremap ,im \item<Space>
-	autocmd FileType tex inoremap ,tab \begin{tabular}<Enter><++><Enter>\end{tabular}<Enter><Enter><++><Esc>4kA{}<Esc>i
-	autocmd FileType tex inoremap ,chap \chapter{}<Enter><Enter><++><Esc>2kf}i
-	autocmd FileType tex inoremap ,sec \section{}<Enter><Enter><++><Esc>2kf}i
-	autocmd FileType tex inoremap ,ssec \subsection{}<Enter><Enter><++><Esc>2kf}i
-	autocmd FileType tex inoremap ,sssec \subsubsection{}<Enter><Enter><++><Esc>2kf}i
+autocmd FileType tex inoremap ,f \begin{frame}<Enter>\frametitle{}<Enter><Enter><++><Enter><Enter>\end{frame}<Enter><Enter><++><Esc>6kf}i
+autocmd FileType tex inoremap ,c \cite{}<++><Esc>T{i
+autocmd FileType tex inoremap ,e \begin{enumerate}<Enter><Enter>\end{enumerate}<Enter><Enter><++><Esc>3kA\item<Space>
+autocmd FileType tex inoremap ,i \begin{itemize}<Enter><Enter>\end{itemize}<Enter><Enter><++><Esc>3kA\item<Space>
+autocmd FileType tex inoremap ,m \item<Space>
+autocmd FileType tex inoremap ,t \begin{tabular}<Enter><++><Enter>\end{tabular}<Enter><Enter><++><Esc>4kA{}<Esc>i
+autocmd FileType tex inoremap ,s \section{}<Enter><Enter><++><Esc>2kf}i
+autocmd FileType tex inoremap ,2s \subsection{}<Enter><Enter><++><Esc>2kf}i
+autocmd FileType tex inoremap ,3s \subsubsection{}<Enter><Enter><++><Esc>2kf}i
