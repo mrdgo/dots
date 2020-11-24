@@ -9,9 +9,6 @@ OPTIONS=" Lock\n Logout\n Reboot system\n Power-off system"
 
 LAUNCHER="rofi -width 30 -theme gruvbox-down -dmenu -i -p rofi-power"
 
-USE_LOCKER="false"
-LOCKER=slock
-
 # Show exit wm option if exit command is provided as an argument
 if [ ${#1} -gt 0 ]; then
   OPTIONS="$OPTIONS"
@@ -23,16 +20,16 @@ then
     case $option in
       Lock)
         sleep 0.2
-        $LOCKER
+        slock
         ;;
       Logout)
         sudo pkill -u $USER
         ;;
       Reboot)
-        systemctl reboot
+        doas reboot
         ;;
       Power-off)
-        systemctl poweroff
+        doas poweroff
         ;;
     esac
 fi

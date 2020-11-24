@@ -1,14 +1,3 @@
-nmap <leader>df :Denite file_mru<cr>
-
-" ['resume denite buffer',
-nmap <leader>dr :Denite -resume<cr>
-
-nmap <leader>pf :Denite file/rec<cr>
-nnoremap <silent> <C-p> :call <SID>warp_denite('Denite file/rec')<cr>
-
-nnoremap <leader>ds :<C-u>Denite grep:. -no-empty<cr>
-nnoremap <leader>da :<C-u>DeniteCursorWord grep:.<cr>
-
 " Define mappings
 autocmd FileType denite call s:denite_my_settings()
 function! s:denite_my_settings() abort
@@ -33,17 +22,22 @@ endfunction
 
 call denite#custom#var('buffer', 'date_format', '')
 
+" source_names 'hide' or 'short'
+            "\ 'highlight_matched_char': 'QuickFixLine',
+            "\ 'highlight_matched_range': 'Visual',
+            "\ 'highlight_window_background': 'Visual',
+            "\ 'highlight_filter_background': 'DiffAdd',
 let s:denite_options = {'default' : {
             \ 'split': 'floating',
             \ 'start_filter': 1,
             \ 'auto_resize': 1,
-            \ 'source_names': 'short',
             \ 'prompt': 'λ ',
-            \ 'highlight_matched_char': 'QuickFixLine',
-            \ 'highlight_matched_range': 'Visual',
-            \ 'highlight_window_background': 'Visual',
-            \ 'highlight_filter_background': 'DiffAdd',
+            \ 'unique': 1,
+            \ 'smartcase': 1,
+            \ 'source_names': 'hide',
             \ 'winrow': 1,
+            \ 'wincol': 1,
+            \ 'winwidth': &columns,
             \ 'vertical_preview': 1
             \ }}
 

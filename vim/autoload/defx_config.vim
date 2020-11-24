@@ -1,5 +1,5 @@
 call defx#custom#option('_', {
-      \ 'columns': 'indent:icons:filename:type',
+      \ 'columns': 'indent:icon:filename:type:mark',
       \ 'winwidth': 30,
       \ 'split': 'vertical',
       \ 'direction': 'rightbelow',

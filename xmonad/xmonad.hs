@@ -15,6 +15,7 @@ import XMonad.Hooks.InsertPosition
 
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spacing
+import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Renamed (renamed, Rename(Replace))
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), (??))
@@ -37,7 +38,7 @@ modm :: KeyMask
 modm = mod1Mask
 
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = ["dev", "www"] ++ map show [3..7] ++ ["avd", "flutter"]
+myWorkspaces = ["dev", "www"] ++ map show [3..7] ++ ["avd", "flt"]
 
 myFont :: String
 myFont = "Mononoki:size=14:antialias=true:hinting=true,xft:FontAwesome:size=12"
@@ -64,7 +65,9 @@ floats = renamed [Replace "floats"]
 
 -- The layout hook
 myLayoutHook = avoidStruts $ mouseResize $ windowArrange $
-    mkToggle (NBFULL ?? NOBORDERS ?? EOT) myDefaultLayout
+    mkToggle (NBFULL ?? NOBORDERS ?? EOT) $
+    onWorkspaces ["www", "flt"] monocle $
+    myDefaultLayout
     where
     myDefaultLayout =   tall
                     ||| monocle
@@ -142,6 +145,7 @@ myKeys = [
     -- Media Keys
     , ("<XF86AudioLowerVolume>", spawn "amixer -q sset Master 5%-")
     , ("<XF86AudioRaiseVolume>", spawn "amixer -q sset Master 5%+")
+    , ("<XF86AudioMute>",        spawn "amixer -q sset Master toggle")
     , ("<XF86MonBrightnessDown>", spawn "doas light -U 5")
     , ("<XF86MonBrightnessUp>", spawn "doas light -A 5")
     -- For the Alt Keyboard
@@ -155,6 +159,9 @@ myKeys = [
     , ("M-u l", spawn "mocp --next")
     , ("M-u h", spawn "mocp --previous")
     , ("M-u <Space>", spawn "mocp --toggle-pause")
+
+    -- Master thesis
+    , ("M-S-b", spawn "zathura ~/dokumente/isento/gps/pybullet_quickstartguide.pdf")
 
     -- Prompt
     , ("M-o", runOrRaisePrompt myXPConfig)
@@ -183,7 +190,7 @@ myManageHook = insertPosition Below Newer <+> composeAll
     , title =? "Android Virtual Device Manager" --> doFloat
     , title =? "Emulator"                       --> doFloat
     , className =? "Android Emulator"           --> doFloat
-    ] 
+    ]
 
 main = do
     xmproc0 <- spawnPipe "xmobar"

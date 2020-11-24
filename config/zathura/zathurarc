@@ -1,17 +1,19 @@
 set selection-clipboard clipboard
 
-set default-bg "#282828"
+set default-bg "#1d2021"
 
-set completion-bg "#282828"
+set completion-bg "#1d2021"
 
-set completion-group-bg "#282828"
+set completion-group-bg "#1d2021"
 set completion-group-fg "#ebdbb2"
 
-set inputbar-bg "#282828"
+set inputbar-bg "#1d2021"
 set inputbar-fg "#ebdbb2"
 
-set statusbar-bg "#282828"
+set statusbar-bg "#1d2021"
 set statusbar-fg "#ebdbb2"
+
+set font "Mononoki normal 12"
 
 set window-title-page true
 set statusbar-home-tilde true
