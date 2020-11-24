@@ -1,36 +1,47 @@
 call defx#custom#option('_', {
-      \ 'columns': 'indent:icon:filename:type:mark',
-      \ 'winwidth': 30,
-      \ 'split': 'vertical',
-      \ 'direction': 'rightbelow',
-      \ 'buffer_name': 'defx',
-      \ 'toggle': 1,
-      \ 'resume': 1
-      \ })
+    \ 'columns': 'indent:icon:git:filename:type:mark',
+    \ 'winwidth': 30,
+    \ 'split': 'vertical',
+    \ 'direction': 'rightbelow',
+    \ 'buffer_name': 'defx',
+    \ 'toggle': 1,
+    \ 'resume': 1
+    \ })
 
 call defx#custom#column('mark', {
-      \ 'readonly_icon': '',
-      \ 'selected_icon': '',
-      \ })
+    \ 'readonly_icon': '',
+    \ 'selected_icon': '',
+    \ })
 
 call defx#custom#column('icon', {
-      \ 'directory_icon': '▶',
-      \ 'opened_icon': '▼',
-      \ 'root_icon': ' ',
-      \ })
+    \ 'directory_icon': '▶',
+    \ 'opened_icon': '▼',
+    \ 'root_icon': ' ',
+    \ })
 
 call defx#custom#column('filename', {
-      \ 'max_width': -90,
-      \ })
+    \ 'max_width': -90,
+    \ })
+
+call defx#custom#column('git', 'indicators', {
+    \ 'Modified'  : '•',
+    \ 'Staged'    : '✚',
+    \ 'Untracked' : 'ᵁ',
+    \ 'Renamed'   : '≫',
+    \ 'Unmerged'  : '≠',
+    \ 'Ignored'   : 'ⁱ',
+    \ 'Deleted'   : '✖',
+    \ 'Unknown'   : '?'
+    \ })
 
 augroup vfinit
     au!
     autocmd FileType defx call s:defx_init()
     " auto close last defx windows
     autocmd BufEnter * nested if
-            \ (!has('vim_starting') && winnr('$') == 1
-            \ && &filetype ==# 'defx') |
-            \ call s:close_last_vimfiler_windows() | endif
+        \ (!has('vim_starting') && winnr('$') == 1
+        \ && &filetype ==# 'defx') |
+        \ call s:close_last_vimfiler_windows() | endif
 augroup END
           "" in this function, we should check if shell terminal still exists,
           " then close the terminal job before close vimfiler

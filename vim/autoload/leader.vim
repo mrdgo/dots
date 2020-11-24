@@ -27,8 +27,13 @@ nnoremap <leader>ds :<C-u>Denite grep:. -no-empty<cr>
 nnoremap <leader>da :<C-u>DeniteCursorWord grep:.<cr>
 nnoremap <leader>db  :Denite buffer<cr>
 
+" Sessions
+nmap <leader>ss :SSave<cr>
+nmap <leader>sc :SClose<cr>
+
 " Easymotion
-nnoremap <leader>f <Plug>(easymotion-overwin-f)
+map  <leader>f <Plug>(easymotion-bd-f)
+nmap <leader>f <Plug>(easymotion-overwin-f)
 
 " jedi-vim
 let g:jedi#rename_command = ';pr'

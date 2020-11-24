@@ -6,6 +6,7 @@ set hls is
 set smartindent
 set hidden
 set laststatus=2
+set cc=80
 
 " solid underscore
 let &t_SI .= "\<Esc>[4 q"
@@ -27,7 +28,7 @@ filetype plugin indent on
 syntax enable
 
 " transparent background
-hi Normal guibg=NONE ctermbg=NONE
+" hi Normal guibg=NONE ctermbg=NONE
 
 if has('termguicolors')
    set termguicolors
