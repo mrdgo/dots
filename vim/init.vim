@@ -29,6 +29,7 @@ Plug 'deoplete-plugins/deoplete-jedi'
 
 Plug 'sbdchd/neoformat'
 Plug 'neomake/neomake'
+Plug 'drinksober/nvim-yapf-formater'
 
 Plug 'davidhalter/jedi-vim'
 Plug 'NLKNguyen/c-syntax.vim'

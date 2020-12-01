@@ -27,9 +27,6 @@ endif
 filetype plugin indent on
 syntax enable
 
-" transparent background
-" hi Normal guibg=NONE ctermbg=NONE
-
 if has('termguicolors')
    set termguicolors
 endif

@@ -42,4 +42,15 @@ let g:jedi#goto_command = ';pd'
 let g:jedi#goto_assignments_command = ';pg'
 let g:jedi#usages_command = ';pn'
 
+nnoremap <leader>py :YapfFormat<cr>
+vnoremap <leader>py :YapfFormat 'full'<cr>
+
+" Git
+nnoremap <leader>gs :G<cr>
+nnoremap <leader>ga :G add %<cr>
+nnoremap <leader>gd :G diff %<cr>
+nnoremap <leader>gc :G commit<cr>
+nnoremap <leader>gp :G push<cr>
+nnoremap <leader>gu :G pull<cr>
+
 " see :help nerdcommenter
