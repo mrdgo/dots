@@ -76,12 +76,12 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $
 myXPConfig :: XPConfig
 myXPConfig = def
       { font                = "xft:Mononoki:size=18"
-      , bgColor             = "#282828"
-      , fgColor             = "#ebdbb2"
-      , bgHLight            = "#1d2021"
+      , bgColor             = "#b8bb26"
+      , fgColor             = "#1d2021"
+      , bgHLight            = "#ebdbb2"
       , fgHLight            = "#fabd2f"
       , borderColor         = "#b8bb26"
-      , promptBorderWidth   = 2
+      , promptBorderWidth   = 0
       , position            = CenteredAt { xpCenterY = 0.2, xpWidth = 0.7 }
       , height              = 50
       , historySize         = 256
@@ -130,8 +130,11 @@ myKeys = [
     , ("M-b", sendMessage ToggleStruts)         -- Toggle xmobar
     , ("M-t", withFocused $ windows . W.sink)   -- Tile client again
     , ("M-m", windows W.swapMaster)             -- Set master
-    , ("M-n", sendMessage MirrorExpand)       -- expand tile
+    , ("M-n", sendMessage MirrorExpand)         -- expand tile
     , ("M-S-n", sendMessage MirrorShrink)       -- shrink tile
+
+    , ("M-S-d", sendMessage (IncMasterN 1))     -- one more master
+    , ("M-d", sendMessage (IncMasterN (-1)))    -- one more master
 
     -- Lock, Reboot, Poweroff
     , ("M-p", dirExecPrompt myXPConfig spawn "/home/maxim/.config/down_scripts")

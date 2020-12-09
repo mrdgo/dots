@@ -11,14 +11,6 @@ shopt -s autocd # change to named directory
 shopt -s cdspell # autocorrects cd misspellings
 shopt -s cmdhist # save multi-line commands in history as single line
 
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# Alias definitions.
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
 GREEN="\[$(tput setaf 2)\]"
 #RED="\[$(tput setaf 1)\]"
 #DGRAY="\[$(tput setaf 0)\]"
@@ -34,14 +26,26 @@ RESET="\[$(tput sgr0)\]"
 BOLD="\[$(tput bold)\]"
 
 # Shell Prompt
-export PS1="${LGRAY}[${GREEN}${BOLD}\w${RESET}${LGRAY}]\n ${ORANGE}λ${RESET} "
+#export PS1="${LGRAY}[${GREEN}${BOLD}\w${RESET}${LGRAY}]\n ${ORANGE}λ${RESET} "
+eval "$(starship init bash)"
 
 export PATH="$PATH:/home/maxim/flutter/bin:/home/maxim/.local/bin"
-export EDITOR="vim"
+export EDITOR="nvim"
 export TERMINAL="alacritty"
 
 # Configure pfetch
 export PF_INFO="ascii title os kernel uptime pkgs shell wm editor memory palette"
+
+# Configure latex
+export TEXINPUT="./:pkg/"
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# Alias definitions.
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
 
 lfcd () {
     tmp="$(mktemp)"

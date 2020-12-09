@@ -1,3 +1,15 @@
+" Mappings
+nnoremap <leader>dr :Denite -resume<cr>
+nnoremap <leader>ds :<C-u>Denite grep:. -no-empty<cr>
+nnoremap <leader>da :<C-u>DeniteCursorWord grep:.<cr>
+nnoremap <leader>db :Denite buffer<cr>
+nnoremap <leader>dc :Denite command_history<cr>
+nnoremap <leader>dh :Denite help<cr>
+nnoremap <leader>df :Denite file_mru file/rec<cr>
+nnoremap <leader>dy :Denite neoyank -default-action=yank<cr>
+nnoremap <leader>dl :Denite line<cr>
+
+
 " Define mappings
 autocmd FileType denite call s:denite_my_settings()
 function! s:denite_my_settings() abort
@@ -5,6 +17,14 @@ function! s:denite_my_settings() abort
   \ denite#do_map('do_action')
   nnoremap <silent><buffer><expr> d
   \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> s
+  \ denite#do_map('do_action', 'split')
+  nnoremap <silent><buffer><expr> v
+  \ denite#do_map('do_action', 'vsplit')
+  nnoremap <silent><buffer><expr> t
+  \ denite#do_map('do_action', 'tabopen')
+  nnoremap <silent><buffer><expr> y
+  \ denite#do_map('do_action', 'yank')
   nnoremap <silent><buffer><expr> p
   \ denite#do_map('do_action', 'preview')
   nnoremap <silent><buffer><expr> q
@@ -20,13 +40,9 @@ function! s:denite_filter_my_settings() abort
   imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
 endfunction
 
+let g:neoyank#file = '/opt/dots/vim/history_yank'
 call denite#custom#var('buffer', 'date_format', '')
 
-" source_names 'hide' or 'short'
-            "\ 'highlight_matched_char': 'QuickFixLine',
-            "\ 'highlight_matched_range': 'Visual',
-            "\ 'highlight_window_background': 'Visual',
-            "\ 'highlight_filter_background': 'DiffAdd',
 let s:denite_options = {'default' : {
             \ 'split': 'floating',
             \ 'start_filter': 1,
@@ -52,6 +68,7 @@ endfunction
 
 call s:profile(s:denite_options)
 
+"call denite#custom#var('warnings',)
 call denite#custom#var('file/rec', 'command', ['rg', '--files', '--glob', '!.git'])
 
 " Use ripgrep in place of grep

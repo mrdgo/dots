@@ -15,8 +15,4 @@ fi
 
 exec /home/maxim/.fehbg
 
-if [ ! -z "$(lsusb | grep Massdrop)" ]; then
-    setxkbmap us -variant intl
-else
-    setxkbmap de
-fi
+setxkbmap us -variant intl

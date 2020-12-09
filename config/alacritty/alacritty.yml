@@ -1,5 +1,5 @@
 env:
-  TERM: alacritty
+  TERM: xterm-256color
 
 window:
   padding:
@@ -53,7 +53,7 @@ colors:
     foreground: '0xebdbb2'
 
   normal:
-    black:   '0x282828'
+    black:   '0x1d2021'
     red:     '0xcc241d'
     green:   '0x98971a'
     yellow:  '0xd79921'

@@ -43,7 +43,7 @@ URxvt.color250: #d5c4a1
 
 ! hard contrast: *background: #1d2021
 ! soft contrast: *background: #32302f
-! default: 
+! default:
 *background: #282828
 *foreground: #ebdbb2
 ! Black + DarkGrey

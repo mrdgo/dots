@@ -37,5 +37,4 @@ config/teams/
 config/unity3d/
 config/vlc/
 config/zoomus.conf
-vim/autoload/
 vim/plugged/

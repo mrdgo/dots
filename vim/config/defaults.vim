@@ -7,6 +7,7 @@ set smartindent
 set hidden
 set laststatus=2
 set cc=80
+set splitbelow
 
 " solid underscore
 let &t_SI .= "\<Esc>[4 q"
@@ -18,10 +19,6 @@ let loaded_matchparen = 1
 
 " Note: Skip initialization for vim-tiny or vim-small.
 if 0 | endif
-
-if &compatible
-set nocompatible               " Be iMproved
-endif
 
 " Required:
 filetype plugin indent on

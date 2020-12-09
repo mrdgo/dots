@@ -1,5 +1,5 @@
 call defx#custom#option('_', {
-    \ 'columns': 'indent:icon:git:filename:type:mark',
+    \ 'columns': 'indent:icon:filename:type:mark',
     \ 'winwidth': 30,
     \ 'split': 'vertical',
     \ 'direction': 'rightbelow',
@@ -21,17 +21,6 @@ call defx#custom#column('icon', {
 
 call defx#custom#column('filename', {
     \ 'max_width': -90,
-    \ })
-
-call defx#custom#column('git', 'indicators', {
-    \ 'Modified'  : '•',
-    \ 'Staged'    : '✚',
-    \ 'Untracked' : 'ᵁ',
-    \ 'Renamed'   : '≫',
-    \ 'Unmerged'  : '≠',
-    \ 'Ignored'   : 'ⁱ',
-    \ 'Deleted'   : '✖',
-    \ 'Unknown'   : '?'
     \ })
 
 augroup vfinit
@@ -108,9 +97,9 @@ function! s:defx_init()
         \     defx#do_action('open_tree')
         \     )
         \ : defx#do_action('drop')
-  nnoremap <silent><buffer><expr> sg
-        \ defx#do_action('drop', 'vsplit')
   nnoremap <silent><buffer><expr> sv
+        \ defx#do_action('drop', 'vsplit')
+  nnoremap <silent><buffer><expr> sp
         \ defx#do_action('drop', 'split')
   nnoremap <silent><buffer><expr> st
         \ defx#do_action('drop', 'tabedit')
@@ -141,8 +130,6 @@ function! s:defx_init()
         \ defx#do_action('print')
   nnoremap <silent><buffer> <Home> :call cursor(2, 1)<cr>
   nnoremap <silent><buffer> <End>  :call cursor(line('$'), 1)<cr>
-  nnoremap <silent><buffer><expr> <C-Home>
-        \ defx#do_action('cd', SpaceVim#plugins#projectmanager#current_root())
   nnoremap <silent><buffer><expr> > defx#do_action('resize',
 	    \ defx#get_context().winwidth + 10)
   nnoremap <silent><buffer><expr> < defx#do_action('resize',

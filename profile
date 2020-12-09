@@ -26,5 +26,5 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-export EDITOR="vim"
+export EDITOR="nvim"
 export PATH="$PATH:/usr/lib/dart/bin"
