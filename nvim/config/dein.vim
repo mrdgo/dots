@@ -1,9 +1,9 @@
-set runtimepath+=/opt/dots/vim/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=/opt/dots/nvim/dein/repos/github.com/Shougo/dein.vim
 
-if dein#load_state('/opt/dots/vim/dein')
-  call dein#begin('/opt/dots/vim/dein')
+if dein#load_state('/opt/dots/nvim/dein')
+  call dein#begin('/opt/dots/nvim/dein')
 
-  call dein#add('/opt/dots/vim/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('/opt/dots/nvim/dein/repos/github.com/Shougo/dein.vim')
 
   call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/defx.nvim')

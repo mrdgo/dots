@@ -130,8 +130,8 @@ cursor:
 
 live_config_reload: false
 
-#shell:
-  #program: /bin/bash
+shell:
+  program: /bin/zsh
   #args:
     #- --login
 

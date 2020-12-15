@@ -49,7 +49,7 @@ myTerminal = "alacritty"
 myStartupHook :: X ()
 myStartupHook = do
     setWMName "XMonad"
-    spawn "/home/maxim/.config/init_wm.sh"
+    spawn "/opt/dots/config/init_wm.sh"
 
 tall     = renamed [Replace "tall"]
         $ spacing 7
@@ -189,10 +189,11 @@ myManageHook = insertPosition Below Newer <+> composeAll
     , className =? "Android Emulator"   --> doShift ( myWorkspaces !! 7 )
     , className =? "jetbrains-studio"   --> doShift ( myWorkspaces !! 8 )
     , (className =? "Mozilla Firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
-    , title =? "mocp"                           --> doFloat
-    , title =? "Android Virtual Device Manager" --> doFloat
-    , title =? "Emulator"                       --> doFloat
-    , className =? "Android Emulator"           --> doFloat
+    , title =? "mocp"                               --> doFloat
+    , title =? "Android Virtual Device Manager"     --> doFloat
+    , title =? "Microsoft Teams-Benachrichtigung"   --> doFloat
+    , title =? "Emulator"                           --> doFloat
+    , className =? "Android Emulator"               --> doFloat
     ]
 
 main = do

@@ -40,7 +40,7 @@ function! s:denite_filter_my_settings() abort
   imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
 endfunction
 
-let g:neoyank#file = '/opt/dots/vim/history_yank'
+let g:neoyank#file = '/opt/dots/nvim/history_yank'
 call denite#custom#var('buffer', 'date_format', '')
 
 let s:denite_options = {'default' : {

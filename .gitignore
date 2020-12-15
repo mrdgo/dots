@@ -1,4 +1,7 @@
-vim/.git_token
+nvim/.git_token
+nvim/dein/
+nvim/history_yank
+nvim/session/
 config/obs-studio/
 config/Android\ Open\ Source\ Project/
 config/QtProject.conf
@@ -22,3 +25,16 @@ config/teams/
 config/unity3d/
 config/vlc/
 config/zoomus.conf
+config/GIMP/
+config/Unknown Organization/
+config/google-chrome/
+config/kdenlive-layoutsrc
+config/youtube-viewer/
+moc/equalizer
+moc/last_directory
+moc/softmixer
+xmonad/prompt-history
+xmonad/xmonad-x86_64-linux
+xmonad/xmonad.errors
+xmonad/xmonad.hi
+xmonad/xmonad.o

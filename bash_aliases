@@ -6,7 +6,7 @@ alias uni="ssh ty82xile@faui0sr0.cs.fau.de"
 alias bello="ssh -t -J ty82xile@i4lab1.cs.fau.de ty82xile@faui49bello3 'bash'"
 
 alias pi1='ssh -J ty82xile@i4lab1.cs.fau.de pi@10.188.42.175'
-alias pi2='ssh -J ty82xile@i4lab1.cs.fau.de pi@10.188.42.155'
+alias pi2='ssh -J ty82xile@i4lab1.cs.fau.de pi@maximPi2'
 
 # master thesis
 alias cma="cd ~/dokumente/isento/gps"
@@ -50,7 +50,6 @@ alias yta-wav="youtube-dl --extract-audio --audio-format wav "
 alias ytv-best="youtube-dl -f bestvideo+bestaudio "
 
 # Dev
-alias bt="bashtop"
 alias m="make"
 alias g="git"
 alias ga="git add"
@@ -60,12 +59,6 @@ alias gc="git commit"
 alias gs="git status"
 alias gd="git diff"
 alias gpc="git push -u custom"
-
-# Configs
-alias vba="nvim ~/.bash_aliases; . ~/.bash_aliases"
-alias vrc="nvim ~/.bashrc; . ~/.bashrc"
-alias va="nvim ~/.config/alacritty/alacritty.yml"
-alias vp="nvim ~/.config/starship.toml"
 
 ## XMonad
 alias vx="nvim ~/.xmonad/xmonad.hs"
@@ -92,3 +85,44 @@ alias us='setxkbmap us -variant intl'
 
 # debian legacy
 # alias ud="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
+
+lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        if [ -d "$dir" ]; then
+            if [ "$dir" != "$(pwd)" ]; then
+                cd "$dir"
+            fi
+        fi
+    fi
+}
+
+### ARCHIVE EXTRACTION
+# usage: ex <file>
+ex ()
+{
+    if [ -f $1  ] ; then
+        case $1 in
+            *.tar.bz2)   tar xjf $1   ;;
+            *.tar.gz)    tar xzf $1   ;;
+            *.bz2)       bunzip2 $1   ;;
+            *.rar)       unrar x $1   ;;
+            *.gz)        gunzip $1    ;;
+            *.tar)       tar xf $1    ;;
+            *.tbz2)      tar xjf $1   ;;
+            *.tgz)       tar xzf $1   ;;
+            *.zip)       unzip $1     ;;
+            *.Z)         uncompress $1;;
+            *.7z)        7z x $1      ;;
+            *.deb)       ar x $1      ;;
+            *.tar.xz)    tar xf $1    ;;
+            *.tar.zst)   unzstd $1    ;;
+            *)           echo "'$1' cannot be extracted via ex()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
