@@ -1,3 +1,6 @@
+" Defx
+nnoremap <leader>de :Defx<cr>
+
 call defx#custom#option('_', {
     \ 'columns': 'indent:icon:filename:type:mark',
     \ 'winwidth': 30,

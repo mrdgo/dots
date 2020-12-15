@@ -3,6 +3,7 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 set hls is
+set ignorecase
 set smartindent
 set hidden
 set laststatus=2

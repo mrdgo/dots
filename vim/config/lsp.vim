@@ -20,7 +20,7 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Space>p', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Space>f', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
   end
-  local servers = {'pyls', 'vimls', 'texlab' }
+  local servers = {'pyls', 'vimls', 'texlab', 'sumneko_lua'}
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
       on_attach = on_attach,

@@ -7,8 +7,10 @@ if dein#load_state('/opt/dots/vim/dein')
 
   call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/defx.nvim')
+  call dein#add('Shougo/deol.nvim')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('Shougo/deoplete-lsp')
+  call dein#add('deoplete-plugins/deoplete-zsh')
   call dein#add('neovim/nvim-lspconfig')
   call dein#add('Shougo/neoyank.vim')
   call dein#add('Shougo/neomru.vim')
@@ -24,6 +26,7 @@ if dein#load_state('/opt/dots/vim/dein')
 
   call dein#add('lambdalisue/suda.vim')
   call dein#add('tpope/vim-fugitive')
+  call dein#add('tpope/vim-surround')
 
   call dein#add('NLKNguyen/c-syntax.vim')
   call dein#add('vim-scripts/gnuplot-syntax-highlighting')
@@ -44,6 +47,6 @@ if dein#check_install()
   call dein#install()
 endif
 
-let g:dein#install_github_api_token = "87bc882b019f500fc8d0f2810042fa93bfe2fff9"
-command! Dup call dein#check_update(v:true)
-command! Dcl call map(dein#check_clean(), "delete(v:val, 'rf')")
+let g:dein#install_github_api_token = "a65b2635b12baf31eb2ecec8c8a79e2bd9a29347"
+command! DeinUp call dein#check_update(v:true)
+command! DeinCl call map(dein#check_clean(), "delete(v:val, 'rf')")

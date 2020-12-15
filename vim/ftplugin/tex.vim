@@ -1,10 +1,6 @@
 """""""""""""" LATEX
-
-let g:livepreview_use_biber = 1
 let g:tex_flavor = 'xelatex'
-let g:livepreview_engine = 'xelatex' " . ' [options]'
-let g:livepreview_previewer = 'zathura'
-"let g:livepreview_texinputs = '/path1/to/files//:/path2/to/files//'
+let g:vimtex_view_general_viewer = 'zathura'
 
 " Navigating with guides
 inoremap <leader>g <Esc>/<++><Enter>"_c4l
