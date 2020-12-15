@@ -47,6 +47,5 @@ if dein#check_install()
   call dein#install()
 endif
 
-let g:dein#install_github_api_token = "a65b2635b12baf31eb2ecec8c8a79e2bd9a29347"
 command! DeinUp call dein#check_update(v:true)
 command! DeinCl call map(dein#check_clean(), "delete(v:val, 'rf')")
