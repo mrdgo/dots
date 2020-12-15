@@ -1,19 +1,4 @@
-vim/.netrwhist
-vim/bundle/auto-pairs/
-vim/bundle/c-syntax.vim/
-vim/bundle/colorizer/
-vim/bundle/conoline.vim/
-vim/bundle/dart-vim-plugin/
-vim/bundle/gnuplot-syntax-highlighting/
-vim/bundle/gruvbox/
-vim/bundle/tabular/
-vim/bundle/vim-airline-themes/
-vim/bundle/vim-airline/
-vim/bundle/vim-easymotion/
-vim/bundle/vim-endwise/
-vim/bundle/vim-latex-live-preview/
-vim/bundle/vim-markdown/
-vim/bundle/vimtex/
+vim/.git_token
 config/obs-studio/
 config/Android\ Open\ Source\ Project/
 config/QtProject.conf
@@ -37,4 +22,3 @@ config/teams/
 config/unity3d/
 config/vlc/
 config/zoomus.conf
-vim/plugged/
