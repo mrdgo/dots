@@ -1,6 +1,8 @@
 import XMonad
 import System.IO (hPutStrLn)
 import Data.Monoid (Endo)
+import Data.Time.Clock
+import Data.Time.Calendar
 import System.Exit (exitSuccess)
 import XMonad.Actions.Search
 
@@ -20,7 +22,6 @@ import XMonad.Layout.Renamed (renamed, Rename(Replace))
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), (??))
 import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBORDERS))
-import XMonad.Layout.LimitWindows (limitWindows)
 import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
 import XMonad.Layout.SimplestFloat (simplestFloat)
 
@@ -38,7 +39,7 @@ modm :: KeyMask
 modm = mod1Mask
 
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = ["dev", "www"] ++ map show [3..7] ++ ["avd", "flt"]
+myWorkspaces = ["dev", "www", "run", "tms", "zoo"] ++ map show [6..7] ++ ["avd", "flt"]
 
 myFont :: String
 myFont = "Mononoki:size=14:antialias=true:hinting=true,xft:FontAwesome:size=12"
@@ -49,24 +50,25 @@ myTerminal = "alacritty"
 myStartupHook :: X ()
 myStartupHook = do
     setWMName "XMonad"
-    spawn "/opt/dots/config/init_wm.sh"
+    spawn "/usr/bin/dunst"
+    spawn "/usr/bin/picom"
+    spawn "/home/maxim/.fehbg"
 
 tall     = renamed [Replace "tall"]
-        $ spacing 7
+        $ spacing 3
         $ noBorders
-        $ limitWindows 12
         $ ResizableTall 1 (3/100) (1/2) []
 monocle  = renamed [Replace "monocle"]
         $ noBorders
-        $ limitWindows 20 Full
+        $ Full
 floats = renamed [Replace "floats"]
         $ noBorders
-        $ limitWindows 20 simplestFloat
+        $ simplestFloat
 
 -- The layout hook
 myLayoutHook = avoidStruts $ mouseResize $ windowArrange $
     mkToggle (NBFULL ?? NOBORDERS ?? EOT) $
-    onWorkspaces ["www", "flt"] monocle $
+    onWorkspaces ["www", "flt", "tms", "zoo"] monocle $
     myDefaultLayout
     where
     myDefaultLayout =   tall
@@ -120,6 +122,27 @@ searchList = [ ("a", archwiki)
              , ("z", S.amazon)
              ]
 
+-- -d: dimensions, -t: title
+spawnFloatingTerm :: String -> X ()
+spawnFloatingTerm cmd = spawn $ "alacritty " ++ opt ++ " -e" ++ cmd
+    where
+        opt = col ++ lin ++ posx ++ posy ++ floatDecorator
+            where
+                col = "-o window.dimensions.columns=200 "   -- 123
+                lin = "-o window.dimensions.lines=35 "      -- 34
+                posx = "-o window.position.x=60 "           -- 10
+                posy = "-o window.position.y=40 "           -- 10
+                floatDecorator = "-t \"float\""
+
+replace :: Eq t => t -> t -> [t] -> [t]
+replace a b = map (\c -> if c==a then b; else c)
+
+buildMaimString :: String -> String
+buildMaimString = wrap pre post . replace ' ' '_' . replace ':' '-' . take 19
+    where
+        pre = "/usr/bin/maim -m 10 /home/maxim/bilder/screenshots/"
+        post = ".png"
+
 myKeys :: [(String, X ())]
 myKeys = [
     -- XMonad
@@ -133,8 +156,13 @@ myKeys = [
     , ("M-n", sendMessage MirrorExpand)         -- expand tile
     , ("M-S-n", sendMessage MirrorShrink)       -- shrink tile
 
+    --, ("M-e", spawn "eww close-all")            -- close all widgets
+    , ("M-n", spawn "/usr/bin/firefox")
+    , ("M-s", liftIO (fmap show getCurrentTime) >>= spawn . buildMaimString )
+    , ("M-S-s", spawn "/usr/bin/maim --select -m 10 | xclip -selection clipboard -target image/png")
+
     , ("M-S-d", sendMessage (IncMasterN 1))     -- one more master
-    , ("M-d", sendMessage (IncMasterN (-1)))    -- one more master
+    , ("M-d", sendMessage (IncMasterN (-1)))    -- one master fewer
 
     -- Lock, Reboot, Poweroff
     , ("M-p", dirExecPrompt myXPConfig spawn "/home/maxim/.config/down_scripts")
@@ -156,12 +184,12 @@ myKeys = [
     , ("S-<XF86AudioRaiseVolume>", spawn "doas light -A 5")
 
     -- Controls for mocp music player.
-    -- -d: dimensions, -t: title
-    , ("M-u o", spawn "alacritty -d 120 32 --position 60 40 -t \"mocp\" -e mocp")
+    , ("M-u o", spawnFloatingTerm "mocp")
     , ("M-u p", spawn "mocp --play")
     , ("M-u l", spawn "mocp --next")
     , ("M-u h", spawn "mocp --previous")
     , ("M-u <Space>", spawn "mocp --toggle-pause")
+    , ("M-u m", spawnFloatingTerm "doas alsamixer")
 
     -- Master thesis
     , ("M-S-b", spawn "zathura ~/dokumente/isento/gps/pybullet_quickstartguide.pdf")
@@ -184,16 +212,25 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 
 myManageHook :: XMonad.Query (Data.Monoid.Endo WindowSet)
 myManageHook = insertPosition Below Newer <+> composeAll
-    [ title =? "Mozilla Firefox"        --> doShift ( myWorkspaces !! 1 )
-    , title =? "Emulator"               --> doShift ( myWorkspaces !! 7 )
-    , className =? "Android Emulator"   --> doShift ( myWorkspaces !! 7 )
-    , className =? "jetbrains-studio"   --> doShift ( myWorkspaces !! 8 )
-    , (className =? "Mozilla Firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
-    , title =? "mocp"                               --> doFloat
-    , title =? "Android Virtual Device Manager"     --> doFloat
+    [ -- Firefox
+      title =? "Mozilla Firefox"               --> doShift ( myWorkspaces !! 1 )
+    , (className =? "Mozilla Firefox" <&&> resource =? "Dialog") --> doFloat
+    -- Teams
+    , className =? "Microsoft Teams - Preview" --> doShift ( myWorkspaces !! 3 )
     , title =? "Microsoft Teams-Benachrichtigung"   --> doFloat
+    -- Zoom
+    , className =? "zoom"                       --> doShift ( myWorkspaces !! 4 )
+    -- Android Dev
+    , title =? "Emulator"                      --> doShift ( myWorkspaces !! 7 )
+    , className =? "Android Emulator"          --> doShift ( myWorkspaces !! 7 )
+    , className =? "jetbrains-studio"          --> doShift ( myWorkspaces !! 8 )
+    , title =? "Android Virtual Device Manager"     --> doFloat
     , title =? "Emulator"                           --> doFloat
     , className =? "Android Emulator"               --> doFloat
+    -- Gimp
+    , stringProperty "WM_WINDOW_ROLE" =? "gimp-message-dialog" --> doFloat
+    -- Generic
+    , title =? "float"                              --> doFloat
     ]
 
 main = do
@@ -212,11 +249,11 @@ main = do
         , logHook = dynamicLogWithPP xmobarPP
                 {
                     ppOutput = hPutStrLn xmproc0
-                    , ppCurrent = xmobarColor "#fabd2f" "" . wrap "[" "]" -- Current workspace in xmobar
-                    , ppVisible = xmobarColor "#debba5" ""                -- Visible but not current ws
-                    , ppHidden = xmobarColor "#debba5" "" . wrap "[" "]"  -- Hidden workspaces in xmobar
-                    , ppHiddenNoWindows = xmobarColor "#debba5" ""        -- Hidden workspaces (no windows)
-                    , ppTitle = xmobarColor "#928374" "" . shorten 60     -- Title of active window
+                    , ppCurrent = xmobarColor "#b8bb28" ""                -- Current workspace in xmobar
+                    , ppVisible = xmobarColor "#fabd2f" ""                -- Visible but not current ws
+                    , ppHidden = xmobarColor "#fabd2f" ""                 -- Hidden workspaces in xmobar
+                    , ppHiddenNoWindows = xmobarColor "#928374" ""        -- Hidden workspaces (no windows)
+                    , ppTitle = xmobarColor "#bdae93" "" . shorten 60     -- Title of active window
                     , ppSep =  " | "                                      -- Separators in xmobar
                     , ppUrgent = xmobarColor "#fb4934" "" . wrap "!" "!"  -- Urgent workspace
                     , ppExtras  = [windowCount]                           -- # of windows current workspace

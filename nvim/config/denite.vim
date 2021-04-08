@@ -1,14 +1,16 @@
-" Mappings
-nnoremap <leader>dr :Denite -resume<cr>
-nnoremap <leader>ds :<C-u>Denite grep:. -no-empty<cr>
-nnoremap <leader>da :<C-u>DeniteCursorWord grep:.<cr>
-nnoremap <leader>db :Denite buffer<cr>
-nnoremap <leader>dc :Denite command_history<cr>
-nnoremap <leader>dh :Denite help<cr>
-nnoremap <leader>df :Denite file_mru file/rec<cr>
-nnoremap <leader>dy :Denite neoyank -default-action=yank<cr>
-nnoremap <leader>dl :Denite line<cr>
+"init.vim: source $HOME/.config/nvim/config/denite.vim
+" dein.vim
+"call dein#add('Shougo/denite.nvim')
+"call dein#add('Shougo/neoyank.vim')
 
+nmap <silent> <Leader>us :<C-u>Denite grep:. -no-empty<cr>
+nmap <silent> <Leader>ua :<C-u>DeniteCursorWord grep:.<cr>
+nmap <silent> <Leader>uc <cmd>Denite command_history<cr>
+nmap <silent> <Leader>uh <cmd>Denite help<cr>
+nmap <silent> <Leader>ul <cmd>Denite line<cr>
+
+nmap <silent> <Leader>ub <cmd>Denite buffer<cr>
+nmap <silent> <Leader>uf <cmd>Denite file/rec<cr>
 
 " Define mappings
 autocmd FileType denite call s:denite_my_settings()

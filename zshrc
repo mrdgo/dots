@@ -1,7 +1,7 @@
 # History
 HISTFILE=~/.zshist
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 
 # Shell options
 setopt autocd extendedglob nomatch notify
@@ -12,18 +12,17 @@ zstyle :compinstall filename '/home/maxim/.zshrc'
 autoload -Uz compinit
 compinit
 
-# Aliases
 source $HOME/.aliases
 
-# Prompt
 eval "$(starship init zsh)"
+export PF_INFO="ascii title os kernel uptime pkgs shell wm editor keymap memory palette"
+pfetch
 
-# Configure pfetch
-export PF_INFO="ascii title os kernel uptime pkgs shell wm editor memory palette"
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
 
 # set cursor shapes
 function zle-keymap-select zle-line-init zle-line-finish {

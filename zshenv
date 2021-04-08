@@ -15,9 +15,13 @@ if [ -d "$HOME/flutter/bin" ] ; then
     export PATH="$PATH:$HOME/flutter/bin"
 fi
 
-export PAGER="less"
+#export BROWSER="librewolf"
+export PAGER="nvimpager"
+export BAT_THEME="gruvbox"
 export EDITOR="nvim"
 export TERMINAL="alacritty"
+export LANG=en_US.UTF-8
 export SHELL=/bin/zsh
 export _JAVA_AWT_WM_NONREPARENTING=1
+export PF_SOURCE=/home/maxim/dokumente/proj/pfetch/addon.sh
 

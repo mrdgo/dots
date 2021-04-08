@@ -5,7 +5,5 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-F=$1
-cp ~/.config/sample.tex $F.tex
-zathura $F.pdf &
-nvim +NeoTexOn $F.tex
+cp ~/.config/sample.tex $1.tex
+nvim +VimtexCompile $1.tex

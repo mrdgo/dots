@@ -1,12 +1,22 @@
 alias screencast="ffmpeg -f x11grab -s 1920x1080 -i :0.0 out.mkv"
 alias webcast="ffmpeg -i /dev/video1 -c:v libx264 out.mkv"
-alias bat="cat /sys/class/power_supply/BAT0/capacity"
+
+set_bg ()
+{
+    base="$HOME/.config/alacritty/alacritty_base.yml"
+    res="$HOME/.config/alacritty/alacritty.yml"
+    cat $base $HOME/.config/alacritty/gruvbox_$1.yml > $res
+}
+
+alias bl="set_bg light"
+alias bd="set_bg dark"
 
 alias uni="ssh ty82xile@faui0sr0.cs.fau.de"
-alias bello="ssh -t -J ty82xile@i4lab1.cs.fau.de ty82xile@faui49bello3 'bash'"
+alias woody="ssh iwso024h@woody.rrze.fau.de"
 
-alias pi1='ssh -J ty82xile@i4lab1.cs.fau.de pi@10.188.42.175'
+alias pi1='ssh -J ty82xile@i4lab1.cs.fau.de pi@maximPi1'
 alias pi2='ssh -J ty82xile@i4lab1.cs.fau.de pi@maximPi2'
+alias bello="ssh -t -J ty82xile@i4lab1.cs.fau.de ty82xile@faui49bello3 'bash'"
 
 # master thesis
 alias cma="cd ~/dokumente/isento/gps"
@@ -27,16 +37,15 @@ alias sml="xrandr --output HDMI-1 --off --output eDP-1 --auto && /home/maxim/.fe
 
 # vim life
 alias v="nvim"
-alias se="doas nvim"
 alias ctv="~/.config/tv.sh"
 
 # Convenience
-alias r="lfcd"
 alias i="devour sxiv -rfb"
 alias z="devour zathura"
+alias d="devour display"
 alias ydl="~/.config/ydl.sh"
-alias fix="echo 218.8"
-alias vlc="devour cvlc --key-quit q"
+alias vlc="cvlc --key-quit q"
+alias minecraft="devour minecraft-launcher"
 
 # youtube-dl
 alias yta-aac="youtube-dl --extract-audio --audio-format aac "
@@ -60,33 +69,29 @@ alias gs="git status"
 alias gd="git diff"
 alias gpc="git push -u custom"
 
-## XMonad
-alias vx="nvim ~/.xmonad/xmonad.hs"
-alias vxb="nvim ~/.config/xmobar/xmobarrc"
-# alias vi3="nvim ~/.config/i3/config"
-
-alias ..="cd .."
+#alias ..="cd .." # bash legacy
 alias ...="cd ../.."
 alias .3="cd ../../.."
 alias .4="cd ../../../.."
 alias .5="cd ../../../../.."
 
-alias ls='lsd'
-alias ll='lsd -alF'
-alias la='lsd -A'
-alias l='lsd -F'
+alias ls='exa'
+alias ll='exa -alF'
+alias la='exa -a'
+alias l='exa -F'
 
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+alias grep='rg'
+alias ps='procs'
 
 alias de='setxkbmap de'
 alias us='setxkbmap us -variant intl'
+alias dv='setxkbmap us -variant dvorak-intl'
 
 # debian legacy
 # alias ud="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 
-lfcd () {
+# lfcd, open lf and cd to directory on exit
+r () {
     tmp="$(mktemp)"
     lf -last-dir-path="$tmp" "$@"
     if [ -f "$tmp" ]; then
@@ -125,4 +130,25 @@ ex ()
     else
         echo "'$1' is not a valid file"
     fi
+}
+
+paccache ()
+{
+    if [ $# -ne 0 ]; then
+        doas /usr/bin/paccache $@
+    else
+        doas /usr/bin/paccache -rk2 -ruk0
+    fi
+}
+
+wifi ()
+{
+    doas ln -s /etc/runit/sv/wpa_supplicant /etc/runit/runsvdir/default/wpa_supplicant
+}
+
+wifi_off ()
+{
+    doas ip link set wlp6s0 down
+    doas sv down wpa_supplicant
+    doas rm /etc/runit/runsvdir/default/wpa_supplicant
 }

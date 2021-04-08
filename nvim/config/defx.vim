@@ -1,5 +1,5 @@
 " Defx
-nnoremap <leader>de :Defx<cr>
+nnoremap <silent> <leader>de :Defx<cr>
 
 call defx#custom#option('_', {
     \ 'columns': 'indent:icon:filename:type:mark',
@@ -108,9 +108,9 @@ function! s:defx_init()
         \ defx#do_action('drop', 'tabedit')
   nnoremap <silent><buffer><expr> p
         \ defx#do_action('open', 'pedit')
-  nnoremap <silent><buffer><expr> K
-        \ defx#do_action('new_directory')
   nnoremap <silent><buffer><expr> N
+        \ defx#do_action('new_directory')
+  nnoremap <silent><buffer><expr> n
         \ defx#do_action('new_file')
   nnoremap <silent><buffer><expr> d
         \ defx#do_action('remove')
@@ -119,24 +119,10 @@ function! s:defx_init()
   nnoremap <silent><buffer><expr> yy defx#do_action('call', 'DefxYarkPath')
   nnoremap <silent><buffer><expr> .
         \ defx#do_action('toggle_ignored_files')
-  nnoremap <silent><buffer><expr> <C-f>
-        \ defx#do_action('change_filtered_files')
-  nnoremap <silent><buffer><expr> ~
-        \ defx#do_action('cd')
-  nnoremap <silent><buffer><expr> j
-        \ line('.') == line('$') ? 'gg' : 'j'
-  nnoremap <silent><buffer><expr> k
-        \ line('.') == 1 ? 'G' : 'k'
-  nnoremap <silent><buffer><expr> <C-r>
-        \ defx#do_action('redraw')
-  nnoremap <silent><buffer><expr> <C-g>
-        \ defx#do_action('print')
-  nnoremap <silent><buffer> <Home> :call cursor(2, 1)<cr>
-  nnoremap <silent><buffer> <End>  :call cursor(line('$'), 1)<cr>
   nnoremap <silent><buffer><expr> > defx#do_action('resize',
-	    \ defx#get_context().winwidth + 10)
+        \ defx#get_context().winwidth + 10)
   nnoremap <silent><buffer><expr> < defx#do_action('resize',
-	    \ defx#get_context().winwidth - 10)
+        \ defx#get_context().winwidth - 10)
 endfunction
 
 " in this function we should vim-choosewin if possible

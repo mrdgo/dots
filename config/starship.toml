@@ -1,7 +1,7 @@
 # Don't print a new line at the start of the prompt
 add_newline = true
 
-# Replace the "❯" symbol in the prompt with "➜"
+# Replace the "❯" symbol in the prompt with "λ"
 [character]
 success_symbol = "[λ](bold green)"
 error_symbol = "[λ](bold red)"
@@ -13,3 +13,10 @@ style = "green bold"
 
 [git_status]
 style = "blue bold"
+
+[battery]
+full_symbol = ""
+
+[[battery.display]]
+threshold = 10
+style = "bold red"
