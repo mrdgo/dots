@@ -36,8 +36,9 @@ source $HOME/.config/nvim/config/denite.vim
 source $HOME/.config/nvim/config/commenter.vim
 source $HOME/.config/nvim/config/doge.vim
 
-luafile $HOME/.config/nvim/lua/lsp_setup.lua
 "luafile $HOME/.config/nvim/lua/telescope_setup.lua
+"luafile $HOME/.config/nvim/lua/telescope_buffers.lua
+luafile $HOME/.config/nvim/lua/lsp_setup.lua
 
 luafile $HOME/.config/nvim/lua/dap_setup.lua
 luafile $HOME/.config/nvim/lua/dap_python.lua

@@ -5,16 +5,38 @@ require'telescope'.setup {
         mappings = {
             n = {
                 -- motion
-                ["j"] = actions.move_selection_next,
-                ["k"] = actions.move_selection_previous,
-                ["d"] = actions.close,
+                --["j"] = actions.move_selection_next,
+                --["k"] = actions.move_selection_previous,
+                ["q"] = actions.close,
 
                 -- split
-                ["s"] = actions.goto_file_selection_split,
-                ["v"] = actions.goto_file_selection_vsplit,
+                ["s"] = actions.file_split,
+                ["v"] = actions.file_vsplit,
+
+                -- select
+                ["t"] = actions.toggle_selection,
 
                 -- TODO: yank filename
                 --["y"] = actions.,
+                ["d"] = function(prompt_bufnr)
+                      local action_state = require('telescope.actions.state')
+                      local actions = require('telescope.actions')
+                      local current_picker = action_state.get_current_picker(prompt_bufnr)
+                      local multi_selections = current_picker:get_multi_selection()
+
+                      if next(multi_selections) == nil then
+                        local selection = action_state.get_selected_entry()
+                        actions.close(prompt_bufnr)
+                        vim.api.nvim_buf_delete(selection.bufnr, {force = true})
+                      else
+                        actions.close(prompt_bufnr)
+                        for _, selection in ipairs(multi_selections) do
+                          vim.api.nvim_buf_delete(selection.bufnr, {force = true})
+                        end
+                      end
+
+                    return true
+                end,
             },
         },
         vimgrep_arguments = {
@@ -26,7 +48,7 @@ require'telescope'.setup {
           '--column',
           '--smart-case'
         },
-        prompt_prefix = "λ",
+        prompt_prefix = "λ ",
         file_previewer = previewers.vim_buffer_cat.new,
         grep_previewer = previewers.vim_buffer_vimgrep.new,
         qflist_previewer = previewers.vim_buffer_qflist.new,

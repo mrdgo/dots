@@ -3,8 +3,8 @@ import System.IO (hPutStrLn)
 import Data.Monoid (Endo)
 import Data.Time.Clock
 import Data.Time.Calendar
+import Data.List (isPrefixOf)
 import System.Exit (exitSuccess)
-import XMonad.Actions.Search
 
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig
@@ -15,9 +15,9 @@ import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, s
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.InsertPosition
 
-import XMonad.Layout.NoBorders
-import XMonad.Layout.Spacing
-import XMonad.Layout.PerWorkspace
+import XMonad.Layout.NoBorders (noBorders)
+import XMonad.Layout.Spacing (spacing)
+import XMonad.Layout.PerWorkspace (onWorkspaces)
 import XMonad.Layout.Renamed (renamed, Rename(Replace))
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), (??))
@@ -25,15 +25,11 @@ import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBO
 import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
 import XMonad.Layout.SimplestFloat (simplestFloat)
 
-import XMonad.Actions.MouseResize
+import XMonad.Actions.MouseResize (mouseResize)
 
 import XMonad.Prompt
-import XMonad.Prompt.Man
-import XMonad.Prompt.FuzzyMatch
-import XMonad.Prompt.RunOrRaise
-import XMonad.Prompt.DirExec
-
-import qualified XMonad.Actions.Search as S
+import XMonad.Prompt.RunOrRaise (runOrRaisePrompt)
+import XMonad.Prompt.DirExec (dirExecPrompt)
 
 modm :: KeyMask
 modm = mod1Mask
@@ -58,10 +54,10 @@ tall     = renamed [Replace "tall"]
         $ spacing 3
         $ noBorders
         $ ResizableTall 1 (3/100) (1/2) []
-monocle  = renamed [Replace "monocle"]
+monocle  = renamed [Replace "full"]
         $ noBorders
         $ Full
-floats = renamed [Replace "floats"]
+floats = renamed [Replace "flts"]
         $ noBorders
         $ simplestFloat
 
@@ -95,32 +91,6 @@ myXPConfig = def
       , alwaysHighlight     = True
       , maxComplRows        = Nothing      -- set to Just 5 for 5 rows
       }
-
--- The same config above minus the autocomplete feature which is annoying
--- on certain Xprompts, like the search engine prompts.
-myXPConfig' :: XPConfig
-myXPConfig' = myXPConfig
-      { autoComplete        = Nothing
-      , searchPredicate     = fuzzyMatch
-      }
-
-archwiki, fontawesome:: S.SearchEngine
-archwiki = S.searchEngine "archwiki" "https://wiki.archlinux.org/index.php?search="
-fontawesome = S.searchEngine "fontawesome" "https://fontawesome.com/icons?d=gallery&q="
-
--- This is the list of search engines that I want to use. Some are from
--- XMonad.Actions.Search, and some are the ones that I added above.
-searchList :: [(String, S.SearchEngine)]
-searchList = [ ("a", archwiki)
-             , ("d", S.duckduckgo)
-             , ("g", S.google)
-             , ("h", S.hoogle)
-             , ("i", fontawesome)
-             , ("s", S.scholar) -- google scholar
-             , ("w", S.alpha) -- wolfram alpha
-             , ("y", S.youtube)
-             , ("z", S.amazon)
-             ]
 
 -- -d: dimensions, -t: title
 spawnFloatingTerm :: String -> X ()
@@ -196,10 +166,7 @@ myKeys = [
 
     -- Prompt
     , ("M-o", runOrRaisePrompt myXPConfig)
-    , ("M-i m", manPrompt myXPConfig')
     ]
-    ++ [("M-i " ++ k, S.promptSearch myXPConfig' f) | (k,f) <- searchList ]
-    ++ [("M-S-i " ++ k, S.selectSearch f) | (k,f) <- searchList ]
 
 myRemKeys :: [String]
 myRemKeys = [
