@@ -2,6 +2,9 @@ nvim/.git_token
 nvim/dein/
 nvim/history_yank
 nvim/session/
+config/gcloud/
+config/inkscape/
+config/okularrc
 config/VCG/
 config/cef_user_data/
 config/neomutt/
