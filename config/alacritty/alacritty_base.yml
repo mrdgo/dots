@@ -114,14 +114,15 @@ mouse:
   triple_click: { threshold: 300 }
   hide_when_typing: true
 
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }
+
+hints:
   url:
     launcher:
       program: firefox
       args: []
     modifiers: None
-
-mouse_bindings:
-  - { mouse: Middle, action: PasteSelection }
 
 # Key bindings
 #

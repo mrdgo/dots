@@ -12,11 +12,12 @@ if dein#load_state('/opt/dots/nvim/dein')
   " completion
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('deoplete-plugins/deoplete-zsh')
+  call dein#add('Shougo/deoplete-lsp')
+  "call dein#add('nvim-lua/completion-nvim')
 
   " language server
   call dein#add('neovim/nvim-lspconfig')
-  call dein#add('Shougo/deoplete-lsp')
-  call dein#add('akinsho/flutter-tools.nvim')
+  "call dein#add('akinsho/flutter-tools.nvim')
 
   " Debugging
   call dein#add('mfussenegger/nvim-dap')

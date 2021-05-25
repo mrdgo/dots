@@ -21,6 +21,8 @@ alias bello="ssh -t -J ty82xile@i4lab1.cs.fau.de ty82xile@faui49bello3 'bash'"
 # master thesis
 alias cma="cd ~/dokumente/isento/gps"
 alias pma="cd ~/dokumente/isento/gps && source venv_gps/bin/activate"
+alias the="cd ~/dokumente/isento/thesis"
+alias gssh="gcloud compute ssh gps-train"
 # in XMonad press "M-S-b"
 # alias pq="devour zathura ~/dokumente/isento/gps/pybullet_quickstartguide.pdf"
 
@@ -42,10 +44,11 @@ alias ctv="~/.config/tv.sh"
 # Convenience
 alias i="devour sxiv -rfb"
 alias z="devour zathura"
+alias ok="devour okular"
 alias d="devour display"
 alias ydl="~/.config/ydl.sh"
 alias vlc="cvlc --key-quit q"
-alias minecraft="devour minecraft-launcher"
+alias minecraft="devour ~/.minecraft/launcher/minecraft-launcher"
 
 # youtube-dl
 alias yta-aac="youtube-dl --extract-audio --audio-format aac "

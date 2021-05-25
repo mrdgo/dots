@@ -20,3 +20,6 @@ full_symbol = ""
 [[battery.display]]
 threshold = 10
 style = "bold red"
+
+[gcloud]
+disabled = true

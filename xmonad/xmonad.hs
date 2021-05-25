@@ -205,7 +205,7 @@ main = do
     xmonad $ docks $ def {
         modMask              = modm
         , focusFollowsMouse  = False
-        , borderWidth        = 1
+        , borderWidth        = 0
         , terminal           = myTerminal
         , focusedBorderColor = "#b8bb26"
         , normalBorderColor  = "#f2e5bc"

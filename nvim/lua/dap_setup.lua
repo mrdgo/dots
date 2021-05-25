@@ -11,7 +11,7 @@ local map_dap = function (key, command)
 end
 
 map_dap('b', 'toggle_breakpoint()')
-map_dap('r', 'repl.toggle({}, "belowright split")')
+map_dap('r', 'repl.toggle({height = 15}, "belowright split")')
 map_dap('vr', 'repl.toggle({}, "belowright vsplit")')
 
 local map_ext = function (key, command)

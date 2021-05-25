@@ -1,4 +1,3 @@
-local nvim_lsp = require'lspconfig'
 
 local on_attach = function(_, bufnr)
 
@@ -41,8 +40,11 @@ local on_attach = function(_, bufnr)
    end
 end
 
---local servers = {'pyls', 'vimls', 'texlab', 'hls', 'emmylua-ls'}
+local nvim_lsp = require'lspconfig'
+
 local servers = {'pyls', 'vimls', 'texlab', 'hls'}
+--local servers = {'pyls', 'vimls', 'texlab', 'hls', 'emmylua-ls'}
+
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end

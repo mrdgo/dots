@@ -14,7 +14,7 @@ nmap <Leader>bl <cmd>set background=light<cr>
 nmap <Leader>bd <cmd>set background=dark<cr>
 
 " transparent background
-" hi Normal guibg=NONE ctermbg=NONE
+hi Normal guibg=NONE ctermbg=NONE
 
 " Activate rainbow_parentheses
 au VimEnter * RainbowParenthesesToggle
