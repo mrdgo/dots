@@ -28,6 +28,7 @@ if dein#load_state('/opt/dots/nvim/dein')
   call dein#add('nvim-telescope/telescope.nvim')
   call dein#add('nvim-telescope/telescope-dap.nvim')
   call dein#add('nvim-telescope/telescope-fzy-native.nvim')
+  call dein#add('sudormrfbin/cheatsheet.nvim')
 
   " Marukups
   call dein#add('lervag/vimtex')
@@ -43,7 +44,6 @@ if dein#load_state('/opt/dots/nvim/dein')
   call dein#add('lambdalisue/suda.vim')
   call dein#add('tpope/vim-fugitive')
   call dein#add('tpope/vim-surround')
-  call dein#add('AndrewRadev/deleft.vim')  " dh removes if else logic
   call dein#add('kkoomen/vim-doge', { 'hook_post_update': "call doge#install()" })  " automatically add docstrings
 
   call dein#add('NLKNguyen/c-syntax.vim')
@@ -51,6 +51,7 @@ if dein#load_state('/opt/dots/nvim/dein')
 
   call dein#add('numirias/semshi')
   call dein#add('kien/rainbow_parentheses.vim')
+  "call dein#add('jmcantrell/vim-virtualenv')
 
   " theme
   call dein#add('morhetz/gruvbox')

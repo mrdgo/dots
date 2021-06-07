@@ -5,8 +5,6 @@ require'telescope'.setup {
         mappings = {
             n = {
                 -- motion
-                --["j"] = actions.move_selection_next,
-                --["k"] = actions.move_selection_previous,
                 ["q"] = actions.close,
 
                 -- split
@@ -19,8 +17,8 @@ require'telescope'.setup {
                 -- TODO: yank filename
                 --["y"] = actions.,
                 ["d"] = function(prompt_bufnr)
-                      local action_state = require('telescope.actions.state')
-                      local actions = require('telescope.actions')
+                      local action_state = require'telescope.actions.state'
+                      local actions = require'telescope.actions'
                       local current_picker = action_state.get_current_picker(prompt_bufnr)
                       local multi_selections = current_picker:get_multi_selection()
 
@@ -34,6 +32,8 @@ require'telescope'.setup {
                           vim.api.nvim_buf_delete(selection.bufnr, {force = true})
                         end
                       end
+                      -- assumption: I only use 'd' when searching buffers
+                      require'telescope.builtin'.buffers({ignore_current_buffer = true})
 
                     return true
                 end,
@@ -70,6 +70,6 @@ end
 
 map('f', 'find_files()')
 map('g', 'live_grep()')
-map('b', 'buffers({ show_all_buffers = true })')
+map('b', 'buffers({ignore_current_buffer = true})')
 map('h', 'help_tags()')
 map('l', 'current_buffer_fuzzy_find()')

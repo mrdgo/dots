@@ -22,7 +22,10 @@ alias bello="ssh -t -J ty82xile@i4lab1.cs.fau.de ty82xile@faui49bello3 'bash'"
 alias cma="cd ~/dokumente/isento/gps"
 alias pma="cd ~/dokumente/isento/gps && source venv_gps/bin/activate"
 alias the="cd ~/dokumente/isento/thesis"
-alias gssh="gcloud compute ssh gps-train"
+
+alias gstart="gcloud compute instances start instance-1"
+alias gstop="gcloud compute instances stop instance-1"
+alias gssh="gcloud compute ssh instance-1"
 # in XMonad press "M-S-b"
 # alias pq="devour zathura ~/dokumente/isento/gps/pybullet_quickstartguide.pdf"
 
@@ -71,6 +74,7 @@ alias gc="git commit"
 alias gs="git status"
 alias gd="git diff"
 alias gpc="git push -u custom"
+alias tmux="TERM=xterm-256color tmux -f ~/.config/tmux.conf"
 
 #alias ..="cd .." # bash legacy
 alias ...="cd ../.."
@@ -92,6 +96,8 @@ alias dv='setxkbmap us -variant dvorak-intl'
 
 # debian legacy
 # alias ud="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
+
+alias dir='xplr'
 
 # lfcd, open lf and cd to directory on exit
 r () {
@@ -132,15 +138,6 @@ ex ()
         esac
     else
         echo "'$1' is not a valid file"
-    fi
-}
-
-paccache ()
-{
-    if [ $# -ne 0 ]; then
-        doas /usr/bin/paccache $@
-    else
-        doas /usr/bin/paccache -rk2 -ruk0
     fi
 }
 

@@ -10,3 +10,5 @@ inoremap <silent><expr> <TAB>
     \ <SID>check_back_space() ? "\<TAB>" :
     \ deoplete#mappings#manual_complete()
 
+autocmd FileType TelescopePrompt
+       \ call deoplete#custom#buffer_option('auto_complete', v:false)

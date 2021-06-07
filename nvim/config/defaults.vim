@@ -1,5 +1,5 @@
 set hidden
-set showcmd wildmenu lazyredraw
+set showcmd wildmenu nolazyredraw
 set cursorline cursorcolumn
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smartindent
 set nohlsearch incsearch smartcase

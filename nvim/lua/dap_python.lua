@@ -13,7 +13,7 @@ dap.configurations.python = {
         request = 'launch';
         name = 'Create lea images';
         program = gps;
-        args = {'pigps_pigps_lea_test', '-m', 'create_data', '-n', '4'};
+        args = {'pigps_pigps_lea_test', '-m', 'create_data'};
         pythonPath = py_path
     },
     {
@@ -29,8 +29,8 @@ dap.configurations.python = {
         request = 'launch';
         name = 'Regular lea run';
         program = gps;
-        args = {'pigps_pigps_lea_test', '-m', 'train', '-v'};
-        --args = {'pigps_pigps_lea_test', '-m', 'train', '--no_save_samples', '-v'};
+        --args = {'pigps_pigps_lea_test', '-m', 'train', '-v'};
+        args = {'pigps_pigps_lea_test', '-m', 'train', '--dont_save_samples', '-v'};
         console = dap.integratedTerminal;
         pythonPath = py_path
     },
@@ -39,7 +39,7 @@ dap.configurations.python = {
         request = 'launch';
         name = 'Lea grid search';
         program = gps;
-        args = {'pigps_pigps_lea_test', '-m', 'grid_search', '-g', 'eval_grid.json', '--no_save_samples'};
+        args = {'pigps_pigps_lea_test', '-m', 'grid_search', '-g', 'eval_grid.json', '--dont_save_samples'};
         pythonPath = py_path
     },
     {
@@ -47,7 +47,7 @@ dap.configurations.python = {
         request = 'launch';
         name = 'Create cartpole images';
         program = gps;
-        args = {'pigps_pigps_cartpole_test', '-m', 'create_data', '-n', '4'};
+        args = {'pigps_pigps_cartpole_test', '-m', 'create_data'};
         pythonPath = py_path
     },
     {
@@ -63,7 +63,7 @@ dap.configurations.python = {
         request = 'launch';
         name = 'Regular cartpole run';
         program = gps;
-        args = {'pigps_pigps_cartpole_test', '-m', 'train', '--no_save_samples'};
+        args = {'pigps_pigps_cartpole_test', '-m', 'train', '--dont_save_samples'};
         console = dap.integratedTerminal;
         pythonPath = py_path
     },

@@ -1,6 +1,6 @@
 " window navigation
-nnoremap <silent> <Leader>h :wincmd h<cr>
-nnoremap <silent> <Leader>j :wincmd j<cr>
+nnoremap <silent> <Leader>h <cmd>wincmd h<cr>
+nnoremap <silent> <Leader>j <cmd>wincmd j<cr>
 nnoremap <silent> <Leader>k <cmd>wincmd k<cr>
 nnoremap <silent> <Leader>l <cmd>wincmd l<cr>
 
