@@ -7,12 +7,13 @@ if dein#load_state('/opt/dots/nvim/dein')
 
   call dein#add('Shougo/defx.nvim')  " file explorer
   call dein#add('Shougo/deol.nvim')  " terminal utilities
-  call dein#add('Shougo/denite.nvim')  " terminal utilities
+  call dein#add('Shougo/denite.nvim')  " fuzzy search
 
   " completion
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('deoplete-plugins/deoplete-zsh')
   call dein#add('Shougo/deoplete-lsp')
+  " TODO check this out
   "call dein#add('nvim-lua/completion-nvim')
 
   " language server
@@ -34,21 +35,24 @@ if dein#load_state('/opt/dots/nvim/dein')
   call dein#add('lervag/vimtex')
   call dein#add('plasticboy/vim-markdown')
 
+  " Code
   call dein#add('scrooloose/nerdcommenter') " <leader>cc and <leader>cu
   call dein#add('jiangmiao/auto-pairs')
   call dein#add('tpope/vim-endwise')
   call dein#add('easymotion/vim-easymotion')
   call dein#add('tpope/vim-repeat')
   call dein#add('godlygeek/tabular')
+  call dein#add('kkoomen/vim-doge', { 'hook_post_update': "call doge#install()" })  " automatically add docstrings
+  call dein#add('tpope/vim-surround')
 
+  " Unix
   call dein#add('lambdalisue/suda.vim')
   call dein#add('tpope/vim-fugitive')
-  call dein#add('tpope/vim-surround')
-  call dein#add('kkoomen/vim-doge', { 'hook_post_update': "call doge#install()" })  " automatically add docstrings
 
   call dein#add('NLKNguyen/c-syntax.vim')
   call dein#add('vim-scripts/gnuplot-syntax-highlighting')
 
+  " python
   call dein#add('numirias/semshi')
   call dein#add('kien/rainbow_parentheses.vim')
   "call dein#add('jmcantrell/vim-virtualenv')

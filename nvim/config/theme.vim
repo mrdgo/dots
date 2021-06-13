@@ -30,6 +30,8 @@ colorscheme gruvbox
 nmap <Leader>bl <cmd>set background=light<cr>
 nmap <Leader>bd <cmd>set background=dark<cr>
 
+let g:Guifont="Mononki Nerd Font:13"
+
 " transparent background
 hi Normal guibg=NONE ctermbg=NONE
 

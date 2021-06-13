@@ -3,12 +3,13 @@ import System.IO (hPutStrLn)
 import Data.Monoid (Endo)
 import Data.Time.Clock
 import Data.Time.Calendar
-import Data.List (isPrefixOf)
+import Data.List (isPrefixOf, isInfixOf)
 import System.Exit (exitSuccess)
 
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig
 import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
+import XMonad.Hooks.EwmhDesktops (ewmh)
 
 import XMonad.Hooks.ManageDocks (avoidStruts, docks, docksEventHook, manageDocks, ToggleStruts(..))
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
@@ -45,7 +46,7 @@ myTerminal = "alacritty"
 
 myStartupHook :: X ()
 myStartupHook = do
-    setWMName "XMonad"
+    setWMName "LG3D"
     spawn "/usr/bin/dunst"
     spawn "/usr/bin/picom"
     spawn "/home/maxim/.fehbg"
@@ -174,6 +175,12 @@ myRemKeys = [
         , "M-S-q"
     ]
 
+-- IntelliJ fix
+(~=?) :: Eq a => Query [a] -> [a] -> Query Bool
+q ~=? x = fmap (isInfixOf x) q
+
+manageIdeaCompletionWindow = (className =? "jetbrains-studio") <&&> (title ~=? "win") --> doIgnore
+
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
@@ -182,6 +189,8 @@ myManageHook = insertPosition Below Newer <+> composeAll
     [ -- Firefox
       title =? "Mozilla Firefox"               --> doShift ( myWorkspaces !! 1 )
     , (className =? "Mozilla Firefox" <&&> resource =? "Dialog") --> doFloat
+    , className =? "Nyxt"                      --> doShift (myWorkspaces !! 1 )
+
     -- Teams
     , className =? "Microsoft Teams - Preview" --> doShift ( myWorkspaces !! 3 )
     , title =? "Microsoft Teams-Benachrichtigung"   --> doFloat
@@ -202,7 +211,7 @@ myManageHook = insertPosition Below Newer <+> composeAll
 
 main = do
     xmproc0 <- spawnPipe "xmobar"
-    xmonad $ docks $ def {
+    xmonad $ ewmh $ docks $ def {
         modMask              = modm
         , focusFollowsMouse  = False
         , borderWidth        = 0
@@ -212,7 +221,7 @@ main = do
         , layoutHook         = myLayoutHook
         , startupHook        = myStartupHook
         , workspaces         = myWorkspaces
-        , manageHook         = myManageHook
+        , manageHook         = myManageHook <+> manageIdeaCompletionWindow
         , logHook = dynamicLogWithPP xmobarPP
                 {
                     ppOutput = hPutStrLn xmproc0

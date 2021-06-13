@@ -25,6 +25,7 @@ alias the="cd ~/dokumente/isento/thesis"
 
 alias gstart="gcloud compute instances start instance-1"
 alias gstop="gcloud compute instances stop instance-1"
+alias gls="gcloud compute instances list"
 alias gssh="gcloud compute ssh instance-1"
 # in XMonad press "M-S-b"
 # alias pq="devour zathura ~/dokumente/isento/gps/pybullet_quickstartguide.pdf"
@@ -97,7 +98,7 @@ alias dv='setxkbmap us -variant dvorak-intl'
 # debian legacy
 # alias ud="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 
-alias dir='xplr'
+alias x='xplr'
 
 # lfcd, open lf and cd to directory on exit
 r () {

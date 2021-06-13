@@ -37,6 +37,15 @@ dap.configurations.python = {
     {
         type = 'python';
         request = 'launch';
+        name = 'Plain policy lea run';
+        program = gps;
+        args = {'pigps_plain_lea', '-m', 'train', '--dont_save_samples', '-v'};
+        console = dap.integratedTerminal;
+        pythonPath = py_path
+    },
+    {
+        type = 'python';
+        request = 'launch';
         name = 'Lea grid search';
         program = gps;
         args = {'pigps_pigps_lea_test', '-m', 'grid_search', '-g', 'eval_grid.json', '--dont_save_samples'};
@@ -71,7 +80,7 @@ dap.configurations.python = {
         type = 'python';
         request = 'launch';
         name = 'PyBullet test script';
-        program = gps_dir..'python/tests/pybullet_test.py';
+        program = gps_dir..'python/gps/utility/pybullet_test.py';
         args = {};
         pythonPath = py_path
     },

@@ -15,6 +15,7 @@ compinit
 source $HOME/.aliases
 
 eval "$(starship init zsh)"
+
 export PF_INFO="ascii title os kernel uptime pkgs shell wm editor keymap memory palette"
 pfetch
 
