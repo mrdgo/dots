@@ -1,5 +1,6 @@
+local on_attach = function(a, bufnr)
 
-local on_attach = function(_, bufnr)
+  require'completion'.on_attach(a, bufnr)
 
   if (string.find(vim.api.nvim_buf_get_name(bufnr), 'venv_gps') ~= nil)
   then

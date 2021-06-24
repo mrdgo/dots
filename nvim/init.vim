@@ -27,22 +27,21 @@ source $HOME/.config/nvim/config/airline.vim
 source $HOME/.config/nvim/config/startify.vim
 source $HOME/.config/nvim/config/semshi.vim
 source $HOME/.config/nvim/config/easymotion.vim
-source $HOME/.config/nvim/config/deoplete.vim
 source $HOME/.config/nvim/config/defx.vim
 source $HOME/.config/nvim/config/auto_pairs.vim
-"source $HOME/.config/nvim/config/tools.vim
 source $HOME/.config/nvim/config/markdown.vim
 source $HOME/.config/nvim/config/commenter.vim
 source $HOME/.config/nvim/config/doge.vim
 
-" choose one only!
-"source $HOME/.config/nvim/config/denite.vim
 luafile $HOME/.config/nvim/lua/telescope_setup.lua
 
 luafile $HOME/.config/nvim/lua/lsp_setup.lua
+source $HOME/.config/nvim/config/complete.vim
+luafile $HOME/.config/nvim/lua/snippet_setup.lua
 
 luafile $HOME/.config/nvim/lua/dap_setup.lua
 luafile $HOME/.config/nvim/lua/dap_python.lua
+luafile $HOME/.config/nvim/lua/dapui_setup.lua
 
 inoremap jk <Esc>
 nmap <silent> <leader>v <cmd>e $MYVIMRC<cr>

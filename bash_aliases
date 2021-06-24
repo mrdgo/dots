@@ -1,4 +1,4 @@
-alias screencast="ffmpeg -f x11grab -s 1920x1080 -i :0.0 out.mkv"
+alias screencast="ffmpeg -f x11grab -s 1920x1080 -i :0.0"
 alias webcast="ffmpeg -i /dev/video1 -c:v libx264 out.mkv"
 
 set_bg ()
@@ -100,21 +100,7 @@ alias dv='setxkbmap us -variant dvorak-intl'
 # alias ud="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 
 alias x='xplr'
-
-# lfcd, open lf and cd to directory on exit
-r () {
-    tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp"
-        if [ -d "$dir" ]; then
-            if [ "$dir" != "$(pwd)" ]; then
-                cd "$dir"
-            fi
-        fi
-    fi
-}
+alias p='paru'
 
 ### ARCHIVE EXTRACTION
 # usage: ex <file>
@@ -143,14 +129,24 @@ ex ()
     fi
 }
 
-wifi ()
-{
-    doas ln -s /etc/runit/sv/wpa_supplicant /etc/runit/runsvdir/default/wpa_supplicant
-}
-
-wifi_off ()
-{
-    doas ip link set wlp6s0 down
-    doas sv down wpa_supplicant
-    doas rm /etc/runit/runsvdir/default/wpa_supplicant
-}
+alias 66-all='doas 66-all -z'
+alias 66-dbctl='doas 66-dbctl -z'
+alias 66-disable='doas 66-disable -z'
+alias 66-enable='doas 66-enable -z'
+alias 66-env='doas 66-env -z'
+alias 66-hpr='doas 66-hpr -z'
+alias 66-init='doas 66-init -z'
+alias 66-inresolve='doas 66-inresolve -z'
+alias 66-inservice='doas 66-inservice -z'
+alias 66-instate='doas 66-instate -z'
+alias 66-intree='doas 66-intree -z'
+alias 66-ns='doas 66-ns -z'
+alias 66-nuke='doas 66-nuke -z'
+alias 66-parser='doas 66-parser -z'
+alias 66-scanctl='doas 66-scanctl -z'
+alias 66-scandir='doas 66-scandir -z'
+alias 66-start='doas 66-start -z'
+alias 66-stop='doas 66-stop -z'
+alias 66-svctl='doas 66-svctl -z'
+alias 66-tree='doas 66-tree -z'
+alias 66-update='doas 66-update -z'

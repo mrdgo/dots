@@ -7,14 +7,10 @@ if dein#load_state('/opt/dots/nvim/dein')
 
   call dein#add('Shougo/defx.nvim')  " file explorer
   call dein#add('Shougo/deol.nvim')  " terminal utilities
-  call dein#add('Shougo/denite.nvim')  " fuzzy search
 
   " completion
-  call dein#add('Shougo/deoplete.nvim')
-  call dein#add('deoplete-plugins/deoplete-zsh')
-  call dein#add('Shougo/deoplete-lsp')
-  " TODO check this out
-  "call dein#add('nvim-lua/completion-nvim')
+  call dein#add('nvim-lua/completion-nvim')
+  call dein#add('norcalli/snippets.nvim')
 
   " language server
   call dein#add('neovim/nvim-lspconfig')
@@ -22,6 +18,7 @@ if dein#load_state('/opt/dots/nvim/dein')
 
   " Debugging
   call dein#add('mfussenegger/nvim-dap')
+  call dein#add("rcarriga/nvim-dap-ui")
 
   " telescope related
   call dein#add('nvim-lua/popup.nvim')
