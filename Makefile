@@ -2,6 +2,12 @@
 
 all: zsh conf xmo
 
+ubuntu: zsh conf
+	sudo add-apt-repository ppa:neovim-ppa/unstable
+	sudo apt install -y neovim tmux git zsh
+	sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+	sudo chsh maxim -s $(which zsh)
+
 zsh: zshrc zshenv zprofile aliases
 	@rm -f ~/.zshrc ~/.zprofile ~/.zshenv ~/.aliases
 	@ln /opt/dots/aliases ~/.aliases
