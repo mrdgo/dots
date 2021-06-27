@@ -23,10 +23,11 @@ alias cma="cd ~/dokumente/isento/gps"
 alias pma="cd ~/dokumente/isento/gps && source venv_gps/bin/activate"
 alias the="cd ~/dokumente/isento/thesis"
 
-alias gstart="gcloud compute instances start instance-1"
-alias gstop="gcloud compute instances stop instance-1"
+alias gstart="gcloud compute instances start eval-compute-1"
+alias gstop="gcloud compute instances stop eval-compute-1"
 alias gls="gcloud compute instances list"
-alias gssh="gcloud compute ssh instance-1"
+alias gssh="gcloud compute ssh eval-compute-1"
+alias gscp='gcloud compute scp'
 # in XMonad press "M-S-b"
 # alias pq="devour zathura ~/dokumente/isento/gps/pybullet_quickstartguide.pdf"
 

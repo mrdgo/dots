@@ -47,8 +47,8 @@ snippets.snippets = {
   };
   python = {
     newfile = "'''\ncreated: ${=os.date('%b %d${1:i} %Y')}\n@author: Maxim Ritter von Onciul\n'''";
-    class = 'class ${1}():\n\tdef __init__():\n\t\t$0';
-    func = U.match_indentation 'def ${1}(${2}):\n\t$0';
-    ["for"] = U.match_indentation 'for ${1} in ${2}:\n\t';
+    class = 'class ${1}():\n    def __init__():\n        $0';
+    func = U.match_indentation 'def ${1}(${2}):\n    $0';
+    ["for"] = U.match_indentation 'for ${1} in ${2}:\n    ';
   };
 }

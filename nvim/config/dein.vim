@@ -31,6 +31,7 @@ if dein#load_state('/opt/dots/nvim/dein')
   " Marukups
   call dein#add('lervag/vimtex')
   call dein#add('plasticboy/vim-markdown')
+  call dein#add('cespare/vim-toml')
 
   " Code
   call dein#add('scrooloose/nerdcommenter') " <leader>cc and <leader>cu
