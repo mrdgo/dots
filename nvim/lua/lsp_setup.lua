@@ -1,6 +1,23 @@
+local nvim_lsp = require'lspconfig'
+local configs = require'lspconfig/configs'
+
+if not nvim_lsp.emmylua then
+  configs.emmylua = {
+    default_config = {
+      cmd = {'java', '-cp', '$HOME/.local/share/vim-lsp-settings/servers/emmylua-ls/EmmyLua-LS-all.jar', 'com.tang.vscode.MainKt'};
+      filetypes = {'lua'};
+      root_dir = function(fname)
+        return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+      end;
+      settings = {};
+    };
+  }
+end
+
 local on_attach = function(a, bufnr)
 
   require'completion'.on_attach(a, bufnr)
+  --require'virtualtypes'.on_attach(a, bufnr)
 
   if (string.find(vim.api.nvim_buf_get_name(bufnr), 'venv_gps') ~= nil)
   then
@@ -41,10 +58,8 @@ local on_attach = function(a, bufnr)
    end
 end
 
-local nvim_lsp = require'lspconfig'
-
 local servers = {'pyls', 'vimls', 'texlab', 'hls'}
---local servers = {'pyls', 'vimls', 'texlab', 'hls', 'emmylua-ls'}
+--local servers = {'pyls', 'vimls', 'texlab', 'hls', 'emmylua'}
 
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }

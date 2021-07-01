@@ -5,64 +5,83 @@ if dein#load_state('/opt/dots/nvim/dein')
 
   call dein#add('/opt/dots/nvim/dein/repos/github.com/Shougo/dein.vim')
 
+  " vimL config chapter
+
   call dein#add('Shougo/defx.nvim')  " file explorer
-  call dein#add('Shougo/deol.nvim')  " terminal utilities
 
-  " completion
-  call dein#add('nvim-lua/completion-nvim')
-  call dein#add('norcalli/snippets.nvim')
-
-  " language server
-  call dein#add('neovim/nvim-lspconfig')
-  "call dein#add('akinsho/flutter-tools.nvim')
-
-  " Debugging
-  call dein#add('mfussenegger/nvim-dap')
-  call dein#add("rcarriga/nvim-dap-ui")
-
-  " telescope related
-  call dein#add('nvim-lua/popup.nvim')
-  call dein#add('nvim-lua/plenary.nvim')
-  call dein#add('nvim-telescope/telescope.nvim')
-  call dein#add('nvim-telescope/telescope-dap.nvim')
-  call dein#add('nvim-telescope/telescope-fzy-native.nvim')
-  call dein#add('sudormrfbin/cheatsheet.nvim')
 
   " Marukups
-  call dein#add('lervag/vimtex')
-  call dein#add('plasticboy/vim-markdown')
-  call dein#add('cespare/vim-toml')
+  call dein#add('lervag/vimtex') " ok
+  call dein#add('plasticboy/vim-markdown') " ok
+  call dein#add('cespare/vim-toml') " ok
+  call dein#add('godlygeek/tabular') " ok
 
   " Code
   call dein#add('scrooloose/nerdcommenter') " <leader>cc and <leader>cu
-  call dein#add('jiangmiao/auto-pairs')
-  call dein#add('tpope/vim-endwise')
+  call dein#add('kkoomen/vim-doge', { 'hook_post_update': "call doge#install()" })  " ok
+
+  " TODO
+  " https://github.com/kyazdani42/nvim-tree.lua
   call dein#add('easymotion/vim-easymotion')
-  call dein#add('tpope/vim-repeat')
-  call dein#add('godlygeek/tabular')
-  call dein#add('kkoomen/vim-doge', { 'hook_post_update': "call doge#install()" })  " automatically add docstrings
-  call dein#add('tpope/vim-surround')
-
-  " Unix
-  call dein#add('lambdalisue/suda.vim')
-  call dein#add('tpope/vim-fugitive')
-
-  call dein#add('NLKNguyen/c-syntax.vim')
-  call dein#add('vim-scripts/gnuplot-syntax-highlighting')
-
   " python
   call dein#add('numirias/semshi')
-  call dein#add('kien/rainbow_parentheses.vim')
-  "call dein#add('jmcantrell/vim-virtualenv')
 
   " theme
   call dein#add('morhetz/gruvbox')
   call dein#add('mhinz/vim-startify')
+
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
-  call dein#add('norcalli/nvim-colorizer.lua')
+  " TODO END
 
+  " ok
   call dein#add('glacambre/firenvim', { 'hook_post_update': "call firenvim#install(0)" })
+
+  " Lua config chapter
+
+  " completion
+  call dein#add('nvim-lua/completion-nvim') " ok
+  call dein#add('norcalli/snippets.nvim') " ok
+
+  " language server
+  call dein#add('neovim/nvim-lspconfig')  " ok
+  call dein#add('onsails/lspkind-nvim')  " ok
+
+  call dein#add('nvim-treesitter/nvim-treesitter')  " ok
+  call dein#add('p00f/nvim-ts-rainbow')  " ok
+  "call dein#add('akinsho/flutter-tools.nvim')
+
+  " Debugging
+  call dein#add('mfussenegger/nvim-dap')  " ok
+  call dein#add("rcarriga/nvim-dap-ui")  " ok
+
+  " telescope related
+  call dein#add('nvim-lua/popup.nvim')  " ok
+  call dein#add('nvim-lua/plenary.nvim')  " ok
+  call dein#add('nvim-telescope/telescope.nvim')  " ok
+  call dein#add('nvim-telescope/telescope-dap.nvim')  " ok
+  call dein#add('nvim-telescope/telescope-fzy-native.nvim')  " ok
+  call dein#add('nvim-telescope/telescope-media-files.nvim')  " ok
+  call dein#add('sudormrfbin/cheatsheet.nvim')  " ok
+
+  "call dein#add('jmcantrell/vim-virtualenv')
+
+  call dein#add('norcalli/nvim-colorizer.lua')  " ok
+
+  " no config plugins
+  call dein#add('jiangmiao/auto-pairs')  " ok
+  call dein#add('tpope/vim-endwise')  " ok
+  call dein#add('tpope/vim-repeat')  " ok
+  call dein#add('tpope/vim-surround')  " ok
+
+  " Unix
+  call dein#add('tpope/vim-fugitive')  " ok
+
+  " TODO (maxim): https://github.com/glepnir/galaxyline.nvim
+  " TODO (maxim): https://github.com/karb94/neoscroll.nvim
+
+  call dein#add('NLKNguyen/c-syntax.vim') " ok
+  call dein#add('vim-scripts/gnuplot-syntax-highlighting') " ok
 
   call dein#end()
   call dein#save_state()

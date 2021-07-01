@@ -46,9 +46,69 @@ snippets.snippets = {
     todo = U.force_comment 'TODO (maxim): ';
   };
   python = {
-    newfile = "'''\ncreated: ${=os.date('%b %d${1:i} %Y')}\n@author: Maxim Ritter von Onciul\n'''";
-    class = 'class ${1}():\n    def __init__():\n        $0';
+    newfile = "'''\ncreated: ${=os.date('%b %d${1:th} %Y')}\n@author: Maxim Ritter von Onciul\n'''";
+    class = 'class ${1}(${2}):\n    def __init__():\n        $0';
     func = U.match_indentation 'def ${1}(${2}):\n    $0';
     ["for"] = U.match_indentation 'for ${1} in ${2}:\n    ';
+  };
+  tex = {
+    figure = [[
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.5]{${1}}
+    \caption{${2}}
+    \label{fig:${3}}
+\end{figure}]];
+    cite = '\\cite{$0}';
+    enumerate = [[
+\begin{enumerate}
+    $0
+\end{enumerate}]];
+    equation = [[
+\begin{equation}
+    \centering
+    \label{eq:${1}}
+    $0
+\end{equation}]];
+    itemize = [[
+\begin{itemize}
+    $0
+\end{itemize}
+]];
+    item = U.match_indentation '\\item $0';
+    tabular = [[
+\begin{tabular}{$1}
+    \label{tab:${2}}
+    $0
+\end{tabular}
+    ]];
+    section = '\\section{$1}\n\n$0';
+    subsection = '\\subsection{$1}\n\n$0';
+    subsubsection = '\\subsubsection{$1}\n\n$0';
+    texttt = '\\texttt{$0}';
+    textbf = '\\textbf{$0}';
+    vspace = '\\vspace{${1:cm}}';
+    hspace = '\\hspace{${1:cm}}';
+    mathcal = '\\mathcal{$0}';
+    text = '\\text{$0}';
+    rightarrow = '\\rightarrow';
+    Rightarrow = '\\Rightarrow';
+    leftarrow = '\\leftarrow';
+    Leftarrow = '\\Leftarrow';
+    sigma = '\\simga';
+    tau = '\\tau';
+    lambda = '\\lambda';
+    forall = '\\forall';
+    frac = '\\frac{${1}}{${2}} ';
+    sum = '\\sum_{${1}}^{${2}} ';
+    algorithm = [[
+\begin{algorithm}
+    \caption{${1}}
+    \label{alg:${2}}
+    \begin{algorithmic}
+        $0
+    \end{algorithmic}
+\end{algorithm}
+    ]];
   };
 }

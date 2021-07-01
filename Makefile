@@ -6,6 +6,8 @@ ubuntu: zsh conf
 	sudo add-apt-repository ppa:neovim-ppa/unstable
 	sudo apt install -y neovim tmux git zsh
 	sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+	curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+	echo 'zplug "jeffreytse/zsh-vi-mode"' >> ~/.zshrc
 	sudo chsh maxim -s $(which zsh)
 
 zsh: zshrc zshenv zprofile aliases

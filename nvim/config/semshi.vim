@@ -1,5 +1,4 @@
 """""""""""""" Semshi
-lua require'colorizer'.setup()
 function MyCustomHighlights()
     hi semshiLocal           ctermfg=209 guifg=#d65d0e
     hi semshiGlobal          ctermfg=214 guifg=#8ec07c

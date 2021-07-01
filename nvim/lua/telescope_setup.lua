@@ -52,10 +52,18 @@ require'telescope'.setup {
         file_previewer = previewers.vim_buffer_cat.new,
         grep_previewer = previewers.vim_buffer_vimgrep.new,
         qflist_previewer = previewers.vim_buffer_qflist.new,
-    }
+        --buffer_previewer_maker = require 'telescope.previewers'.buffer_previewer_maker
+    },
+    extensions = {
+            media_files = {
+                filetypes = {'png', 'webp', 'jpg', 'jpeg', 'pdf', 'mp4'},
+                find_cmd = 'rg' -- find command (defaults to `fd`)
+            }
+        }
 }
 
 require'telescope'.load_extension'fzy_native'
+require'telescope'.load_extension'media_files'
 
 
 local map = function(key, cmd)

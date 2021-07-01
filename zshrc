@@ -15,8 +15,9 @@ compinit
 source $HOME/.aliases
 
 eval "$(starship init zsh)"
+#eval "$(fasd --init zsh-hook posix-alias)"
 
-export PF_INFO="ascii title os kernel uptime pkgs shell wm editor keymap memory palette"
+export PF_INFO="ascii title os kernel uptime pkgs init shell wm editor keymap memory palette"
 pfetch
 
 bindkey "^[[A" history-beginning-search-backward
@@ -40,3 +41,21 @@ zle -N zle-line-init
 zle -N zle-line-finish
 zle -N zle-keymap-select
 # set cursor shapes END
+
+if [ -f "/usr/share/zsh/scripts/zplug/init.zsh" ] ; then
+    source /usr/share/zsh/scripts/zplug/init.zsh    
+
+    zplug "jeffreytse/zsh-vi-mode"
+    zplug "zsh-users/zsh-syntax-highlighting"
+
+    # Install plugins if there are plugins that have not been installed
+    if ! zplug check; then
+        printf "Install? [y/N]: "
+        if read -q; then
+            echo; zplug install
+        fi
+    fi
+    
+    # Then, source plugins and add commands to $PATH
+    zplug load
+ fi

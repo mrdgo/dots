@@ -25,6 +25,6 @@ if has('termguicolors')
 endif
 
 " UI
-hi CursorLine   cterm=NONE ctermbg=8 ctermfg=NONE
+hi CursorLine cterm=NONE ctermbg=8 ctermfg=NONE
 hi Cursorline term=NONE cterm=NONE
 hi LineNr ctermfg=grey
