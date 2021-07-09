@@ -2,6 +2,7 @@ version = '0.14.1'
 
 package.path = os.getenv("HOME") .. '/.config/xplr/lua/?.lua'
 
+-- function I found to display icons from lua code
 do
   local bytemarkers = { {0x7FF,192}, {0xFFFF,224}, {0x1FFFFF,240} }
   function utf8(decimal)
