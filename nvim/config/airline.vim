@@ -8,9 +8,9 @@ else
 endif
 let g:airline_skip_empty_sections = 1
 
-let g:airline#extensions#lsp#enabled = 0
-let g:airline#extensions#nvimlsp#enabled = 0
-
+let g:airline#extensions#lsp#enabled = 1
+"let g:airline#extensions#nvimlsp#enabled = 0
+let g:airline#extensions#nvimlsp#enabled = 1
 "let g:airline_symbols_ascii = 1
 
 if !exists('g:airline_symbols')

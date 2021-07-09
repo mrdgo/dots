@@ -47,7 +47,7 @@ xplr.config.modes.builtin['action'].key_bindings.on_key['!'] = {
   }
 }
 xplr.config.modes.builtin['action'].key_bindings.on_key["v"] = {
-        help = "view pdf",
+        help = "view pdf regular",
         messages = {
           {
             BashExec = [===[
@@ -59,11 +59,23 @@ xplr.config.modes.builtin['action'].key_bindings.on_key["v"] = {
       }
 
 xplr.config.modes.builtin['action'].key_bindings.on_key["o"] = {
-        help = "okular pdf",
+        help = "open pdf in okular",
         messages = {
           {
             BashExec = [===[
             devour okular "${XPLR_FOCUS_PATH:?}"
+            ]===]
+          },
+          "PopMode",
+        }
+      }
+
+xplr.config.modes.builtin['action'].key_bindings.on_key["d"] = {
+        help = "display svg",
+        messages = {
+          {
+            BashExec = [===[
+            devour display "${XPLR_FOCUS_PATH:?}"
             ]===]
           },
           "PopMode",

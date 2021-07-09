@@ -17,6 +17,7 @@ end
 local on_attach = function(a, bufnr)
 
   require'completion'.on_attach(a, bufnr)
+  require'lsp_signature'.on_attach(a, bufnr)
   --require'virtualtypes'.on_attach(a, bufnr)
 
   if (string.find(vim.api.nvim_buf_get_name(bufnr), 'venv_gps') ~= nil)

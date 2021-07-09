@@ -152,6 +152,13 @@ previewer_loop () {
                     term_nuke "$XID" "$FILE"
                 fi
                 ;;
+            image/svg+xml)
+                if type display >/dev/null 2>&1 ; then
+                    display "$XID" "$FILE" &
+                else
+                    term_nuke "$XID" "$FILE"
+                fi
+                ;;
             image/*)
                 if type sxiv >/dev/null 2>&1 ; then
                     sxiv -e "$XID" "$FILE" &

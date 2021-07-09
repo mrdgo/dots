@@ -12,7 +12,7 @@ import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
 import XMonad.Hooks.EwmhDesktops (ewmh)
 
 import XMonad.Hooks.ManageDocks (avoidStruts, docks, docksEventHook, manageDocks, ToggleStruts(..))
-import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
+import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarStrip, xmobarColor, shorten, PP(..))
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.InsertPosition
 
@@ -231,7 +231,7 @@ main = do
                     , ppHiddenNoWindows = xmobarColor "#928374" ""        -- Hidden workspaces (no windows)
                     , ppTitle = xmobarColor "#bdae93" "" . shorten 60     -- Title of active window
                     , ppSep =  " | "                                      -- Separators in xmobar
-                    , ppUrgent = xmobarColor "#fb4934" "" . wrap "!" "!"  -- Urgent workspace
+                    , ppUrgent = xmobarColor "#fb4934" "#50945" . wrap "!" "!"  -- Urgent workspace
                     , ppExtras  = [windowCount]                           -- # of windows current workspace
                     , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
                 }

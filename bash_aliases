@@ -48,8 +48,8 @@ alias ctv="~/.config/tv.sh"
 
 # Convenience
 alias i="devour sxiv -rfb"
-alias za="devour zathura"
-alias ok="devour okular"
+alias z="devour zathura"
+alias o="devour okular"
 alias d="devour display"
 alias ydl="~/.config/ydl.sh"
 alias vlc="cvlc --key-quit q"
