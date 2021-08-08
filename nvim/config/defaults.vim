@@ -8,6 +8,9 @@ set cc=80
 set splitbelow splitright
 set number relativenumber
 
+set linebreak breakindent
+set showbreak="> "
+
 " solid underscore
 let &t_SI .= "\<Esc>[4 q"
 " solid block

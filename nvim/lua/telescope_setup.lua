@@ -16,27 +16,7 @@ require'telescope'.setup {
 
                 -- TODO: yank filename
                 --["y"] = actions.,
-                ["d"] = function(prompt_bufnr)
-                      local action_state = require'telescope.actions.state'
-                      local actions = require'telescope.actions'
-                      local current_picker = action_state.get_current_picker(prompt_bufnr)
-                      local multi_selections = current_picker:get_multi_selection()
-
-                      if next(multi_selections) == nil then
-                        local selection = action_state.get_selected_entry()
-                        actions.close(prompt_bufnr)
-                        vim.api.nvim_buf_delete(selection.bufnr, {force = true})
-                      else
-                        actions.close(prompt_bufnr)
-                        for _, selection in ipairs(multi_selections) do
-                          vim.api.nvim_buf_delete(selection.bufnr, {force = true})
-                        end
-                      end
-                      -- assumption: I only use 'd' when searching buffers
-                      require'telescope.builtin'.buffers({ignore_current_buffer = true})
-
-                    return true
-                end,
+                ["d"] = actions.delete_buffer,
             },
         },
         vimgrep_arguments = {

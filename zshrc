@@ -18,7 +18,7 @@ eval "$(starship init zsh)"
 #eval "$(fasd --init zsh-hook posix-alias)"
 
 export PF_INFO="ascii title os kernel uptime pkgs init shell wm editor keymap memory palette"
-pfetch
+#pfetch
 
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
@@ -43,7 +43,7 @@ zle -N zle-keymap-select
 # set cursor shapes END
 
 if [ -f "/usr/share/zsh/scripts/zplug/init.zsh" ] ; then
-    source /usr/share/zsh/scripts/zplug/init.zsh    
+    source /usr/share/zsh/scripts/zplug/init.zsh
 
     zplug "jeffreytse/zsh-vi-mode"
     zplug "zsh-users/zsh-syntax-highlighting"
@@ -55,7 +55,7 @@ if [ -f "/usr/share/zsh/scripts/zplug/init.zsh" ] ; then
             echo; zplug install
         fi
     fi
-    
+
     # Then, source plugins and add commands to $PATH
     zplug load
  fi

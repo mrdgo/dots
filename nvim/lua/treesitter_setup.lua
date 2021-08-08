@@ -1,5 +1,5 @@
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"python", "yaml", "lua", "latex", "json", "bibtex", 'haskell', 'bash'},
+  ensure_installed = {"python", "yaml", "toml", "lua", "latex", "json", "bibtex", 'haskell', 'bash'},
   highlight = {
     enable = true,
     --disable = { "python" },

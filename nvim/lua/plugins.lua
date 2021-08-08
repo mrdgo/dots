@@ -31,7 +31,9 @@ pmap('c', 'Clean')
 
 return require('packer').startup(function()
     -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
+    use {
+        'wbthomason/packer.nvim',
+    }
 
     use {
         'nvim-telescope/telescope.nvim',
@@ -73,12 +75,10 @@ return require('packer').startup(function()
 
     use {
         'nvim-treesitter/nvim-treesitter-textobjects',
-        requires = {{'nvim-treesitter/nvim-treesitter'}}
-    }
-
-    use {
-        'p00f/nvim-ts-rainbow',
-        requires = {{'nvim-treesitter/nvim-treesitter'}}
+        requires = {
+            {'p00f/nvim-ts-rainbow'},
+            {'nvim-treesitter/nvim-treesitter'}
+        }
     }
 
     use {
@@ -99,6 +99,16 @@ return require('packer').startup(function()
     use {
         'norcalli/nvim-colorizer.lua',
         config = function() require'colorizer'.setup() end
+    }
+
+    use {
+        "ThePrimeagen/refactoring.nvim",
+        ft = {'python', 'lua'},
+        config = function() require'refactoring_setup' end,
+        requires = {
+            {"nvim-lua/plenary.nvim"},
+            {"nvim-treesitter/nvim-treesitter"}
+        }
     }
 
     use {
@@ -134,7 +144,7 @@ return require('packer').startup(function()
        requires = {{'rktjmp/lush.nvim'}}
     }
 
-
+    --use 'windwp/nvim-autopairs'
     use {
         'jiangmiao/auto-pairs',
         config = function() require'auto_pairs_setup' end
@@ -143,7 +153,28 @@ return require('packer').startup(function()
     use 'tpope/vim-endwise'
     use 'tpope/vim-repeat'
     use 'tpope/vim-surround'
-    use 'tpope/vim-fugitive'
+
+    use {
+        'tpope/vim-fugitive',
+        config = function()
+            local map = function(key, cmd)
+                vim.api.nvim_set_keymap(
+                  'n', '<Leader>'..key, '<cmd>'..cmd..'<CR>', { noremap=true, silent=false })
+            end
+            local gmap = function(key, cmd) map('g'..key, 'G '..cmd) end
+
+            gmap('s', '')
+            gmap('a', 'add %')
+            gmap('d', 'diff %')
+            gmap('c', 'commit')
+            gmap('p', 'push')
+            gmap('u', 'pull')
+            gmap('n', 'rebase --continue')
+
+            map('gh', 'diffget //2')
+            map('gt', 'diffget //3')
+        end
+    }
 
     use {
         'NLKNguyen/c-syntax.vim',
@@ -171,7 +202,17 @@ return require('packer').startup(function()
         ft = {'toml'}
     }
 
+    use {
+        'lewis6991/spellsitter.nvim',
+        ft = {'tex'},
+        config = function()
+            require('spellsitter').setup()
+        end
+    }
+
     use 'godlygeek/tabular'
+
+    --use 'ggandor/lightspeed.nvim'
 
     use {
         'easymotion/vim-easymotion',

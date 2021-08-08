@@ -59,7 +59,7 @@ local on_attach = function(a, bufnr)
    end
 end
 
-local servers = {'pyls', 'vimls', 'texlab', 'hls'}
+local servers = {'pylsp', 'vimls', 'texlab', 'hls', 'ccls'}
 --local servers = {'pyls', 'vimls', 'texlab', 'hls', 'emmylua'}
 
 for _, lsp in ipairs(servers) do

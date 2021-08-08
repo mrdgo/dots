@@ -26,20 +26,22 @@ map('q', 'q')
 map('ss', 'SSave')  -- startify
 map('sc', 'SClose')  -- startify
 
--- fugitive
-local gmap = function(key, cmd)
-    vim.api.nvim_set_keymap(
-      'n', '<Leader>g'..key,
-      '<cmd>G '..cmd..'<CR>', opts
-    )
-end
+-- natural Y
+vim.api.nvim_set_keymap('n', 'Y', 'y$', opts)
 
-gmap('', '')
-gmap('a', 'add %')
-gmap('d', 'diff %')
-gmap('c', 'commit')
-gmap('p', 'push')
-gmap('u', 'pull')
+-- better next and join
+vim.api.nvim_set_keymap('n', 'n', 'nzzzv', opts)
+vim.api.nvim_set_keymap('n', 'N', 'Nzzzv', opts)
+--vim.api.nvim_set_keymap('n', 'J', 'mzJ`z', opts)
 
-map('gh', 'diffget //2')
-map('gs', 'diffget //3')
+-- improve undo feeling
+vim.api.nvim_set_keymap('i', '.', '.<c-g>u', opts)
+vim.api.nvim_set_keymap('i', ',', ',<c-g>u', opts)
+vim.api.nvim_set_keymap('i', '?', '?<c-g>u', opts)
+vim.api.nvim_set_keymap('i', '!', '!<c-g>u', opts)
+
+-- move lines/selection
+vim.api.nvim_set_keymap('v', 'J', ":m '>+1<CR>gv=gv", opts)
+vim.api.nvim_set_keymap('v', 'K', ":m '<-2<CR>gv=gv", opts)
+vim.api.nvim_set_keymap('n', '<C-j>', ':m .+1<CR>==', opts)
+vim.api.nvim_set_keymap('n', '<C-k>', ':m .-2<CR>==', opts)

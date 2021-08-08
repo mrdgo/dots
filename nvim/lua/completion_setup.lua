@@ -23,10 +23,14 @@ vim.opt.completeopt = {'menuone', 'noinsert', 'noselect'}
 
 -- <c-h> will either expand the current snippet at the word or try to jump to
 -- the next position for the snippet.
+vim.api.nvim_set_keymap('n', '<Leader>nn',
+    '<Cmd>lua return require"snippets".expand_or_advance(1)<CR>', { noremap=true, silent=true })
 vim.api.nvim_set_keymap('i', '<C-h>',
     '<Cmd>lua return require"snippets".expand_or_advance(1)<CR>', { noremap=true, silent=true })
 
 -- <c-t> will jump backwards to the previous field.
 -- If you jump before the first field, it will cancel the snippet.
+vim.api.nvim_set_keymap('n', '<Leader>pp',
+    '<Cmd>lua return require"snippets".expand_or_advance(-1)<CR>', { noremap=true, silent=true })
 vim.api.nvim_set_keymap('i', '<C-t>',
     '<Cmd>lua return require"snippets".expand_or_advance(-1)<CR>', { noremap=true, silent=true })

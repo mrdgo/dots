@@ -46,7 +46,7 @@ snippets.snippets = {
     todo = U.force_comment 'TODO (maxim): ';
   };
   python = {
-    newfile = "'''\ncreated: ${=os.date('%b %dth %Y')}\n@author: Maxim Ritter von Onciul\n'''";
+    newfile = '"""\ncreated: ${=os.date("%b %dth %Y")}\n@author: Maxim Ritter von Onciul\n"""';
     class = 'class ${1}(${2}):\n    def __init__():\n        $0';
     func = U.match_indentation 'def ${1}(${2}):\n    $0';
     ["for"] = U.match_indentation 'for ${1} in ${2}:\n    ';
@@ -82,6 +82,7 @@ snippets.snippets = {
     tabular = U.match_indentation [[
 \vspace{0.3cm}
 \begin{table}[ht]
+    \centering
     \begin{tabular}{$1}
         $0
     \end{tabular}
@@ -119,6 +120,17 @@ snippets.snippets = {
     \end{algorithmic}
 \end{algorithm}
     ]];
+    ["for"] = U.match_indentation [[
+\FOR{${1}}
+    $0
+\ENDFOR{}
+    ]];
+    ["while"] = U.match_indentation [[
+\WHILE{${1}}
+    $0
+\ENDWHILE{}
+    ]];
+    state = '\\STATE';
     tikzpicture = [[
 \begin{figure}[${1:ht}]
     \centering

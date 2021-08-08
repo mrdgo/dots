@@ -36,7 +36,7 @@ modm :: KeyMask
 modm = mod1Mask
 
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = ["dev", "www", "run", "tms", "zoo"] ++ map show [6..7] ++ ["avd", "flt"]
+myWorkspaces = map show [1..9]
 
 myFont :: String
 myFont = "Mononoki:size=14:antialias=true:hinting=true,xft:FontAwesome:size=12"
@@ -65,7 +65,7 @@ floats = renamed [Replace "flts"]
 -- The layout hook
 myLayoutHook = avoidStruts $ mouseResize $ windowArrange $
     mkToggle (NBFULL ?? NOBORDERS ?? EOT) $
-    onWorkspaces ["www", "flt", "tms", "zoo"] monocle $
+    onWorkspaces [2, 4, 5, 8] monocle $
     myDefaultLayout
     where
     myDefaultLayout =   tall
@@ -119,7 +119,7 @@ myKeys = [
     -- XMonad
       ("M-r", spawn "xmonad --recompile")       -- Recompiles xmonad
     , ("M-S-r", spawn "xmonad --restart")       -- Restarts xmonad
-    , ("M-S-e", io exitSuccess)                 -- Quits xmonad
+    --, ("M-S-e", io exitSuccess)                 -- Quits xmonad, dvorak 'e' and 'q' are too close
     , ("M-S-q", kill)                           -- kill client
     , ("M-b", sendMessage ToggleStruts)         -- Toggle xmobar
     , ("M-t", withFocused $ windows . W.sink)   -- Tile client again

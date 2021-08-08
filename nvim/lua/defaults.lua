@@ -24,7 +24,9 @@ vim.opt.splitright = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-vim.opt.termguicolors = true
+vim.opt.linebreak = true
+vim.opt.breakindent = true
+vim.opt.showbreak = '> '
 
 vim.opt.clipboard:append{'unnamedplus'}
 
@@ -33,10 +35,12 @@ vim.cmd('let &t_SI .= "\<Esc>[4 q"')
 -- solid block
 vim.cmd('let &t_EI .= "\<Esc>[2 q"')
 
-vim.cmd('let loadedd_matchparen = 1')
+vim.cmd('let loaded_matchparen = 1')
 
 vim.cmd('filetype plugin indent on')
 vim.cmd('syntax enable')
+
+vim.opt.termguicolors = true
 
 vim.cmd('hi CursorLine cterm=NONE ctermbg=8 ctermfg=NONE')
 vim.cmd('hi Cursorline term=NONE cterm=NONE')
