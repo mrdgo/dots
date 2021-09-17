@@ -14,9 +14,9 @@ if not nvim_lsp.emmylua then
   }
 end
 
+
 local on_attach = function(a, bufnr)
 
-  require'completion'.on_attach(a, bufnr)
   require'lsp_signature'.on_attach(a, bufnr)
   --require'virtualtypes'.on_attach(a, bufnr)
 
@@ -59,9 +59,32 @@ local on_attach = function(a, bufnr)
    end
 end
 
-local servers = {'pylsp', 'vimls', 'texlab', 'hls', 'ccls'}
---local servers = {'pyls', 'vimls', 'texlab', 'hls', 'emmylua'}
+local servers = {'pylsp', 'vimls', 'texlab', 'hls', 'ccls', 'jdtls'}
 
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup { on_attach = on_attach }
+  nvim_lsp[lsp].setup (require"coq".lsp_ensure_capabilities({ on_attach = on_attach }))
 end
+
+USER = vim.fn.expand('$USER')
+local sumneko_root_path = "/home/maxim/.cache/nvim/lspconfig/sumneko_lua/lua-language-server"
+local sumneko_binary = "/home/maxim/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/bin/Linux/lua-language-server"
+
+require'lspconfig'.sumneko_lua.setup (require'coq'.lsp_ensure_capabilities {
+    on_attach = on_attach,
+    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT',
+                -- Setup your lua path
+                path = vim.split(package.path, ';')
+            },
+            diagnostics = { globals = {'vim'} },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
+            }
+        }
+    }
+})

@@ -26,9 +26,6 @@ map('q', 'q')
 map('ss', 'SSave')  -- startify
 map('sc', 'SClose')  -- startify
 
--- natural Y
-vim.api.nvim_set_keymap('n', 'Y', 'y$', opts)
-
 -- better next and join
 vim.api.nvim_set_keymap('n', 'n', 'nzzzv', opts)
 vim.api.nvim_set_keymap('n', 'N', 'Nzzzv', opts)
@@ -39,6 +36,7 @@ vim.api.nvim_set_keymap('i', '.', '.<c-g>u', opts)
 vim.api.nvim_set_keymap('i', ',', ',<c-g>u', opts)
 vim.api.nvim_set_keymap('i', '?', '?<c-g>u', opts)
 vim.api.nvim_set_keymap('i', '!', '!<c-g>u', opts)
+--vim.api.nvim_set_keymap('i', " ", " <c-g>u", opts)
 
 -- move lines/selection
 vim.api.nvim_set_keymap('v', 'J', ":m '>+1<CR>gv=gv", opts)

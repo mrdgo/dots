@@ -83,28 +83,29 @@ return require('packer').startup(function()
 
     use {
         'neovim/nvim-lspconfig',
-        config = function() require'lsp_setup' end
+        config = function() require"lsp_setup" end,
+        requires = {{"ms-jpq/coq_nvim"}, {"mfussenegger/nvim-jdtls"}}
 
     }
 
     use {
-        'onsails/lspkind-nvim',
-        requires = {{'kyazdani42/nvim-web-devicons'}},
-        config = function() require'lspkind_setup' end
+        "onsails/lspkind-nvim",
+        requires = {{"kyazdani42/nvim-web-devicons"}},
+        config = function() require"lspkind_setup" end
     }
 
     --use 'jubnzv/virtual-types.nvim'
-    use 'ray-x/lsp_signature.nvim'
-    use 'folke/lsp-colors.nvim'
+    use "ray-x/lsp_signature.nvim"
+    use "folke/lsp-colors.nvim"
     use {
-        'norcalli/nvim-colorizer.lua',
-        config = function() require'colorizer'.setup() end
+        "norcalli/nvim-colorizer.lua",
+        config = function() require"colorizer".setup() end
     }
 
     use {
         "ThePrimeagen/refactoring.nvim",
-        ft = {'python', 'lua'},
-        config = function() require'refactoring_setup' end,
+        ft = {"python", "lua"},
+        config = function() require"refactoring_setup" end,
         requires = {
             {"nvim-lua/plenary.nvim"},
             {"nvim-treesitter/nvim-treesitter"}
@@ -122,13 +123,24 @@ return require('packer').startup(function()
         run = function() vim.fn['firenvim#install'](0) end
     }
 
+    --use {
+    --    'nvim-lua/completion-nvim',
+    --    config = function() require'completion_setup' end
+    --}
+
+    --use {
+    --    'norcalli/snippets.nvim',
+    --    config = function() require'snippet_setup' end
+    --}
+
     use {
-        'nvim-lua/completion-nvim',
-        config = function() require'completion_setup' end
-    }
-    use {
-        'norcalli/snippets.nvim',
-        config = function() require'snippet_setup' end
+        'ms-jpq/coq_nvim',
+        branch = 'coq',
+        requires = {
+            {'ms-jpq/coq.artifacts', {branch = 'artifacts'}}
+            --{ 'codota/tabnine-vim' }
+        },
+        config = function() vim.g.coq_settings = { auto_start = true, } end
     }
 
     use {
@@ -156,24 +168,7 @@ return require('packer').startup(function()
 
     use {
         'tpope/vim-fugitive',
-        config = function()
-            local map = function(key, cmd)
-                vim.api.nvim_set_keymap(
-                  'n', '<Leader>'..key, '<cmd>'..cmd..'<CR>', { noremap=true, silent=false })
-            end
-            local gmap = function(key, cmd) map('g'..key, 'G '..cmd) end
-
-            gmap('s', '')
-            gmap('a', 'add %')
-            gmap('d', 'diff %')
-            gmap('c', 'commit')
-            gmap('p', 'push')
-            gmap('u', 'pull')
-            gmap('n', 'rebase --continue')
-
-            map('gh', 'diffget //2')
-            map('gt', 'diffget //3')
-        end
+        config = function() require'fugitive_setup' end
     }
 
     use {
@@ -191,11 +186,11 @@ return require('packer').startup(function()
         ft = {'tex', 'bib'}
     }
 
-    use {
-        'plasticboy/vim-markdown',
-        config = function() vim.cmd'source $HOME/.config/nvim/config/markdown.vim' end,
-        ft = {'markdown'}
-    }
+    --use {
+    --    'plasticboy/vim-markdown',
+    --    config = function() vim.cmd'source $HOME/.config/nvim/config/markdown.vim' end,
+    --    ft = {'markdown'}
+    --}
 
     use {
         'cespare/vim-toml',
@@ -205,9 +200,7 @@ return require('packer').startup(function()
     use {
         'lewis6991/spellsitter.nvim',
         ft = {'tex'},
-        config = function()
-            require('spellsitter').setup()
-        end
+        config = function() require'spellsitter'.setup() end
     }
 
     use 'godlygeek/tabular'
@@ -226,6 +219,14 @@ return require('packer').startup(function()
 
     use {
         'scrooloose/nerdcommenter',
-        config = function() vim.cmd'source $HOME/.config/nvim/config/commenter.vim' end
+        config = function() vim.cmd[[let g:NERDDefaultNesting = 0]] end
     }
+
+    use {
+        "nvim-neorg/neorg",
+        config = function() require'neorg_setup' end,
+        ft = "norg",
+        requires = "nvim-lua/plenary.nvim"
+    }
+
 end)

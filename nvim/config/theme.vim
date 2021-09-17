@@ -7,7 +7,7 @@ let g:gruvbox_hls_cursor = 'green'
 
 let g:airline_theme='base16_gruvbox_dark_hard'
 
-let g:airline#extensions#tabline#ignore_bufadd_pat = '!|defx|gundo|startify|tagbar|term://|undotree|dap-repl'
+let g:airline#extensions#tabline#ignore_bufadd_pat = '!|nvim-tree|gundo|startify|tagbar|term://|undotree|dap-repl'
 
 set background=dark
 colorscheme gruvbox

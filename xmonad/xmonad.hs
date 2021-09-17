@@ -17,7 +17,7 @@ import XMonad.Hooks.SetWMName
 import XMonad.Hooks.InsertPosition
 
 import XMonad.Layout.NoBorders (noBorders)
-import XMonad.Layout.Spacing (spacing)
+import XMonad.Layout.Spacing (spacingRaw)
 import XMonad.Layout.PerWorkspace (onWorkspaces)
 import XMonad.Layout.Renamed (renamed, Rename(Replace))
 import XMonad.Layout.ResizableTile
@@ -25,12 +25,14 @@ import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), (??))
 import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBORDERS))
 import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
 import XMonad.Layout.SimplestFloat (simplestFloat)
+import XMonad.Layout.IndependentScreens (countScreens)
 
 import XMonad.Actions.MouseResize (mouseResize)
 
 import XMonad.Prompt
 import XMonad.Prompt.RunOrRaise (runOrRaisePrompt)
 import XMonad.Prompt.DirExec (dirExecPrompt)
+import GHC.IO.Handle.Types (Handle)
 
 modm :: KeyMask
 modm = mod1Mask
@@ -52,7 +54,7 @@ myStartupHook = do
     spawn "/home/maxim/.fehbg"
 
 tall     = renamed [Replace "tall"]
-        $ spacing 3
+        -- $ spacingRaw 3
         $ noBorders
         $ ResizableTall 1 (3/100) (1/2) []
 monocle  = renamed [Replace "full"]
@@ -65,7 +67,7 @@ floats = renamed [Replace "flts"]
 -- The layout hook
 myLayoutHook = avoidStruts $ mouseResize $ windowArrange $
     mkToggle (NBFULL ?? NOBORDERS ?? EOT) $
-    onWorkspaces [2, 4, 5, 8] monocle $
+    --onWorkspaces [2, 4, 5, 8] monocle $
     myDefaultLayout
     where
     myDefaultLayout =   tall
@@ -201,6 +203,7 @@ myManageHook = insertPosition Below Newer <+> composeAll
     , className =? "Android Emulator"          --> doShift ( myWorkspaces !! 7 )
     , className =? "jetbrains-studio"          --> doShift ( myWorkspaces !! 8 )
     , title =? "Android Virtual Device Manager"     --> doFloat
+    , className =? "matplotlib"                     --> doFloat
     , title =? "Emulator"                           --> doFloat
     , className =? "Android Emulator"               --> doFloat
     -- Gimp
@@ -209,8 +212,28 @@ myManageHook = insertPosition Below Newer <+> composeAll
     , title =? "float"                              --> doFloat
     ]
 
+myPP :: Handle -> X ()
+myPP handle = dynamicLogWithPP $ xmobarPP
+   {
+       ppOutput = hPutStrLn handle
+       , ppCurrent = xmobarColor "#b8bb28" ""                -- Current workspace in xmobar
+       , ppVisible = xmobarColor "#fabd2f" ""                -- Visible but not current ws
+       , ppHidden = xmobarColor "#fabd2f" ""                 -- Hidden workspaces in xmobar
+       , ppHiddenNoWindows = xmobarColor "#928374" ""        -- Hidden workspaces (no windows)
+       , ppTitle = xmobarColor "#bdae93" "" . shorten 60     -- Title of active window
+       , ppSep =  " | "                                      -- Separators in xmobar
+       , ppUrgent = xmobarColor "#fb4934" "#50945" . wrap "!" "!"  -- Urgent workspace
+       , ppExtras  = [windowCount]                           -- # of windows current workspace
+       , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
+   }
+
+spawnBar :: (MonadIO m) => Int -> m Handle
+spawnBar i = spawnPipe $ "xmobar -x " ++ show i
+
 main = do
-    xmproc0 <- spawnPipe "xmobar"
+    n <- countScreens
+    xmprocs <- mapM spawnBar [0..n-1]
+
     xmonad $ ewmh $ docks $ def {
         modMask              = modm
         , focusFollowsMouse  = False
@@ -222,18 +245,7 @@ main = do
         , startupHook        = myStartupHook
         , workspaces         = myWorkspaces
         , manageHook         = myManageHook <+> manageIdeaCompletionWindow
-        , logHook = dynamicLogWithPP xmobarPP
-                {
-                    ppOutput = hPutStrLn xmproc0
-                    , ppCurrent = xmobarColor "#b8bb28" ""                -- Current workspace in xmobar
-                    , ppVisible = xmobarColor "#fabd2f" ""                -- Visible but not current ws
-                    , ppHidden = xmobarColor "#fabd2f" ""                 -- Hidden workspaces in xmobar
-                    , ppHiddenNoWindows = xmobarColor "#928374" ""        -- Hidden workspaces (no windows)
-                    , ppTitle = xmobarColor "#bdae93" "" . shorten 60     -- Title of active window
-                    , ppSep =  " | "                                      -- Separators in xmobar
-                    , ppUrgent = xmobarColor "#fb4934" "#50945" . wrap "!" "!"  -- Urgent workspace
-                    , ppExtras  = [windowCount]                           -- # of windows current workspace
-                    , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
-                }
+        , logHook = mapM_ myPP xmprocs
+        --, logHook = mapM (liftIO . spawnBar) [0..n-1] >>= mapM_ myPP
     } `removeKeysP` myRemKeys `additionalKeysP` myKeys
 

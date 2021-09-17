@@ -1,4 +1,4 @@
-version = '0.14.1'
+version = '0.14.5'
 
 package.path = os.getenv("HOME") .. '/.config/xplr/lua/?.lua'
 
@@ -22,6 +22,8 @@ do
     return table.concat(charbytes)
   end
 end
+
+xplr.config.general.initial_layout = "no_help_no_selection"
 
 xplr.config.node_types.directory.meta.icon = ' '..utf8(0xf07c)..' '
 xplr.config.node_types.file.meta.icon = ' '..utf8(0xf15c)..' '

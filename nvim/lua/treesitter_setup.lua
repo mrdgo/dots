@@ -1,5 +1,22 @@
+local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
+
+parser_configs.norg = {
+    install_info = {
+        url = "https://github.com/nvim-neorg/tree-sitter-norg",
+        files = { "src/parser.c", "src/scanner.cc" },
+        branch = "main"
+    },
+}
+
+
+--["core.norg.completion"] = {
+--    config = {
+--    engine = "nvim-cmp" -- We current support nvim-compe and nvim-cmp only
+--    }
+--}
+
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"python", "yaml", "toml", "lua", "latex", "json", "bibtex", 'haskell', 'bash'},
+  ensure_installed = {"norg", "python", "yaml", "toml", "lua", "latex", "json", "bibtex", 'haskell', 'bash'},
   highlight = {
     enable = true,
     --disable = { "python" },

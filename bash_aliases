@@ -113,6 +113,8 @@ alias dv='setxkbmap us -variant dvorak-intl'
 
 alias x='xplr'
 alias p='paru'
+alias psc='paru -Sc --noconfirm'
+alias docker='doas docker'
 
 ### ARCHIVE EXTRACTION
 # usage: ex <file>

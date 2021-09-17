@@ -21,6 +21,10 @@ vim.g.completion_enable_snippet = 'snippets.nvim'
 vim.opt.shortmess:append'c'
 vim.opt.completeopt = {'menuone', 'noinsert', 'noselect'}
 
+vim.g.completion_enable_auto_popup = 0
+vim.api.nvim_set_keymap('i', '<tab>', '<Plug>(completion_smart_tab)', { noremap=false, silent=true })
+vim.api.nvim_set_keymap('i', '<s-tab>', '<Plug>(completion_smart_s_tab)', { noremap=false, silent=true })
+
 -- <c-h> will either expand the current snippet at the word or try to jump to
 -- the next position for the snippet.
 vim.api.nvim_set_keymap('n', '<Leader>nn',
