@@ -29,7 +29,7 @@ pmap('c', 'Clean')
     --    config = function() require'myline' end
     --}
 
-return require('packer').startup(function()
+return require('packer').startup(function(use)
     -- Packer can manage itself
     use {
         'wbthomason/packer.nvim',
@@ -113,25 +113,28 @@ return require('packer').startup(function()
     }
 
     use {
-        'vim-airline/vim-airline-themes',
-        requires = {{'vim-airline/vim-airline'}},
-        config = function() vim.cmd'source $HOME/.config/nvim/config/airline.vim' end
+        'NTBBloodbath/galaxyline.nvim',
+        config = function() require'gruv_line' end
     }
+
+    --use {
+    --    'famiu/feline.nvim',
+    --    config = function() require'feline'.setup() end,
+    --    branch = 'develop'
+    --}
+
+    --use {
+    --    'vim-airline/vim-airline-themes',
+    --    requires = {{'vim-airline/vim-airline'}},
+    --    config = function() vim.cmd'source $HOME/.config/nvim/config/airline.vim' end
+    --}
 
     use {
         'glacambre/firenvim',
         run = function() vim.fn['firenvim#install'](0) end
     }
 
-    --use {
-    --    'nvim-lua/completion-nvim',
-    --    config = function() require'completion_setup' end
-    --}
-
-    --use {
-    --    'norcalli/snippets.nvim',
-    --    config = function() require'snippet_setup' end
-    --}
+    use 'zsugabubus/crazy8.nvim'
 
     use {
         'ms-jpq/coq_nvim',
@@ -153,6 +156,7 @@ return require('packer').startup(function()
     use {
        --'morhetz/gruvbox'
        'npxbr/gruvbox.nvim',
+       config = function() vim.cmd'source $HOME/.config/nvim/config/theme.vim' end,
        requires = {{'rktjmp/lush.nvim'}}
     }
 
@@ -209,17 +213,17 @@ return require('packer').startup(function()
 
     use {
         'easymotion/vim-easymotion',
-        config = 'vim.cmd[[source $HOME/.config/nvim/config/easymotion.vim]]'
+        config = function() vim.cmd[[source $HOME/.config/nvim/config/easymotion.vim]] end
     }
 
     use {
         'mhinz/vim-startify',
-        config = 'vim.cmd[[source $HOME/.config/nvim/config/startify.vim]]'
+        config = function() vim.cmd[[source $HOME/.config/nvim/config/startify.vim]] end
     }
 
     use {
         'scrooloose/nerdcommenter',
-        config = function() vim.cmd[[let g:NERDDefaultNesting = 0]] end
+        config = function() vim.g.NERDDefaultNesting = 0 end
     }
 
     use {

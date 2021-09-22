@@ -32,9 +32,9 @@ Config { font = "xft:Mononoki Nerd Font:pixelsize=14:antialias=true:hinting=true
                                 --, "-A", "5"
                                 , "--" -- battery specific options
                                 -- discharging status
-                                , "-o"  , " <left>% <timeleft>"
+                                , "-o"  , "<left>% <timeleft>"
                                 -- AC "on" status
-                                , "-O"    , "<left>% <fc=#fabd2f> Charging</fc>"
+                                , "-O"    , "<fc=#fabd2f> Charging <left>%</fc>"
                                 -- charged status
                                 , "-i"  , "<fc=#b8bb26> Charged</fc>"
                             ] 150

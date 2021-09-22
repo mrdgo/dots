@@ -26,3 +26,7 @@ let g:airline_symbols.spell = 'Ꞩ'
 let g:airline_symbols.notexists = 'Ɇ'
 let g:airline_symbols.whitespace = 'Ξ'
 
+let g:airline_theme='base16_gruvbox_dark_hard'
+
+let g:airline#extensions#tabline#ignore_bufadd_pat = '!|nvim-tree|gundo|startify|tagbar|term://|undotree|dap-repl'
+

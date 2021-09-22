@@ -31,11 +31,11 @@ vim.opt.showbreak = '> '
 vim.opt.clipboard:append{'unnamedplus'}
 
 -- solid underscore
-vim.cmd('let &t_SI .= "\<Esc>[4 q"')
+vim.cmd[['let &t_SI .= "\<Esc>[4 q"']]
 -- solid block
-vim.cmd('let &t_EI .= "\<Esc>[2 q"')
+vim.cmd[['let &t_EI .= "\<Esc>[2 q"']]
 
-vim.cmd('let loaded_matchparen = 1')
+vim.cmd[['let loaded_matchparen = 1']]
 
 vim.cmd('filetype plugin indent on')
 vim.cmd('syntax enable')
