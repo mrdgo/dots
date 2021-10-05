@@ -324,7 +324,7 @@ gls.right[12] = {
 }
 
 local short_map = {
-  ["startify"] = "Starfity",
+  ["startify"] = "Startify",
   ["packer"] = "Packer",
 }
 

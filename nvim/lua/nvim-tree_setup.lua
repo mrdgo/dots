@@ -1,5 +1,5 @@
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
-vim.g.nvim_tree_bindings = {
+local list = {
     { key = {"<CR>", "o", "<2-LeftMouse>"}, cb = tree_cb("edit") },
     { key = {"l", "<C-]>"},                 cb = tree_cb("cd") },
     { key = "v",                            cb = tree_cb("vsplit") },
@@ -33,9 +33,39 @@ vim.g.nvim_tree_bindings = {
     { key = "g?",                           cb = tree_cb("toggle_help") },
 }
 
+require'nvim-tree'.setup {
+      disable_netrw       = true,
+      hijack_netrw        = true,
+      open_on_setup       = false,
+      ignore_ft_on_setup  = {},
+      auto_close          = false,
+      open_on_tab         = false,
+      hijack_cursor       = false,
+      update_cwd          = false,
+      lsp_diagnostics     = false,
+      update_focused_file = {
+        enable      = false,
+        update_cwd  = false,
+        ignore_list = {}
+      },
+      system_open = {
+        cmd  = nil,
+        args = {}
+      },
+      view = {
+        width = 30,
+        side = 'left',
+        auto_resize = false,
+        mappings = {
+          custom_only = false,
+          list = list
+        }
+      }
+}
+
 vim.api.nvim_set_keymap(
     'n',
     '<Leader>ut',
-    '<cmd>NvimTreeToggle<CR>',
+    '<cmd>lua require"nvim-tree".toggle()<CR>',
     {noremap=true, silent=true}
 )

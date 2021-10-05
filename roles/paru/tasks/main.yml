@@ -1,0 +1,5 @@
+- name: install paru
+  kewlfft.aur.aur:
+    name: paru
+    use: makepkg
+    state: present

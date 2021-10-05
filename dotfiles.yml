@@ -1,0 +1,21 @@
+- name: Set up local workstation
+  hosts: local
+  roles:
+    # - role: paru
+    #   tags:
+    #     - paru
+    - role: pacman
+      tags:
+        - pacman
+    - role: git
+      tags:
+        - git
+    - role: zsh
+      tags:
+        - zsh
+    # - role: nvim
+    #   tags:
+    #     - nvim
+    # - role: tmux
+    #   tags:
+    #     - tmux

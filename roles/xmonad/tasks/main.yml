@@ -1,0 +1,9 @@
+- name: Configure xmonad and xmobar
+  file:
+    src: "{{ dotfiles_home }}/roles/xmonad/files"
+    dest: "~/.xmonad"
+    state: link
+    force: yes
+
+# - name: Recompile xmonad
+  # TODO

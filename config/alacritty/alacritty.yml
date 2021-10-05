@@ -329,7 +329,6 @@ key_bindings:
   - { key: Key0,     mods: Control,                 action: ResetFontSize    }
   - { key: PageUp,   mods: Control|Shift,           action: IncreaseFontSize }
   - { key: PageDown, mods: Control|Shift,           action: DecreaseFontSize }
-
 colors:
   primary:
     # hard contrast:

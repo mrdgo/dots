@@ -1,0 +1,10 @@
+packages:
+  - neovim-nightly-bin
+  - lua-language-server
+  - minecraft-launcher
+  - nerd-fonts-mononoki
+  - ttf-mononoki
+  - nvimpager-git
+  - teams
+  - zoom
+  - zplug

@@ -21,22 +21,18 @@ pmap('s', 'Sync')
 pmap('i', 'Install')
 pmap('c', 'Clean')
 
-    -- use 'karb94/neoscroll.nvim'
+-- https://github.com/folke/trouble.nvim
 
-    --use {
-    --    'glepnir/galaxyline.nvim',
-    --    requires = {{'kyazdani42/nvim-web-devicons'}},
-    --    config = function() require'myline' end
-    --}
+-- TypeScript
+-- https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
+-- https://github.com/jose-elias-alvarez/null-ls.nvim
 
 return require('packer').startup(function(use)
     -- Packer can manage itself
-    use {
-        'wbthomason/packer.nvim',
-    }
+    use "wbthomason/packer.nvim"
 
     use {
-        'nvim-telescope/telescope.nvim',
+        "nvim-telescope/telescope.nvim",
         config = function() require'telescope_setup' end,
         requires = {
             {'nvim-lua/popup.nvim'},
@@ -48,21 +44,20 @@ return require('packer').startup(function(use)
     }
 
     use {
-        'kyazdani42/nvim-tree.lua',
+        "kyazdani42/nvim-tree.lua",
         config = function() require'nvim-tree_setup' end
     }
 
     use {
-        'rcarriga/nvim-dap-ui',
+        "rcarriga/nvim-dap-ui",
         requires = {
-            {'mfussenegger/nvim-dap'},
-            {'nvim-telescope/telescope-dap.nvim'}
+            {"mfussenegger/nvim-dap"},
+            {"nvim-telescope/telescope-dap.nvim"}
         },
-        ft = {'python'},
+        ft = {"python"},
         config = function()
-            require'dap_setup'
-            require'dapui_setup'
-            require'dap_python'
+            require"dap_setup"
+            require"dapui_setup"
         end
     }
 
@@ -104,7 +99,7 @@ return require('packer').startup(function(use)
 
     use {
         "ThePrimeagen/refactoring.nvim",
-        ft = {"python", "lua"},
+        ft = {"python", "lua", "java", "typescript"},
         config = function() require"refactoring_setup" end,
         requires = {
             {"nvim-lua/plenary.nvim"},
@@ -117,17 +112,10 @@ return require('packer').startup(function(use)
         config = function() require'gruv_line' end
     }
 
-    --use {
-    --    'famiu/feline.nvim',
-    --    config = function() require'feline'.setup() end,
-    --    branch = 'develop'
-    --}
-
-    --use {
-    --    'vim-airline/vim-airline-themes',
-    --    requires = {{'vim-airline/vim-airline'}},
-    --    config = function() vim.cmd'source $HOME/.config/nvim/config/airline.vim' end
-    --}
+--     use {
+--         'windwp/floatline.nvim',
+--         config = function() require'floatline'.setup() end
+--     }
 
     use {
         'glacambre/firenvim',
@@ -175,20 +163,10 @@ return require('packer').startup(function(use)
         config = function() require'fugitive_setup' end
     }
 
-    use {
-        'NLKNguyen/c-syntax.vim',
-        ft = {'c', 'cpp'}
-    }
-
-    use {
-        'vim-scripts/gnuplot-syntax-highlighting',
-        ft = {'gnuplot'}
-    }
-
-    use {
-        'lervag/vimtex',
-        ft = {'tex', 'bib'}
-    }
+    use { 'NLKNguyen/c-syntax.vim', ft = {'c', 'cpp'} }
+    use { 'vim-scripts/gnuplot-syntax-highlighting', ft = {'gnuplot'} }
+    use { 'lervag/vimtex', ft = {'tex', 'bib'} }
+    -- use { 'cespare/vim-toml', ft = {'toml'} }
 
     --use {
     --    'plasticboy/vim-markdown',
@@ -196,10 +174,6 @@ return require('packer').startup(function(use)
     --    ft = {'markdown'}
     --}
 
-    use {
-        'cespare/vim-toml',
-        ft = {'toml'}
-    }
 
     use {
         'lewis6991/spellsitter.nvim',
@@ -222,9 +196,14 @@ return require('packer').startup(function(use)
     }
 
     use {
-        'scrooloose/nerdcommenter',
-        config = function() vim.g.NERDDefaultNesting = 0 end
+        "terrortylor/nvim-comment",
+        config = function() require"nvim_comment".setup() end
     }
+
+    --use {
+    --    'scrooloose/nerdcommenter',
+    --    config = function() vim.g.NERDDefaultNesting = 0 end
+    --}
 
     use {
         "nvim-neorg/neorg",

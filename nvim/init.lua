@@ -17,33 +17,29 @@ vim.g.loaded_2html_plugin = false
 vim.g.loaded_remote_plugins = false
 
 vim.cmd'source $HOME/.config/nvim/config/defaults.vim'
---require'defaults'
+
+-- unsuccessfull shot on luafication of defaults
+-- require'defaults'
 
 require'leader'
 
 require'plugins'
 
-vim.cmd'source $HOME/.config/nvim/config/theme.vim'
-
-vim.api.nvim_set_keymap('i', 'jk', '<Esc>', {noremap=true})
-vim.api.nvim_set_keymap('n', '<Leader>v', '<Cmd>e $MYVIMRC<CR>', {silent=true})
-vim.api.nvim_set_keymap('n', '<Leader>r', '<Cmd>so $MYVIMRC<CR>', {noremap=false})
-
---local async
---async =vim.loop.new_async(
---    vim.schedule_wrap(
---    function()
---        require'leader'
+-- local async
+-- async =vim.loop.new_async(
+--     vim.schedule_wrap(
+--     function()
+--         require'leader'
 --
---        require'plugins'
---        vim.cmd'source $HOME/.config/nvim/config/theme.vim'
+--         require'plugins'
+--         vim.cmd'source $HOME/.config/nvim/config/theme.vim'
 --
---        vim.api.nvim_set_keymap('i', 'jk', '<Esc>', {noremap=true})
---        vim.api.nvim_set_keymap('n', '<Leader>v', '<Cmd>e $MYVIMRC<CR>', {silent=true})
---        vim.api.nvim_set_keymap('n', '<Leader>r', '<Cmd>so $MYVIMRC<CR>', {noremap=false})
---        async:close()
---    end
---    )
---)
+--         vim.api.nvim_set_keymap('i', 'jk', '<Esc>', {noremap=true})
+--         vim.api.nvim_set_keymap('n', '<Leader>v', '<Cmd>e $MYVIMRC<CR>', {silent=true})
+--         vim.api.nvim_set_keymap('n', '<Leader>r', '<Cmd>so $MYVIMRC<CR>', {noremap=false})
+--         async:close()
+--     end
+--     )
+-- )
 --
---async:send()
+-- async:send()

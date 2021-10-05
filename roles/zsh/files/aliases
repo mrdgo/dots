@@ -143,6 +143,34 @@ ex ()
     fi
 }
 
+blu () {
+    dbus-send --print-reply --system --dest=org.bluez /org/bluez/hci0/dev_54_A4_93_54_49_7E org.bluez.MediaControl1.VolumeUp
+}
+
+bld () {
+    dbus-send --print-reply --system --dest=org.bluez /org/bluez/hci0/dev_54_A4_93_54_49_7E org.bluez.MediaControl1.VolumeDown
+}
+
+tryb () {
+    sess=tryb
+    tmux new-session -d -s $sess
+
+    # create windows
+    tmux rename-window -t $sess:0 "front"
+    tmux neww -t $sess:1 -n back 
+    tmux neww -t $sess:2 -n nvim
+
+    tmux send-keys -t $sess:0 "cd ~/dokumente/isento/tryb_docker/" C-m
+    tmux send-keys -t $sess:0 "doas docker-compose start" C-m
+
+    tmux send-keys -t $sess:1 "cd ~/dokumente/isento/lea-back/" C-m
+    tmux send-keys -t $sess:1 "mvn spring-boot:run"
+
+    tmux send-keys -t $sess:2 "nvim" C-m
+
+    tmux attach -t $sess
+}
+
 alias 66-all='doas 66-all -z'
 alias 66-dbctl='doas 66-dbctl -z'
 alias 66-disable='doas 66-disable -z'

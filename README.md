@@ -25,18 +25,27 @@ Here you can easily see and reproduce my setup consisting of these components:
 First install requirements:
 - `git`
 - `ansible`, `ansible-aur`
+- `community.general` package from `ansible-galaxy`
 - `paru`
 
+Install `git` and `ansible`:
 ```sh
 pacman -S git ansible
 ```
 
+Install `pacman` for ansible:
+```sh
+ansible-galaxy collection install community.general
+```
+
+Install `paru`:
 ```sh
 git clone https://aur.archlinux.org/paru-bin.git /opt/paru
 cd /opt/paru
 sudo makepkg -i
 ```
 
+Install `ansible-aur` to use AUR packages:
 ```sh
 paru -S ansible-aur
 ```
@@ -46,5 +55,5 @@ paru -S ansible-aur
 ```sh
 git clone https://github.com/mrdgo/dots.git /opt/dots
 cd /opt/dots
-ansible-playbook dotfiles.yml
+ansible-playbook -i ./hosts ./dotfiles.yml --ask-become-pass --tags all
 ```

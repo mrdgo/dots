@@ -1,0 +1,57 @@
+packages:
+  - xmonad
+  - libxinerama
+  - xmonad-contrib
+  - xmobar
+  - alacritty
+  - alsa-utils-suite66
+  - make
+  - bat
+  - suite66
+  - xdm-suite66
+  - elogind-suite66
+  - networkmanager-suite66
+  - ntp-suite66
+  - acpid-suite66
+  - docker-suite66
+  - docker-compose
+  - bluez-suite66
+  - dbus-suite66
+  - dunst
+  - exa
+  - feh
+  - firefox
+  - freetype2
+  - ghc
+  - ripgrep
+  - moc
+  - npm
+  - pulseaudio
+  - pulseaudio-alsa
+  - pulseaudio-modules-bt
+  - python
+  - starship
+  - sxiv
+  - tmux
+  - ttf-font-awesome
+  - xclip
+  - xorg-server
+  - xorg-xinit
+  - xplr
+  - zathura
+  - zathura-pdf-mupdf
+  - zsh
+
+remove_packages:
+  - sudo
+
+aur_packages:
+  - neovim-nightly-bin
+  - lua-language-server
+  - minecraft-launcher
+  - nerd-fonts-mononoki
+  - ttf-mononoki
+  - nvimpager-git
+  - teams
+  - zoom
+  - zplug

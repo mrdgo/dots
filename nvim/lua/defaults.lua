@@ -1,34 +1,35 @@
-vim.opt.hidden = true
+vim.o.hidden = true
 
-vim.opt.showcmd = true
-vim.opt.wildmenu = true
-vim.opt.lazyredraw = false
+vim.o.showcmd = true
+vim.o.wildmenu = true
+vim.o.lazyredraw = false
 
-vim.opt.cursorline = true
-vim.opt.cursorcolumn = true
+vim.o.cursorline = true
+vim.o.cursorcolumn = true
 
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.opt.smartindent = true
+vim.o.tabstop = 4
+vim.o.softtabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
+vim.o.smartindent = true
 
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
-vim.opt.smartcase = true
+-- vim.opt.hlsearch = false
+vim.o.hlsearch = false
+vim.o.incsearch = true
+vim.o.smartcase = true
 
-vim.opt.laststatus = 2
-vim.opt.colorcolumn = 80
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-vim.opt.number = true
-vim.opt.relativenumber = true
+vim.o.laststatus = 2
+vim.o.colorcolumn = "80"
+vim.o.splitbelow = true
+vim.o.splitright = true
+vim.o.number = true
+vim.o.relativenumber = true
 
-vim.opt.linebreak = true
-vim.opt.breakindent = true
-vim.opt.showbreak = '> '
+vim.o.linebreak = true
+vim.o.breakindent = true
+vim.o.showbreak = '> '
 
-vim.opt.clipboard:append{'unnamedplus'}
+vim.o.clipboard:append{'unnamedplus'}
 
 -- solid underscore
 vim.cmd[['let &t_SI .= "\<Esc>[4 q"']]
@@ -40,7 +41,7 @@ vim.cmd[['let loaded_matchparen = 1']]
 vim.cmd('filetype plugin indent on')
 vim.cmd('syntax enable')
 
-vim.opt.termguicolors = true
+-- vim.o.termguicolors = true
 
 vim.cmd('hi CursorLine cterm=NONE ctermbg=8 ctermfg=NONE')
 vim.cmd('hi Cursorline term=NONE cterm=NONE')

@@ -16,7 +16,7 @@ parser_configs.norg = {
 --}
 
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"norg", "python", "yaml", "toml", "lua", "latex", "json", "bibtex", 'haskell', 'bash'},
+  ensure_installed = {"norg", "python", "yaml", "toml", "lua", "latex", "json", "bibtex", 'haskell', 'bash', "java"},
   highlight = {
     enable = true,
     --disable = { "python" },

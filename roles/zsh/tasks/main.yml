@@ -1,0 +1,27 @@
+- name: Setup zshrc
+  file:
+    src: "roles/zsh/files/zshrc"
+    dest: "~/.zshrc"
+    state: hard
+    force: yes
+
+- name: Setup zshenv
+  file:
+    src: "roles/zsh/files/zshenv"
+    dest: "~/.zshenv"
+    state: hard
+    force: yes
+
+- name: Setup zprofile
+  file:
+    src: "roles/zsh/files/zprofile"
+    dest: "~/.zprofile"
+    state: hard
+    force: yes
+
+- name: Setup zprofile
+  file:
+    src: "roles/zsh/files/aliases"
+    dest: "~/.aliases"
+    state: hard
+    force: yes

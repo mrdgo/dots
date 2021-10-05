@@ -1,4 +1,5 @@
-version = '0.14.5'
+version = '0.14.7'
+local xplr = xplr
 
 package.path = os.getenv("HOME") .. '/.config/xplr/lua/?.lua'
 
@@ -91,4 +92,14 @@ require'nnn_preview_wrapper'.setup{
   fifo_path = "/tmp/xplr.fifo",
   mode = "action",
   key = "p",
+}
+
+-- Type `yy` to copy and `p` to paste whole files.
+-- Type `yp` to copy the paths of focused or selected files.
+-- Type `yP` to copy the parent directory path.
+require("xclip").setup{
+  copy_command = "xclip-copyfile",
+  copy_paths_command = "xclip -sel clip",
+  paste_command = "xclip-pastefile",
+  keep_selection = false,
 }
