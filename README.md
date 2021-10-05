@@ -1,6 +1,8 @@
-# Dotfiles for xmonad machine
+# Rice dots
 
-| Key | Value |
+Disclaimer: currently under construction to run with `ansible`
+
+| System | Software |
 |---|---|
 | OS | Artix linux |
 | Init system | suite66 |
@@ -25,25 +27,15 @@ First install requirements:
 - `ansible`, `ansible-aur`
 - `paru`
 
-### Install packages
-
 ```sh
 pacman -S git ansible
 ```
-
-### Install paru
 
 ```sh
 git clone https://aur.archlinux.org/paru-bin.git /opt/paru
 cd /opt/paru
 sudo makepkg -i
 ```
-
-Optional:
-
-You can then use `paru` to reinstall itself, so it updates itself on `paru -Syu`.
-
-### Install ansible deps
 
 ```sh
 paru -S ansible-aur
