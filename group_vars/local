@@ -1,5 +1,5 @@
 dotfiles_user_home: "{{ '~' | expanduser }}"
-dotfiles_home: "{{ dotfiles_user_home }}/.config"
+dotfiles_home: "/opt/dots"
 
 full_name: Maxim R. v. Onciul
 git_user: mrdgo

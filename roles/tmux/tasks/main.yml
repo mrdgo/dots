@@ -1,0 +1,6 @@
+- name: Configure tmux
+  file:
+    src: "{{ dotfiles_home }}/roles/tmux/files/tmux.conf"
+    dest: "~/.config/tmux.conf"
+    state: hard
+    force: yes

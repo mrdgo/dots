@@ -1,0 +1,7 @@
+- name: Setup zathura
+  file:
+    src: "{{ dotfiles_home }}/roles/zathura/files/zathura"
+    dest: "~/.config/zathura"
+    state: link
+    force: yes
+

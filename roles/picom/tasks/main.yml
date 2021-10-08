@@ -1,0 +1,6 @@
+- name: Setup picom
+  file:
+    src: "{{ dotfiles_home }}/roles/picom/files/picom.conf"
+    dest: "~/.config/picom.conf"
+    state: hard
+    force: yes

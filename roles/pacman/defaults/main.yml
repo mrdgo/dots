@@ -23,6 +23,8 @@ packages:
   - firefox
   - freetype2
   - ghc
+  - git
+  - light
   - ripgrep
   - moc
   - npm

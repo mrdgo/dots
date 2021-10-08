@@ -156,17 +156,18 @@ tryb () {
     tmux new-session -d -s $sess
 
     # create windows
-    tmux rename-window -t $sess:0 "front"
+    tmux rename-window -t $sess:0 "docker-compose"
     tmux neww -t $sess:1 -n back 
-    tmux neww -t $sess:2 -n nvim
+    tmux neww -t $sess:2 -n front 
+    tmux neww -t $sess:3 -n nvim
 
-    tmux send-keys -t $sess:0 "cd ~/dokumente/isento/tryb_docker/" C-m
-    tmux send-keys -t $sess:0 "doas docker-compose start" C-m
-
+    tmux send-keys -t $sess:0 "cd ~/dokumente/isento/tryb_docker/tryb_docker" C-m
     tmux send-keys -t $sess:1 "cd ~/dokumente/isento/lea-back/" C-m
-    tmux send-keys -t $sess:1 "mvn spring-boot:run"
+    tmux send-keys -t $sess:2 "cd ~/dokumente/isento/lea-front/" C-m
 
-    tmux send-keys -t $sess:2 "nvim" C-m
+    tmux send-keys -t $sess:0 "doas docker-compose start" C-m
+    tmux send-keys -t $sess:1 "mvn spring-boot:run"
+    tmux send-keys -t $sess:3 "nvim" C-m
 
     tmux attach -t $sess
 }

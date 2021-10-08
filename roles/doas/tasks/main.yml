@@ -1,11 +1,6 @@
-- name: Install package opendoas
-  community.general.pacman:
-    name: opendoas
-    state: present
-
 - name: Provide doas.conf
   file:
     src: "{{ dotfiles_home }}/roles/doas/files/doas.conf"
     dest: "/etc/doas.conf"
-    state: link
+    state: hard
     force: yes

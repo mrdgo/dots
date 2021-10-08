@@ -1,21 +1,60 @@
+# https://github.com/kewlfft/ansible-aur
+# https://medium.com/espinola-designs/manage-your-dotfiles-with-ansible-6dbedd5532bb
 - name: Set up local workstation
   hosts: local
   roles:
-    # - role: paru
-    #   tags:
-    #     - paru
-    - role: pacman
+    - role: alacritty
       tags:
-        - pacman
+        - alacritty
+        - zsh
+    # - role: bash
+    #   tags:
+    #     - bash
+    - role: bat
+      tags:
+        - bat
+    - role: doas
+      tags:
+        - doas
+    - role: dunst
+      tags:
+        - dunst
+    - role: dwm
+      tags:
+        - dwm
     - role: git
       tags:
         - git
+    - role: i3
+      tags:
+        - i3
+    - role: moc
+      tags:
+        - moc
+    - role: nvim
+      tags:
+        - nvim
+    - role: pacman
+      tags:
+        - pacman
+    # - role: paru
+    #   tags:
+    #     - paru
+    - role: picom
+      tags:
+        - picom
+    - role: tmux
+      tags:
+        - tmux
+    - role: xmonad
+      tags:
+        - xmonad
+    - role: xplr
+      tags:
+        - xplr
+    - role: zathura
+      tags:
+        - zathura
     - role: zsh
       tags:
         - zsh
-    # - role: nvim
-    #   tags:
-    #     - nvim
-    # - role: tmux
-    #   tags:
-    #     - tmux

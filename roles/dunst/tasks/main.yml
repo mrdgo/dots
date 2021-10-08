@@ -1,0 +1,6 @@
+- name: Setup dunst
+  file:
+    src: "{{ dotfiles_home }}/roles/dunst/files/dunst"
+    dest: "~/.config/dunst"
+    state: link
+    force: yes

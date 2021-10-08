@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Go into desktop mode if possible
+if [ $(xrandr | awk '/HDMI-1/{print $2}') = "connected" ]; then
+    xrandr --output eDP-1 --left-of HDMI-1 --auto
+fi
+
+xconsole -geometry 480x130-0-0 -daemon -notify -verbose -fn fixed -exitOnFail
+
+setxkbmap us -variant dvorak-intl
+$HOME/.fehbg

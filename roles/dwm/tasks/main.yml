@@ -1,0 +1,24 @@
+- name: Clone dwm
+  git:
+    repo: "https://github.com/mrdgo/dwm_custom.git"
+    dest: "/opt/dwm"
+    version: master
+  become: yes
+  become_user: root
+  become_method: doas
+
+- name: Build and deploy dwm
+  make:
+    chdir: "/opt/dwm"
+    target: install
+  become: yes
+  become_user: root
+  become_method: doas
+
+- name: Install dwm
+  file:
+    src: "{{ dotfiles_home }}/roles/dwm/files/init_wm.sh"
+    dest: "~/.config/init_wm.sh"
+    state: hard
+    force: yes
+

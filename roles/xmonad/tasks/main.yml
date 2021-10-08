@@ -1,9 +1,40 @@
 - name: Configure xmonad and xmobar
   file:
-    src: "{{ dotfiles_home }}/roles/xmonad/files"
+    src: "{{ dotfiles_home }}/roles/xmonad/files/xmonad"
     dest: "~/.xmonad"
     state: link
     force: yes
 
-# - name: Recompile xmonad
-  # TODO
+- name: Install xinitrc
+  file:
+    src: "{{ dotfiles_home }}/roles/xmonad/files/xinitrc"
+    dest: "~/.xinitrc"
+    state: hard
+    force: yes
+
+- name: Install downscripts
+  file:
+    src: "{{ dotfiles_home }}/roles/xmonad/files/down_scripts"
+    dest: "~/.config/down_scripts"
+    state: link
+    force: yes
+
+- name: Install Xresources
+  file:
+    src: "{{ dotfiles_home }}/roles/xmonad/files/Xresources"
+    dest: "~/.Xresources"
+    state: hard
+    force: yes
+
+- name: Install Xsetup_0 to theme xdm
+  file:
+    src: "{{ dotfiles_home }}/roles/xmonad/files/Xsetup_0"
+    dest: "/etc/X11/xdm/Xsetup_0"
+    state: hard
+    force: yes
+  become: yes
+  become_user: root
+  become_method: doas
+
+- name: Recompile xmonad
+  command: "xmonad --recompile"

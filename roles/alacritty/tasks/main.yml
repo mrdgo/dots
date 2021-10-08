@@ -1,0 +1,7 @@
+- name: Configure alacritty
+  file:
+    src: "{{ dotfiles_home }}/roles/alacritty/files/alacritty"
+    dest: "~/.config/alacritty"
+    state: link
+    force: yes
+

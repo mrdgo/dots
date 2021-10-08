@@ -1,8 +1,3 @@
-- name: Install package from AUR using a Pacman compatible AUR helper
-  community.general.pacman:
-    name: git
-    state: present
-
 - name: Link global gitignore file
   file:
     src: "{{ dotfiles_home }}/roles/git/files/gitignore_global.link"

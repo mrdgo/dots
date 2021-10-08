@@ -1,27 +1,34 @@
 - name: Setup zshrc
   file:
-    src: "roles/zsh/files/zshrc"
+    src: "{{ dotfiles_home }}/roles/zsh/files/zshrc"
     dest: "~/.zshrc"
     state: hard
     force: yes
 
 - name: Setup zshenv
   file:
-    src: "roles/zsh/files/zshenv"
+    src: "{{ dotfiles_home }}/roles/zsh/files/zshenv"
     dest: "~/.zshenv"
     state: hard
     force: yes
 
 - name: Setup zprofile
   file:
-    src: "roles/zsh/files/zprofile"
+    src: "{{ dotfiles_home }}/roles/zsh/files/zprofile"
     dest: "~/.zprofile"
     state: hard
     force: yes
 
 - name: Setup zprofile
   file:
-    src: "roles/zsh/files/aliases"
+    src: "{{ dotfiles_home }}/roles/zsh/files/aliases"
     dest: "~/.aliases"
+    state: hard
+    force: yes
+
+- name: Setup starship
+  file:
+    src: "{{ dotfiles_home }}/roles/zsh/files/starship.toml"
+    dest: "~/.config/starship.toml"
     state: hard
     force: yes
