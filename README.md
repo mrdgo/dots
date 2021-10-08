@@ -1,13 +1,6 @@
 # Rice dots
 
-Disclaimer: currently under construction to run with `ansible`
-
-| System | Software |
-|---|---|
-| OS | Artix linux |
-| Init system | suite66 |
-
-Here you can easily see and reproduce my setup consisting of these components:
+Here you can easily reproduce my setup consisting of these components:
 - `nvim` setup
 - `zsh` setup (mainly aliases)
 - `XMonad` window manager config
@@ -19,14 +12,14 @@ Here you can easily see and reproduce my setup consisting of these components:
 - `zathura` minimal pdf viewer
 - `picom` compositor for X11
 - `starship` shell prompt
+- `suite66` init system (nothing to to see here, yet)
 
 ## Pre-install
 
 First install requirements:
 - `git`
-- `ansible`, `ansible-aur`
-- `community.general` package from `ansible-galaxy`
-- `paru`
+- `ansible`
+- `community.general` and `kewlfft.aur` package from `ansible-galaxy`
 
 Install `git` and `ansible`:
 ```sh
@@ -39,15 +32,18 @@ ansible-galaxy collection install community.general
 ansible-galaxy collection install kewlfft.aur
 ```
 
-## Play this ansible playbook
+## Install all components
 
 ```sh
 git clone https://github.com/mrdgo/dots.git /opt/dots && cd /opt/dots
 ansible-playbook -i ./hosts ./dotfiles.yml --tags all
 ```
 
-## Only install my XMonad config
+## Install single components
 
 ```sh
-ansible-playbook -i ./hosts ./dotfiles.yml --tags xmonad
+ansible-playbook -i ./hosts ./dotfiles.yml --tags TAG
 ```
+
+For `TAG` in the list of tags in `dotfiles.yml`.
+`i3` and `bash` exist but are unmaintained.

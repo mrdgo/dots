@@ -1,5 +1,3 @@
-# https://github.com/kewlfft/ansible-aur
-# https://medium.com/espinola-designs/manage-your-dotfiles-with-ansible-6dbedd5532bb
 - name: Set up local workstation
   hosts: local
   roles:
@@ -10,9 +8,6 @@
     # - role: bash
     #   tags:
     #     - bash
-    - role: bat
-      tags:
-        - bat
     - role: doas
       tags:
         - doas
@@ -25,9 +20,9 @@
     - role: git
       tags:
         - git
-    - role: i3
-      tags:
-        - i3
+    # - role: i3
+    #   tags:
+    #     - i3
     - role: moc
       tags:
         - moc
