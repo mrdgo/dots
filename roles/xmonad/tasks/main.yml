@@ -19,7 +19,7 @@
     state: hard
     force: yes
 
-- name: Install downscripts
+- name: Install down scripts
   file:
     src: "{{ dotfiles_home }}/roles/xmonad/files/down_scripts"
     dest: "~/.config/down_scripts"
