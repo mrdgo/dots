@@ -33,27 +33,21 @@ Install `git` and `ansible`:
 pacman -S git ansible
 ```
 
-Install `pacman` for ansible:
+Install `pacman` and `AUR` for ansible:
 ```sh
 ansible-galaxy collection install community.general
-```
-
-Install `paru`:
-```sh
-git clone https://aur.archlinux.org/paru-bin.git /opt/paru
-cd /opt/paru
-sudo makepkg -i
-```
-
-Install `ansible-aur` to use AUR packages:
-```sh
-paru -S ansible-aur
+ansible-galaxy collection install kewlfft.aur
 ```
 
 ## Play this ansible playbook
 
 ```sh
-git clone https://github.com/mrdgo/dots.git /opt/dots
-cd /opt/dots
-ansible-playbook -i ./hosts ./dotfiles.yml --ask-become-pass --tags all
+git clone https://github.com/mrdgo/dots.git /opt/dots && cd /opt/dots
+ansible-playbook -i ./hosts ./dotfiles.yml --tags all
+```
+
+## Only install my XMonad config
+
+```sh
+ansible-playbook -i ./hosts ./dotfiles.yml --tags xmonad
 ```

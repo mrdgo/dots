@@ -1,7 +1,43 @@
+- name: install paru
+  kewlfft.aur.aur:
+    name: paru
+    use: makepkg
+    state: present
+  become: yes
+  become_user: root
+  become_method: doas
+
+- name: Configure pacman
+  file:
+    src: "{{ dotfiles_home }}/roles/pacman/files/pacman.conf"
+    dest: "/etc/pacman.conf"
+    state: hard
+    force: yes
+  become: yes
+  become_user: root
+  become_method: doas
+
+- name: Configure paru
+  file:
+    src: "{{ dotfiles_home }}/roles/pacman/files/paru.conf"
+    dest: "/etc/paru.conf"
+    state: hard
+    force: yes
+  become: yes
+  become_user: root
+  become_method: doas
+
+- name: pacman -Syu
+  community.general.pacman:
+    update_cache: yes
+    upgrade: yes
+    executable: paru
+
 - name: Install packages from repo
   community.general.pacman:
     name: "{{ packages }}"
     state: present
+    executable: paru
   become: yes
   become_user: root
   become_method: doas
@@ -41,36 +77,23 @@
 #     name: foo
 #     state: latest
 #     update_cache: yes
-# 
+
 # - name: Remove packages foo and bar
 #   community.general.pacman:
 #     name:
 #       - foo
 #       - bar
 #     state: absent
-# 
+
 # - name: Recursively remove package baz
 #   community.general.pacman:
 #     name: baz
 #     state: absent
 #     extra_args: --recursive
-# 
-# - name: Run the equivalent of "pacman -Sy" as a separate step
-#   community.general.pacman:
-#     update_cache: yes
-# 
-# - name: Run the equivalent of "pacman -Su" as a separate step
-#   community.general.pacman:
-#     upgrade: yes
-# 
-# - name: Run the equivalent of "pacman -Syu" as a separate step
-#   community.general.pacman:
-#     update_cache: yes
-#     upgrade: yes
-# 
+
 # - name: Run the equivalent of "pacman -Rdd", force remove package baz
 #   community.general.pacman:
 #     name: baz
 #     state: absent
 #     force: yes
-# 
+

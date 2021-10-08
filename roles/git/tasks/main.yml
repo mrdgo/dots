@@ -2,7 +2,7 @@
   file:
     src: "{{ dotfiles_home }}/roles/git/files/gitignore_global.link"
     dest: "{{ dotfiles_user_home }}/.gitignore_global"
-    state: link
+    state: hard
     force: yes
 
 - name: Check if gitconfig exists

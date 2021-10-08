@@ -12,6 +12,13 @@
     state: hard
     force: yes
 
+- name: Install .profile
+  file:
+    src: "{{ dotfiles_home }}/roles/xmonad/files/profile"
+    dest: "~/.profile"
+    state: hard
+    force: yes
+
 - name: Install downscripts
   file:
     src: "{{ dotfiles_home }}/roles/xmonad/files/down_scripts"

@@ -27,7 +27,6 @@ packages:
   - light
   - ripgrep
   - moc
-  - npm
   - pulseaudio
   - pulseaudio-alsa
   - pulseaudio-modules-bt
@@ -54,6 +53,4 @@ aur_packages:
   - nerd-fonts-mononoki
   - ttf-mononoki
   - nvimpager-git
-  - teams
-  - zoom
   - zplug

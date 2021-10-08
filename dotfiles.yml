@@ -37,9 +37,6 @@
     - role: pacman
       tags:
         - pacman
-    # - role: paru
-    #   tags:
-    #     - paru
     - role: picom
       tags:
         - picom
