@@ -27,6 +27,16 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap(
     "n",
     "<Leader>sc",
-    "<cmd>SaveSession<CR><cmd>Alpha<CR>",
+    ":lua require'session_setup'.save_session()",
     { noremap=true, silent=false }
 )
+
+local function save_session()
+    vim.cmd[[SaveSession]]
+    vim.cmd[[cd ~]]
+    vim.cmd[[Alpha]]
+end
+
+return {
+    save_session = save_session
+}

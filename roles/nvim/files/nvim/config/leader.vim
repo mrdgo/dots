@@ -17,10 +17,6 @@ nmap <silent> <Leader>q <cmd>q<cr>
 " LSP: <Leader>sX
 " DAP: <Leader>dX
 
-" Sessions
-nmap <silent> <Leader>ss <cmd>SSave<cr>
-nmap <silent> <Leader>sc <cmd>SClose<cr>
-
 " Git
 nmap <silent> <Leader>g <cmd>G<cr>
 nmap <silent> <Leader>ga <cmd>G add %<cr>
