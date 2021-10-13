@@ -1,8 +1,8 @@
 require'galaxyline_conf'
 
 local gl = require('galaxyline')
-local gruvbox = require'gruvbox'
-local colors = require'galaxyline.theme'.default
+-- local gruvbox = require'gruvbox'
+-- local colors = require'galaxyline.theme'.default
 local condition = require('galaxyline.condition')
 local gls = gl.section
 gl.short_line_list = {'NvimTree','vista','dbui','packer', 'startify'}
@@ -17,7 +17,7 @@ gls.left[2] = {
   ViMode = {
         provider = function()
             local alias = {n = 'NORMAL',i = 'INSERT',c= 'COMMAND',v= 'VISUAL',V= 'VISUAL LINE', [''] = 'VISUAL BLOCK'}
-            mode = vim.fn.mode()
+            local mode = vim.fn.mode()
             local bg_color = {n='#b8bb26', i='#fabd2f', c='83a598', v='#d3869b', V='#d3869b', ['^V']='#d3869b', }
             vim.cmd('highlight GalaxyViMode guibg='..bg_color[mode])
         return alias[mode]

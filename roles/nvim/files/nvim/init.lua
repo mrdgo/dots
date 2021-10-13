@@ -16,6 +16,9 @@ vim.g.loaded_zipPlugin = false
 vim.g.loaded_2html_plugin = false
 vim.g.loaded_remote_plugins = false
 
+-- vim.cmd[[scriptencoding utf-8]]
+
+vim.o.termguicolors = true
 vim.cmd'source $HOME/.config/nvim/config/defaults.vim'
 
 -- shot on luafication of defaults
@@ -24,6 +27,12 @@ require'defaults'
 require'leader'
 
 require'plugins'
+
+-- <Leader>W saves file as root
+require'doas'.setup()
+
+-- TODO rewrite this in lua
+-- https://github.com/arp242/startscreen.vim/blob/master/plugin/startscreen.vim
 
 -- local async
 -- async =vim.loop.new_async(
@@ -34,9 +43,6 @@ require'plugins'
 --         require'plugins'
 --         vim.cmd'source $HOME/.config/nvim/config/theme.vim'
 --
---         vim.api.nvim_set_keymap('i', 'jk', '<Esc>', {noremap=true})
---         vim.api.nvim_set_keymap('n', '<Leader>v', '<Cmd>e $MYVIMRC<CR>', {silent=true})
---         vim.api.nvim_set_keymap('n', '<Leader>r', '<Cmd>so $MYVIMRC<CR>', {noremap=false})
 --         async:close()
 --     end
 --     )

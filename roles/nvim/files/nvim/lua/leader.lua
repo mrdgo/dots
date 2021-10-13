@@ -3,28 +3,26 @@ vim.g.mapleader = " "
 local opts = { noremap=true, silent=true }
 local map = function(key, cmd)
     vim.api.nvim_set_keymap(
-      'n', '<Leader>'..key,
-      '<cmd>'..cmd..'<CR>', opts
+      "n", "<Leader>"..key,
+      "<cmd>"..cmd.."<CR>", opts
     )
 end
 
-map('h', 'wincmd h')
-map('j', 'wincmd j')
-map('k', 'wincmd k')
-map('l', 'wincmd l')
+map("h", "wincmd h")
+map("j", "wincmd j")
+map("k", "wincmd k")
+map("l", "wincmd l")
 
 local opts_nore = { noremap=false, silent=true }
-map('rh', 'vertical resize +5')
-map('rl', 'vertical resize -5')
-map('rj', 'resize +5')
-map('rk', 'resize -5')
+map("rh", "vertical resize +5")
+map("rl", "vertical resize -5")
+map("rj", "resize +5")
+map("rk", "resize -5")
 
-map('w', 'w')
-map('x', 'x')
-map('q', 'q')
-
-map('ss', 'SSave')  -- startify
-map('sc', 'SClose')  -- startify
+map("w", "w")
+map("x", "x")
+map("qq", "quitall")
+map("qw", "q")
 
 vim.api.nvim_set_keymap('v', '<Leader><Leader>', '<Esc>', opts_nore)
 
@@ -47,5 +45,8 @@ vim.api.nvim_set_keymap('n', '<C-j>', ':m .+1<CR>==', opts_nore)
 vim.api.nvim_set_keymap('n', '<C-k>', ':m .-2<CR>==', opts_nore)
 
 -- map madness
-vim.api.nvim_set_keymap('i', 'jk', '<Esc>', {noremap=true})
 vim.api.nvim_set_keymap('n', '<Leader>v', '<Cmd>e $MYVIMRC<CR>', {silent=true})
+
+-- motions
+vim.api.nvim_set_keymap("n", "gl", "$", opts)
+vim.api.nvim_set_keymap("n", "gh", "^", opts)

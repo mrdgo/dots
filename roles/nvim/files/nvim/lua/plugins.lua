@@ -32,14 +32,35 @@ return require('packer').startup(function(use)
     use "wbthomason/packer.nvim"
 
     use {
+        'goolord/alpha-nvim',
+        requires = { 'kyazdani42/nvim-web-devicons' },
+        config = function ()
+            -- require'alpha'.setup(require'alpha.themes.startify'.opts)
+            require"alpha_setup"
+        end
+    }
+
+    use {
         "nvim-telescope/telescope.nvim",
-        config = function() require'telescope_setup' end,
+        config = function()
+            require"terminal".setup()
+            require"telescope_setup"
+            require"session_setup"
+            -- require"git_wt_setup"
+        end,
         requires = {
-            {'nvim-lua/popup.nvim'},
-            {'nvim-lua/plenary.nvim'},
-            {'nvim-telescope/telescope-fzy-native.nvim'},
-            {'nvim-telescope/telescope-media-files.nvim'},
-            {'sudormrfbin/cheatsheet.nvim'}
+            {"nvim-lua/popup.nvim"},
+            {"nvim-lua/plenary.nvim"},
+            {"nvim-telescope/telescope-fzy-native.nvim"},
+            {"nvim-telescope/telescope-media-files.nvim"},
+            {"nvim-telescope/telescope-packer.nvim"},
+            {"nvim-telescope/telescope-project.nvim"},
+            {"rmagatti/session-lens"},
+            {"rmagatti/auto-session"},
+            {"norcalli/nvim-terminal.lua"},
+            {"camgraff/telescope-tmux.nvim"},
+            {"sudormrfbin/cheatsheet.nvim"},
+            -- {"ThePrimeagen/git-worktree.nvim"}
         }
     }
 
@@ -49,9 +70,9 @@ return require('packer').startup(function(use)
     }
 
     use {
-        "rcarriga/nvim-dap-ui",
+        "mfussenegger/nvim-dap",
         requires = {
-            {"mfussenegger/nvim-dap"},
+            {"rcarriga/nvim-dap-ui"},
             {"nvim-telescope/telescope-dap.nvim"}
         },
         ft = {"python"},
@@ -65,14 +86,10 @@ return require('packer').startup(function(use)
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
-        config = function() require'treesitter_setup' end
-    }
-
-    use {
-        'nvim-treesitter/nvim-treesitter-textobjects',
+        config = function() require'treesitter_setup' end,
         requires = {
-            {'p00f/nvim-ts-rainbow'},
-            {'nvim-treesitter/nvim-treesitter'}
+            {'nvim-treesitter/nvim-treesitter-textobjects'},
+            {'p00f/nvim-ts-rainbow'}
         }
     }
 
@@ -80,7 +97,6 @@ return require('packer').startup(function(use)
         'neovim/nvim-lspconfig',
         config = function() require"lsp_setup" end,
         requires = {{"ms-jpq/coq_nvim"}, {"mfussenegger/nvim-jdtls"}}
-
     }
 
     use {
@@ -163,6 +179,18 @@ return require('packer').startup(function(use)
         config = function() require'fugitive_setup' end
     }
 
+    use {
+        "max397574/better-escape.nvim",
+        config = function()
+            require("better_escape").setup{
+                mapping = {"jk"},
+                timeout = vim.o.timeoutlen,
+                clear_empty_lines = false,
+                keys = "<Esc>",
+            }
+        end,
+    }
+
     use { 'NLKNguyen/c-syntax.vim', ft = {'c', 'cpp'} }
     use { 'vim-scripts/gnuplot-syntax-highlighting', ft = {'gnuplot'} }
     use { 'lervag/vimtex', ft = {'tex', 'bib'} }
@@ -190,10 +218,14 @@ return require('packer').startup(function(use)
         config = function() vim.cmd[[source $HOME/.config/nvim/config/easymotion.vim]] end
     }
 
-    use {
-        'mhinz/vim-startify',
-        config = function() vim.cmd[[source $HOME/.config/nvim/config/startify.vim]] end
-    }
+    -- use {
+    --     "glepnir/dashboard-nvim",
+    -- }
+
+    -- use {
+    --     'mhinz/vim-startify',
+    --     config = function() vim.cmd[[source $HOME/.config/nvim/config/startify.vim]] end
+    -- }
 
     use {
         "terrortylor/nvim-comment",

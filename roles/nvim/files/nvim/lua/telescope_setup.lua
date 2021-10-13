@@ -4,10 +4,8 @@ require'telescope'.setup {
     defaults = {
         mappings = {
             n = {
-                -- motion
                 ["q"] = actions.close,
 
-                -- split
                 ["s"] = actions.file_split,
                 ["v"] = actions.file_vsplit,
 
@@ -46,22 +44,41 @@ require'telescope'.setup {
         }
 }
 
-require'telescope'.load_extension'fzy_native'
-require'telescope'.load_extension'media_files'
-
+require"telescope".load_extension"fzy_native"
+require"telescope".load_extension"media_files"
+require"telescope".load_extension"session-lens"
 
 local map = function(key, cmd)
-    local opts = { noremap=false, silent=true }
     vim.api.nvim_set_keymap(
-        'n', '<Leader>u'..key,
-        '<cmd>lua require"telescope.builtin".'..cmd..'<CR>', opts
+        "n", "<Leader>u"..key,
+        '<cmd>lua require"telescope.builtin".'..cmd.."<CR>",
+        { noremap=false, silent=true }
     )
-
 end
 
 
-map('f', 'find_files()')
-map('g', 'live_grep()')
-map('b', 'buffers({ignore_current_buffer = true})')
-map('h', 'help_tags()')
-map('l', 'current_buffer_fuzzy_find()')
+map("f", "find_files()")
+map("g", "live_grep()")
+map("b", "buffers({ignore_current_buffer = true})")
+map("h", "help_tags()")
+map("l", "current_buffer_fuzzy_find()")
+
+vim.api.nvim_set_keymap(
+    "n",
+    "/",
+    "<cmd>lua require'telescope.builtin'.current_buffer_fuzzy_find()<CR>",
+    { noremap=true, silent=true }
+)
+
+local function map_ext(key, cmd)
+    vim.api.nvim_set_keymap(
+        'n',
+        "<Leader>u" .. key,
+        '<cmd>lua require"telescope".extensions.' .. cmd .. '<CR>',
+        { noremap=true, silent=true }
+    )
+end
+
+map_ext("u", "packer.plugins()")
+map_ext("w", "tmux.windows{}")
+map_ext("s", "tmux.sessions{}")
