@@ -59,7 +59,7 @@ local on_attach = function(a, bufnr)
    end
 end
 
-local servers = {'pylsp', 'vimls', 'texlab', 'hls', 'ccls', 'tsserver'}
+local servers = {'pylsp', 'vimls', 'texlab', 'hls', 'ccls', 'tsserver'} -- 'angularls'
 
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup (require"coq".lsp_ensure_capabilities({ on_attach = on_attach }))

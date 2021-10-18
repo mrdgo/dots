@@ -128,10 +128,10 @@ return require('packer').startup(function(use)
         config = function() require'gruv_line' end
     }
 
---     use {
---         'windwp/floatline.nvim',
---         config = function() require'floatline'.setup() end
---     }
+    -- use {
+    --     'windwp/floatline.nvim',
+    --     config = function() require'floatline'.setup() end
+    -- }
 
     use {
         'glacambre/firenvim',
@@ -211,31 +211,26 @@ return require('packer').startup(function(use)
 
     use 'godlygeek/tabular'
 
-    --use 'ggandor/lightspeed.nvim'
-
     use {
-        'easymotion/vim-easymotion',
-        config = function() vim.cmd[[source $HOME/.config/nvim/config/easymotion.vim]] end
+        'phaazon/hop.nvim',
+        as = 'hop',
+        config = function()
+            -- you can configure Hop the way you like here; see :h hop-config
+            require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+            vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_char1{}<cr>", {})
+            vim.api.nvim_set_keymap('n', 'F', "<cmd>lua require'hop'.hint_char2{}<cr>", {})
+        end
     }
 
     -- use {
-    --     "glepnir/dashboard-nvim",
-    -- }
-
-    -- use {
-    --     'mhinz/vim-startify',
-    --     config = function() vim.cmd[[source $HOME/.config/nvim/config/startify.vim]] end
+    --     'easymotion/vim-easymotion',
+    --     config = function() vim.cmd[[source $HOME/.config/nvim/config/easymotion.vim]] end
     -- }
 
     use {
         "terrortylor/nvim-comment",
         config = function() require"nvim_comment".setup() end
     }
-
-    --use {
-    --    'scrooloose/nerdcommenter',
-    --    config = function() vim.g.NERDDefaultNesting = 0 end
-    --}
 
     use {
         "nvim-neorg/neorg",

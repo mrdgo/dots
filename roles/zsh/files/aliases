@@ -153,21 +153,20 @@ bld () {
 
 tryb () {
     sess=tryb
-    tmux new-session -d -s $sess -c ~/dokumente/isento/tryb_docker/tryb_docker
+    tmux new-session -d -s $sess -c ~ nvim
 
     # create windows
-    tmux rename-window -t $sess:0 "docker-compose"
-    tmux neww -t $sess:1 -n back -c ~/dokumente/isento/lea-back/
-    tmux neww -t $sess:2 -n front -c ~/dokumente/isento/lea-front/
-    tmux neww -t $sess:3 -n nvim
+    tmux rename-window -t $sess:0 "dev"
+    tmux neww -t $sess:1 -n deploy -c ~/dokumente/isento/tryb_docker/tryb_docker
+    tmux neww -t $sess:2 -n back -c ~/dokumente/isento/lea-back/
+    tmux neww -t $sess:3 -n front -c ~/dokumente/isento/lea-front/
 
-    # tmux send-keys -t $sess:0 "cd " C-m
+    # tmux send-keys -t $sess:0 "nvim" C-m
+    tmux send-keys -t $sess:1 "doas docker-compose start" C-m
+    tmux send-keys -t $sess:2 "mvn spring-boot:run"
 
-    tmux send-keys -t $sess:0 "doas docker-compose start" C-m
-    tmux send-keys -t $sess:1 "mvn spring-boot:run"
-    tmux send-keys -t $sess:3 "nvim" C-m
-
-    tmux attach -t $sess
+    tmux select-window -t $sess:dev \; attach -t $sess
+    # tmux attach -t $sess
 }
 
 alias 66-all='doas 66-all -z'

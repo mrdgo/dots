@@ -31,6 +31,7 @@ vim.o.showbreak = '> '
 
 vim.cmd[[autocmd BufWritePre * %s/\s\+$//e]]
 vim.o.foldmethod = "manual"
+vim.o.foldenable = false
 -- vim.o.clipboard:append{'unnamedplus'}
 
 -- -- solid underscore

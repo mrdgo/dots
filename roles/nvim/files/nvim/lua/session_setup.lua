@@ -1,4 +1,4 @@
-vim.o.sessionoptions="blank,buffers,curdir,folds,help,options,tabpages,winsize,resize,winpos,terminal"
+vim.o.sessionoptions="blank,buffers,curdir,help,options,tabpages,winsize,resize,winpos,terminal"
 
 require"auto-session".setup {
     log_level = "error",
