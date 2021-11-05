@@ -31,6 +31,11 @@ require'telescope'.setup {
         grep_previewer = previewers.vim_buffer_vimgrep.new,
         qflist_previewer = previewers.vim_buffer_qflist.new,
         --buffer_previewer_maker = require 'telescope.previewers'.buffer_previewer_maker
+        path_display = { "smart" },
+        history = {
+            path = '~/.config/nvim/databases/telescope_history.sqlite3',
+            limit = 100,
+        }
     },
     extensions = {
             media_files = {
@@ -38,7 +43,7 @@ require'telescope'.setup {
                 find_cmd = 'rg' -- find command (defaults to `fd`)
             },
             fzy_native = {
-                override_generic_sorter = false,
+                override_generic_sorter = true,
                 override_file_sorter = true,
             }
         }
@@ -47,6 +52,7 @@ require'telescope'.setup {
 require"telescope".load_extension"fzy_native"
 require"telescope".load_extension"media_files"
 require"telescope".load_extension"session-lens"
+-- require"telescope".load_extension"smart_history"
 
 local map = function(key, cmd)
     vim.api.nvim_set_keymap(

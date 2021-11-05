@@ -11,9 +11,6 @@ set_bg ()
 alias bl="set_bg light"
 alias bd="set_bg dark"
 
-alias uni="ssh ty82xile@faui0sr0.cs.fau.de"
-alias woody="ssh iwso024h@woody.rrze.fau.de"
-
 alias pi1='ssh -J ty82xile@i4lab1.cs.fau.de pi@maximPi1'
 alias pi2='ssh -J ty82xile@i4lab1.cs.fau.de pi@maximPi2'
 alias bello="ssh -t -J ty82xile@i4lab1.cs.fau.de ty82xile@faui49bello3 'bash'"
@@ -21,22 +18,12 @@ alias bello="ssh -t -J ty82xile@i4lab1.cs.fau.de ty82xile@faui49bello3 'bash'"
 # master thesis
 alias cma="cd ~/dokumente/isento/gps"
 alias pma="cd ~/dokumente/isento/gps && source venv_gps/bin/activate"
-alias the="cd ~/dokumente/isento/thesis"
 
 alias gstart="gcloud compute instances start eval-compute-3"
 alias gstop="gcloud compute instances stop eval-compute-3"
 alias gls="gcloud compute instances list"
 alias gssh="gcloud compute ssh eval-compute-3"
 alias gscp='gcloud compute scp'
-# in XMonad press "M-S-b"
-# alias pq="devour zathura ~/dokumente/isento/gps/pybullet_quickstartguide.pdf"
-
-# master project
-alias mp="cd ~/dokumente/uni/masterprojekt/pi_files/experiment/"
-
-# enable second monitor
-# alias pres="xrandr --output HDMI-1 --mode 1920x1080 --left-of eDP-1 && feh --bg-fill $HOME/bilder/wallpaper/liebe.jpg --bg-fill $HOME/bilder/wallpaper/liebe.jpg"
-# alias proff="xrandr --output HDMI-1 --off && /home/maxim/.fehbg"
 
 # only second monitor
 alias big="xrandr --output eDP-1 --off --output HDMI-1 --auto && /home/maxim/.fehbg"
@@ -44,14 +31,12 @@ alias sml="xrandr --output HDMI-1 --off --output eDP-1 --auto && /home/maxim/.fe
 
 # vim life
 alias v="nvim"
-alias ctv="~/.config/tv.sh"
 
 # Convenience
 alias i="devour sxiv -rfb"
 alias z="devour zathura"
 alias o="devour okular"
 alias d="devour display"
-alias ydl="~/.config/ydl.sh"
 alias vlc="cvlc --key-quit q"
 alias minecraft="devour ~/.minecraft/launcher/minecraft-launcher"
 
@@ -65,18 +50,10 @@ alias yta-opus="youtube-dl --extract-audio --audio-format opus "
 alias yta-vorbis="youtube-dl --extract-audio --audio-format vorbis "
 alias yta-wav="youtube-dl --extract-audio --audio-format wav "
 alias ytv-best="youtube-dl -f bestvideo+bestaudio "
-alias ytr="/opt/youtube_rss/youtube_rss.py"
 
 # Dev
 alias m="make"
 alias g="git"
-alias ga="git add"
-alias gu="git pull"
-alias gp="git push"
-alias gc="git commit"
-alias gs="git status"
-alias gd="git diff"
-alias gpc="git push -u custom"
 alias tmux="TERM=xterm-256color tmux -f ~/.config/tmux.conf"
 
 #alias ..="cd .." # bash legacy
@@ -85,17 +62,13 @@ alias .3="cd ../../.."
 alias .4="cd ../../../.."
 alias .5="cd ../../../../.."
 
+alias exa='exa --icons --group-directories-first'
 alias ls='exa'
 alias ll='exa -alF'
 alias la='exa -a'
 alias l='exa -F'
-#
-# general use
-alias lg='exa -lbF --git'                                               # list, size, type, git
-alias llg='exa -lbGF --git'                                             # long list
-alias llm='exa -lbGF --git --sort=modified'                            # long list, modified date sort
-alias lag='exa -lbhHigUmuSa --time-style=long-iso --git --color-scale'  # all list
-alias lx='exa -lbhHigUmuSa@ --time-style=long-iso --git --color-scale' # all + extended list
+alias lx='exa -lbhHma@ --time-style=default --color-scale'
+alias lall='exa -lbhHigUmuSa --time-style=long-iso'  # all list
 
 # speciality views
 alias lS='exa -1'			                                            # one column, just names
@@ -190,3 +163,21 @@ alias 66-stop='doas 66-stop -z'
 alias 66-svctl='doas 66-svctl -z'
 alias 66-tree='doas 66-tree -z'
 alias 66-update='doas 66-update -z'
+
+lsgrok() {
+  url=$(curl http://localhost:4040/api/tunnels 2>/dev/null | jq -r '.tunnels[0].public_url')
+
+  if [ "$url" = "" ] || [ "$url" = "null" ]; then
+   echo No tunnels running?
+  else
+   host=$(echo "$url" | cut -d / -f 3 | cut -d : -f 1)
+   port=$(echo "$url" | cut -d / -f 3 | cut -d : -f 2)
+
+   echo ssh -p "$port" "$(whoami)"@"$host"
+  fi
+}
+
+ngrok_init() {
+  tmux new-session -s ngrok -d
+  tmux send -t ngrok "ngrok tcp --region=eu 22" ENTER
+}

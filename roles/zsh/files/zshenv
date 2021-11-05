@@ -17,7 +17,7 @@ fi
 
 export BROWSER="firefox"
 export PAGER="nvimpager"
-export BAT_THEME="gruvbox"
+export BAT_THEME="gruvbox-dark"
 export EDITOR="nvim"
 export TERMINAL="alacritty"
 export LANG=en_US.UTF-8

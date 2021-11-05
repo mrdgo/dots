@@ -9,8 +9,6 @@ function os.capture(cmd, raw)
   return s
 end
 
-local startify = require'alpha.themes.startify'
-
 local function button(sc, txt, keybind, keybind_opts)
     local sc_ = sc:gsub("%s", ""):gsub("SPC", "<leader>")
 
@@ -43,10 +41,6 @@ end
 math.randomseed(os.time())
 local index = math.floor(math.random() * 6 + 1)
 local header_text_now = require'banners'[index]
-
-startify.section.bottom_buttons.val = {
-    startify.button( "q", "  Quit NVIM" , ":qa<CR>"),
-}
 
 -- require"alpha".setup(startify.opts)
 require"alpha".setup {

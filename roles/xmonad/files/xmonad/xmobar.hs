@@ -4,8 +4,8 @@ Config { font = "xft:Mononoki Nerd Font:pixelsize=14:antialias=true:hinting=true
        , border = TopB
        , bgColor = "#1d2021"
        , fgColor = "#ebdbb2"
-       , alpha = 0
-       , position = TopP 5 5
+       , alpha = 247
+       , position = TopP 0 0
        , textOffset = -1
        , iconOffset = -1
        , lowerOnStart = True

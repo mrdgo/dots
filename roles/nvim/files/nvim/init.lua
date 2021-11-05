@@ -31,9 +31,6 @@ require'plugins'
 -- <Leader>W saves file as root
 require'doas'.setup()
 
--- TODO rewrite this in lua
--- https://github.com/arp242/startscreen.vim/blob/master/plugin/startscreen.vim
-
 -- local async
 -- async =vim.loop.new_async(
 --     vim.schedule_wrap(

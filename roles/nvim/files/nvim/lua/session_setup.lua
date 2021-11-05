@@ -1,4 +1,4 @@
-vim.o.sessionoptions="blank,buffers,curdir,help,options,tabpages,winsize,resize,winpos,terminal"
+vim.o.sessionoptions="blank,buffers,curdir,help,options"
 
 require"auto-session".setup {
     log_level = "error",
@@ -11,8 +11,8 @@ require"auto-session".setup {
 }
 
 require"session-lens".setup {
-    prompt_title = "SESSIONS",
-    path_display = {"tail", "shorten"},
+    prompt_title = "Sessions",
+    path_display = {"smart"},
     theme_conf = { border = true },
     previewer = false,
 }
@@ -20,7 +20,7 @@ require"session-lens".setup {
 vim.api.nvim_set_keymap(
     "n",
     "<Leader>up",
-    "<cmd>SearchSession<CR>",
+    "<cmd>lua require'telescope._extensions.session-lens.main'.search_session()<CR>",
     { noremap=true, silent=true }
 )
 
@@ -32,8 +32,11 @@ vim.api.nvim_set_keymap(
 )
 
 local function save_session()
-    vim.cmd[[SaveSession]]
+    -- vim.cmd[[SaveSession]]
+    require"auto-session".AutoSaveSession()
     vim.cmd[[cd ~]]
+    vim.cmd("%bd!")
+    -- delete buffers
     vim.cmd[[Alpha]]
 end
 

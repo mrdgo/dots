@@ -1,4 +1,4 @@
-local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
+local parser_configs = require"nvim-treesitter.parsers".get_parser_configs()
 
 parser_configs.norg = {
     install_info = {
@@ -15,8 +15,23 @@ parser_configs.norg = {
 --    }
 --}
 
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"norg", "python", "yaml", "toml", "lua", "latex", "json", "bibtex", 'haskell', 'bash', "java"},
+require"nvim-treesitter.configs".setup {
+  ensure_installed = {
+    "norg",
+    "python",
+    "yaml",
+    "toml",
+    "lua",
+    "latex",
+    "bibtex",
+    "json",
+    "haskell",
+    "bash",
+    "java",
+    "typescript",
+    "html",
+    "css",
+  },
   highlight = {
     enable = true,
     --disable = { "python" },
@@ -51,8 +66,10 @@ require'nvim-treesitter.configs'.setup {
         ["ic"] = "@class.inner",
         ["al"] = "@loop.outer",
         ["il"] = "@loop.inner",
-        ["ac"] = "@conditional.outer",
-        ["ic"] = "@conditional.inner",
+        ["aC"] = "@conditional.outer",
+        ["iC"] = "@conditional.inner",
+        ["is"] = "@statement.inner",
+        ["as"] = "@statement.outer",
 
 
         -- Or you can define your own textobjects like this
@@ -62,6 +79,19 @@ require'nvim-treesitter.configs'.setup {
         --  c = "(function_definition) @function",
         --  java = "(method_declaration) @function",
         } -- keymaps
-      } -- select
+      }, -- select
+      swap = {
+         enable = true,
+         swap_next = {
+             ['<leader>mp'] = '@parameter.inner',
+             ['<leader>mf'] = '@function.outer',
+             ['<leader>me'] = '@element',
+         },
+         swap_previous = {
+             ['<leader>mP'] = '@parameter.inner',
+             ['<leader>mF'] = '@function.outer',
+             ['<leader>mE'] = '@element',
+         },
+       },
     } -- textobjects
   }

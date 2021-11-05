@@ -21,13 +21,14 @@ pmap('s', 'Sync')
 pmap('i', 'Install')
 pmap('c', 'Clean')
 
+
 -- https://github.com/folke/trouble.nvim
 
 -- TypeScript
 -- https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
 -- https://github.com/jose-elias-alvarez/null-ls.nvim
 
-return require('packer').startup(function(use)
+return require"packer".startup(function(use)
     -- Packer can manage itself
     use "wbthomason/packer.nvim"
 
@@ -60,6 +61,8 @@ return require('packer').startup(function(use)
             {"norcalli/nvim-terminal.lua"},
             {"camgraff/telescope-tmux.nvim"},
             {"sudormrfbin/cheatsheet.nvim"},
+            -- {"tami5/sqlite.lua"},
+            -- {"nvim-telescope/telescope-smart-history.nvim"},
             -- {"ThePrimeagen/git-worktree.nvim"}
         }
     }
@@ -75,7 +78,7 @@ return require('packer').startup(function(use)
             {"rcarriga/nvim-dap-ui"},
             {"nvim-telescope/telescope-dap.nvim"}
         },
-        ft = {"python"},
+        ft = {"python", "java"},
         config = function()
             require"dap_setup"
             require"dapui_setup"
@@ -124,6 +127,19 @@ return require('packer').startup(function(use)
     }
 
     use {
+        "ThePrimeagen/harpoon",
+        requires = {"nvim-lua/plenary.nvim"},
+        config = function()
+            local function nmap(keys, cmd)
+                vim.api.nvim_set_keymap('n', keys, cmd, {noremap=true,silent=true})
+            end
+            -- require"harpoon".setup()
+            nmap("<Leader>ha", "<cmd>lua require'harpoon.mark'.add_file()<CR>")
+            nmap("<Leader>ho", "<cmd>lua require'harpoon.ui'.toggle_quick_menu()<CR>")
+        end
+    }
+
+    use {
         'NTBBloodbath/galaxyline.nvim',
         config = function() require'gruv_line' end
     }
@@ -144,10 +160,21 @@ return require('packer').startup(function(use)
         'ms-jpq/coq_nvim',
         branch = 'coq',
         requires = {
-            {'ms-jpq/coq.artifacts', {branch = 'artifacts'}}
-            --{ 'codota/tabnine-vim' }
+            {'ms-jpq/coq.artifacts', {branch = 'artifacts'}},
+            -- {'ms-jpq/coq.thirdparty', {branch = '3p'}}
+            -- { 'codota/tabnine-vim' }
         },
-        config = function() vim.g.coq_settings = { auto_start = true, } end
+        config = function()
+            vim.g.coq_settings = { auto_start = 'shut-up', }
+            require"coq"
+            -- require"coq_3p"{
+            --     { src = "nvimlua", short_name = "nLUA", conf_only = true },
+            --     { src = "bc", short_name = "MATH", precision = 6 },
+            --     { src = "figlet", short_name = "BIG" },
+            --     { src = "vimtex", short_name = "vTEX" },
+            --     { src = "dap" }
+            -- }
+        end
     }
 
     use {
@@ -212,13 +239,22 @@ return require('packer').startup(function(use)
     use 'godlygeek/tabular'
 
     use {
-        'phaazon/hop.nvim',
-        as = 'hop',
+        "phaazon/hop.nvim",
+        as = "hop",
         config = function()
-            -- you can configure Hop the way you like here; see :h hop-config
-            require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
-            vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_char1{}<cr>", {})
-            vim.api.nvim_set_keymap('n', 'F', "<cmd>lua require'hop'.hint_char2{}<cr>", {})
+            require"hop".setup()
+            -- Set up `f` as general hop hotkey to hint character
+            vim.api.nvim_set_keymap("n", "f", "<cmd>lua require'hop'.hint_char1()<cr>", {})
+            vim.api.nvim_set_keymap("x", "f", "<cmd>lua require'hop'.hint_char1()<cr>", {})
+
+            -- Set up actions in normal mode
+            -- local actions = { "d", "c", "y", "ys" }
+            -- for _, a in ipairs(actions) do
+            --     vim.api.nvim_set_keymap("n", a .. "f", a .. "<cmd>lua require'hop'.hint_char1()<cr>", {})
+            -- end
+
+            -- vim.cmd[[hi HopUnmatched Comment]]
+
         end
     }
 

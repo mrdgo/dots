@@ -1,3 +1,9 @@
+local leader_key = "<Leader>r"
+
+local function refactor_map(key, cmd)
+    vim.api.nvim_set_keymap("v", leader_key .. key, "<Cmd>lua require'refactoring'.refactor'"..cmd.."'<CR>", {noremap = true, silent = true, expr = false})
+end
+
 local refactor = require("refactoring")
 refactor.setup()
 
@@ -14,22 +20,30 @@ end
 -- you can extract this function and the helper above
 -- and then require the file and call the extracted function
 -- in the mappings below
-M = {}
-M.refactors = function()
-    require("telescope.pickers").new({}, {
-        prompt_title = "refactors",
-        finder = require("telescope.finders").new_table({
-            results = require("refactoring").get_refactors(),
-        }),
-        sorter = require("telescope.config").values.generic_sorter({}),
-        attach_mappings = function(_, map)
-            map("i", "<CR>", refactoring)
-            map("n", "<CR>", refactoring)
-            return true
-        end
-    }):find()
-end
 
-vim.api.nvim_set_keymap("v", "<Leader>re", [[ <Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], {noremap = true, silent = true, expr = false})
-vim.api.nvim_set_keymap("v", "<Leader>rf", [[ <Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]], {noremap = true, silent = true, expr = false})
-vim.api.nvim_set_keymap("v", "<Leader>rt", [[ <Cmd>lua M.refactors()<CR>]], {noremap = true, silent = true, expr = false})
+
+refactor_map("f", "Extract Function")
+refactor_map("F", "Extract Function To File")
+
+vim.api.nvim_set_keymap("v", leader_key .. "e", [[<Cmd>lua require'refactoring_setup'.refactors()<CR>]], {noremap = true, silent = true, expr = false})
+
+return {
+    refactors = function()
+        local opts = require"telescope.themes".get_cursor()
+        require"telescope.pickers".new(
+            opts,
+            {
+                prompt_title = "refactors",
+                finder = require"telescope.finders".new_table{
+                    results = require"refactoring".get_refactors(),
+                },
+                sorter = require"telescope.config".values.generic_sorter(opts),
+                attach_mappings = function(_, map)
+                    map("i", "<CR>", refactoring)
+                    map("n", "<CR>", refactoring)
+                    return true
+                end
+            }
+        ):find()
+    end
+}
