@@ -54,3 +54,4 @@ aur_packages:
   - ttf-mononoki
   - nvimpager-git
   - zplug
+  - git-interactive-rebase-tool-bin

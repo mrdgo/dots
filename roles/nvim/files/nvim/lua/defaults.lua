@@ -27,11 +27,13 @@ vim.o.relativenumber = true
 
 vim.o.linebreak = true
 vim.o.breakindent = true
-vim.o.showbreak = '> '
+vim.o.showbreak = "> "
 
-vim.cmd[[autocmd BufWritePre * %s/\s\+$//e]]
 vim.o.foldmethod = "manual"
 vim.o.foldenable = false
+
+vim.o.scrolloff = 5
+
 -- vim.o.clipboard:append{'unnamedplus'}
 
 -- -- solid underscore
@@ -49,5 +51,3 @@ vim.o.foldenable = false
 -- vim.cmd[[hi CursorLine cterm=NONE ctermbg=8 ctermfg=NONE]]
 -- vim.cmd[[hi Cursorline term=NONE cterm=NONE]]
 -- vim.cmd[[hi LineNr ctermfg=grey]]
-
-

@@ -1,3 +1,5 @@
+vim.o.colorcolumn = "140"
+
 require"jdtls".start_or_attach{
   cmd = {"eclipse.jdt.ls"},
   init_options = {
@@ -6,6 +8,15 @@ require"jdtls".start_or_attach{
     },
   },
   root_dir = require"jdtls.setup".find_root{"gradle.build", "pom.xml"},
+  settings = {
+    java = {
+      format = {
+        settings = {
+          url = " https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+        }
+      }
+    }
+  },
   on_attach = function(a, bufnr)
     require"lsp_on_attach".on_attach(a, bufnr)
 
@@ -31,11 +42,3 @@ require"jdtls".start_or_attach{
 }
 
 require"dap_java"
-
-vim.cmd[[
-augroup FormatAutogroup
-  autocmd!
-  autocmd BufWritePre *.java !mvn spotless:apply %
-augroup END
-]]
-

@@ -19,17 +19,18 @@ vim.g.loaded_remote_plugins = false
 -- vim.cmd[[scriptencoding utf-8]]
 
 vim.o.termguicolors = true
-vim.cmd'source $HOME/.config/nvim/config/defaults.vim'
+vim.cmd("source $HOME/.config/nvim/config/defaults.vim")
 
 -- shot on luafication of defaults
-require'defaults'
+require("defaults")
 
-require'leader'
+require("leader")
 
-require'plugins'
+require("plugins")
 
 -- <Leader>W saves file as root
-require'doas'.setup()
+require("doas").setup()
+require("whitespace")
 
 -- local async
 -- async =vim.loop.new_async(

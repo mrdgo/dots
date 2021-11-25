@@ -121,7 +121,7 @@ buildMaimString = wrap pre post . replace ' ' '_' . replace ':' '-' . take 19
 myKeys :: [(String, X ())]
 myKeys = [
     -- XMonad
-      ("M-r", spawn "xmonad --recompile")       -- Recompiles xmonad
+      ("M-r", spawn "/bin/sh xmonad --recompile")       -- Recompiles xmonad
     , ("M-S-r", spawn "xmonad --restart")       -- Restarts xmonad
     --, ("M-S-e", io exitSuccess)                 -- Quits xmonad, dvorak 'e' and 'q' are too close
     , ("M-S-q", kill)                           -- kill client
