@@ -12,3 +12,6 @@ roles/xmonad/files/xmonad/xmonad-x86_64-linux
 roles/xmonad/files/xmonad/xmonad.errors
 roles/xmonad/files/xmonad/xmonad.hi
 roles/xmonad/files/xmonad/xmonad.o
+
+roles/nvim/files/nvim/nvim_sessions
+roles/nvim/files/nvim/databases
