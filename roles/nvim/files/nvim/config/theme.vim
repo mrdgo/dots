@@ -14,4 +14,4 @@ nmap <Leader>bd <cmd>set background=dark<cr>
 let g:Guifont="Mononki Nerd Font:13"
 
 " transparent background
-hi Normal guibg=NONE ctermbg=NONE
+" hi Normal guibg=NONE ctermbg=NONE

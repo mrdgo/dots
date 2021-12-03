@@ -42,7 +42,7 @@ return require("packer").startup(function(use)
 			require("terminal").setup()
 			require("telescope_setup")
 			require("session_setup")
-			-- require"git_wt_setup"
+			require("git_wt_setup")
 		end,
 		requires = {
 			{ "nvim-lua/popup.nvim" },
@@ -56,9 +56,9 @@ return require("packer").startup(function(use)
 			{ "norcalli/nvim-terminal.lua" },
 			{ "camgraff/telescope-tmux.nvim" },
 			{ "sudormrfbin/cheatsheet.nvim" },
+			{ "ThePrimeagen/git-worktree.nvim" },
 			-- {"tami5/sqlite.lua"},
 			-- {"nvim-telescope/telescope-smart-history.nvim"},
-			-- {"ThePrimeagen/git-worktree.nvim"}
 		},
 	})
 
@@ -120,18 +120,18 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- use({
-	-- 	-- "mrdgo/refactoring.nvim",
-	-- 	"ThePrimeagen/refactoring.nvim",
-	-- 	ft = { "python", "lua", "java", "typescript" },
-	-- 	config = function()
-	-- 		require("refactoring_setup")
-	-- 	end,
-	-- 	requires = {
-	-- 		{ "nvim-lua/plenary.nvim" },
-	-- 		{ "nvim-treesitter/nvim-treesitter" },
-	-- 	},
-	-- })
+	use({
+		-- "mrdgo/refactoring.nvim",
+		"ThePrimeagen/refactoring.nvim",
+		ft = { "python", "lua", "java", "typescript" },
+		config = function()
+			require("refactoring_setup")
+		end,
+		requires = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-treesitter/nvim-treesitter" },
+		},
+	})
 
 	use({
 		"luukvbaal/stabilize.nvim",
@@ -186,8 +186,21 @@ return require("packer").startup(function(use)
 			-- { 'codota/tabnine-vim' }
 		},
 		config = function()
-			vim.g.coq_settings = { auto_start = "shut-up" }
+			vim.g.coq_settings = {
+				auto_start = "shut-up",
+				keymap = { recommended = false },
+			}
+
+			local inoremap = function(key, expr)
+				local opt = { expr = true, noremap = true }
+				vim.api.nvim_set_keymap("i", key, expr, opt)
+			end
+			inoremap("<esc>", [[pumvisible() ? "<c-e><esc>" : "<esc>"]])
+			inoremap("<c-c>", [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]])
+			inoremap("<tab>", [[pumvisible() ? "<c-n>" : "<tab>"]])
+			inoremap("<s-tab>", [[pumvisible() ? "<c-p>" : "<bs>"]])
 			require("coq")
+
 			-- rrequire("coq_3p")({
 			-- 	{ src = "nvimlua", short_name = "nLUA", conf_only = true },
 			-- 	{ src = "bc", short_name = "MATH", precision = 6 },
@@ -219,13 +232,27 @@ return require("packer").startup(function(use)
 		requires = { { "rktjmp/lush.nvim" } },
 	})
 
-	--use 'windwp/nvim-autopairs'
 	use({
-		"jiangmiao/auto-pairs",
+		"Olical/conjure",
+		ft = { "clojure" },
 		config = function()
-			require("auto_pairs_setup")
+			vim.api.nvim_set_keymap("n", "<LocalLeader>eR", "<cmd>ConjureCljRefreshAll<CR>", { noremap = true })
 		end,
 	})
+
+	use({
+		"windwp/nvim-autopairs",
+		config = function()
+			require("autopairs_setup")
+		end,
+	})
+
+	-- use({
+	-- 	"jiangmiao/auto-pairs",
+	-- 	config = function()
+	-- 		require("auto_pairs_setup")
+	-- 	end,
+	-- })
 
 	use("tpope/vim-endwise")
 	use("tpope/vim-repeat")
@@ -281,9 +308,11 @@ return require("packer").startup(function(use)
 		"phaazon/hop.nvim",
 		as = "hop",
 		config = function()
+			-- vim.cmd([[set virtualedit=onemore]])
 			require("hop").setup({
-				inclusive_jump = true,
-				uppercase_labels = true,
+				inclusive_jump = false,
+				uppercase_labels = false,
+				create_hl_autocmd = true,
 			})
 			-- Set up `f` as general hop hotkey to hint character
 			vim.api.nvim_set_keymap("n", "f", "<cmd>lua require'hop'.hint_char1()<cr>", {})
@@ -317,7 +346,7 @@ return require("packer").startup(function(use)
 
 	use({
 		"mhartington/formatter.nvim",
-		ft = { "typescript", "javascript", "java", "lua", "python" },
+		ft = { "typescript", "javascript", "java", "lua", "python", "clojure" },
 		config = function()
 			require("formatter_setup")
 		end,

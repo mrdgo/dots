@@ -8,6 +8,8 @@ local servers = {
 	"ccls",
 	"tsserver",
 	"html",
+	"yamlls",
+	"clojure_lsp",
 }
 
 for _, lsp in ipairs(servers) do
@@ -15,6 +17,13 @@ for _, lsp in ipairs(servers) do
 		on_attach = require("lsp_on_attach").on_attach,
 	}))
 end
+
+vim.cmd([[
+sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl=
+sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=
+sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=
+sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=
+]])
 
 USER = vim.fn.expand("$USER")
 local sumneko_root_path = "/home/maxim/.cache/nvim/lspconfig/sumneko_lua/lua-language-server"
@@ -82,3 +91,11 @@ nvim_lsp.eslint.setup(require("coq").lsp_ensure_capabilities({
 	on_attach = require("lsp_on_attach").on_attach,
 	settings = eslint_settings,
 }))
+
+return {
+	setup_ansible = function()
+		nvim_lsp.ansiblels.setup(require("coq").lsp_ensure_capabilities({
+			on_attach = require("lsp_on_attach").on_attach,
+		}))
+	end,
+}

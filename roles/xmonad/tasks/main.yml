@@ -10,12 +10,14 @@
     src: "{{ dotfiles_home }}/roles/xmonad/files/xinitrc"
     dest: "~/.xinitrc"
     state: hard
+    mode: 0755
     force: yes
 
 - name: Install .profile
   file:
     src: "{{ dotfiles_home }}/roles/xmonad/files/profile"
     dest: "~/.profile"
+    mode: 0755
     state: hard
     force: yes
 
@@ -23,6 +25,7 @@
   file:
     src: "{{ dotfiles_home }}/roles/xmonad/files/down_scripts"
     dest: "~/.config/down_scripts"
+    mode: 0755
     state: link
     force: yes
 
@@ -30,6 +33,7 @@
   file:
     src: "{{ dotfiles_home }}/roles/xmonad/files/Xresources"
     dest: "~/.Xresources"
+    mode: 0755
     state: hard
     force: yes
 
@@ -37,6 +41,7 @@
   file:
     src: "{{ dotfiles_home }}/roles/xmonad/files/Xsetup_0"
     dest: "/etc/X11/xdm/Xsetup_0"
+    mode: 0755
     state: hard
     force: yes
   become: yes

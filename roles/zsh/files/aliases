@@ -54,6 +54,7 @@ alias ytv-best="youtube-dl -f bestvideo+bestaudio "
 # Dev
 alias m="make"
 alias g="git"
+alias lg="lazygit"
 alias tmux="TERM=xterm-256color tmux -f ~/.config/tmux.conf"
 
 #alias ..="cd .." # bash legacy
@@ -88,6 +89,7 @@ alias x='xplr'
 alias p='paru'
 alias psc='paru -Sc --noconfirm'
 alias docker='doas docker'
+alias ldocker='doas lazydocker'
 
 ### ARCHIVE EXTRACTION
 # usage: ex <file>
@@ -133,10 +135,12 @@ tryb () {
     tmux neww -t $sess:1 -n deploy -c ~/dokumente/isento/tryb_docker/tryb_docker
     tmux neww -t $sess:2 -n back -c ~/dokumente/isento/lea-back/
     tmux neww -t $sess:3 -n front -c ~/dokumente/isento/lea-front/
+    tmux neww -t $sess:4 -n gps -c ~/dokumente/isento/gps/branches/development/
 
     # tmux send-keys -t $sess:0 "nvim" C-m
     tmux send-keys -t $sess:1 "doas docker-compose start" C-m
     tmux send-keys -t $sess:2 "mvn spring-boot:run"
+    tmux send-keys -t $sess:4 "source ../../venv_gps/bin/activate" C-m
 
     tmux select-window -t $sess:dev \; attach -t $sess
     # tmux attach -t $sess

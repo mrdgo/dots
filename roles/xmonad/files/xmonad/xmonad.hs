@@ -51,12 +51,12 @@ myStartupHook :: X ()
 myStartupHook = do
     setWMName "LG3D"
     spawn "/usr/bin/dunst"
-    spawn "/usr/bin/picom"
+    -- spawn "/usr/bin/picom"
     spawn "/home/maxim/.fehbg"
 
 -- spacingRaw :: smartBorder (Screenborder) sbEnabled (WindowBorder) wbEnabled
 tall     = renamed [Replace "tall"]
-        $ spacingRaw True (Border 0 0 0 0) False (Border 2 2 2 2) True
+        -- $ spacingRaw False (Border 1 1 1 1) True (Border 1 1 1 1) True
         $ noBorders
         $ ResizableTall 1 (3/100) (1/2) []
 monocle  = renamed [Replace "full"]
@@ -220,7 +220,7 @@ myPP handle = dynamicLogWithPP $ xmobarPP
    {
        ppOutput = hPutStrLn handle
        , ppCurrent = xmobarColor "#b8bb28" ""                -- Current workspace in xmobar
-       , ppVisible = xmobarColor "#fabd2f" ""                -- Visible but not current ws
+       , ppVisible = xmobarColor "#fe8019" ""                -- Visible but not current ws
        , ppHidden = xmobarColor "#fabd2f" ""                 -- Hidden workspaces in xmobar
        , ppHiddenNoWindows = xmobarColor "#928374" ""        -- Hidden workspaces (no windows)
        , ppTitle = xmobarColor "#bdae93" "" . shorten 60     -- Title of active window
