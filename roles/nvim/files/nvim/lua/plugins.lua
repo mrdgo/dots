@@ -258,10 +258,17 @@ return require("packer").startup(function(use)
 	use("tpope/vim-repeat")
 	use("tpope/vim-surround")
 
+	-- use({
+	-- 	"tpope/vim-fugitive",
+	-- 	config = function()
+	-- 		require("fugitive_setup")
+	-- 	end,
+	-- })
+
 	use({
-		"tpope/vim-fugitive",
+		"akinsho/toggleterm.nvim",
 		config = function()
-			require("fugitive_setup")
+			require("toggleterm_setup")
 		end,
 	})
 

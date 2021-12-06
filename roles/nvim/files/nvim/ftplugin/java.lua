@@ -46,3 +46,8 @@ require("jdtls").start_or_attach({
 })
 
 -- require"dap_java"
+
+-- semicolon
+local opts_nore_silent = { noremap = true, silent = true }
+vim.api.nvim_set_keymap("i", ";", "<Esc>A;", opts_nore_silent)
+vim.api.nvim_set_keymap("n", ";", "A;<Esc>", opts_nore_silent)

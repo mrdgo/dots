@@ -17,7 +17,7 @@ map("rl", "vertical resize -5")
 map("rj", "resize +5")
 map("rk", "resize -5")
 
-map("w", "w")
+map("w", "update")
 map("x", "x")
 map("qq", "quitall")
 map("qw", "q")
@@ -48,10 +48,6 @@ vim.api.nvim_set_keymap("n", "<Leader>v", "<Cmd>e $MYVIMRC<CR>", { silent = true
 -- motions
 vim.api.nvim_set_keymap("n", "gl", "$", opts_nore_silent)
 vim.api.nvim_set_keymap("n", "gh", "^", opts_nore_silent)
-
--- semicolon
-vim.api.nvim_set_keymap("i", ";", "<Esc>A;", opts_nore_silent)
-vim.api.nvim_set_keymap("n", ";", "A;<Esc>", opts_nore_silent)
 
 vim.api.nvim_set_keymap(
 	"n",

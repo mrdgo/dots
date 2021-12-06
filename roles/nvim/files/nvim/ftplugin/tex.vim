@@ -8,3 +8,5 @@ set spell
 
 "let g:vimtex_quickfix_enabled = 0
 nnoremap <Leader>vc <cmd>VimtexCompile<CR>
+nnoremap ; A;<Esc>
+inoremap ; <Esc>A;
