@@ -22,10 +22,9 @@ return {
 		map_lsp("R", "lsp.buf.rename()")
 		map_lsp("f", "lsp.buf.formatting()")
 
-		-- TODO: will change?
-		map_lsp("a", "lsp.diagnostic.show_line_diagnostics()")
-		map_lsp("n", "lsp.diagnostic.goto_next()")
-		map_lsp("p", "lsp.diagnostic.goto_prev()")
+		map_lsp("a", "diagnostic.open_float()")
+		map_lsp("n", "diagnostic.goto_next()")
+		map_lsp("p", "diagnostic.goto_prev()")
 
 		local map_tel = function(key, cmd)
 			map(key, 'require"telescope.builtin".' .. cmd)
