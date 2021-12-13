@@ -343,6 +343,13 @@ return require("packer").startup(function(use)
 	})
 
 	use({
+		"sQVe/sort.nvim",
+		config = function()
+			require("sort").setup({})
+		end,
+	})
+
+	use({
 		"nvim-neorg/neorg",
 		config = function()
 			require("neorg_setup")
