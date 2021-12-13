@@ -86,10 +86,11 @@ alias dv='setxkbmap us -variant dvorak-intl'
 # alias ud="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 
 alias x='xplr'
+alias xd='$(xplr)'
 alias p='paru'
 alias psc='paru -Sc --noconfirm'
 alias docker='doas docker'
-alias ldocker='doas lazydocker'
+alias dk="doas lazydocker"
 
 ### ARCHIVE EXTRACTION
 # usage: ex <file>
@@ -128,16 +129,16 @@ bld () {
 
 tryb () {
     sess=tryb
-    tmux new-session -d -s $sess -c ~ nvim
+    tmux new-session -d -s $sess -c ~
 
     # create windows
     tmux rename-window -t $sess:0 "dev"
-    tmux neww -t $sess:1 -n deploy -c ~/dokumente/isento/tryb_docker/tryb_docker
+    tmux neww -t $sess:1 -n deploy -c ~/dokumente/isento/tryb_docker/tryb_compose/
     tmux neww -t $sess:2 -n back -c ~/dokumente/isento/lea-back/
     tmux neww -t $sess:3 -n front -c ~/dokumente/isento/lea-front/
     tmux neww -t $sess:4 -n gps -c ~/dokumente/isento/gps/branches/development/
 
-    # tmux send-keys -t $sess:0 "nvim" C-m
+    tmux send-keys -t $sess:0 "nvim" C-m
     tmux send-keys -t $sess:1 "doas docker-compose start" C-m
     tmux send-keys -t $sess:2 "mvn spring-boot:run"
     tmux send-keys -t $sess:4 "source ../../venv_gps/bin/activate" C-m
@@ -182,10 +183,14 @@ lsgrok() {
 }
 
 ngrok_init() {
-  tmux new-session -s ngrok -d
-  tmux send -t ngrok "ngrok tcp --region=eu 22" ENTER
+  sess=ngrok
+  tmux new-session -s $sess -d
+  tmux send -t $sess:0 "ngrok tcp --region=eu 22" ENTER
+  tmux neww -t $sess:1
+  tmux send -t $sess:1 "ngrok tcp --region=eu 4200" ENTER
 }
 
 
+alias myip="wget -qO- https://ipecho.net/plain ; echo"
 alias install_nvm="curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash"
 

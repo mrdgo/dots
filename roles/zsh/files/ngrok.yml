@@ -1,0 +1,11 @@
+authtoken: 20OrY6YofLg7pzRxC0smMGafo07_3eigCe4LUHsbz1P7rKrky
+
+tunnels:
+  ssh:
+    proto: tcp
+    addr: 22
+    subdomain: first-subdomain
+  http:
+    proto: http
+    addr: 4200
+    subdomain: second-subdomain
