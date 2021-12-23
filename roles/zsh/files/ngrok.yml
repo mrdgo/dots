@@ -1,11 +1,14 @@
-authtoken: 20OrY6YofLg7pzRxC0smMGafo07_3eigCe4LUHsbz1P7rKrky
+region: eu
 
 tunnels:
   ssh:
     proto: tcp
     addr: 22
-    subdomain: first-subdomain
-  http:
+  frontend:
     proto: http
     addr: 4200
-    subdomain: second-subdomain
+    host-header: localhost:80
+  backend:
+    proto: http
+    addr: 8080
+    host-header: localhost:8080
