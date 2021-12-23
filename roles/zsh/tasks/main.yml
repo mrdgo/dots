@@ -33,6 +33,12 @@
     state: hard
     force: yes
 
+- name: ngrok config dir
+  file:
+    path: "~/.ngrok2"
+    state: directory
+    mode: "u=rwx,g=rwx,o=rwx"
+
 - name: Setup ngrok
   file:
     src: "{{ dotfiles_home }}/roles/zsh/files/ngrok.yml"

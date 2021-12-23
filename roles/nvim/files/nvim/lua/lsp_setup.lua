@@ -49,15 +49,15 @@ require("lspconfig").sumneko_lua.setup(require("coq").lsp_ensure_capabilities({
 	},
 }))
 
-local lsPath = "/usr/lib/node_modules"
-local cmd = { "ngserver", "--stdio", "--ngProbeLocations", lsPath, "--tsProbeLocations", lsPath }
-require("lspconfig").angularls.setup(require("coq").lsp_ensure_capabilities({
-	on_attach = require("lsp_on_attach").on_attach,
-	cmd = cmd,
-	on_new_config = function(new_config, _)
-		new_config.cmd = cmd
-	end,
-}))
+-- local lsPath = "/usr/lib/node_modules"
+-- local cmd = { "ngserver", "--stdio", "--ngProbeLocations", lsPath, "--tsProbeLocations", lsPath }
+-- require("lspconfig").angularls.setup(require("coq").lsp_ensure_capabilities({
+-- 	on_attach = require("lsp_on_attach").on_attach,
+-- 	cmd = cmd,
+-- 	on_new_config = function(new_config, _)
+-- 		new_config.cmd = cmd
+-- 	end,
+-- }))
 
 local eslint_settings = {
 	codeAction = {

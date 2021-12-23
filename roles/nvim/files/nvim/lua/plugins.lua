@@ -41,7 +41,7 @@ return require("packer").startup(function(use)
 		config = function()
 			require("terminal").setup()
 			require("telescope_setup")
-			require("session_setup")
+			-- require("session_setup")
 			require("git_wt_setup")
 		end,
 		requires = {
@@ -51,8 +51,8 @@ return require("packer").startup(function(use)
 			{ "nvim-telescope/telescope-media-files.nvim" },
 			{ "nvim-telescope/telescope-packer.nvim" },
 			{ "nvim-telescope/telescope-project.nvim" },
-			{ "rmagatti/session-lens" },
-			{ "rmagatti/auto-session" },
+			-- { "rmagatti/session-lens" },
+			-- { "rmagatti/auto-session" },
 			{ "norcalli/nvim-terminal.lua" },
 			{ "camgraff/telescope-tmux.nvim" },
 			{ "sudormrfbin/cheatsheet.nvim" },
@@ -97,9 +97,18 @@ return require("packer").startup(function(use)
 	use({
 		"neovim/nvim-lspconfig",
 		config = function()
+			require("autopairs_setup")
+			require("coq")
 			require("lsp_setup")
+			vim.cmd("COQnow")
 		end,
-		requires = { { "ms-jpq/coq_nvim" }, { "mfussenegger/nvim-jdtls" } },
+		requires = {
+			{ "mfussenegger/nvim-jdtls" },
+			{ "ms-jpq/coq_nvim", { branch = "coq" } },
+			{ "ms-jpq/coq.artifacts", { branch = "artifacts" } },
+			{ "windwp/nvim-autopairs" },
+			-- { "ms-jpq/coq.thirdparty", { branch = "3p" } },
+		},
 	})
 
 	use({
@@ -178,41 +187,6 @@ return require("packer").startup(function(use)
 	use("zsugabubus/crazy8.nvim")
 
 	use({
-		"ms-jpq/coq_nvim",
-		branch = "coq",
-		requires = {
-			{ "ms-jpq/coq.artifacts", { branch = "artifacts" } },
-			-- { "ms-jpq/coq.thirdparty", { branch = "3p" } },
-			-- { 'codota/tabnine-vim' }
-		},
-		config = function()
-			vim.g.coq_settings = {
-				auto_start = "shut-up",
-				keymap = { recommended = false },
-			}
-
-			local inoremap = function(key, expr)
-				local opt = { expr = true, noremap = true }
-				vim.api.nvim_set_keymap("i", key, expr, opt)
-			end
-			inoremap("<esc>", [[pumvisible() ? "<c-e><esc>" : "<esc>"]])
-			inoremap("<c-c>", [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]])
-			inoremap("<tab>", [[pumvisible() ? "<c-n>" : "<tab>"]])
-			inoremap("<s-tab>", [[pumvisible() ? "<c-p>" : "<bs>"]])
-			require("coq")
-
-			-- rrequire("coq_3p")({
-			-- 	{ src = "nvimlua", short_name = "nLUA", conf_only = true },
-			-- 	{ src = "bc", short_name = "MATH", precision = 6 },
-			-- 	{ src = "figlet", short_name = "BIG" },
-			-- 	{ src = "vimtex", short_name = "vTEX" },
-			-- 	{ src = "dap" },
-			-- })
-			vim.cmd("COQnow")
-		end,
-	})
-
-	use({
 		"kkoomen/vim-doge",
 		ft = { "python" },
 		config = function()
@@ -236,14 +210,8 @@ return require("packer").startup(function(use)
 		"Olical/conjure",
 		ft = { "clojure" },
 		config = function()
+			vim.api.nvim_set_keymap("n", "<LocalLeader>et", "<cmd>ConjureCljRunCurrentTest<CR>", { noremap = true })
 			vim.api.nvim_set_keymap("n", "<LocalLeader>eR", "<cmd>ConjureCljRefreshAll<CR>", { noremap = true })
-		end,
-	})
-
-	use({
-		"windwp/nvim-autopairs",
-		config = function()
-			require("autopairs_setup")
 		end,
 	})
 
