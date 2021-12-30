@@ -15,6 +15,7 @@ packages:
   - freetype2
   - ghc
   - git
+  - lazygit
   - libxinerama
   - light
   - make
@@ -55,4 +56,3 @@ aur_packages:
   - ttf-mononoki
   - nvimpager-git
   - zplug
-  - lazygit
