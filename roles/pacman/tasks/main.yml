@@ -55,13 +55,13 @@
   become_user: root
   become_method: sudo
 
-- name: Install packages from AUR using paru
+- name: Install packages from AUR
   kewlfft.aur.aur:
     name: "{{ aur_packages }}"
     state: present
-    use: paru
   become: yes
   become_user: root
+  become_method: sudo
 
 # - name: Remove packages
 #   community.general.pacman:
