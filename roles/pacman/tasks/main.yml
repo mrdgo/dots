@@ -59,6 +59,7 @@
   kewlfft.aur.aur:
     name: "{{ aur_packages }}"
     state: present
+    use: makepkg
   become: yes
   become_user: root
   become_method: sudo
