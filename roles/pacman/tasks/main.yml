@@ -43,20 +43,20 @@
   community.general.pacman:
     update_cache: yes
     upgrade: yes
-    executable: paru
   become: yes
   become_user: root
+  become_method: sudo
 
 - name: Install packages from repo
   community.general.pacman:
     name: "{{ packages }}"
     state: present
-    executable: paru
   become: yes
   become_user: root
+  become_method: sudo
 
 - name: Install packages from AUR using paru
-  community.general.pacman:
+  kewlfft.aur.aur:
     name: "{{ aur_packages }}"
     state: present
     use: paru
