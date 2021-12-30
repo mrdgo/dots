@@ -12,3 +12,6 @@
     dest: "/etc/doas.conf"
     state: hard
     force: yes
+  become: yes
+  become_user: root
+  become_method: sudo
