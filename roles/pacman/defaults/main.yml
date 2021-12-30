@@ -1,41 +1,42 @@
 packages:
-  - xmonad
-  - libxinerama
-  - xmonad-contrib
-  - xmobar
+  - acpid-suite66
   - alacritty
   - alsa-utils-suite66
-  - make
   - bat
-  - suite66
-  - xdm-suite66
-  - elogind-suite66
-  - networkmanager-suite66
-  - ntp-suite66
-  - acpid-suite66
-  - docker-suite66
-  - docker-compose
   - bluez-suite66
   - dbus-suite66
+  - docker-compose
+  - docker-suite66
   - dunst
+  - elogind-suite66
   - exa
   - feh
   - firefox
   - freetype2
   - ghc
   - git
+  - libxinerama
   - light
-  - ripgrep
+  - make
   - moc
+  - networkmanager-suite66
+  - ntp-suite66
+  - opendoas
   - pulseaudio
   - pulseaudio-alsa
   - pulseaudio-modules-bt
   - python
+  - ripgrep
   - starship
+  - suite66
   - sxiv
   - tmux
   - ttf-font-awesome
   - xclip
+  - xdm-suite66
+  - xmobar
+  - xmonad
+  - xmonad-contrib
   - xorg-server
   - xorg-xinit
   - xplr
@@ -54,4 +55,4 @@ aur_packages:
   - ttf-mononoki
   - nvimpager-git
   - zplug
-  - git-interactive-rebase-tool-bin
+  - lazygit
