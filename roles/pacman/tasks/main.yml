@@ -45,7 +45,7 @@
     upgrade: yes
     executable: paru
   become: yes
-  become_user: aur_builder
+  become_user: root
 
 - name: Install packages from repo
   community.general.pacman:
@@ -53,15 +53,15 @@
     state: present
     executable: paru
   become: yes
-  become_user: aur_builder
+  become_user: root
 
 - name: Install packages from AUR using paru
   community.general.pacman:
     name: "{{ aur_packages }}"
     state: present
-    executable: paru
+    use: paru
   become: yes
-  become_user: aur_builder
+  become_user: root
 
 # - name: Remove packages
 #   community.general.pacman:
