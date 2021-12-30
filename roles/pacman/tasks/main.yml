@@ -46,6 +46,8 @@
     update_cache: yes
     upgrade: yes
     executable: paru
+  become: yes
+  become_user: aur_builder
 
 - name: Install packages from repo
   community.general.pacman:
@@ -53,8 +55,7 @@
     state: present
     executable: paru
   become: yes
-  become_user: root
-  become_method: doas
+  become_user: aur_builder
 
 - name: Install packages from AUR using paru
   community.general.pacman:
@@ -62,8 +63,7 @@
     state: present
     executable: paru
   become: yes
-  become_user: root
-  become_method: doas
+  become_user: aur_builder
 
 # - name: Remove packages
 #   community.general.pacman:
