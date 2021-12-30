@@ -29,7 +29,6 @@
     force: yes
   become: yes
   become_user: root
-  become_method: doas
 
 - name: Configure paru
   file:
@@ -39,7 +38,6 @@
     force: yes
   become: yes
   become_user: root
-  become_method: doas
 
 - name: pacman -Syu
   community.general.pacman:
@@ -72,7 +70,6 @@
 #     state: absent
 #   become: yes
 #   become_user: root
-#   become_method: doas
 
 # - name: Install package bar from file
 #   community.general.pacman:
