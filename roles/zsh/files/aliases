@@ -85,8 +85,8 @@ alias dv='setxkbmap us -variant dvorak-intl'
 # debian legacy
 # alias ud="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 
-alias x='xplr'
-alias xd='$(xplr)'
+# alias x='xplr'
+alias x='$(xplr)'
 alias p='paru'
 alias psc='paru -Sc --noconfirm'
 alias docker='doas docker'
@@ -129,22 +129,23 @@ bld () {
 
 tryb () {
     sess=tryb
-    tmux new-session -d -s $sess -c ~
+    tmux new-session -d -s $sess -c ~/dokumente/isento/lea-front/
 
     # create windows
-    tmux rename-window -t $sess:0 "dev"
+    tmux rename-window -t $sess:0 front
     tmux neww -t $sess:1 -n deploy -c ~/dokumente/isento/tryb_docker/tryb_compose/
     tmux neww -t $sess:2 -n back -c ~/dokumente/isento/lea-back/
-    tmux neww -t $sess:3 -n front -c ~/dokumente/isento/lea-front/
-    tmux neww -t $sess:4 -n gps -c ~/dokumente/isento/gps/branches/development/
 
-    tmux send-keys -t $sess:0 "nvim" C-m
     tmux send-keys -t $sess:1 "doas docker-compose start" C-m
     tmux send-keys -t $sess:2 "mvn spring-boot:run"
-    tmux send-keys -t $sess:4 "source ../../venv_gps/bin/activate" C-m
 
-    tmux select-window -t $sess:dev \; attach -t $sess
-    # tmux attach -t $sess
+    tmux select-window -t $sess:0 \; attach -t $sess
+}
+
+gps () {
+    sess=tryb
+    tmux neww -t $sess:3 gps -c ~/dokumente/isento/gps/branches/development/
+    tmux send-keys -t $sess:3 "source ../../venv_gps/bin/activate" C-m
 }
 
 alias 66-all='doas 66-all -z'

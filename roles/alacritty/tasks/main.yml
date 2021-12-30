@@ -1,3 +1,8 @@
+- name: setup .config
+  file:
+    path: ~/.config
+    state: directory
+
 - name: Configure alacritty
   file:
     src: "{{ dotfiles_home }}/roles/alacritty/files/alacritty"
