@@ -6,7 +6,7 @@ local devicons = require("nvim-web-devicons")
 local utils = require("utils")
 local appearance = require("appearance")
 local icons = appearance.icons
-local theme_map = appearance.color_map[vim.g.colors_name] or appearance.color_map["gruvbox"]
+local theme_map = appearance.color_map[vim.g.colors_name] or appearance.color_map["tokyonight"]
 local colors = theme_map[vim.opt.background:get()] or theme_map["dark"]
 
 gl.short_line_list = {
@@ -31,7 +31,7 @@ local mode_map = {
 }
 
 local function diag(severity)
-	local n = #(vim.diagnostic.get(0, {severity=severity}))
+	local n = #(vim.diagnostic.get(0, { severity = severity }))
 
 	if n == 0 then
 		return ""
@@ -225,10 +225,10 @@ gls.right[3] = {
 			if not utils.diagnostic_exists() then
 				return ""
 			end
-			local w = #(vim.diagnostic.get(0, {severity = vim.diagnostic.severity.WARN}))
-			local e = #(vim.diagnostic.get(0, {severity = vim.diagnostic.severity.ERROR}))
-			local i = #(vim.diagnostic.get(0, {severity = vim.diagnostic.severity.INFO}))
-			local h = #(vim.diagnostic.get(0, {severity = vim.diagnostic.severity.HINT}))
+			local w = #(vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN }))
+			local e = #(vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR }))
+			local i = #(vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO }))
+			local h = #(vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT }))
 			if w ~= 0 or e ~= 0 or i ~= 0 or h ~= 0 then
 				return ""
 			end

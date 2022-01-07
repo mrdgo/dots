@@ -48,43 +48,39 @@ draw_bold_text_with_bright_colors: true
 #
 # The bell is rung every time the BEL control character is received.
 #bell:
-  # Visual Bell Animation
-  #
-  # Animation effect for flashing the screen when the visual bell is rung.
-  #
-  # Values for `animation`:
-  #   - Ease
-  #   - EaseOut
-  #   - EaseOutSine
-  #   - EaseOutQuad
-  #   - EaseOutCubic
-  #   - EaseOutQuart
-  #   - EaseOutQuint
-  #   - EaseOutExpo
-  #   - EaseOutCirc
-  #   - Linear
-  #animation: EaseOutExpo
-
-  # Duration of the visual bell flash. A `duration` of `0` will disable the
-  # visual bell animation.
-  #duration: 0
-
-  # Visual bell animation color.
-  #color: '#ffffff'
-
-  # Bell Command
-  #
-  # This program is executed whenever the bell is rung.
-  #
-  # When set to `command: None`, no command will be executed.
-  #
-  # Example:
-  #   command:
-  #     program: notify-send
-  #     args: ["Hello, World!"]
-  #
-  #command: None
-
+# Visual Bell Animation
+#
+# Animation effect for flashing the screen when the visual bell is rung.
+#
+# Values for `animation`:
+#   - Ease
+#   - EaseOut
+#   - EaseOutSine
+#   - EaseOutQuad
+#   - EaseOutCubic
+#   - EaseOutQuart
+#   - EaseOutQuint
+#   - EaseOutExpo
+#   - EaseOutCirc
+#   - Linear
+#animation: EaseOutExpo
+# Duration of the visual bell flash. A `duration` of `0` will disable the
+# visual bell animation.
+#duration: 0
+# Visual bell animation color.
+#color: '#ffffff'
+# Bell Command
+#
+# This program is executed whenever the bell is rung.
+#
+# When set to `command: None`, no command will be executed.
+#
+# Example:
+#   command:
+#     program: notify-send
+#     args: ["Hello, World!"]
+#
+#command: None
 background_opacity: 1
 
 selection:
@@ -105,7 +101,7 @@ live_config_reload: false
 shell:
   program: /bin/zsh
   #args:
-    #- --login
+  #- --login
 
 working_directory: /home/maxim/
 
@@ -264,96 +260,185 @@ hints:
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
 key_bindings:
-  - { key: L,         mods: Control,             action: ClearLogNotice }
-  - { key: L,         mods: Control, mode: ~Vi,  chars: "\x0c"          }
-  - { key: PageUp,    mods: Shift,   mode: ~Alt, action: ScrollLineUp,  }
-  - { key: PageDown,  mods: Shift,   mode: ~Alt, action: ScrollLineDown }
-  - { key: Home,      mods: Shift,   mode: ~Alt, action: ScrollToTop,   }
-  - { key: End,       mods: Shift,   mode: ~Alt, action: ScrollToBottom }
+  - { key: L, mods: Control, action: ClearLogNotice }
+  - { key: L, mods: Control, mode: ~Vi, chars: "\f" }
+  - {
+      key: PageUp,
+      mods: Shift,
+      mode: ~Alt,
+      action: ScrollLineUp
+    }
+  - {
+      key: PageDown,
+      mods: Shift,
+      mode: ~Alt,
+      action: ScrollLineDown
+    }
+  - {
+      key: Home,
+      mods: Shift,
+      mode: ~Alt,
+      action: ScrollToTop
+    }
+  - {
+      key: End,
+      mods: Shift,
+      mode: ~Alt,
+      action: ScrollToBottom
+    }
 
   # Vi Mode
-  - { key: Space,  mods: Shift|Control, mode: Vi, action: ScrollToBottom          }
-  - { key: Space,  mods: Shift|Control,           action: ToggleViMode            }
-  - { key: Escape,                      mode: Vi, action: ClearSelection          }
-  - { key: I,                           mode: Vi, action: ScrollToBottom          }
-  - { key: I,                           mode: Vi, action: ToggleViMode            }
-  - { key: Y,      mods: Control,       mode: Vi, action: ScrollLineUp            }
-  - { key: E,      mods: Control,       mode: Vi, action: ScrollLineDown          }
-  - { key: G,                           mode: Vi, action: ScrollToTop             }
-  - { key: G,      mods: Shift,         mode: Vi, action: ScrollToBottom          }
-  - { key: B,      mods: Control,       mode: Vi, action: ScrollPageUp            }
-  - { key: F,      mods: Control,       mode: Vi, action: ScrollPageDown          }
-  - { key: U,      mods: Control,       mode: Vi, action: ScrollHalfPageUp        }
-  - { key: D,      mods: Control,       mode: Vi, action: ScrollHalfPageDown      }
-  - { key: Y,                           mode: Vi, action: Copy                    }
-  - { key: Y,                           mode: Vi, action: ClearSelection          }
-  - { key: Copy,                        mode: Vi, action: ClearSelection          }
-  - { key: V,                           mode: Vi, action: ToggleNormalSelection   }
-  - { key: V,      mods: Shift,         mode: Vi, action: ToggleLineSelection     }
-  - { key: V,      mods: Control,       mode: Vi, action: ToggleBlockSelection    }
-  - { key: V,      mods: Alt,           mode: Vi, action: ToggleSemanticSelection }
-  - { key: Return,                      mode: Vi, action: Open                    }
-  - { key: K,                           mode: Vi, action: Up                      }
-  - { key: J,                           mode: Vi, action: Down                    }
-  - { key: H,                           mode: Vi, action: Left                    }
-  - { key: L,                           mode: Vi, action: Right                   }
-  - { key: Up,                          mode: Vi, action: Up                      }
-  - { key: Down,                        mode: Vi, action: Down                    }
-  - { key: Left,                        mode: Vi, action: Left                    }
-  - { key: Right,                       mode: Vi, action: Right                   }
-  - { key: Key0,                        mode: Vi, action: First                   }
-  - { key: Key4,   mods: Shift,         mode: Vi, action: Last                    }
-  - { key: Key6,   mods: Shift,         mode: Vi, action: FirstOccupied           }
-  - { key: H,      mods: Shift,         mode: Vi, action: High                    }
-  - { key: M,      mods: Shift,         mode: Vi, action: Middle                  }
-  - { key: L,      mods: Shift,         mode: Vi, action: Low                     }
-  - { key: B,                           mode: Vi, action: SemanticLeft            }
-  - { key: W,                           mode: Vi, action: SemanticRight           }
-  - { key: E,                           mode: Vi, action: SemanticRightEnd        }
-  - { key: B,      mods: Shift,         mode: Vi, action: WordLeft                }
-  - { key: W,      mods: Shift,         mode: Vi, action: WordRight               }
-  - { key: E,      mods: Shift,         mode: Vi, action: WordRightEnd            }
-  - { key: Key5,   mods: Shift,         mode: Vi, action: Bracket                 }
-  - { key: Slash,                       mode: Vi, action: SearchForward           }
-  - { key: Slash,  mods: Shift,         mode: Vi, action: SearchBackward          }
-  - { key: N,                           mode: Vi, action: SearchNext              }
-  - { key: N,      mods: Shift,         mode: Vi, action: SearchPrevious          }
+  - {
+      key: Space,
+      mods: Shift|Control,
+      mode: Vi,
+      action: ScrollToBottom
+    }
+  - { key: Space, mods: Shift|Control, action: ToggleViMode }
+  - { key: Escape, mode: Vi, action: ClearSelection }
+  - { key: I, mode: Vi, action: ScrollToBottom }
+  - { key: I, mode: Vi, action: ToggleViMode }
+  - { key: Y, mods: Control, mode: Vi, action: ScrollLineUp }
+  - {
+      key: E,
+      mods: Control,
+      mode: Vi,
+      action: ScrollLineDown
+    }
+  - { key: G, mode: Vi, action: ScrollToTop }
+  - { key: G, mods: Shift, mode: Vi, action: ScrollToBottom }
+  - { key: B, mods: Control, mode: Vi, action: ScrollPageUp }
+  - {
+      key: F,
+      mods: Control,
+      mode: Vi,
+      action: ScrollPageDown
+    }
+  - {
+      key: U,
+      mods: Control,
+      mode: Vi,
+      action: ScrollHalfPageUp
+    }
+  - {
+      key: D,
+      mods: Control,
+      mode: Vi,
+      action: ScrollHalfPageDown
+    }
+  - { key: Y, mode: Vi, action: Copy }
+  - { key: Y, mode: Vi, action: ClearSelection }
+  - { key: Copy, mode: Vi, action: ClearSelection }
+  - { key: V, mode: Vi, action: ToggleNormalSelection }
+  - {
+      key: V,
+      mods: Shift,
+      mode: Vi,
+      action: ToggleLineSelection
+    }
+  - {
+      key: V,
+      mods: Control,
+      mode: Vi,
+      action: ToggleBlockSelection
+    }
+  - {
+      key: V,
+      mods: Alt,
+      mode: Vi,
+      action: ToggleSemanticSelection
+    }
+  - { key: Return, mode: Vi, action: Open }
+  - { key: K, mode: Vi, action: Up }
+  - { key: J, mode: Vi, action: Down }
+  - { key: H, mode: Vi, action: Left }
+  - { key: L, mode: Vi, action: Right }
+  - { key: Up, mode: Vi, action: Up }
+  - { key: Down, mode: Vi, action: Down }
+  - { key: Left, mode: Vi, action: Left }
+  - { key: Right, mode: Vi, action: Right }
+  - { key: Key0, mode: Vi, action: First }
+  - { key: Key4, mods: Shift, mode: Vi, action: Last }
+  - {
+      key: Key6,
+      mods: Shift,
+      mode: Vi,
+      action: FirstOccupied
+    }
+  - { key: H, mods: Shift, mode: Vi, action: High }
+  - { key: M, mods: Shift, mode: Vi, action: Middle }
+  - { key: L, mods: Shift, mode: Vi, action: Low }
+  - { key: B, mode: Vi, action: SemanticLeft }
+  - { key: W, mode: Vi, action: SemanticRight }
+  - { key: E, mode: Vi, action: SemanticRightEnd }
+  - { key: B, mods: Shift, mode: Vi, action: WordLeft }
+  - { key: W, mods: Shift, mode: Vi, action: WordRight }
+  - { key: E, mods: Shift, mode: Vi, action: WordRightEnd }
+  - { key: Key5, mods: Shift, mode: Vi, action: Bracket }
+  - { key: Slash, mode: Vi, action: SearchForward }
+  - {
+      key: Slash,
+      mods: Shift,
+      mode: Vi,
+      action: SearchBackward
+    }
+  - { key: N, mode: Vi, action: SearchNext }
+  - { key: N, mods: Shift, mode: Vi, action: SearchPrevious }
 
   # (Windows, Linux, and BSD only)
-  - { key: V,        mods: Control|Shift,           action: Paste            }
-  - { key: C,        mods: Control|Shift,           action: Copy             }
-  - { key: F,        mods: Control|Shift,           action: SearchForward    }
-  - { key: B,        mods: Control|Shift,           action: SearchBackward   }
-  - { key: C,        mods: Control|Shift, mode: Vi, action: ClearSelection   }
-  - { key: Insert,   mods: Shift,                   action: PasteSelection   }
-  - { key: Key0,     mods: Control,                 action: ResetFontSize    }
-  - { key: PageUp,   mods: Control|Shift,           action: IncreaseFontSize }
-  - { key: PageDown, mods: Control|Shift,           action: DecreaseFontSize }
+  - { key: V, mods: Control|Shift, action: Paste }
+  - { key: C, mods: Control|Shift, action: Copy }
+  - { key: F, mods: Control|Shift, action: SearchForward }
+  - { key: B, mods: Control|Shift, action: SearchBackward }
+  - {
+      key: C,
+      mods: Control|Shift,
+      mode: Vi,
+      action: ClearSelection
+    }
+  - { key: Insert, mods: Shift, action: PasteSelection }
+  - { key: Key0, mods: Control, action: ResetFontSize }
+  - {
+      key: PageUp,
+      mods: Control|Shift,
+      action: IncreaseFontSize
+    }
+  - {
+      key: PageDown,
+      mods: Control|Shift,
+      action: DecreaseFontSize
+    }
 colors:
+  name: TokyoNight Night
+  author: Folke
+  # Default colors
   primary:
-    # hard contrast:
-    background: '0x1d2021'
-    # medium contrast: background: '0x282828'
-    # soft contrast: background = '0x32302f'
-    foreground: '0xebdbb2'
+    background: '0x1a1b26'
+    foreground: '0xc0caf5'
 
+  # Normal colors
   normal:
-    black:   '0x1d2021'
-    red:     '0xcc241d'
-    green:   '0x98971a'
-    yellow:  '0xd79921'
-    blue:    '0x458588'
-    magenta: '0xb16286'
-    cyan:    '0x689d6a'
-    white:   '0xa89984'
+    black: '0x15161E'
+    red: '0xf7768e'
+    green: '0x9ece6a'
+    yellow: '0xe0af68'
+    blue: '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan: '0x7dcfff'
+    white: '0xa9b1d6'
 
+  # Bright colors
   bright:
-    black:   '0x928374'
-    red:     '0xfb4934'
-    green:   '0xb8bb26'
-    yellow:  '0xfabd2f'
-    blue:    '0x83a598'
-    magenta: '0xd3869b'
-    cyan:    '0x8ec07c'
-    white:   '0xebdbb2'
+    black: '0x414868'
+    red: '0xf7768e'
+    green: '0x9ece6a'
+    yellow: '0xe0af68'
+    blue: '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan: '0x7dcfff'
+    white: '0xc0caf5'
 
+  indexed_colors:
+    - { index: 16, color: '0xff9e64' }
+    - { index: 17, color: '0xdb4b4b' }
+theme: Tokyonight_Night

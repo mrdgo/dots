@@ -37,6 +37,22 @@
     state: hard
     force: yes
 
+- name: Install Xresources gruvbox
+  file:
+    src: "{{ dotfiles_home }}/roles/xmonad/files/Xresources.gruvbox"
+    dest: "~/.Xresources.gruvbox"
+    mode: 0755
+    state: hard
+    force: yes
+
+- name: Install Xresources tokyonight
+  file:
+    src: "{{ dotfiles_home }}/roles/xmonad/files/Xresources.tokyonight"
+    dest: "~/.Xresources.tokyonight"
+    mode: 0755
+    state: hard
+    force: yes
+
 - name: Install Xsetup_0 to theme xdm
   file:
     src: "{{ dotfiles_home }}/roles/xmonad/files/Xsetup_0"

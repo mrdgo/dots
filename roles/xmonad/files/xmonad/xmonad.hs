@@ -1,11 +1,17 @@
 import XMonad
 import System.IO (hPutStrLn)
 import Data.Monoid (Endo)
+import Data.Bifunctor (bimap)
+import Data.Maybe (catMaybes, fromMaybe)
+import Data.Char as DC
+import Data.List as DL
 import Data.Time.Clock
 import Data.Time.Calendar
 import Data.List (isPrefixOf, isInfixOf)
 import System.Exit (exitSuccess)
+import System.IO.Unsafe (unsafePerformIO)
 
+import XMonad.Core (installSignalHandlers)
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig
 import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
@@ -76,14 +82,45 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $
                     ||| monocle
                     ||| floats
 
+
+splitAtColon :: String -> Maybe (String, String)
+splitAtColon str = splitAtTrimming str <$> DL.elemIndex ':' str
+  where
+    splitAtTrimming :: String -> Int -> (String, String)
+    splitAtTrimming s idx = bimap trim (trim . tail) $ splitAt idx s
+    trim :: String -> String
+    trim = DL.dropWhileEnd DC.isSpace . DL.dropWhile DC.isSpace
+
+getFromXres :: String -> IO String
+getFromXres key = do
+  installSignalHandlers
+  fromMaybe "" . findValue key <$> runProcessWithInput "xrdb" ["-query"] ""
+  where
+    findValue :: String -> String -> Maybe String
+    findValue xresKey xres =
+      snd <$>
+      DL.find ((== xresKey) . fst) (catMaybes $ splitAtColon <$> lines xres)
+
+xProp :: String -> String
+xProp = unsafePerformIO . getFromXres
+
+xColorFg :: String
+xColorFg = xProp "*foreground"
+
+xColorBg :: String
+xColorBg = xProp "*background"
+
+xColor :: String -> String
+xColor a = xProp $ "*color" ++ a
+
 myXPConfig :: XPConfig
 myXPConfig = def
       { font                = "xft:Mononoki:size=18"
-      , bgColor             = "#b8bb26"
-      , fgColor             = "#1d2021"
-      , bgHLight            = "#ebdbb2"
-      , fgHLight            = "#fabd2f"
-      , borderColor         = "#b8bb26"
+      , bgColor             = xColor "10"
+      , fgColor             = xColorBg
+      , bgHLight            = xColorFg
+      , fgHLight            = xColor "11"
+      , borderColor         = xColor "10"
       , promptBorderWidth   = 0
       , position            = CenteredAt { xpCenterY = 0.2, xpWidth = 0.7 }
       , height              = 50
@@ -123,7 +160,7 @@ myKeys = [
     -- XMonad
       ("M-r", spawn "/bin/sh xmonad --recompile")       -- Recompiles xmonad
     , ("M-S-r", spawn "xmonad --restart")       -- Restarts xmonad
-    --, ("M-S-e", io exitSuccess)                 -- Quits xmonad, dvorak 'e' and 'q' are too close
+    , ("M-S-c", io exitSuccess)                 -- Quits xmonad, dvorak 'e' and 'q' are too close
     , ("M-S-q", kill)                           -- kill client
     , ("M-b", sendMessage ToggleStruts)         -- Toggle xmobar
     , ("M-t", withFocused $ windows . W.sink)   -- Tile client again
@@ -219,19 +256,29 @@ myPP :: Handle -> X ()
 myPP handle = dynamicLogWithPP $ xmobarPP
    {
        ppOutput = hPutStrLn handle
-       , ppCurrent = xmobarColor "#b8bb28" ""                -- Current workspace in xmobar
-       , ppVisible = xmobarColor "#fe8019" ""                -- Visible but not current ws
-       , ppHidden = xmobarColor "#fabd2f" ""                 -- Hidden workspaces in xmobar
+       , ppCurrent = xmobarColor (xColor "10") ""                -- Current workspace in xmobar
+       , ppVisible = xmobarColor (xColor "6") ""                -- Visible but not current ws
+       , ppHidden = xmobarColor (xColor "11") ""                 -- Hidden workspaces in xmobar
        , ppHiddenNoWindows = xmobarColor "#928374" ""        -- Hidden workspaces (no windows)
        , ppTitle = xmobarColor "#bdae93" "" . shorten 60     -- Title of active window
        , ppSep =  " | "                                      -- Separators in xmobar
-       , ppUrgent = xmobarColor "#fb4934" "#50945" . wrap "!" "!"  -- Urgent workspace
+       , ppUrgent = xmobarColor (xColor "9") "#50945" . wrap "!" "!"  -- Urgent workspace
        , ppExtras  = [windowCount]                           -- # of windows current workspace
        , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
    }
 
 spawnBar :: (MonadIO m) => Int -> m Handle
-spawnBar i = spawnPipe $ "xmobar -x " ++ show i ++ " ~/.xmonad/xmobar.hs"
+spawnBar i = spawnPipe ("xmobar -x "
+                 -- Set xmobar color and font through command line arguments.
+                 ++ show i
+                 ++ xmobarArg "B" xColorBg -- The background color.
+                 ++ xmobarArg "F" xColorFg -- The foreground color.
+                 -- ++ xmobarArg "f" (xFontSized "12") -- Font name.
+                 -- ++ xmobarArg "N" (xFontSized "15") -- Add to the list of additional fonts.
+                 ++ " ~/.xmonad/xmobar.hs")
+  where
+    xmobarArg :: String -> String -> String
+    xmobarArg flag value = " -" ++ flag ++ " \"" ++ value ++ "\""
 
 main = do
     n <- countScreens
@@ -242,8 +289,8 @@ main = do
         , focusFollowsMouse  = False
         , borderWidth        = 0
         , terminal           = myTerminal
-        , focusedBorderColor = "#b8bb26"
-        , normalBorderColor  = "#f2e5bc"
+        , focusedBorderColor = xColor "10"
+        , normalBorderColor  = xColor "15"
         , layoutHook         = myLayoutHook
         , startupHook        = myStartupHook
         , workspaces         = myWorkspaces

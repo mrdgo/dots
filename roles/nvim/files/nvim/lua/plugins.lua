@@ -149,13 +149,13 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use({
-		"folke/todo-comments.nvim",
-		requires = "nvim-lua/plenary.nvim",
-		config = function()
-			require("todo-comments").setup({})
-		end,
-	})
+	-- use({
+	-- 	"folke/todo-comments.nvim",
+	-- 	requires = "nvim-lua/plenary.nvim",
+	-- 	config = function()
+	-- 		require("todo-comments").setup({})
+	-- 	end,
+	-- })
 
 	use({
 		"ThePrimeagen/harpoon",
@@ -201,9 +201,18 @@ return require("packer").startup(function(use)
 		--'morhetz/gruvbox'
 		"npxbr/gruvbox.nvim",
 		config = function()
+			vim.g.gruvbox_italic = 1
+			vim.g.gruvbox_contrast_dark = "hard"
+			vim.g.gruvbox_contrast_light = "soft"
+			vim.g.gruvbox_termcolors = 256
+			vim.g.gruvbox_hls_cursor = "green"
+			vim.g.tokyonight_style = "night"
 			vim.cmd("source $HOME/.config/nvim/config/theme.vim")
 		end,
-		requires = { { "rktjmp/lush.nvim" } },
+		requires = {
+			{ "rktjmp/lush.nvim" },
+			{ "folke/tokyonight.nvim" },
+		},
 	})
 
 	use({
