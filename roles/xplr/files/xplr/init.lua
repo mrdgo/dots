@@ -1,4 +1,4 @@
-version = "0.17.0"
+version = "0.17.1"
 local xplr = xplr
 
 package.path = os.getenv("HOME") .. "/.config/xplr/lua/?.lua"

@@ -136,7 +136,7 @@ tryb () {
     tmux neww -t $sess:1 -n deploy -c ~/dokumente/isento/tryb_docker/tryb_compose/
     tmux neww -t $sess:2 -n back -c ~/dokumente/isento/lea-back/
 
-    tmux send-keys -t $sess:1 "docker-compose start" C-m
+    tmux send-keys -t $sess:1 "docker compose start" C-m
     tmux send-keys -t $sess:2 "mvn spring-boot:run"
 
     tmux select-window -t $sess:0 \; attach -t $sess
@@ -211,18 +211,16 @@ tk () {
     alacritty-themes Tokyonight_Night
 
     # neovim
-    sed -i 's/colorscheme gruvbox/colorscheme tokyonight/' ~/.config/nvim/config/theme.vim
-    sed -i 's/gruvbox/tokyonight/' ~/.config/nvim/lua/gruv_line.lua
+    sed -i 's/colorscheme gruvbox/colorscheme tokyonight/g' ~/.config/nvim/config/theme.vim
+    sed -i 's/gruvbox/tokyonight/g' ~/.config/nvim/lua/gruv_line.lua
 
     manual='s/b8bb26/9ece6a/g; s/fabd2f/e0af68/g; s/fb4934/f7768e/g; s/1d2021/1a1b26/g; s/ebdbb2/19b1d6/g; s/fe8019/e0af67/g; s/d3869b/9a7ecc/g'
 
-    # xmobar
     sed -i $manual ~/.xmonad/xmobar.hs
-
-    # firefox
     sed -i $manual $(fd 'userChrome.css$' ~/.mozilla/firefox)
+    sed -i $manual ~/.config/zathura/zathurarc
 
-    sed -i 's/gruvbox/tokyonight' /etc/X11/xdm/Xsetup_0
+    doas sed -i 's/gruvbox/tokyonight/g' /etc/X11/xdm/Xsetup_0
     xrdb ~/.Xresources.tokyonight
 
     xmonad --recompile
@@ -237,13 +235,11 @@ gr () {
 
     manual='s/9ece6a/b8bb26/g; s/e0af68/fabd2f/g; s/f7768e/fb4934/g; s/1a1b26/1d2021/g; s/19b1d6/ebdbb2/g; s/e0af67/fe8019/g; s/9a7ecc/d3869b/g'
 
-    # xmobar
     sed -i $manual ~/.xmonad/xmobar.hs
-
-    # firefox
     sed -i $manual $(fd 'userChrome.css$' ~/.mozilla/firefox)
+    sed -i $manual ~/.config/zathura/zathurarc
 
-    sed -i 's/tokyonight/gruvbox' /etc/X11/xdm/Xsetup_0
+    doas sed -i 's/tokyonight/gruvbox/' /etc/X11/xdm/Xsetup_0
     xrdb ~/.Xresources.gruvbox
 
     xmonad --recompile

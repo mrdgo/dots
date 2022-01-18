@@ -1,12 +1,7 @@
 !Tokyo Night theme
-
 *foreground: #a9b1d6
 *background: #1a1b26
 *cursorColor: #a9b1d6
-
-
-*color223: #a9b1d6
-*color235: #20212c
 
 ! terminal padding color
 *borderColor: #1a1b26

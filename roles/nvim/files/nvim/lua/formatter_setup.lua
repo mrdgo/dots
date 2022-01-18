@@ -66,12 +66,10 @@ require("formatter").setup({
 	},
 })
 
-vim.api.nvim_set_keymap("n", "<Leader>ff", "<cmd>Format<CR>", { noremap = true })
-
 vim.cmd([[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.java,*.ts,*.lua,*.py FormatWrite
+  autocmd BufWritePost *.java,*.ts,*.lua,*.py,*.clj FormatWrite
   autocmd BufWritePost *.ts EslintFixAll
 augroup END
 ]])

@@ -1,6 +1,6 @@
 """""""""""""" theme
 set background=dark
-colorscheme tokyonight
+colorscheme gruvbox
 
 let g:Guifont="Mononki Nerd Font:13"
 

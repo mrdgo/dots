@@ -299,8 +299,7 @@ return require("packer").startup(function(use)
 				create_hl_autocmd = true,
 			})
 			-- Set up `f` as general hop hotkey to hint character
-			vim.api.nvim_set_keymap("n", "f", "<cmd>lua require'hop'.hint_char1()<cr>", {})
-			vim.api.nvim_set_keymap("x", "f", "<cmd>lua require'hop'.hint_char1()<cr>", {})
+			vim.api.nvim_set_keymap("n", "<Leader>f", "<cmd>HopChar1MW<cr>", {})
 
 			-- Set up actions in normal mode
 			-- local actions = { "d", "c", "y", "ys" }

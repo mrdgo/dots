@@ -6,7 +6,7 @@ local devicons = require("nvim-web-devicons")
 local utils = require("utils")
 local appearance = require("appearance")
 local icons = appearance.icons
-local theme_map = appearance.color_map[vim.g.colors_name] or appearance.color_map["tokyonight"]
+local theme_map = appearance.color_map[vim.g.colors_name] or appearance.color_map["gruvbox"]
 local colors = theme_map[vim.opt.background:get()] or theme_map["dark"]
 
 gl.short_line_list = {
