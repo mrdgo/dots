@@ -120,7 +120,14 @@ return require("packer").startup(function(use)
 	})
 
 	--use 'jubnzv/virtual-types.nvim'
-	use("ray-x/lsp_signature.nvim")
+
+	use({
+		"ray-x/lsp_signature.nvim",
+		config = function()
+			require("lsp_signature").setup({ toggle_key = "<C-l>" })
+		end,
+	})
+
 	use("folke/lsp-colors.nvim")
 	use({
 		"norcalli/nvim-colorizer.lua",

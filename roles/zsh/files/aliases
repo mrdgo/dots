@@ -15,8 +15,6 @@ alias pi1='ssh -J ty82xile@i4lab1.cs.fau.de pi@maximPi1'
 alias pi2='ssh -J ty82xile@i4lab1.cs.fau.de pi@maximPi2'
 alias bello="ssh -t -J ty82xile@i4lab1.cs.fau.de ty82xile@faui49bello3 'bash'"
 
-# master thesis
-alias cma="cd ~/dokumente/isento/gps"
 alias pma="cd ~/dokumente/isento/gps && source venv_gps/bin/activate"
 
 alias gstart="gcloud compute instances start eval-compute-3"
@@ -128,13 +126,17 @@ bld () {
 }
 
 tryb () {
+    66-start -t docker dockerd
+
     sess=tryb
     tmux new-session -d -s $sess -c ~/dokumente/isento/lea-front/
 
     # create windows
     tmux rename-window -t $sess:0 front
-    tmux neww -t $sess:1 -n deploy -c ~/dokumente/isento/tryb_docker/tryb_compose/
-    tmux neww -t $sess:2 -n back -c ~/dokumente/isento/lea-back/
+    tmux neww -t $sess:1 -n docker -c ~/dokumente/isento/tryb_docker/tryb_compose/
+    tmux neww -t $sess:2 -n back-run -c ~/dokumente/isento/lea-back/
+    tmux neww -t $sess:3 -n back-dev -c ~/dokumente/isento/lea-back/
+    tmux neww -t $sess:4 -n secrets -c ~/dokumente/isento/lea-secrets/
 
     tmux send-keys -t $sess:1 "docker compose start" C-m
     tmux send-keys -t $sess:2 "mvn spring-boot:run"
@@ -151,8 +153,8 @@ cl () {
     tmux neww -t $sess:1 -n repl -c ~/dokumente/isento/clj-back/
     tmux neww -t $sess:2 -n run -c ~/dokumente/isento/clj-back/
 
-    tmux send-keys -t $sess:1 "lein repl" C-m
     tmux send-keys -t $sess:0 "nvim" C-m
+    tmux send-keys -t $sess:1 "lein repl" C-m
     tmux send-keys -t $sess:2 "lein test"
 
     tmux select-window -t $sess:0 \; attach -t $sess
@@ -160,8 +162,8 @@ cl () {
 
 gps () {
     sess=tryb
-    tmux neww -t $sess:3 gps -c ~/dokumente/isento/gps/branches/development/
-    tmux send-keys -t $sess:3 "source ../../venv_gps/bin/activate" C-m
+    tmux neww -t $sess:5 gps -c ~/dokumente/isento/gps/branches/development/
+    tmux send-keys -t $sess:5 "source ../../venv_gps/bin/activate" C-m
 }
 
 alias 66-all='doas 66-all -z'
@@ -220,6 +222,7 @@ tk () {
     sed -i $manual $(fd 'userChrome.css$' ~/.mozilla/firefox)
     sed -i $manual ~/.config/zathura/zathurarc
 
+    sed -i 's/gruvbox/tokyonight/' ~/.xinitrc
     doas sed -i 's/gruvbox/tokyonight/g' /etc/X11/xdm/Xsetup_0
     xrdb ~/.Xresources.tokyonight
 
@@ -239,6 +242,7 @@ gr () {
     sed -i $manual $(fd 'userChrome.css$' ~/.mozilla/firefox)
     sed -i $manual ~/.config/zathura/zathurarc
 
+    sed -i 's/tokyonight/gruvbox/' ~/.xinitrc
     doas sed -i 's/tokyonight/gruvbox/' /etc/X11/xdm/Xsetup_0
     xrdb ~/.Xresources.gruvbox
 
