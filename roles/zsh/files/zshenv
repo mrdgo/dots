@@ -1,19 +1,9 @@
 # only include what is present
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-
-if [ -d "/usr/lib/dart/bin" ] ; then
-    export PATH="$PATH:/usr/lib/dart/bin"
-fi
-
-if [ -d "$HOME/flutter/bin" ] ; then
-    export PATH="$PATH:$HOME/flutter/bin"
-fi
+for bin_dir in "$HOME/bin $HOME/.local/bin $HOME/flutter/bin $HOME/.cache/paru/clone/python38/pkg/python38/usr/bin"; do
+    if [ -d $bin_dir ] ; then
+        export PATH="$PATH:$bin_dir"
+    fi
+done
 
 export BROWSER="firefox"
 export PAGER="nvimpager"
