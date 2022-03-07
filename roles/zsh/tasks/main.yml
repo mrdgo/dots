@@ -40,6 +40,19 @@
     state: hard
     force: yes
 
+- name: zsh custom config dir
+  file:
+    path: "~/.zshcustom"
+    state: directory
+    mode: "u=rwx,g=rwx,o=rwx"
+
+- name: Setup gico completion
+  file:
+    src: "{{ dotfiles_home }}/roles/zsh/files/gico.completion.zsh"
+    dest: "~/.zshcustom/gico.completion.zsh"
+    state: hard
+    force: yes
+
 - name: ngrok config dir
   file:
     path: "~/.ngrok2"
