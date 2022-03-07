@@ -1,7 +1,7 @@
 # only include what is present
-for bin_dir in "$HOME/bin $HOME/.local/bin $HOME/flutter/bin $HOME/.cache/paru/clone/python38/pkg/python38/usr/bin"; do
-    if [ -d $bin_dir ] ; then
-        export PATH="$PATH:$bin_dir"
+for bin_dir in `cat ~/.bin_dirs`; do
+    if [ -d "$HOME/$bin_dir" ] ; then
+        export PATH="$PATH:$HOME/$bin_dir"
     fi
 done
 

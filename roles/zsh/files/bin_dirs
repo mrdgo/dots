@@ -1,0 +1,5 @@
+bin
+.local/bin
+flutter/bin
+.cache/paru/clone/python38/pkg/python38/usr/bin
+go/bin

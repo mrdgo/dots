@@ -47,6 +47,8 @@ if [ -f "/usr/share/zsh/scripts/zplug/init.zsh" ] ; then
 
     zplug "jeffreytse/zsh-vi-mode"
     zplug "zsh-users/zsh-syntax-highlighting"
+    zplug "greymd/docker-zsh-completion"
+    zplug "ptavares/zsh-z"
 
     # Install plugins if there are plugins that have not been installed
     if ! zplug check; then
@@ -58,6 +60,10 @@ if [ -f "/usr/share/zsh/scripts/zplug/init.zsh" ] ; then
 
     # Then, source plugins and add commands to $PATH
     zplug load
+fi
+
+if [ -f "$HOME/.zshcustom/gico.completion.zsh" ] ; then
+  source "$HOME/.zshcustom/gico.completion.zsh"
 fi
 
 # export NVM_DIR="$HOME/.nvm"

@@ -129,14 +129,14 @@ tryb () {
     66-start -t docker dockerd
 
     sess=tryb
-    tmux new-session -d -s $sess -c ~/dokumente/isento/lea-front/
+    tmux new-session -d -s $sess -c ~/dokumente/isento/tryb/frontend
 
     # create windows
     tmux rename-window -t $sess:0 front
-    tmux neww -t $sess:1 -n docker -c ~/dokumente/isento/tryb_docker/tryb_compose/
-    tmux neww -t $sess:2 -n back-run -c ~/dokumente/isento/lea-back/
-    tmux neww -t $sess:3 -n back-dev -c ~/dokumente/isento/lea-back/
-    tmux neww -t $sess:4 -n secrets -c ~/dokumente/isento/lea-secrets/
+    tmux neww -t $sess:1 -n docker   -c ~/dokumente/isento/tryb/environment/tryb_compose
+    tmux neww -t $sess:2 -n back-run -c ~/dokumente/isento/tryb/backend/
+    tmux neww -t $sess:3 -n back-dev -c ~/dokumente/isento/tryb/backend/
+    tmux neww -t $sess:4 -n secrets  -c ~/dokumente/isento/tryb/secrets/
 
     tmux send-keys -t $sess:1 "docker compose start" C-m
     tmux send-keys -t $sess:2 "mvn spring-boot:run"
