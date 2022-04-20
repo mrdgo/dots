@@ -36,7 +36,7 @@ alias z="devour zathura"
 alias o="devour okular"
 alias d="devour display"
 alias vlc="cvlc --key-quit q"
-alias minecraft="devour ~/.minecraft/launcher/minecraft-launcher"
+alias minecraft="JAVA_HOME=/usr/lib/jvm/java-17-openjdk/ devour ~/.minecraft/launcher/minecraft-launcher"
 
 # youtube-dl
 alias yta-aac="youtube-dl --extract-audio --audio-format aac "
@@ -61,17 +61,21 @@ alias .3="cd ../../.."
 alias .4="cd ../../../.."
 alias .5="cd ../../../../.."
 
-alias exa='exa --icons --group-directories-first'
-alias ls='exa'
-alias ll='exa -alF'
-alias la='exa -a'
-alias l='exa -F'
-alias lx='exa -lbhHma@ --time-style=default --color-scale'
-alias lall='exa -lbhHigUmuSa --time-style=long-iso'  # all list
+# pretty ls
+alias exac='exa --icons --group-directories-first'
+alias ls='exac'
+alias ll='exac -alF'
+alias la='exac -a'
+alias l='exac -F'
+alias lx='exac -lbhHma@ --time-style=default --color-scale'
+alias lall='exac -lbhHigUmuSa --time-style=long-iso'  # all list
+
+# pretty copy
+alias cp='ptcp'
 
 # speciality views
 alias lS='exa -1'			                                            # one column, just names
-alias lt='exa --tree --level=2'                                         # tree
+alias lt='exac --tree --level=2'                                         # tree
 
 alias grep='rg'
 alias ps='procs'
@@ -87,8 +91,7 @@ alias dv='setxkbmap us -variant dvorak-intl'
 alias x='$(xplr)'
 alias p='paru'
 alias psc='paru -Sc --noconfirm'
-alias docker='doas docker'
-alias dk="doas lazydocker"
+alias dk="lazydocker"
 
 ### ARCHIVE EXTRACTION
 # usage: ex <file>
@@ -126,20 +129,21 @@ bld () {
 }
 
 tryb () {
-    66-start -t docker dockerd
-
     sess=tryb
-    tmux new-session -d -s $sess -c ~/dokumente/isento/tryb/frontend
+    tmux new-session -d -s $sess -c ~/dokumente/isento
 
     # create windows
-    tmux rename-window -t $sess:0 front
-    tmux neww -t $sess:1 -n docker   -c ~/dokumente/isento/tryb/environment/tryb_compose
-    tmux neww -t $sess:2 -n back-run -c ~/dokumente/isento/tryb/backend/
-    tmux neww -t $sess:3 -n back-dev -c ~/dokumente/isento/tryb/backend/
-    tmux neww -t $sess:4 -n secrets  -c ~/dokumente/isento/tryb/secrets/
+    tmux rename-window -t $sess:0 tryb
+    tmux neww -t $sess:1 -n back -c ~/dokumente/isento/tryb/lea-back
+    tmux neww -t $sess:2 -n front -c ~/dokumente/isento/tryb/lea-front
+    tmux neww -t $sess:3 -n gps -c ~/dokumente/isento/gps
+    tmux neww -t $sess:4 -n gps-shell -c ~/dokumente/isento/gps
+    tmux neww -t $sess:5 -n agents -c ~/dokumente/isento/rlagents
+    tmux neww -t $sess:6 -n agents-shell -c ~/dokumente/isento/rlagents
 
-    tmux send-keys -t $sess:1 "docker compose start" C-m
-    tmux send-keys -t $sess:2 "mvn spring-boot:run"
+    tmux send-keys -t $sess:0 "cd tryb/tryb_docker && docker compose start" C-m
+    tmux send-keys -t $sess:4 "source ../venv_tryb/bin/activate" C-m
+    tmux send-keys -t $sess:6 "source ../venv_tryb/bin/activate" C-m
 
     tmux select-window -t $sess:0 \; attach -t $sess
 }
@@ -158,12 +162,6 @@ cl () {
     tmux send-keys -t $sess:2 "lein test"
 
     tmux select-window -t $sess:0 \; attach -t $sess
-}
-
-gps () {
-    sess=tryb
-    tmux neww -t $sess:5 gps -c ~/dokumente/isento/gps/branches/development/
-    tmux send-keys -t $sess:5 "source ../../venv_gps/bin/activate" C-m
 }
 
 alias 66-all='doas 66-all -z'
