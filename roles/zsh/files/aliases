@@ -54,6 +54,7 @@ alias m="make"
 alias g="git"
 alias lg="lazygit"
 alias tmux="TERM=xterm-256color tmux -f ~/.config/tmux.conf"
+alias dk="lazydocker"
 
 #alias ..="cd .." # bash legacy
 alias ...="cd ../.."
@@ -76,9 +77,6 @@ alias cp='ptcp'
 # speciality views
 alias lS='exa -1'			                                            # one column, just names
 alias lt='exac --tree --level=2'                                         # tree
-
-alias grep='rg'
-alias ps='procs'
 
 alias de='setxkbmap de'
 alias us='setxkbmap us -variant intl'
@@ -130,20 +128,15 @@ bld () {
 
 tryb () {
     sess=tryb
-    tmux new-session -d -s $sess -c ~/dokumente/isento
+    tmux new-session -d -s $sess -c ~/tryb/lea-front
 
     # create windows
-    tmux rename-window -t $sess:0 tryb
-    tmux neww -t $sess:1 -n back -c ~/dokumente/isento/tryb/lea-back
-    tmux neww -t $sess:2 -n front -c ~/dokumente/isento/tryb/lea-front
-    tmux neww -t $sess:3 -n gps -c ~/dokumente/isento/gps
-    tmux neww -t $sess:4 -n gps-shell -c ~/dokumente/isento/gps
-    tmux neww -t $sess:5 -n agents -c ~/dokumente/isento/rlagents
-    tmux neww -t $sess:6 -n agents-shell -c ~/dokumente/isento/rlagents
+    tmux rename-window -t $sess:0 front
+    tmux neww -t $sess:1 -n docker   -c ~/tryb/tryb_docker
+    tmux neww -t $sess:2 -n back -c ~/tryb/lea-back/
+    # tmux neww -t $sess:4 -n secrets  -c ~/tryb/lea-secrets/
 
-    tmux send-keys -t $sess:0 "cd tryb/tryb_docker && docker compose start" C-m
-    tmux send-keys -t $sess:4 "source ../venv_tryb/bin/activate" C-m
-    tmux send-keys -t $sess:6 "source ../venv_tryb/bin/activate" C-m
+    tmux send-keys -t $sess:1 "docker compose start" C-m
 
     tmux select-window -t $sess:0 \; attach -t $sess
 }
@@ -164,27 +157,14 @@ cl () {
     tmux select-window -t $sess:0 \; attach -t $sess
 }
 
-alias 66-all='doas 66-all -z'
-alias 66-dbctl='doas 66-dbctl -z'
-alias 66-disable='doas 66-disable -z'
-alias 66-enable='doas 66-enable -z'
-alias 66-env='doas 66-env -z'
-alias 66-hpr='doas 66-hpr -z'
-alias 66-init='doas 66-init -z'
-alias 66-inresolve='doas 66-inresolve -z'
-alias 66-inservice='doas 66-inservice -z'
-alias 66-instate='doas 66-instate -z'
-alias 66-intree='doas 66-intree -z'
-alias 66-ns='doas 66-ns -z'
-alias 66-nuke='doas 66-nuke -z'
-alias 66-parser='doas 66-parser -z'
-alias 66-scanctl='doas 66-scanctl -z'
-alias 66-scandir='doas 66-scandir -z'
-alias 66-start='doas 66-start -z'
-alias 66-stop='doas 66-stop -z'
-alias 66-svctl='doas 66-svctl -z'
-alias 66-tree='doas 66-tree -z'
-alias 66-update='doas 66-update -z'
+gps () {
+    sess=tryb
+    tmux neww -t $sess:5 gps -c ~/dokumente/isento/gps/branches/development/
+    tmux send-keys -t $sess:5 "source ../../venv_gps/bin/activate" C-m
+}
+
+alias 66-start='doas systemctl start'
+alias 66-stop='doas systemctl stop'
 
 lsgrok() {
   url=$(curl http://localhost:4040/api/tunnels 2>/dev/null | jq -r '.tunnels[0].public_url')

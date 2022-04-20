@@ -8,15 +8,15 @@
     # - role: bash
     #   tags:
     #     - bash
-    - role: doas
-      tags:
-        - doas
+    #- role: doas
+    #  tags:
+    #    - doas
     - role: dunst
       tags:
         - dunst
-    - role: dwm
-      tags:
-        - dwm
+    # - role: dwm
+    #   tags:
+    #     - dwm
     - role: git
       tags:
         - git

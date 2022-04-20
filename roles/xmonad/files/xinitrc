@@ -1,5 +1,6 @@
 #!/bin/sh
 export AWT_TOOLKIT=MToolkit
 export _JAVA_AWT_WM_NONREPARENTING=1
+setxkbmap us -variant dvorak-intl
 xrdb ~/.Xresources.gruvbox
 dbus-launch --sh-syntax xmonad || exec /home/maxim/.config/init_wm.sh
