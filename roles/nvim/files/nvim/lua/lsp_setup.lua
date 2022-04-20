@@ -10,6 +10,7 @@ local servers = {
 	"html",
 	"yamlls",
 	"clojure_lsp",
+	"sumneko_lua",
 }
 
 for _, lsp in ipairs(servers) do
@@ -24,30 +25,6 @@ sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=
 sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=
 sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=
 ]])
-
-USER = vim.fn.expand("$USER")
-local sumneko_root_path = "/home/maxim/.cache/nvim/lspconfig/sumneko_lua/lua-language-server"
-local sumneko_binary = "/home/maxim/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/bin/Linux/lua-language-server"
-
-require("lspconfig").sumneko_lua.setup(require("coq").lsp_ensure_capabilities({
-	on_attach = require("lsp_on_attach").on_attach,
-	cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
-	settings = {
-		Lua = {
-			runtime = {
-				version = "LuaJIT",
-				path = vim.split(package.path, ";"),
-			},
-			diagnostics = { globals = { "vim" } },
-			workspace = {
-				library = {
-					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-					[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-				},
-			},
-		},
-	},
-}))
 
 -- local lsPath = "/usr/lib/node_modules"
 -- local cmd = { "ngserver", "--stdio", "--ngProbeLocations", lsPath, "--tsProbeLocations", lsPath }

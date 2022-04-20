@@ -21,14 +21,14 @@
   become: yes
   become_user: aur_builder
 
-- name: Configure pacman
-  file:
-    src: "{{ dotfiles_home }}/roles/pacman/files/pacman.conf"
-    dest: "/etc/pacman.conf"
-    state: hard
-    force: yes
-  become: yes
-  become_user: root
+    #- name: Configure pacman
+    #  file:
+    #    src: "{{ dotfiles_home }}/roles/pacman/files/pacman.conf"
+    #    dest: "/etc/pacman.conf"
+    #    state: hard
+    #    force: yes
+    #  become: yes
+    #  become_user: root
 
 - name: Configure paru
   file:
@@ -47,19 +47,19 @@
   become_user: root
   become_method: sudo
 
-- name: Install packages from repo
-  community.general.pacman:
-    name: "{{ packages }}"
-    state: present
-  become: yes
-  become_user: root
-  become_method: sudo
+    #- name: Install packages from repo
+    #  community.general.pacman:
+    #    name: "{{ packages }}"
+    #    state: present
+    #  become: yes
+    #  become_user: root
+    #  become_method: sudo
 
-- name: Install packages from AUR
-  kewlfft.aur.aur:
-    name: "{{ aur_packages }}"
-    state: present
-    use: makepkg
+    #- name: Install packages from AUR
+    #  kewlfft.aur.aur:
+    #    name: "{{ aur_packages }}"
+    #    state: present
+    #    use: makepkg
 
 # - name: Remove packages
 #   community.general.pacman:

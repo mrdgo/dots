@@ -26,7 +26,7 @@ require("jdtls").start_or_attach({
 	init_options = {
 		bundles = {
 			vim.fn.glob(
-				"/opt/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.33.0.jar"
+				"/opt/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.36.0.jar"
 			),
 		},
 	},
