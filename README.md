@@ -28,8 +28,7 @@ pacman -S git ansible
 
 Install `pacman` and `AUR` for ansible:
 ```sh
-ansible-galaxy collection install community.general
-ansible-galaxy collection install kewlfft.aur
+ansible-galaxy collection install community.general kewlfft.aur
 ```
 
 ## Install all components
