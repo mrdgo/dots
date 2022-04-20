@@ -63,6 +63,17 @@ return require("packer").startup(function(use)
 	})
 
 	use({
+		"ms-jpq/chadtree",
+		branch = "chad",
+		run = function()
+			vim.cmd("CHADdeps")
+		end,
+		config = function()
+			require("chadtree_setup")
+		end,
+	})
+
+	use({
 		"kyazdani42/nvim-tree.lua",
 		config = function()
 			require("nvim-tree_setup")
@@ -99,6 +110,10 @@ return require("packer").startup(function(use)
 		config = function()
 			require("autopairs_setup")
 			require("coq")
+			require("coq_3p")({
+				{ src = "nvimlua", short_name = "nLUA" },
+				-- { src = "dap" },
+			})
 			require("lsp_setup")
 			vim.cmd("COQnow")
 		end,
@@ -107,7 +122,7 @@ return require("packer").startup(function(use)
 			{ "ms-jpq/coq_nvim", { branch = "coq" } },
 			{ "ms-jpq/coq.artifacts", { branch = "artifacts" } },
 			{ "windwp/nvim-autopairs" },
-			-- { "ms-jpq/coq.thirdparty", { branch = "3p" } },
+			{ "ms-jpq/coq.thirdparty", { branch = "3p" } },
 		},
 	})
 
@@ -177,6 +192,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- better: https://github.com/nvim-lualine/lualine.nvim
 	use({
 		"NTBBloodbath/galaxyline.nvim",
 		config = function()

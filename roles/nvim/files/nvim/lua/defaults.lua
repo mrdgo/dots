@@ -18,7 +18,7 @@ vim.o.hlsearch = false
 vim.o.incsearch = true
 vim.o.smartcase = true
 
-vim.o.laststatus = 2
+vim.o.laststatus = 3
 vim.o.colorcolumn = "80"
 vim.o.splitbelow = true
 vim.o.splitright = true
