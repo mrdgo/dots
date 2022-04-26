@@ -62,16 +62,16 @@ return require("packer").startup(function(use)
 		},
 	})
 
-	use({
-		"ms-jpq/chadtree",
-		branch = "chad",
-		run = function()
-			vim.cmd("CHADdeps")
-		end,
-		config = function()
-			require("chadtree_setup")
-		end,
-	})
+	-- use({
+	-- 	"ms-jpq/chadtree",
+	-- 	branch = "chad",
+	-- 	run = function()
+	-- 		vim.cmd("CHADdeps")
+	-- 	end,
+	-- 	config = function()
+	-- 		require("chadtree_setup")
+	-- 	end,
+	-- })
 
 	use({
 		"kyazdani42/nvim-tree.lua",
