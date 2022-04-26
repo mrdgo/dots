@@ -1,5 +1,16 @@
 vim.o.colorcolumn = "140"
 
+local java_debug = "/opt/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.36.0.jar"
+
+-- https://github.com/microsoft/vscode-java-test.git
+local vscode_java_test = "/opt/vscode-java-test/server/*.jar"
+
+local bundles = {
+	vim.fn.glob(java_debug),
+}
+
+vim.list_extend(bundles, vim.split(vim.fn.glob(vscode_java_test), "\n"))
+
 require("jdtls").start_or_attach({
 	cmd = {
 		"/usr/lib/jvm/java-11-openjdk/bin/java",
@@ -24,11 +35,7 @@ require("jdtls").start_or_attach({
 		"/home/maxim/.jdt",
 	},
 	init_options = {
-		bundles = {
-			vim.fn.glob(
-				"/opt/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.33.0.jar"
-			),
-		},
+		bundles = bundles,
 	},
 	root_dir = require("jdtls.setup").find_root({ "mvnw", "pom.xml", ".git" }),
 	settings = {

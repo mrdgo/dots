@@ -73,12 +73,12 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use({
-		"kyazdani42/nvim-tree.lua",
-		config = function()
-			require("nvim-tree_setup")
-		end,
-	})
+	-- use({
+	-- 	"kyazdani42/nvim-tree.lua",
+	-- 	config = function()
+	-- 		require("nvim-tree_setup")
+	-- 	end,
+	-- })
 
 	use({
 		"mfussenegger/nvim-dap",
@@ -90,6 +90,14 @@ return require("packer").startup(function(use)
 		config = function()
 			require("dap_setup")
 			require("dapui_setup")
+		end,
+	})
+
+	use({
+		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("trouble_setup")
 		end,
 	})
 
@@ -192,11 +200,18 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- better: https://github.com/nvim-lualine/lualine.nvim
+	-- use({
+	-- 	"NTBBloodbath/galaxyline.nvim",
+	-- 	config = function()
+	-- 		require("gruv_line")
+	-- 	end,
+	-- })
+
 	use({
-		"NTBBloodbath/galaxyline.nvim",
+		"nvim-lualine/lualine.nvim",
+		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 		config = function()
-			require("gruv_line")
+			require("lualine_setup")
 		end,
 	})
 
@@ -265,12 +280,12 @@ return require("packer").startup(function(use)
 	-- 	end,
 	-- })
 
-	use({
-		"akinsho/toggleterm.nvim",
-		config = function()
-			require("toggleterm_setup")
-		end,
-	})
+	-- use({
+	-- 	"akinsho/toggleterm.nvim",
+	-- 	config = function()
+	-- 		require("toggleterm_setup")
+	-- 	end,
+	-- })
 
 	use({
 		"max397574/better-escape.nvim",
