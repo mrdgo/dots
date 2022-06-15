@@ -256,10 +256,13 @@ return require("packer").startup(function(use)
 	use({
 		"Olical/conjure",
 		ft = { "clojure" },
+		'vimpostor/vim-tpipeline',
 		config = function()
 			vim.api.nvim_set_keymap("n", "<LocalLeader>et", "<cmd>ConjureCljRunCurrentTest<CR>", { noremap = true })
 			vim.api.nvim_set_keymap("n", "<LocalLeader>eR", "<cmd>ConjureCljRefreshAll<CR>", { noremap = true })
 		end,
+			vim.g.tpipeline_autoembed = 0
+		end
 	})
 
 	-- use({
