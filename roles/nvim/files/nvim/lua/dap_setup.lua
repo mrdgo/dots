@@ -1,27 +1,32 @@
 -- local dap =  require'dap'
 
+local leader = "<Leader>e"
+local dap_mappings = {
+	b = "toggle_breakpoint()",
+	r = 'repl.toggle({height = 15}, "belowright split")',
+	R = 'repl.toggle({}, "belowright vsplit")',
+	s = "step_over()",
+}
+
+local telescope_mappings = {
+	h = "commands()",
+	c = "configurations()",
+	B = "list_breakpoints()",
+	s = "variables()",
+}
+
 local opts = { noremap = false, silent = true }
 
-local map_dap = function(key, command)
-	vim.api.nvim_buf_set_keymap(0, "n", "<Leader>e" .. key, '<cmd>lua require"dap".' .. command .. "<CR>", opts)
+for key, command in pairs(dap_mappings) do
+	vim.api.nvim_buf_set_keymap(0, "n", leader .. key, '<cmd>lua require"dap".' .. command .. "<CR>", opts)
 end
 
-map_dap("b", "toggle_breakpoint()")
-map_dap("r", 'repl.toggle({height = 15}, "belowright split")')
-map_dap("R", 'repl.toggle({}, "belowright vsplit")')
-map_dap("s", "step_over()")
-
-local map_ext = function(key, command)
+for key, command in pairs(telescope_mappings) do
 	vim.api.nvim_buf_set_keymap(
 		0,
 		"n",
-		"<Leader>e" .. key,
+		leader .. key,
 		'<cmd>lua require"telescope".extensions.dap.' .. command .. "<CR><Esc>",
 		opts
 	)
 end
-
-map_ext("h", "commands()")
-map_ext("c", "configurations()")
-map_ext("B", "list_breakpoints()")
-map_ext("s", "variables()")

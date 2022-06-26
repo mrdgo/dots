@@ -64,8 +64,18 @@ require("jdtls").start_or_attach({
 
 		local opts = { noremap = false, silent = true }
 
+		local jdt_maps = {
+			oi = "organize_imports()",
+			ct = "test_class()",
+			nt = "test_nearest_method()",
+			-- ("e", "extract_variable()")
+
+			-- ("e", "extract_variable(true)")
+			-- ("m", "extract_method(true)")
+		}
+
 		-- Java specific
-		local map_jdt = function(key, cmd)
+		for key, cmd in pairs(jdt_maps) do
 			vim.api.nvim_buf_set_keymap(
 				bufnr,
 				"n",
@@ -74,13 +84,5 @@ require("jdtls").start_or_attach({
 				opts
 			)
 		end
-
-		map_jdt("oi", "organize_imports()")
-		map_jdt("ct", "test_class()")
-		map_jdt("nt", "test_nearest_method()")
-		-- map_jdt("e", "extract_variable()")
-
-		-- map_jdt("e", "extract_variable(true)")
-		-- map_jdt("m", "extract_method(true)")
 	end,
 })

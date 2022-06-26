@@ -1,16 +1,3 @@
-" set hidden
-" set showcmd wildmenu nolazyredraw
-" set cursorline cursorcolumn
-" set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smartindent
-" set nohlsearch incsearch smartcase
-" set laststatus=2
-" set cc=80
-" set splitbelow splitright
-" set number relativenumber
-
-" set linebreak breakindent
-" set showbreak="> "
-
 " solid underscore
 let &t_SI .= "\<Esc>[4 q"
 " solid block

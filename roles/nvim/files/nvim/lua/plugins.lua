@@ -39,7 +39,6 @@ return require("packer").startup(function(use)
 		config = function()
 			require("terminal").setup()
 			require("telescope_setup")
-			-- require("session_setup")
 		end,
 		requires = {
 			{ "nvim-lua/popup.nvim" },
@@ -54,8 +53,6 @@ return require("packer").startup(function(use)
 			{ "norcalli/nvim-terminal.lua" },
 			{ "camgraff/telescope-tmux.nvim" },
 			{ "sudormrfbin/cheatsheet.nvim" },
-			-- {"tami5/sqlite.lua"},
-			-- {"nvim-telescope/telescope-smart-history.nvim"},
 		},
 	})
 
@@ -252,10 +249,10 @@ return require("packer").startup(function(use)
 	})
 
 	use({
-		'vimpostor/vim-tpipeline',
+		"vimpostor/vim-tpipeline",
 		config = function()
 			vim.g.tpipeline_autoembed = 0
-		end
+		end,
 	})
 
 	use("tpope/vim-endwise")
