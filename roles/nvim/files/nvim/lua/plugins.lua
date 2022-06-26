@@ -18,8 +18,6 @@ pmap("s", "Sync")
 pmap("i", "Install")
 pmap("c", "Clean")
 
--- https://github.com/folke/trouble.nvim
-
 -- TypeScript
 -- https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
 -- https://github.com/jose-elias-alvarez/null-ls.nvim
@@ -42,7 +40,6 @@ return require("packer").startup(function(use)
 			require("terminal").setup()
 			require("telescope_setup")
 			-- require("session_setup")
-			require("git_wt_setup")
 		end,
 		requires = {
 			{ "nvim-lua/popup.nvim" },
@@ -51,27 +48,27 @@ return require("packer").startup(function(use)
 			{ "nvim-telescope/telescope-media-files.nvim" },
 			{ "nvim-telescope/telescope-packer.nvim" },
 			{ "nvim-telescope/telescope-project.nvim" },
+			{ "nvim-telescope/telescope-ui-select.nvim" },
 			-- { "rmagatti/session-lens" },
 			-- { "rmagatti/auto-session" },
 			{ "norcalli/nvim-terminal.lua" },
 			{ "camgraff/telescope-tmux.nvim" },
 			{ "sudormrfbin/cheatsheet.nvim" },
-			{ "ThePrimeagen/git-worktree.nvim" },
 			-- {"tami5/sqlite.lua"},
 			-- {"nvim-telescope/telescope-smart-history.nvim"},
 		},
 	})
 
-	-- use({
-	-- 	"ms-jpq/chadtree",
-	-- 	branch = "chad",
-	-- 	run = function()
-	-- 		vim.cmd("CHADdeps")
-	-- 	end,
-	-- 	config = function()
-	-- 		require("chadtree_setup")
-	-- 	end,
-	-- })
+	use({
+		"ms-jpq/chadtree",
+		branch = "chad",
+		run = function()
+			vim.cmd("CHADdeps")
+		end,
+		config = function()
+			require("chadtree_setup")
+		end,
+	})
 
 	-- use({
 	-- 	"kyazdani42/nvim-tree.lua",
@@ -86,7 +83,7 @@ return require("packer").startup(function(use)
 			{ "rcarriga/nvim-dap-ui" },
 			{ "nvim-telescope/telescope-dap.nvim" },
 		},
-		ft = { "python", "java" },
+		-- ft = { "python", "java" },
 		config = function()
 			require("dap_setup")
 			require("dapui_setup")
@@ -179,13 +176,13 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- use({
-	-- 	"folke/todo-comments.nvim",
-	-- 	requires = "nvim-lua/plenary.nvim",
-	-- 	config = function()
-	-- 		require("todo-comments").setup({})
-	-- 	end,
-	-- })
+	use({
+		"folke/todo-comments.nvim",
+		requires = "nvim-lua/plenary.nvim",
+		config = function()
+			require("todo-comments").setup({})
+		end,
+	})
 
 	use({
 		"ThePrimeagen/harpoon",
@@ -254,16 +251,20 @@ return require("packer").startup(function(use)
 	})
 
 	use({
-		"Olical/conjure",
-		ft = { "clojure" },
 		'vimpostor/vim-tpipeline',
 		config = function()
-			vim.api.nvim_set_keymap("n", "<LocalLeader>et", "<cmd>ConjureCljRunCurrentTest<CR>", { noremap = true })
-			vim.api.nvim_set_keymap("n", "<LocalLeader>eR", "<cmd>ConjureCljRefreshAll<CR>", { noremap = true })
-		end,
 			vim.g.tpipeline_autoembed = 0
 		end
 	})
+
+	-- use({
+	-- 	"Olical/conjure",
+	-- 	ft = { "clojure" },
+	-- 	config = function()
+	-- 		vim.api.nvim_set_keymap("n", "<LocalLeader>et", "<cmd>ConjureCljRunCurrentTest<CR>", { noremap = true })
+	-- 		vim.api.nvim_set_keymap("n", "<LocalLeader>eR", "<cmd>ConjureCljRefreshAll<CR>", { noremap = true })
+	-- 	end,
+	-- })
 
 	-- use({
 	-- 	"jiangmiao/auto-pairs",
@@ -313,13 +314,13 @@ return require("packer").startup(function(use)
 	--    ft = {'markdown'}
 	--}
 
-	use({
-		"lewis6991/spellsitter.nvim",
-		ft = { "tex" },
-		config = function()
-			require("spellsitter").setup()
-		end,
-	})
+	-- use({
+	-- 	"lewis6991/spellsitter.nvim",
+	-- 	ft = { "tex" },
+	-- 	config = function()
+	-- 		require("spellsitter").setup()
+	-- 	end,
+	-- })
 
 	use("godlygeek/tabular")
 	use({

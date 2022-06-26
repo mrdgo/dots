@@ -30,8 +30,8 @@ return {
 			map(key, 'require"telescope.builtin".' .. cmd)
 		end
 
-		-- map_tel("r", "lsp_references()")
-		map_tel("A", "lsp_code_actions()")
+		map("A", "vim.lsp.buf.code_action()")
+
 		map_tel("g", "lsp_document_diagnostics()")
 		map_tel("i", "lsp_implementations()")
 		map_tel("d", "lsp_definitions()")

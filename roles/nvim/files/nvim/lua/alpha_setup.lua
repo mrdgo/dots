@@ -91,8 +91,8 @@ local function button(sc, txt, keybind, keybind_opts)
 end
 
 math.randomseed(os.time())
-local index = math.floor(math.random() * 6 + 1)
-local header_text_now = require'banners'[index]
+-- local index = math.floor(math.random() * 2 + 1)
+local header_text_now = require'banners'[1]
 
 -- require"alpha".setup(startify.opts)
 require"alpha".setup {

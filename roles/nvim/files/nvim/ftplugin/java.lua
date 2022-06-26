@@ -76,8 +76,8 @@ require("jdtls").start_or_attach({
 		end
 
 		map_jdt("oi", "organize_imports()")
-		map_jdt("tc", "test_class()")
-		map_jdt("tn", "test_nearest_method()")
+		map_jdt("ct", "test_class()")
+		map_jdt("nt", "test_nearest_method()")
 		-- map_jdt("e", "extract_variable()")
 
 		-- map_jdt("e", "extract_variable(true)")
