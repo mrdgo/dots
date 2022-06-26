@@ -70,12 +70,13 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- use({
-	-- 	"kyazdani42/nvim-tree.lua",
-	-- 	config = function()
-	-- 		require("nvim-tree_setup")
-	-- 	end,
-	-- })
+	use({
+		"anuvyklack/hydra.nvim",
+		requires = "anuvyklack/keymap-layer.nvim", -- needed only for pink hydras
+		config = function()
+			require("hydra_setup")
+		end,
+	})
 
 	use({
 		"mfussenegger/nvim-dap",
@@ -257,39 +258,9 @@ return require("packer").startup(function(use)
 		end
 	})
 
-	-- use({
-	-- 	"Olical/conjure",
-	-- 	ft = { "clojure" },
-	-- 	config = function()
-	-- 		vim.api.nvim_set_keymap("n", "<LocalLeader>et", "<cmd>ConjureCljRunCurrentTest<CR>", { noremap = true })
-	-- 		vim.api.nvim_set_keymap("n", "<LocalLeader>eR", "<cmd>ConjureCljRefreshAll<CR>", { noremap = true })
-	-- 	end,
-	-- })
-
-	-- use({
-	-- 	"jiangmiao/auto-pairs",
-	-- 	config = function()
-	-- 		require("auto_pairs_setup")
-	-- 	end,
-	-- })
-
 	use("tpope/vim-endwise")
 	use("tpope/vim-repeat")
 	use("tpope/vim-surround")
-
-	-- use({
-	-- 	"tpope/vim-fugitive",
-	-- 	config = function()
-	-- 		require("fugitive_setup")
-	-- 	end,
-	-- })
-
-	-- use({
-	-- 	"akinsho/toggleterm.nvim",
-	-- 	config = function()
-	-- 		require("toggleterm_setup")
-	-- 	end,
-	-- })
 
 	use({
 		"max397574/better-escape.nvim",
@@ -305,14 +276,6 @@ return require("packer").startup(function(use)
 
 	use({ "NLKNguyen/c-syntax.vim", ft = { "c", "cpp" } })
 	use({ "vim-scripts/gnuplot-syntax-highlighting", ft = { "gnuplot" } })
-	use({ "lervag/vimtex", ft = { "tex", "bib" } })
-	-- use { 'cespare/vim-toml', ft = {'toml'} }
-
-	--use {
-	--    'plasticboy/vim-markdown',
-	--    config = function() vim.cmd'source $HOME/.config/nvim/config/markdown.vim' end,
-	--    ft = {'markdown'}
-	--}
 
 	-- use({
 	-- 	"lewis6991/spellsitter.nvim",

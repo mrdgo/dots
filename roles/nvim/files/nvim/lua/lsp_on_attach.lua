@@ -13,6 +13,7 @@ return {
 			map(key, "vim." .. cmd)
 		end
 
+		map_lsp("A", "lsp.buf.code_action()")
 		map_lsp("k", "lsp.buf.hover()")
 		map_lsp("D", "lsp.buf.declaration()")
 		-- map_lsp("d", "lsp.buf.definition()")
@@ -35,6 +36,6 @@ return {
 		map_tel("g", "lsp_document_diagnostics()")
 		map_tel("i", "lsp_implementations()")
 		map_tel("d", "lsp_definitions()")
-		map_tel("S", "lsp_document_symbols()")
+		map_tel("y", "lsp_document_symbols()")
 	end,
 }

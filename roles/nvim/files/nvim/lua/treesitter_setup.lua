@@ -15,8 +15,6 @@ require("nvim-treesitter.configs").setup({
 		"yaml",
 		"toml",
 		"lua",
-		"latex",
-		"bibtex",
 		"json",
 		"haskell",
 		"bash",
