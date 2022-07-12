@@ -4,7 +4,7 @@ vim.api.nvim_set_var("chadtree_settings", {
 		change_dir = { "l", "c" },
 		h_split = { "s" },
 		v_split = { "v" },
-		select = { "<Space>" },
+		select = { "t" },
 		new = { "n" },
 	},
 	options = {
@@ -38,4 +38,4 @@ vim.api.nvim_set_var("chadtree_settings", {
 	},
 })
 
-vim.api.nvim_set_keymap("n", "<Leader>ut", "<cmd>CHADopen<CR>", {})
+vim.keymap.set("n", "<Leader>ut", "<cmd>CHADopen<CR>", {})

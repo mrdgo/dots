@@ -44,11 +44,3 @@ require("dapui").setup({
 		max_type_length = nil, -- Can be integer or nil.
 	},
 })
-
-local opts = { noremap = false, silent = true }
-local map_dapui = function(mode, key, command)
-	vim.api.nvim_buf_set_keymap(0, mode, "<Leader>e" .. key, '<cmd>lua require"dapui".' .. command .. "<CR>", opts)
-end
-
-map_dapui("n", "u", "toggle()")
-map_dapui("v", "e", "eval()")

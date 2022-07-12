@@ -1,10 +1,9 @@
 local execute = vim.api.nvim_command
-local fn = vim.fn
 
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
-if fn.empty(fn.glob(install_path)) > 0 then
-	fn.system({ "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path })
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+	vim.fn.system({ "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path })
 	execute("packadd packer.nvim")
 end
 
@@ -91,8 +90,9 @@ return require("packer").startup(function(use)
 		},
 		-- ft = { "python", "java" },
 		config = function()
-			require("dap_setup")
-			require("dapui_setup")
+			require("dap_hydra")
+			-- require("dap_setup")
+			-- require("dapui_setup")
 		end,
 	})
 
@@ -194,12 +194,8 @@ return require("packer").startup(function(use)
 		"ThePrimeagen/harpoon",
 		requires = { "nvim-lua/plenary.nvim" },
 		config = function()
-			local function nmap(keys, cmd)
-				vim.api.nvim_set_keymap("n", keys, cmd, { noremap = true, silent = true })
-			end
-			-- require"harpoon".setup()
-			nmap("<Leader><Leader>a", "<cmd>lua require'harpoon.mark'.add_file()<CR>")
-			nmap("<Leader><Leader>o", "<cmd>lua require'harpoon.ui'.toggle_quick_menu()<CR>")
+			vim.keymap.set("n", "<Leader>a", require("harpoon.mark").add_file)
+			vim.keymap.set("n", "<Leader>o", require("harpoon.ui").toggle_quick_menu)
 		end,
 	})
 

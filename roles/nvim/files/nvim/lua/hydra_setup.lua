@@ -17,25 +17,6 @@ Hydra({
 	},
 })
 
--- Hydra({
--- 	name = "Debug mode",
--- 	mode = "n",
--- 	hint = "resize mode",
--- 	config = {
--- 		color = "teal",
--- 		invoke_on_body = true,
--- 		hint = {
--- 			-- position = "upp",
--- 			border = "rounded",
--- 		},
--- 	},
--- 	body = "",
--- 	heads = {
--- 		{ "+", "C-w +" },
--- 		{ "-", "C-w -" },
--- 	},
--- })
-
 local buffer_hydra = Hydra({
 	name = "Buffer",
 	config = {
