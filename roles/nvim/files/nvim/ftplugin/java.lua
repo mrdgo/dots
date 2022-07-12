@@ -68,10 +68,8 @@ require("jdtls").start_or_attach({
 			oi = "organize_imports()",
 			ct = "test_class()",
 			nt = "test_nearest_method()",
-			-- ("e", "extract_variable()")
-
-			-- ("e", "extract_variable(true)")
-			-- ("m", "extract_method(true)")
+			-- e = "extract_variable(true)"
+			-- m = "extract_method(true)"
 		}
 
 		-- Java specific

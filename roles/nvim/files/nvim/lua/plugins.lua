@@ -69,9 +69,17 @@ return require("packer").startup(function(use)
 
 	use({
 		"anuvyklack/hydra.nvim",
-		requires = "anuvyklack/keymap-layer.nvim", -- needed only for pink hydras
+		requires = {
+			"anuvyklack/keymap-layer.nvim",
+			-- "romgrk/barbar.nvim",
+			"kyazdani42/nvim-web-devicons",
+			"jlanzarotta/bufexplorer",
+			"sindrets/winshift.nvim",
+			"mrjones2014/smart-splits.nvim",
+		},
 		config = function()
-			require("hydra_setup")
+			require("telescope_hydra")
+			-- require("hydra_setup")
 		end,
 	})
 

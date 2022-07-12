@@ -30,7 +30,6 @@ require("telescope").setup({
 		file_previewer = previewers.vim_buffer_cat.new,
 		grep_previewer = previewers.vim_buffer_vimgrep.new,
 		qflist_previewer = previewers.vim_buffer_qflist.new,
-		--buffer_previewer_maker = require 'telescope.previewers'.buffer_previewer_maker
 		path_display = { "smart" },
 		history = {
 			path = "~/.config/nvim/databases/telescope_history.sqlite3",
@@ -47,23 +46,7 @@ require("telescope").setup({
 			override_file_sorter = true,
 		},
 		["ui-select"] = {
-			require("telescope.themes").get_dropdown({
-				-- even more opts
-			}),
-
-			-- pseudo code / specification for writing custom displays, like the one
-			-- for "codeactions"
-			-- specific_opts = {
-			--   [kind] = {
-			--     make_indexed = function(items) -> indexed_items, width,
-			--     make_displayer = function(widths) -> displayer
-			--     make_display = function(displayer) -> function(e)
-			--     make_ordinal = function(e) -> string
-			--   },
-			--   -- for example to disable the custom builtin "codeactions" display
-			--      do the following
-			--   codeactions = false,
-			-- }
+			require("telescope.themes").get_dropdown({}),
 		},
 	},
 })
@@ -71,33 +54,3 @@ require("telescope").setup({
 require("telescope").load_extension("fzy_native")
 require("telescope").load_extension("media_files")
 require("telescope").load_extension("ui-select")
--- require("telescope").load_extension("session-lens")
--- require"telescope".load_extension"smart_history"
-
-local map = function(key, cmd)
-	vim.api.nvim_set_keymap(
-		"n",
-		"<Leader>u" .. key,
-		'<cmd>lua require"telescope.builtin".' .. cmd .. "<CR>",
-		{ noremap = false, silent = true }
-	)
-end
-
-map("f", "find_files()")
-map("g", "live_grep()")
-map("b", "buffers({ignore_current_buffer = true})")
-map("h", "help_tags()")
-map("l", "current_buffer_fuzzy_find()")
-
-local function map_ext(key, cmd)
-	vim.api.nvim_set_keymap(
-		"n",
-		"<Leader>u" .. key,
-		'<cmd>lua require"telescope".extensions.' .. cmd .. "<CR>",
-		{ noremap = true, silent = true }
-	)
-end
-
-map_ext("u", "packer.plugins()")
-map_ext("w", "tmux.windows{}")
-map_ext("s", "tmux.sessions{}")
