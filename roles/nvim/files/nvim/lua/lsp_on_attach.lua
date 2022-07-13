@@ -2,7 +2,7 @@ local function on_attach(a, bufnr)
 	require("lsp_signature").on_attach(a, bufnr)
 	--require'virtualtypes'.on_attach(a, bufnr)
 
-	local vim = vim
+	local vim = vim.buf
 	local telescope = require("telescope.builtin")
 	local keymaps = {
 		A = vim.lsp.code_action,
