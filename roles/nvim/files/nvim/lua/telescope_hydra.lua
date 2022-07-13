@@ -1,5 +1,3 @@
-local Hydra = require("hydra")
-
 local function cmd(command)
 	return table.concat({ "<Cmd>", command, "<CR>" })
 end
@@ -18,7 +16,7 @@ local hint = [[
 				 _q_: escape
 ]]
 
-Hydra({
+require("hydra")({
 	name = "Telescope",
 	hint = hint,
 	config = {

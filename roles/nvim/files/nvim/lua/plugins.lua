@@ -38,6 +38,7 @@ return require("packer").startup(function(use)
 		config = function()
 			require("terminal").setup()
 			require("telescope_setup")
+			require("telescope_hydra")
 		end,
 		requires = {
 			{ "nvim-lua/popup.nvim" },
@@ -47,11 +48,11 @@ return require("packer").startup(function(use)
 			{ "nvim-telescope/telescope-packer.nvim" },
 			{ "nvim-telescope/telescope-project.nvim" },
 			{ "nvim-telescope/telescope-ui-select.nvim" },
-			-- { "rmagatti/session-lens" },
-			-- { "rmagatti/auto-session" },
 			{ "norcalli/nvim-terminal.lua" },
 			{ "camgraff/telescope-tmux.nvim" },
 			{ "sudormrfbin/cheatsheet.nvim" },
+			{ "anuvyklack/hydra.nvim" },
+			-- "anuvyklack/keymap-layer.nvim",
 		},
 	})
 
@@ -67,40 +68,17 @@ return require("packer").startup(function(use)
 	})
 
 	use({
-		"anuvyklack/hydra.nvim",
-		requires = {
-			"anuvyklack/keymap-layer.nvim",
-			-- "romgrk/barbar.nvim",
-			"kyazdani42/nvim-web-devicons",
-			"jlanzarotta/bufexplorer",
-			"sindrets/winshift.nvim",
-			"mrjones2014/smart-splits.nvim",
-		},
-		config = function()
-			require("telescope_hydra")
-			-- require("hydra_setup")
-		end,
-	})
-
-	use({
 		"mfussenegger/nvim-dap",
 		requires = {
 			{ "rcarriga/nvim-dap-ui" },
 			{ "nvim-telescope/telescope-dap.nvim" },
+			{ "anuvyklack/hydra.nvim" },
+			-- "anuvyklack/keymap-layer.nvim",
 		},
-		-- ft = { "python", "java" },
 		config = function()
 			require("dap_hydra")
 			-- require("dap_setup")
 			-- require("dapui_setup")
-		end,
-	})
-
-	use({
-		"folke/trouble.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
-		config = function()
-			require("trouble_setup")
 		end,
 	})
 
@@ -123,10 +101,12 @@ return require("packer").startup(function(use)
 			require("coq")
 			require("coq_3p")({
 				{ src = "nvimlua", short_name = "nLUA" },
-				-- { src = "dap" },
+				{ src = "dap" },
 			})
 			require("lsp_setup")
 			vim.cmd("COQnow")
+			require("lspkind_setup")
+			require("lsp_signature").setup({ toggle_key = "<C-l>" })
 		end,
 		requires = {
 			{ "mfussenegger/nvim-jdtls" },
@@ -134,27 +114,17 @@ return require("packer").startup(function(use)
 			{ "ms-jpq/coq.artifacts", { branch = "artifacts" } },
 			{ "windwp/nvim-autopairs" },
 			{ "ms-jpq/coq.thirdparty", { branch = "3p" } },
+			{ "folke/trouble.nvim" },
+			{ "onsails/lspkind-nvim" },
+			{ "kyazdani42/nvim-web-devicons" },
+			{ "ray-x/lsp_signature.nvim" },
+			{ "folke/lsp-colors.nvim" },
+			{ "nvim-telescope/telescope.nvim" },
 		},
-	})
-
-	use({
-		"onsails/lspkind-nvim",
-		requires = { { "kyazdani42/nvim-web-devicons" } },
-		config = function()
-			require("lspkind_setup")
-		end,
 	})
 
 	--use 'jubnzv/virtual-types.nvim'
 
-	use({
-		"ray-x/lsp_signature.nvim",
-		config = function()
-			require("lsp_signature").setup({ toggle_key = "<C-l>" })
-		end,
-	})
-
-	use("folke/lsp-colors.nvim")
 	use({
 		"norcalli/nvim-colorizer.lua",
 		config = function()
@@ -198,13 +168,6 @@ return require("packer").startup(function(use)
 			vim.keymap.set("n", "<Leader>o", require("harpoon.ui").toggle_quick_menu)
 		end,
 	})
-
-	-- use({
-	-- 	"NTBBloodbath/galaxyline.nvim",
-	-- 	config = function()
-	-- 		require("gruv_line")
-	-- 	end,
-	-- })
 
 	use({
 		"nvim-lualine/lualine.nvim",

@@ -41,5 +41,7 @@ Hydra({
 		{ "v", tel.variables },
 		{ "u", require("dapui").toggle, { desc = "dapui" } },
 		{ "e", require("dapui").eval, { desc = "eval" } },
+		{ "<Esc>", nil, { exit = true, nowait = true } },
+		{ "q", nil, { exit = true, nowait = true } },
 	},
 })
