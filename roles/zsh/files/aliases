@@ -1,6 +1,3 @@
-alias screencast="ffmpeg -f x11grab -s 1920x1080 -i :0.0"
-alias webcast="ffmpeg -i /dev/video1 -c:v libx264 out.mkv"
-
 set_bg ()
 {
     base="$HOME/.config/alacritty/alacritty_base.yml"
@@ -8,32 +5,11 @@ set_bg ()
     cat $base $HOME/.config/alacritty/gruvbox_$1.yml > $res
 }
 
-alias bl="set_bg light"
-alias bd="set_bg dark"
-
-alias pi1='ssh -J ty82xile@i4lab1.cs.fau.de pi@maximPi1'
-alias pi2='ssh -J ty82xile@i4lab1.cs.fau.de pi@maximPi2'
-alias bello="ssh -t -J ty82xile@i4lab1.cs.fau.de ty82xile@faui49bello3 'bash'"
-
-alias pma="cd ~/dokumente/isento/gps && source venv_gps/bin/activate"
-
-alias gstart="gcloud compute instances start eval-compute-3"
-alias gstop="gcloud compute instances stop eval-compute-3"
-alias gls="gcloud compute instances list"
-alias gssh="gcloud compute ssh eval-compute-3"
-alias gscp='gcloud compute scp'
-
-# only second monitor
-alias big="xrandr --output eDP-1 --off --output HDMI-1 --auto && /home/maxim/.fehbg"
-alias sml="xrandr --output HDMI-1 --off --output eDP-1 --auto && /home/maxim/.fehbg"
-
 # vim life
 alias v="nvim"
 
 # Convenience
 alias i="devour sxiv -rfb"
-alias z="devour zathura"
-alias o="devour okular"
 alias d="devour display"
 alias vlc="cvlc --key-quit q"
 alias minecraft="JAVA_HOME=/usr/lib/jvm/java-17-openjdk/ devour ~/.minecraft/launcher/minecraft-launcher"
@@ -50,7 +26,6 @@ alias yta-wav="youtube-dl --extract-audio --audio-format wav "
 alias ytv-best="youtube-dl -f bestvideo+bestaudio "
 
 # Dev
-alias m="make"
 alias g="git"
 alias lg="lazygit"
 alias tmux="TERM=xterm-256color tmux -f ~/.config/tmux.conf"
@@ -82,10 +57,6 @@ alias de='setxkbmap de'
 alias us='setxkbmap us -variant intl'
 alias dv='setxkbmap us -variant dvorak-intl'
 
-# debian legacy
-# alias ud="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
-
-# alias x='xplr'
 alias x='$(xplr)'
 alias p='paru'
 alias psc='paru -Sc --noconfirm'
@@ -118,13 +89,6 @@ ex ()
     fi
 }
 
-blu () {
-    dbus-send --print-reply --system --dest=org.bluez /org/bluez/hci0/dev_54_A4_93_54_49_7E org.bluez.MediaControl1.VolumeUp
-}
-
-bld () {
-    dbus-send --print-reply --system --dest=org.bluez /org/bluez/hci0/dev_54_A4_93_54_49_7E org.bluez.MediaControl1.VolumeDown
-}
 
 tryb () {
     sess=tryb
@@ -141,30 +105,8 @@ tryb () {
     tmux select-window -t $sess:0 \; attach -t $sess
 }
 
-cl () {
-    sess=lein
-    tmux new-session -d -s $sess -c ~/dokumente/isento/clj-back/
 
-    # create windows
-    tmux rename-window -t $sess:0 code
-    tmux neww -t $sess:1 -n repl -c ~/dokumente/isento/clj-back/
-    tmux neww -t $sess:2 -n run -c ~/dokumente/isento/clj-back/
 
-    tmux send-keys -t $sess:0 "nvim" C-m
-    tmux send-keys -t $sess:1 "lein repl" C-m
-    tmux send-keys -t $sess:2 "lein test"
-
-    tmux select-window -t $sess:0 \; attach -t $sess
-}
-
-gps () {
-    sess=tryb
-    tmux neww -t $sess:5 gps -c ~/dokumente/isento/gps/branches/development/
-    tmux send-keys -t $sess:5 "source ../../venv_gps/bin/activate" C-m
-}
-
-alias 66-start='doas systemctl start'
-alias 66-stop='doas systemctl stop'
 
 lsgrok() {
   url=$(curl http://localhost:4040/api/tunnels 2>/dev/null | jq -r '.tunnels[0].public_url')
@@ -187,47 +129,4 @@ ngrok_init() {
   tmux send -t $sess:1 "ngrok tcp --region=eu 4200" ENTER
 }
 
-tk () {
-    alacritty-themes Tokyonight_Night
-
-    # neovim
-    sed -i 's/colorscheme gruvbox/colorscheme tokyonight/g' ~/.config/nvim/config/theme.vim
-    sed -i 's/gruvbox/tokyonight/g' ~/.config/nvim/lua/gruv_line.lua
-
-    manual='s/b8bb26/9ece6a/g; s/fabd2f/e0af68/g; s/fb4934/f7768e/g; s/1d2021/1a1b26/g; s/ebdbb2/19b1d6/g; s/fe8019/e0af67/g; s/d3869b/9a7ecc/g'
-
-    sed -i $manual ~/.xmonad/xmobar.hs
-    sed -i $manual $(fd 'userChrome.css$' ~/.mozilla/firefox)
-    sed -i $manual ~/.config/zathura/zathurarc
-
-    sed -i 's/gruvbox/tokyonight/' ~/.xinitrc
-    doas sed -i 's/gruvbox/tokyonight/g' /etc/X11/xdm/Xsetup_0
-    xrdb ~/.Xresources.tokyonight
-
-    xmonad --recompile
-    xmonad --restart
-}
-
-gr () {
-    alacritty-themes Gruvbox-Dark
-    sed -i 's/colorscheme tokyonight/colorscheme gruvbox/' ~/.config/nvim/config/theme.vim
-    sed -i 's/tokyonight/gruvbox/' ~/.config/nvim/lua/gruv_line.lua
-
-
-    manual='s/9ece6a/b8bb26/g; s/e0af68/fabd2f/g; s/f7768e/fb4934/g; s/1a1b26/1d2021/g; s/19b1d6/ebdbb2/g; s/e0af67/fe8019/g; s/9a7ecc/d3869b/g'
-
-    sed -i $manual ~/.xmonad/xmobar.hs
-    sed -i $manual $(fd 'userChrome.css$' ~/.mozilla/firefox)
-    sed -i $manual ~/.config/zathura/zathurarc
-
-    sed -i 's/tokyonight/gruvbox/' ~/.xinitrc
-    doas sed -i 's/tokyonight/gruvbox/' /etc/X11/xdm/Xsetup_0
-    xrdb ~/.Xresources.gruvbox
-
-    xmonad --recompile
-    xmonad --restart
-}
-
 alias myip="wget -qO- https://ipecho.net/plain ; echo"
-alias install_nvm="curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash"
-
