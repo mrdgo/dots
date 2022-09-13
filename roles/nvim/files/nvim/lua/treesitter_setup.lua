@@ -8,13 +8,14 @@ parser_configs.norg = {
 	},
 }
 
+vim.g.ts_highlight_lua = true
+
 require("nvim-treesitter.configs").setup({
 	ensure_installed = {
 		"norg",
 		"python",
 		"yaml",
 		"toml",
-		"lua",
 		"json",
 		"haskell",
 		"bash",

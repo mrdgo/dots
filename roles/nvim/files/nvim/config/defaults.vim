@@ -3,6 +3,9 @@ let &t_SI .= "\<Esc>[4 q"
 " solid block
 let &t_EI .= "\<Esc>[2 q"
 
+let &t_fe = "\<Esc>[?1004h"
+let &t_fd = "\<Esc>[?1004l"
+
 set clipboard+=unnamedplus
 let loaded_matchparen = 1
 

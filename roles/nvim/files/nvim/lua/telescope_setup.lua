@@ -1,7 +1,15 @@
 local actions = require("telescope.actions")
 local previewers = require("telescope.previewers")
+
+local drop_open = {
+	["<CR>"] = function(bufnr)
+		require("telescope.actions.set").edit(bufnr, "drop")
+	end,
+}
+
 require("telescope").setup({
 	defaults = {
+		initial_mode = "insert",
 		mappings = {
 			n = {
 				["q"] = actions.close,
@@ -36,6 +44,20 @@ require("telescope").setup({
 			limit = 100,
 		},
 	},
+	pickers = {
+		buffers = {
+			mappings = {
+				n = drop_open,
+				i = drop_open,
+			},
+		},
+		find_files = {
+			mappings = {
+				n = drop_open,
+				i = drop_open,
+			},
+		},
+	},
 	extensions = {
 		media_files = {
 			filetypes = { "png", "webp", "jpg", "jpeg", "pdf", "mp4" },
@@ -54,3 +76,4 @@ require("telescope").setup({
 require("telescope").load_extension("fzy_native")
 require("telescope").load_extension("media_files")
 require("telescope").load_extension("ui-select")
+require("telescope").load_extension("harpoon")

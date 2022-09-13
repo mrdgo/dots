@@ -52,17 +52,6 @@ require("formatter").setup({
 				}
 			end,
 		},
-		clojure = {
-			function()
-				return {
-					exe = "cljstyle",
-					args = {
-						"fix",
-					},
-					stdin = false,
-				}
-			end,
-		},
 	},
 })
 

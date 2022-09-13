@@ -1,9 +1,9 @@
 require("lualine").setup({
 	options = {
-		theme = "gruvbox",
+		theme = "gruvbox-baby",
 		component_separators = "|",
 		section_separators = { left = "", right = "" },
-        globalstatus = true,
+		globalstatus = true,
 	},
 	sections = {
 		lualine_a = {
@@ -12,7 +12,7 @@ require("lualine").setup({
 		lualine_b = { "filename", "branch" },
 		lualine_c = { "fileformat" },
 		lualine_x = {},
-		lualine_y = { "filetype", "progress" },
+		lualine_y = { "lsp_progress", "filetype", "progress" },
 		lualine_z = {
 			{ "location", left_padding = 2 },
 		},

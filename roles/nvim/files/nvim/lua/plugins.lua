@@ -7,15 +7,21 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 	execute("packadd packer.nvim")
 end
 
-local opts = { noremap = true, silent = false }
-local pmap = function(key, cmd)
-	vim.api.nvim_set_keymap("n", "<Leader>p" .. key, "<cmd>Packer" .. cmd .. "<CR>", opts)
-end
+local packer_maps = {
+	{ "u", "Update" },
+	{ "s", "Sync" },
+	{ "i", "Install" },
+	{ "c", "Clean" },
+}
 
-pmap("u", "Update")
-pmap("s", "Sync")
-pmap("i", "Install")
-pmap("c", "Clean")
+for _, cmd in pairs(packer_maps) do
+	vim.api.nvim_set_keymap(
+		"n",
+		"<Leader>p" .. cmd[1],
+		"<cmd>Packer" .. cmd[2] .. "<CR>",
+		{ noremap = true, silent = false }
+	)
+end
 
 -- TypeScript
 -- https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
@@ -34,9 +40,16 @@ return require("packer").startup(function(use)
 	})
 
 	use({
+		"charludo/projectmgr.nvim",
+		rocks = { "lsqlite3complete" },
+		config = function()
+			require("projectmgr_setup")
+		end,
+	})
+
+	use({
 		"nvim-telescope/telescope.nvim",
 		config = function()
-			require("terminal").setup()
 			require("telescope_setup")
 			require("telescope_hydra")
 		end,
@@ -46,11 +59,8 @@ return require("packer").startup(function(use)
 			{ "nvim-telescope/telescope-fzy-native.nvim" },
 			{ "nvim-telescope/telescope-media-files.nvim" },
 			{ "nvim-telescope/telescope-packer.nvim" },
-			{ "nvim-telescope/telescope-project.nvim" },
 			{ "nvim-telescope/telescope-ui-select.nvim" },
-			{ "norcalli/nvim-terminal.lua" },
 			{ "camgraff/telescope-tmux.nvim" },
-			{ "sudormrfbin/cheatsheet.nvim" },
 			{ "anuvyklack/hydra.nvim" },
 			-- "anuvyklack/keymap-layer.nvim",
 		},
@@ -60,7 +70,7 @@ return require("packer").startup(function(use)
 		"ms-jpq/chadtree",
 		branch = "chad",
 		run = function()
-			vim.cmd("CHADdeps")
+			vim.cmd("!python -m chadtree deps")
 		end,
 		config = function()
 			require("chadtree_setup")
@@ -98,6 +108,9 @@ return require("packer").startup(function(use)
 		"neovim/nvim-lspconfig",
 		config = function()
 			require("autopairs_setup")
+			vim.g.coq_settings = {
+				auto_start = "shut-up",
+			}
 			require("coq")
 			require("coq_3p")({
 				{ src = "nvimlua", short_name = "nLUA" },
@@ -107,6 +120,7 @@ return require("packer").startup(function(use)
 			vim.cmd("COQnow")
 			require("lspkind_setup")
 			require("lsp_signature").setup({ toggle_key = "<C-l>" })
+			require("test_setup")
 		end,
 		requires = {
 			{ "mfussenegger/nvim-jdtls" },
@@ -120,7 +134,21 @@ return require("packer").startup(function(use)
 			{ "ray-x/lsp_signature.nvim" },
 			{ "folke/lsp-colors.nvim" },
 			{ "nvim-telescope/telescope.nvim" },
+			{ "klen/nvim-test" },
 		},
+	})
+
+	use({
+		"jose-elias-alvarez/typescript.nvim",
+		config = function()
+			require("typescript").setup({
+				disable_commands = true, -- prevent the plugin from creating Vim commands
+				debug = false, -- enable debug logging for commands
+				server = { -- pass options to lspconfig's setup method
+					on_attach = require("typescript_setup").on_attach,
+				},
+			})
+		end,
 	})
 
 	--use 'jubnzv/virtual-types.nvim'
@@ -165,13 +193,16 @@ return require("packer").startup(function(use)
 		requires = { "nvim-lua/plenary.nvim" },
 		config = function()
 			vim.keymap.set("n", "<Leader>a", require("harpoon.mark").add_file)
-			vim.keymap.set("n", "<Leader>o", require("harpoon.ui").toggle_quick_menu)
+			vim.keymap.set("n", "<Leader>o", require("telescope").extensions.harpoon.marks)
 		end,
 	})
 
 	use({
 		"nvim-lualine/lualine.nvim",
-		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+		requires = {
+			{ "kyazdani42/nvim-web-devicons", opt = true },
+			"WhoIsSethDaniel/lualine-lsp-progress",
+		},
 		config = function()
 			require("lualine_setup")
 		end,
@@ -187,33 +218,40 @@ return require("packer").startup(function(use)
 	use("zsugabubus/crazy8.nvim")
 
 	use({
-		"kkoomen/vim-doge",
-		ft = { "python" },
+		"luisiacc/gruvbox-baby",
 		config = function()
-			vim.cmd("source $HOME/.config/nvim/config/doge.vim")
-		end,
-		run = function()
-			vim.fn["doge#install"]()
+			-- Example config in Lua
+			vim.g.gruvbox_baby_function_style = "bold"
+			vim.g.gruvbox_baby_keyword_style = "italic"
+			vim.g.gruvbox_baby_comment_style = "italic"
+			vim.g.gruvbox_baby_variable_style = "NONE"
+			vim.g.gruvbox_baby_background_color = "dark"
+
+			vim.g.gruvbox_baby_telescope_theme = 0
+			vim.g.gruvbox_baby_transparent_mode = 1
+
+			-- Load the colorscheme
+			vim.cmd([[colorscheme gruvbox-baby]])
 		end,
 	})
 
-	use({
-		--'morhetz/gruvbox'
-		"npxbr/gruvbox.nvim",
-		config = function()
-			vim.g.gruvbox_italic = 1
-			vim.g.gruvbox_contrast_dark = "hard"
-			vim.g.gruvbox_contrast_light = "soft"
-			vim.g.gruvbox_termcolors = 256
-			vim.g.gruvbox_hls_cursor = "green"
-			vim.g.tokyonight_style = "night"
-			vim.cmd("source $HOME/.config/nvim/config/theme.vim")
-		end,
-		requires = {
-			{ "rktjmp/lush.nvim" },
-			{ "folke/tokyonight.nvim" },
-		},
-	})
+	-- use({
+	-- 	--'morhetz/gruvbox'
+	-- 	"npxbr/gruvbox.nvim",
+	-- 	config = function()
+	-- 		vim.g.gruvbox_italic = 1
+	-- 		vim.g.gruvbox_contrast_dark = "hard"
+	-- 		vim.g.gruvbox_contrast_light = "soft"
+	-- 		vim.g.gruvbox_termcolors = 256
+	-- 		vim.g.gruvbox_hls_cursor = "green"
+	-- 		vim.g.tokyonight_style = "night"
+	-- 		vim.cmd("source $HOME/.config/nvim/config/theme.vim")
+	-- 	end,
+	-- 	requires = {
+	-- 		{ "rktjmp/lush.nvim" },
+	-- 		{ "folke/tokyonight.nvim" },
+	-- 	},
+	-- })
 
 	use({
 		"vimpostor/vim-tpipeline",
@@ -224,7 +262,13 @@ return require("packer").startup(function(use)
 
 	use("tpope/vim-endwise")
 	use("tpope/vim-repeat")
-	use("tpope/vim-surround")
+
+	use({
+		"kylechui/nvim-surround",
+		config = function()
+			require("nvim-surround").setup({})
+		end,
+	})
 
 	use({
 		"max397574/better-escape.nvim",
@@ -237,17 +281,6 @@ return require("packer").startup(function(use)
 			})
 		end,
 	})
-
-	use({ "NLKNguyen/c-syntax.vim", ft = { "c", "cpp" } })
-	use({ "vim-scripts/gnuplot-syntax-highlighting", ft = { "gnuplot" } })
-
-	-- use({
-	-- 	"lewis6991/spellsitter.nvim",
-	-- 	ft = { "tex" },
-	-- 	config = function()
-	-- 		require("spellsitter").setup()
-	-- 	end,
-	-- })
 
 	use("godlygeek/tabular")
 	use({

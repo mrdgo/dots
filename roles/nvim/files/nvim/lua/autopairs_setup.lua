@@ -11,6 +11,17 @@ npairs.setup({
 vim.g.coq_settings = {
 	auto_start = "shut-up",
 	keymap = { recommended = false },
+	clients = {
+		buffers = {
+			weight_adjust = 0.6,
+		},
+		tmux = {
+			weight_adjust = 0.6,
+		},
+		tree_sitter = {
+			weight_adjust = 0.8,
+		},
+	},
 }
 
 -- these mappings are coq recommended mappings unrelated to nvim-autopairs

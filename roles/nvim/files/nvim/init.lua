@@ -15,6 +15,7 @@ vim.g.loaded_tarPlugin = false
 vim.g.loaded_zipPlugin = false
 vim.g.loaded_2html_plugin = false
 vim.g.loaded_remote_plugins = false
+vim.g.python3_host_prog = "/usr/bin/python"
 
 -- vim.cmd[[scriptencoding utf-8]]
 

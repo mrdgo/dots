@@ -48,6 +48,4 @@ local function on_attach(a, bufnr)
 	end
 end
 
-return {
-	on_attach = on_attach,
-}
+return { on_attach = on_attach }

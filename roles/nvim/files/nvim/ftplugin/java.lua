@@ -12,11 +12,8 @@ local bundles = {
 vim.list_extend(bundles, vim.split(vim.fn.glob("/opt/vscode-java-test/server/*.jar"), "\n"))
 
 local config = {
-	-- The command that starts the language server
-	-- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
 	cmd = {
-
-		"java",
+		"/usr/lib/jvm/java-17-openjdk/bin/java",
 		"-Declipse.application=org.eclipse.jdt.ls.core.id1",
 		"-Dosgi.bundles.defaultStartLevel=4",
 		"-Declipse.product=org.eclipse.jdt.ls.core.product",
@@ -29,25 +26,14 @@ local config = {
 		"--add-opens",
 		"java.base/java.lang=ALL-UNNAMED",
 		"-javaagent:/home/maxim/.config/nvim/config/lombok.jar",
-
-		-- 💀
 		"-jar",
 		"/usr/share/java/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar",
-
-		-- 💀
 		"-configuration",
 		"/usr/share/java/jdtls/config_linux",
-
-		-- 💀
 		"-data",
 		workspace_folder,
 	},
-
-	-- 💀
-	-- This is the default if not provided, you can remove it. Or adjust as needed.
-	-- One dedicated LSP server & client will be started per unique root_dir
 	root_dir = jdtls.setup.find_root({ ".git", "mvnw", "gradlew" }),
-
 	settings = {
 		java = {
 			format = {
@@ -57,14 +43,6 @@ local config = {
 			},
 		},
 	},
-
-	-- Language server `initializationOptions`
-	-- You need to extend the `bundles` with paths to jar files
-	-- if you want to use additional eclipse.jdt.ls plugins.
-	--
-	-- See https://github.com/mfussenegger/nvim-jdtls#java-debug-installation
-	--
-	-- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
 	init_options = {
 		bundles = bundles,
 	},
