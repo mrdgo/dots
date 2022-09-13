@@ -1,8 +1,8 @@
 Config { font = "xft:Mononoki Nerd Font:pixelsize=14:antialias=true:hinting=true"
        , additionalFonts = []
-       , borderColor = "#1d2021"
+       , borderColor = "#161616"
        , border = TopB
-       , bgColor = "#1d2021"
+       , bgColor = "#161616"
        , fgColor = "#ebdbb2"
        , alpha = 255
        , position = TopP 0 0
@@ -25,7 +25,7 @@ Config { font = "xft:Mononoki Nerd Font:pixelsize=14:antialias=true:hinting=true
                                 , "--Low"      , "10"        -- units: %
                                 , "--High"     , "95"        -- units: %
                                 , "--low"      , "#fb4934"
-                                , "--high"     , "#b8bb26"
+                                , "--high"     , "#98971a"
 
                                 -- send message when low
                                 , "-a", "notify-send -u critical battery"
@@ -36,13 +36,13 @@ Config { font = "xft:Mononoki Nerd Font:pixelsize=14:antialias=true:hinting=true
                                 -- AC "on" status
                                 , "-O"    , "<left>% <fc=#fabd2f> Charging</fc>"
                                 -- charged status
-                                , "-i"  , "<fc=#b8bb26> Charged</fc>"
+                                , "-i"  , "<fc=#98971a> Charged</fc>"
                             ] 150
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " <fc=#fe8019>λ</fc> | %battery% | %StdinReader% | }\
-                    \{ | <fc=#83a598>  %cpu%</fc> | <fc=#d3869b>  %dynnetwork%</fc> | <fc=#fabd2f>  %date%</fc> "
+       , template = " <fc=#D4879C>λ</fc> | %battery% | %StdinReader% | }\
+                    \{ | <fc=#8ec07c>  %cpu%</fc> | <fc=#D4879C>  %dynnetwork%</fc> | <fc=#fabd2f>  %date%</fc> "
        }
        --         

@@ -17,7 +17,7 @@ import XMonad.Util.EZConfig
 import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
 import XMonad.Hooks.EwmhDesktops (ewmh)
 
-import XMonad.Hooks.ManageDocks (avoidStruts, docks, docksEventHook, manageDocks, ToggleStruts(..))
+import XMonad.Hooks.ManageDocks (docks, docksEventHook, manageDocks, ToggleStruts(..))
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarStrip, xmobarColor, shorten, PP(..))
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.InsertPosition
@@ -73,7 +73,7 @@ floats = renamed [Replace "flts"]
         $ simplestFloat
 
 -- The layout hook
-myLayoutHook = avoidStruts $ mouseResize $ windowArrange $
+myLayoutHook = mouseResize $ windowArrange $
     mkToggle (NBFULL ?? NOBORDERS ?? EOT) $
     --onWorkspaces [2, 4, 5, 8] monocle $
     myDefaultLayout
@@ -162,7 +162,7 @@ myKeys = [
     , ("M-S-r", spawn "xmonad --restart")       -- Restarts xmonad
     , ("M-S-c", io exitSuccess)                 -- Quits xmonad, dvorak 'e' and 'q' are too close
     , ("M-S-q", kill)                           -- kill client
-    , ("M-b", sendMessage ToggleStruts)         -- Toggle xmobar
+    -- , ("M-b", sendMessage ToggleStruts)         -- Toggle xmobar
     , ("M-t", withFocused $ windows . W.sink)   -- Tile client again
     , ("M-m", windows W.swapMaster)             -- Set master
     , ("M-n", sendMessage MirrorExpand)         -- expand tile
@@ -205,7 +205,7 @@ myKeys = [
     , ("M-u m", spawnFloatingTerm "doas alsamixer")
 
     -- Master thesis
-    , ("M-S-b", spawn "zathura ~/dokumente/isento/gps/pybullet_quickstartguide.pdf")
+    , ("M-S-b", spawn "zathura ~/gps/pybullet_quickstartguide.pdf")
 
     -- Prompt
     , ("M-o", runOrRaisePrompt myXPConfig)
@@ -257,8 +257,8 @@ myPP handle = dynamicLogWithPP $ xmobarPP
    {
        ppOutput = hPutStrLn handle
        , ppCurrent = xmobarColor (xColor "10") ""                -- Current workspace in xmobar
-       , ppVisible = xmobarColor (xColor "6") ""                -- Visible but not current ws
-       , ppHidden = xmobarColor (xColor "11") ""                 -- Hidden workspaces in xmobar
+       , ppVisible = xmobarColor (xColor "14") ""                -- Visible but not current ws
+       , ppHidden = xmobarColor (xColor "13") ""                 -- Hidden workspaces in xmobar
        , ppHiddenNoWindows = xmobarColor "#928374" ""        -- Hidden workspaces (no windows)
        , ppTitle = xmobarColor "#bdae93" "" . shorten 60     -- Title of active window
        , ppSep =  " | "                                      -- Separators in xmobar
