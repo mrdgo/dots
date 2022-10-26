@@ -29,9 +29,9 @@
     - role: nvim
       tags:
         - nvim
-    - role: pacman
-      tags:
-        - pacman
+    # - role: pacman
+    #   tags:
+    #     - pacman
     - role: picom
       tags:
         - picom

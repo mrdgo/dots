@@ -7,8 +7,11 @@ local drop_open = {
 	end,
 }
 
+require("close_buffers").setup({})
+
 require("telescope").setup({
 	defaults = {
+		borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
 		initial_mode = "insert",
 		mappings = {
 			n = {
@@ -25,6 +28,7 @@ require("telescope").setup({
 				["d"] = actions.delete_buffer,
 			},
 		},
+		file_ignore_patterns = { "node_modules", "ckeditor" },
 		vimgrep_arguments = {
 			"rg",
 			"--color=never",
@@ -67,8 +71,19 @@ require("telescope").setup({
 			override_generic_sorter = true,
 			override_file_sorter = true,
 		},
-		["ui-select"] = {
-			require("telescope.themes").get_dropdown({}),
+		-- ["ui-select"] = {
+		-- require("telescope.themes").get_dropdown({}),
+		-- },
+		zoxide = {
+			prompt_title = "z",
+			mappings = {
+				default = {
+					after_action = function()
+						require("alpha").start()
+						require("close_buffers").wipe({ type = "other" })
+					end,
+				},
+			},
 		},
 	},
 })
@@ -77,3 +92,10 @@ require("telescope").load_extension("fzy_native")
 require("telescope").load_extension("media_files")
 require("telescope").load_extension("ui-select")
 require("telescope").load_extension("harpoon")
+require("telescope").load_extension("zoxide")
+
+-- vim.cmd([[
+-- augroup ChangeDir
+-- 	au!
+-- 	au DirChanged * lua require("alpha").start()
+-- ]])

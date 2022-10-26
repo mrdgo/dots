@@ -8,13 +8,41 @@
 --    | | |   |   |___|       ||     ||   | ||_|| |
 --    |_|  |__|_______|_______| |___| |___|_|   |_|
 
-vim.g.loaded_man = false
-vim.g.loaded_gzip = false
-vim.g.loaded_netrwPlugin = false
-vim.g.loaded_tarPlugin = false
-vim.g.loaded_zipPlugin = false
-vim.g.loaded_2html_plugin = false
-vim.g.loaded_remote_plugins = false
+-- disable some builtin vim plugins
+local default_plugins = {
+	"2html_plugin",
+	"getscript",
+	"getscriptPlugin",
+	"gzip",
+	"logipat",
+	"netrw",
+	"netrwPlugin",
+	"netrwSettings",
+	"netrwFileHandlers",
+	"matchit",
+	"tar",
+	"tarPlugin",
+	"rrhelper",
+	"spellfile_plugin",
+	"vimball",
+	"vimballPlugin",
+	"zip",
+	"zipPlugin",
+	"tutor",
+	"rplugin",
+	"syntax",
+	"synmenu",
+	"optwin",
+	"compiler",
+	"bugreport",
+	"ftplugin",
+	"man",
+}
+
+for _, plugin in pairs(default_plugins) do
+	vim.g["loaded_" .. plugin] = 1
+end
+
 vim.g.python3_host_prog = "/usr/bin/python"
 
 -- vim.cmd[[scriptencoding utf-8]]

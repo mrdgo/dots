@@ -1,10 +1,3 @@
-set_bg ()
-{
-    base="$HOME/.config/alacritty/alacritty_base.yml"
-    res="$HOME/.config/alacritty/alacritty.yml"
-    cat $base $HOME/.config/alacritty/gruvbox_$1.yml > $res
-}
-
 # vim life
 alias v="nvim"
 
@@ -46,12 +39,9 @@ alias l='exac -F'
 alias lx='exac -lbhHma@ --time-style=default --color-scale'
 alias lall='exac -lbhHigUmuSa --time-style=long-iso'  # all list
 
-# pretty copy
-alias cp='ptcp'
-
 # speciality views
-alias lS='exa -1'			                                            # one column, just names
-alias lt='exac --tree --level=2'                                         # tree
+alias lS='exa -1'			              # one column, just names
+alias lt='exac --tree --level=2'    # tree
 
 alias de='setxkbmap de'
 alias us='setxkbmap us -variant intl'
@@ -61,6 +51,14 @@ alias x='$(xplr)'
 alias p='paru'
 alias psc='paru -Sc --noconfirm'
 alias dk="lazydocker"
+
+set_bg ()
+{
+    base="$HOME/.config/alacritty/alacritty_base.yml"
+    res="$HOME/.config/alacritty/alacritty.yml"
+    cat $base $HOME/.config/alacritty/gruvbox_$1.yml > $res
+}
+
 
 ### ARCHIVE EXTRACTION
 # usage: ex <file>
@@ -89,18 +87,17 @@ ex ()
     fi
 }
 
-
 tryb () {
     sess=tryb
-    tmux new-session -d -s $sess -c ~/tryb/lea-front
+    tmux new-session -d -s $sess -c ~/tryb
 
     # create windows
-    tmux rename-window -t $sess:0 front
-    tmux neww -t $sess:1 -n docker   -c ~/tryb/tryb_docker
-    tmux neww -t $sess:2 -n back -c ~/tryb/lea-back/
-    # tmux neww -t $sess:4 -n secrets  -c ~/tryb/lea-secrets/
+    tmux rename-window -t $sess:0 dev
+    tmux neww -t $sess:1 -n docker -c ~/tryb/docker
+    tmux neww -t $sess:2 -n git    -c ~/tryb
 
     tmux send-keys -t $sess:1 "docker compose start" C-m
+    tmux send-keys -t $sess:2 "lazygit" C-m
 
     tmux select-window -t $sess:0 \; attach -t $sess
 }

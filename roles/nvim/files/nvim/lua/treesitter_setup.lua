@@ -12,6 +12,7 @@ vim.g.ts_highlight_lua = true
 
 require("nvim-treesitter.configs").setup({
 	ensure_installed = {
+		"regex",
 		"norg",
 		"python",
 		"yaml",

@@ -1,84 +1,58 @@
 local dap = require("dap")
 
-local gps_dir = "/home/maxim/dokumente/isento/gps/"
-local gps = gps_dir .. "python/gps/gps_main.py"
+local mldir = "/home/maxim/tryb/ml-backend/"
 
-local py_path = function()
-	return gps_dir .. "venv_gps/bin/python"
+local function py_path()
+	return mldir .. ".tox/py38-test/bin/python"
 end
 
 dap.configurations.python = {
 	{
 		type = "python",
 		request = "launch",
-		name = "Create lea images",
-		program = gps,
-		args = { "pigps_pigps_lea_test", "-m", "create_data" },
-		pythonPath = py_path,
-	},
-	{
-		type = "python",
-		request = "launch",
-		name = "Pretrain lea policy",
-		program = gps,
-		args = { "pigps_pigps_lea_test", "-m", "pretrain" },
-		pythonPath = py_path,
-	},
-	{
-		type = "python",
-		request = "launch",
-		name = "Regular lea run",
-		program = gps,
-		--args = {'pigps_pigps_lea_test', '-m', 'train', '-v'};
-		args = { "pigps_pigps_lea_test", "-m", "train", "--dont_save_samples", "-v" },
+		name = "Cloud storage test",
+		program = mldir .. "python/gps/gps_main.py",
+		args = {
+			"--mode=train",
+			"--local_run",
+			"--job-dir=gs://lea-gps-data-storage/gps",
+			"-v",
+			"--save_samples",
+			"--out_dir",
+			"24808c6b-5ef0-48e7-9125-9a7ce6ce7c55",
+			"pigps_pigps_leaOneDof",
+		},
 		console = dap.integratedTerminal,
 		pythonPath = py_path,
 	},
 	{
 		type = "python",
 		request = "launch",
-		name = "Plain policy lea run",
-		program = gps,
-		args = { "pigps_plain_lea", "-m", "train", "--dont_save_samples", "-v" },
+		name = "Pipeline integration test",
+		program = mldir .. "python/gps/gps_main.py",
+		args = {
+			"--mode=train",
+			"--out_dir",
+			"unittests",
+			"--verbose",
+			"pigps_pigps_cartpole_test",
+		},
 		console = dap.integratedTerminal,
-		pythonPath = py_path,
-	},
-	{
-		type = "python",
-		request = "launch",
-		name = "Lea grid search",
-		program = gps,
-		args = { "pigps_pigps_lea_test", "-m", "grid_search", "-g", "eval_grid.json", "--dont_save_samples" },
-		pythonPath = py_path,
-	},
-	{
-		type = "python",
-		request = "launch",
-		name = "PyBullet test script",
-		program = gps_dir .. "python/gps/utility/pybullet_test.py",
-		args = {},
 		pythonPath = py_path,
 	},
 }
 
 dap.adapters.python = {
 	type = "executable",
-	command = gps_dir .. "/venv_gps/bin/python",
+	command = "/usr/bin/python",
 	args = { "-m", "debugpy.adapter" },
 }
 
-vim.api.nvim_buf_set_keymap(
-	0,
-	"n",
-	"<Leader>eC",
-	'<cmd>lua require"dap_python".reload_continue()<CR><Esc>',
-	{ noremap = false, silent = true }
-)
-
-return {
-	reload_continue = function()
+vim.api.nvim_set_keymap("n", "<Leader>eC", "", {
+	noremap = false,
+	callback = function()
 		package.loaded["dap_python"] = nil
 		require("dap_python")
 		require("telescope").extensions.dap.configurations()
 	end,
-}
+})

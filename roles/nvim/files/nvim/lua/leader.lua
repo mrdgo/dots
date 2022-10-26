@@ -49,9 +49,15 @@ vim.api.nvim_set_keymap("n", "<Leader>v", "<Cmd>e $MYVIMRC<CR>", { silent = true
 vim.api.nvim_set_keymap("n", "gl", "$", opts_nore_silent)
 vim.api.nvim_set_keymap("n", "gh", "^", opts_nore_silent)
 
-vim.api.nvim_set_keymap(
-	"n",
-	"<Leader>qf",
-	"<cmd>lua for _, win in ipairs(vim.api.nvim_list_wins()) do local config = vim.api.nvim_win_get_config(win); if config.relative ~= '' then vim.api.nvim_win_close(win, false); print('Closing window', win) end end<CR>",
-	opts_nore_silent
-)
+vim.api.nvim_set_keymap("n", "<Leader>qf", "", {
+	noremap = true,
+	silent = true,
+	callback = function()
+		for _, win in ipairs(vim.api.nvim_list_wins()) do
+			local config = vim.api.nvim_win_get_config(win)
+			if config.relative ~= "" then
+				vim.api.nvim_win_close(win, false)
+			end
+		end
+	end,
+})

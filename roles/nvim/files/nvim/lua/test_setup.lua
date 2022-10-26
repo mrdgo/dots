@@ -5,25 +5,27 @@ test.setup({
 })
 
 require("nvim-test.runners.pytest"):setup({
-	command = "pytest", -- a command to run the test runner
+	command = { (vim.env.VIRTUAL_ENV or "venv") .. "/bin/pytest", "pytest" },
+	file_pattern = "\\v(test_[^.]+|[^.]+_test|tests)\\.py$",
+	find_files = { "test_{name}.py", "{name}_test.py", "tests.py" },
 })
 
 local test_maps = {
-	tf = function()
+	f = function()
 		test.run("file")
 	end,
-	tl = test.run_last,
-	tn = function()
+	l = test.run_last,
+	n = function()
 		test.run("nearest")
 	end,
-	ts = function()
+	s = function()
 		test.run("suite")
 	end,
-	tv = test.visit,
-	ti = test.info,
-	te = test.edit,
+	v = test.visit,
+	i = test.info,
+	e = test.edit,
 }
 
 for key, cmd in pairs(test_maps) do
-	vim.keymap.set("n", "<Leader>" .. key, cmd, { noremap = false, silent = true })
+	vim.keymap.set("n", "<Leader>t" .. key, cmd, { noremap = false, silent = true })
 end

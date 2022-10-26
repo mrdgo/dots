@@ -25,7 +25,6 @@ end
 
 -- TypeScript
 -- https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
--- https://github.com/jose-elias-alvarez/null-ls.nvim
 
 return require("packer").startup(function(use)
 	-- Packer can manage itself
@@ -39,19 +38,20 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use({
-		"charludo/projectmgr.nvim",
-		rocks = { "lsqlite3complete" },
-		config = function()
-			require("projectmgr_setup")
-		end,
-	})
+	-- use({
+	-- 	"charludo/projectmgr.nvim",
+	-- 	rocks = { "lsqlite3complete" },
+	-- 	config = function()
+	-- 		require("projectmgr_setup")
+	-- 	end,
+	-- })
 
 	use({
 		"nvim-telescope/telescope.nvim",
 		config = function()
 			require("telescope_setup")
 			require("telescope_hydra")
+			-- require("dirs")
 		end,
 		requires = {
 			{ "nvim-lua/popup.nvim" },
@@ -60,9 +60,32 @@ return require("packer").startup(function(use)
 			{ "nvim-telescope/telescope-media-files.nvim" },
 			{ "nvim-telescope/telescope-packer.nvim" },
 			{ "nvim-telescope/telescope-ui-select.nvim" },
+			{ "jvgrootveld/telescope-zoxide" },
 			{ "camgraff/telescope-tmux.nvim" },
 			{ "anuvyklack/hydra.nvim" },
+			{ "kazhala/close-buffers.nvim" },
+			-- { "nvim-telescope/telescope-project.nvim" },
 			-- "anuvyklack/keymap-layer.nvim",
+		},
+	})
+
+	use({
+		"stevearc/dressing.nvim",
+		config = function()
+			require("dressing_setup")
+		end,
+	})
+
+	use({
+		"folke/noice.nvim",
+		event = "VimEnter",
+		config = function()
+			require("noice_setup")
+		end,
+		requires = {
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
 		},
 	})
 
@@ -88,7 +111,20 @@ return require("packer").startup(function(use)
 		config = function()
 			require("dap_hydra")
 			-- require("dap_setup")
-			-- require("dapui_setup")
+			require("dapui_setup")
+		end,
+	})
+
+	use({
+		"0x00-ketsu/maximizer.nvim",
+		config = function()
+			require("maximizer").setup({})
+			vim.api.nvim_set_keymap(
+				"n",
+				"mt",
+				"",
+				{ silent = true, noremap = true, callback = require("maximizer").toggle }
+			)
 		end,
 	})
 
@@ -96,6 +132,7 @@ return require("packer").startup(function(use)
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 		config = function()
+			-- require("ts-fix")
 			require("treesitter_setup")
 		end,
 		requires = {
@@ -105,8 +142,22 @@ return require("packer").startup(function(use)
 	})
 
 	use({
+		"MrcJkb/haskell-tools.nvim",
+		requires = {
+			"neovim/nvim-lspconfig",
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+		ft = { "hs" },
+		config = function()
+			require("hls_setup")
+		end,
+	})
+
+	use({
 		"neovim/nvim-lspconfig",
 		config = function()
+			require("goto_preview_setup")
 			require("autopairs_setup")
 			vim.g.coq_settings = {
 				auto_start = "shut-up",
@@ -119,8 +170,12 @@ return require("packer").startup(function(use)
 			require("lsp_setup")
 			vim.cmd("COQnow")
 			require("lspkind_setup")
-			require("lsp_signature").setup({ toggle_key = "<C-l>" })
-			require("test_setup")
+			require("lsp_signature").setup({
+				toggle_key = "<C-l>",
+				handler_opts = { border = "single" },
+				floating_window = true,
+			})
+			-- require("test_setup")
 		end,
 		requires = {
 			{ "mfussenegger/nvim-jdtls" },
@@ -134,7 +189,20 @@ return require("packer").startup(function(use)
 			{ "ray-x/lsp_signature.nvim" },
 			{ "folke/lsp-colors.nvim" },
 			{ "nvim-telescope/telescope.nvim" },
-			{ "klen/nvim-test" },
+			{ "rmagatti/goto-preview" },
+		},
+	})
+
+	use({
+		"nvim-neotest/neotest",
+		config = function()
+			require("neotest_setup")
+		end,
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"antoinemadec/FixCursorHold.nvim",
+			"nvim-neotest/neotest-python",
 		},
 	})
 
@@ -154,9 +222,9 @@ return require("packer").startup(function(use)
 	--use 'jubnzv/virtual-types.nvim'
 
 	use({
-		"norcalli/nvim-colorizer.lua",
+		"uga-rosa/ccc.nvim",
 		config = function()
-			require("colorizer").setup()
+			require("ccc_setup")
 		end,
 	})
 
@@ -220,45 +288,37 @@ return require("packer").startup(function(use)
 	use({
 		"luisiacc/gruvbox-baby",
 		config = function()
-			-- Example config in Lua
-			vim.g.gruvbox_baby_function_style = "bold"
-			vim.g.gruvbox_baby_keyword_style = "italic"
-			vim.g.gruvbox_baby_comment_style = "italic"
-			vim.g.gruvbox_baby_variable_style = "NONE"
-			vim.g.gruvbox_baby_background_color = "dark"
-
-			vim.g.gruvbox_baby_telescope_theme = 0
-			vim.g.gruvbox_baby_transparent_mode = 1
-
-			-- Load the colorscheme
-			vim.cmd([[colorscheme gruvbox-baby]])
+			require("theme")
 		end,
 	})
 
-	-- use({
-	-- 	--'morhetz/gruvbox'
-	-- 	"npxbr/gruvbox.nvim",
-	-- 	config = function()
-	-- 		vim.g.gruvbox_italic = 1
-	-- 		vim.g.gruvbox_contrast_dark = "hard"
-	-- 		vim.g.gruvbox_contrast_light = "soft"
-	-- 		vim.g.gruvbox_termcolors = 256
-	-- 		vim.g.gruvbox_hls_cursor = "green"
-	-- 		vim.g.tokyonight_style = "night"
-	-- 		vim.cmd("source $HOME/.config/nvim/config/theme.vim")
-	-- 	end,
-	-- 	requires = {
-	-- 		{ "rktjmp/lush.nvim" },
-	-- 		{ "folke/tokyonight.nvim" },
-	-- 	},
-	-- })
+	use({
+		"melkster/modicator.nvim",
+		after = "gruvbox-baby", -- Add your colorscheme plugin here
+		config = function()
+			require("modicator").setup({})
+		end,
+	})
 
 	use({
 		"vimpostor/vim-tpipeline",
 		config = function()
 			vim.g.tpipeline_autoembed = 0
+			vim.g.tpipeline_cursormoved = 1
 		end,
 	})
+
+	use("seandewar/nvimesweeper")
+	use("nagy135/typebreak.nvim")
+
+	use({ "kevinhwang91/nvim-bqf", ft = "qf" })
+
+	-- use({
+	-- 	"https://gitlab.com/yorickpeterse/nvim-pqf.git",
+	-- 	config = function()
+	-- 		require("pqf").setup()
+	-- 	end,
+	-- })
 
 	use("tpope/vim-endwise")
 	use("tpope/vim-repeat")
@@ -283,6 +343,7 @@ return require("packer").startup(function(use)
 	})
 
 	use("godlygeek/tabular")
+
 	use({
 		"karb94/neoscroll.nvim",
 		config = function()
@@ -341,6 +402,18 @@ return require("packer").startup(function(use)
 		ft = { "typescript", "javascript", "java", "lua", "python", "clojure" },
 		config = function()
 			require("formatter_setup")
+		end,
+	})
+
+	use({
+		"LhKipp/nvim-nu",
+		requires = "jose-elias-alvarez/null-ls.nvim",
+		run = function()
+			vim.cmd([[:TSInstall nu]])
+		end,
+		config = function()
+			require("null-ls").setup({})
+			require("nu").setup({})
 		end,
 	})
 end)

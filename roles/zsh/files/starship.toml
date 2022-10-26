@@ -8,7 +8,7 @@ error_symbol = "[λ](bold red)"
 vicmd_symbol = "[V](bold green)"
 
 [python]
-symbol = " "
+# symbol = " "
 style = "green bold"
 
 [git_status]

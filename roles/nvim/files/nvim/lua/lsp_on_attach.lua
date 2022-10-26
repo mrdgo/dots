@@ -7,27 +7,34 @@ local function on_attach(a, bufnr)
 	})
 
 	local telescope = require("telescope.builtin")
+	local goto_prev = require("goto-preview")
 	local opts = { exit = true, nowait = true }
 	local function trouble(command)
-		return table.concat({ "<Cmd>Trouble ", command, "<CR>" })
+		return function()
+			vim.cmd("TroubleToggle " .. command)
+		end
 	end
 
 	local keymaps = {
 		{ "a", vim.lsp.buf.code_action, opts },
 		{ "A", vim.diagnostic.open_float, opts },
 		{ "k", vim.lsp.buf.hover, opts },
-		{ "d", telescope.lsp_definitions, opts },
+		{ "i", telescope.lsp_implementations, opts },
+		{ "d", vim.lsp.buf.definition, opts },
+		{ "t", vim.lsp.buf.type_definition, opts },
+		{ "fi", goto_prev.goto_preview_implementation, opts },
+		{ "fd", goto_prev.goto_preview_definition, opts },
+		{ "ft", goto_prev.goto_type_definition, opts },
+		{ "fq", goto_prev.close_all_win, opts },
 		-- { "D", vim.lsp.buf.declaration, opts },
 		{ "D", trouble("document_diagnostics"), opts },
 		{ "S", vim.lsp.buf.signature_help, opts },
-		{ "t", vim.lsp.buf.type_definition, opts },
 		{ "R", vim.lsp.buf.rename, opts },
 		{ "r", trouble("lsp_references"), opts },
 		{ "f", vim.lsp.buf.formatting, opts },
 		{ "n", vim.diagnostic.goto_next, opts },
 		{ "p", vim.diagnostic.goto_prev, opts },
 		{ "g", telescope.diagnostics, opts },
-		{ "i", telescope.lsp_implementations, opts },
 		{ "y", telescope.lsp_document_symbols, opts },
 		{ "s", trouble(""), opts },
 		{ "w", trouble("workspace_diagnostics"), opts },
@@ -44,7 +51,7 @@ local function on_attach(a, bufnr)
 	-- })
 
 	for _, tbl in ipairs(keymaps) do
-		vim.keymap.set("n", "<Leader>s" .. tbl[1], tbl[2])
+		vim.keymap.set("n", "<Leader>s" .. tbl[1], "", { callback = tbl[2] })
 	end
 end
 

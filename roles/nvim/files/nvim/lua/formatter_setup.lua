@@ -56,9 +56,29 @@ require("formatter").setup({
 })
 
 vim.cmd([[
-augroup FormatAutogroup
-  autocmd!
-  autocmd BufWritePost *.java,*.ts,*.lua,*.py,*.clj FormatWrite
-  autocmd BufWritePost *.ts EslintFixAll
-augroup END
+augroup FormatGroup
+	autocmd!
+	autocmd BufWritePost *.java,*.ts,*.lua,*.py FormatWrite
+	"autocmd User FormatterPost print "Formatter Post"
+	"autocmd WinEnter * print "Win Enter"
+	"autocmd TextChanged * print "Text Changed"
+	autocmd FocusGained * TSDisable rainbow | TSEnable rainbow
+augroup end
 ]])
+
+-- local au_id = vim.api.nvim_create_augroup("format", { clear = true })
+-- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+-- 	pattern = "",
+-- 	callback = function()
+-- 		vim.cmd([[FormatWrite]])
+-- 	end,
+-- 	group = au_id,
+-- })
+--
+-- vim.api.nvim_create_autocmd({ "User FormatterPost" }, {
+-- 	pattern = "*.java, *.ts, *.lua, *.py ",
+-- 	callback = function()
+-- 		vim.cmd([[TSDisable rainbow | TSEnable rainbow]])
+-- 	end,
+-- 	group = au_id,
+-- })

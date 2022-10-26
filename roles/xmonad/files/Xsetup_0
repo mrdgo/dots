@@ -1,13 +1,13 @@
 #!/bin/sh
 
 # Go into desktop mode if possible
-if [ $(xrandr | awk '/HDMI-1/{print $2}') = "connected" ]; then
-    xrandr --output eDP-1 --left-of HDMI-1 --auto
+if [ $(xrandr | awk '/HDMI-0/{print $2}') = "connected" ]; then
+    xrandr --output eDP-1 --left-of HDMI-0 --auto
 fi
 
 xconsole -geometry 480x130-0-0 -daemon -notify -verbose -fn fixed -exitOnFail
 
 setxkbmap us -variant dvorak-intl
 xrdb /home/maxim/home/maxim/.Xresources
-xrdb /home/maxim/home/maxim/.Xresources.tokyonight
+xrdb /home/maxim/home/maxim/.Xresources.gruvbox
 $HOME/.fehbg

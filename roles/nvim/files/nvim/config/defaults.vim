@@ -21,3 +21,7 @@ endif
 hi CursorLine cterm=NONE ctermbg=8 ctermfg=NONE
 hi Cursorline term=NONE cterm=NONE
 hi LineNr ctermfg=grey
+
+" set fillchars=''
+" set foldexpr=nvim_treesitter#foldexpr()
+set foldtext=substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend))

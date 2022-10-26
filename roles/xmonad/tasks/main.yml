@@ -53,16 +53,14 @@
     state: hard
     force: yes
 
-      #- name: Install Xsetup_0 to theme xdm
-      #  file:
-      #    src: "{{ dotfiles_home }}/roles/xmonad/files/Xsetup_0"
-      #    dest: "/etc/X11/xdm/Xsetup_0"
-      #    mode: 0755
-      #    state: hard
-      #    force: yes
-      #  become: yes
-      #  become_user: root
-      #  become_method: doas
+- name: Install Xsetup_0 to theme xdm
+  file:
+    src: "{{ dotfiles_home }}/roles/xmonad/files/Xsetup_0"
+    dest: "/etc/X11/xdm/Xsetup_0"
+    mode: 0755
+    state: hard
+    force: yes
+  become: true
 
 - name: Recompile xmonad
   command: "xmonad --recompile"

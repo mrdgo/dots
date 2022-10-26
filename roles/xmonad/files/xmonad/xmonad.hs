@@ -21,6 +21,7 @@ import XMonad.Hooks.ManageDocks (docks, docksEventHook, manageDocks, ToggleStrut
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarStrip, xmobarColor, shorten, PP(..))
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.InsertPosition
+import XMonad.Hooks.ManageHelpers (isDialog, doCenterFloat)
 
 import XMonad.Layout.NoBorders (noBorders)
 import XMonad.Layout.Spacing (spacingRaw, Border(..))
@@ -32,9 +33,11 @@ import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBO
 import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
 import XMonad.Layout.SimplestFloat (simplestFloat)
 import XMonad.Layout.IndependentScreens (countScreens)
+import XMonad.Layout.Maximize (maximizeWithPadding, maximizeRestore)
 
 import XMonad.Actions.MouseResize (mouseResize)
 import XMonad.Actions.CycleWS (nextScreen)
+import XMonad.Actions.EasyMotion (selectWindow)
 
 import XMonad.Prompt
 import XMonad.Prompt.RunOrRaise (runOrRaisePrompt)
@@ -63,6 +66,7 @@ myStartupHook = do
 -- spacingRaw :: smartBorder (Screenborder) sbEnabled (WindowBorder) wbEnabled
 tall     = renamed [Replace "tall"]
         -- $ spacingRaw False (Border 1 1 1 1) True (Border 1 1 1 1) True
+        $ maximizeWithPadding 100
         $ noBorders
         $ ResizableTall 1 (3/100) (1/2) []
 monocle  = renamed [Replace "full"]
@@ -183,6 +187,10 @@ myKeys = [
     -- Rofi
     --, ("M-S-o", spawn "rofi -modi drun -show drun -theme gruvbox-dark-soft")
 
+    -- Easymotion select window
+    , ("M-e", selectWindow def >>= (`whenJust` windows . W.focusWindow))
+    , ("M-f", withFocused (sendMessage . maximizeRestore))
+
     -- Override
     , ("M-<Return>", spawn myTerminal)
 
@@ -250,6 +258,7 @@ myManageHook = insertPosition Below Newer <+> composeAll
     , stringProperty "WM_WINDOW_ROLE" =? "gimp-message-dialog" --> doFloat
     -- Generic
     , title =? "float"                              --> doFloat
+    , isDialog --> doCenterFloat
     ]
 
 myPP :: Handle -> X ()

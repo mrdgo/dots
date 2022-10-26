@@ -19,7 +19,7 @@ vim.o.incsearch = true
 vim.o.smartcase = true
 
 vim.o.laststatus = 3
-vim.o.cmdheight = 0
+vim.o.cmdheight = 0 -- TODO: 0
 vim.o.colorcolumn = "80"
 vim.o.splitbelow = true
 vim.o.splitright = true
@@ -30,10 +30,13 @@ vim.o.linebreak = true
 vim.o.breakindent = true
 vim.o.showbreak = "> "
 
-vim.o.foldmethod = "manual"
-vim.o.foldenable = false
-
 vim.o.scrolloff = 5
+
+vim.o.foldenable = false
+vim.o.foldmethod = "manual"
+-- vim.o.foldmethod = "expr"
+vim.o.foldnestmax = 3
+vim.o.foldminlines = 1
 
 -- vim.o.clipboard:append{'unnamedplus'}
 
