@@ -1,7 +1,14 @@
-version = "0.19.4"
+version = "0.20.0"
 local xplr = xplr
+local home = os.getenv("HOME")
 
-package.path = os.getenv("HOME") .. "/.config/xplr/lua/?.lua"
+package.path = home .. "/.config/xplr/lua/?.lua"
+local xpm_path = home .. "/.local/share/xplr/dtomvan/xpm.xplr"
+local xpm_url = "https://github.com/dtomvan/xpm.xplr"
+
+package.path = package.path .. ";" .. xpm_path .. "/?.lua;" .. xpm_path .. "/?/init.lua"
+
+os.execute(string.format("[ -e '%s' ] || git clone '%s' '%s'", xpm_path, xpm_url, xpm_path))
 
 -- function I found to display icons from lua code
 do
@@ -26,7 +33,7 @@ do
 	end
 end
 
-xplr.config.general.initial_layout = "no_help_no_selection"
+-- xplr.config.general.initial_layout = "no_help_no_selection"
 
 xplr.config.node_types.directory.meta.icon = " " .. utf8(0xf07c) .. " "
 xplr.config.node_types.file.meta.icon = " " .. utf8(0xf15c) .. " "
@@ -96,12 +103,63 @@ require("nnn_preview_wrapper").setup({
 	key = "p",
 })
 
--- Type `yy` to copy and `p` to paste whole files.
--- Type `yp` to copy the paths of focused or selected files.
--- Type `yP` to copy the parent directory path.
-require("xclip").setup({
-	copy_command = "xclip-copyfile",
-	copy_paths_command = "xclip -sel clip",
-	paste_command = "xclip-pastefile",
-	keep_selection = false,
+local function setup_xclip()
+	-- Type `yy` to copy and `p` to paste whole files.
+	-- Type `yp` to copy the paths of focused or selected files.
+	-- Type `yP` to copy the parent directory path.
+	require("xclip").setup({
+		copy_command = "xclip-copyfile",
+		copy_paths_command = "xclip -sel clip",
+		paste_command = "xclip-pastefile",
+		keep_selection = false,
+	})
+end
+
+require("xpm").setup({
+	plugins = {
+		-- Let xpm manage itself
+		"dtomvan/xpm.xplr",
+		{ name = "sayanarijit/zoxide.xplr" },
+		{
+			name = "sayanarijit/tri-pane.xplr",
+			after = function()
+				require("tri-pane").setup({
+					layout_key = "T", -- In switch_layout mode
+					as_default_layout = true,
+					left_pane_width = { Percentage = 20 },
+					middle_pane_width = { Percentage = 50 },
+					right_pane_width = { Percentage = 30 },
+				})
+			end,
+		},
+		{ name = "sayanarijit/xclip.xplr", after = setup_xclip },
+	},
+	auto_install = true,
+	auto_cleanup = true,
 })
+
+-- {
+--     -- Default: Skip if empty
+--     "<name>",
+--
+--     -- Default: Skip if empty
+--     name = "<name>",
+--
+--     -- Branch, commit or tag to pin
+--     -- Default: "origin"
+--     rev = "<revision>"
+--
+--     -- Default: empty
+--     after = function() end,
+--
+--     -- Default: empty
+--     before = function() end,
+--
+--     -- Default: require("<name>").setup()
+--     setup = function() end,
+--
+--     -- Default: empty
+--     -- WARNING: if any of the dependencies fail to download, the plugin won't
+--     -- load to prevent from any damage being done
+--     deps = { "dtomvan/xpm.xplr" }
+-- }
