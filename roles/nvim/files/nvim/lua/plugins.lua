@@ -27,7 +27,6 @@ end
 -- https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
 
 return require("packer").startup(function(use)
-	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 
 	use({
@@ -38,34 +37,27 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- use({
-	-- 	"charludo/projectmgr.nvim",
-	-- 	rocks = { "lsqlite3complete" },
-	-- 	config = function()
-	-- 		require("projectmgr_setup")
-	-- 	end,
-	-- })
-
 	use({
 		"nvim-telescope/telescope.nvim",
 		config = function()
 			require("telescope_setup")
 			require("telescope_hydra")
-			-- require("dirs")
+			require("noice_setup")
 		end,
 		requires = {
-			{ "nvim-lua/popup.nvim" },
-			{ "nvim-lua/plenary.nvim" },
-			{ "nvim-telescope/telescope-fzy-native.nvim" },
-			{ "nvim-telescope/telescope-media-files.nvim" },
-			{ "nvim-telescope/telescope-packer.nvim" },
-			{ "nvim-telescope/telescope-ui-select.nvim" },
-			{ "jvgrootveld/telescope-zoxide" },
-			{ "camgraff/telescope-tmux.nvim" },
-			{ "anuvyklack/hydra.nvim" },
-			{ "kazhala/close-buffers.nvim" },
-			-- { "nvim-telescope/telescope-project.nvim" },
-			-- "anuvyklack/keymap-layer.nvim",
+			"nvim-lua/popup.nvim",
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope-fzy-native.nvim",
+			"nvim-telescope/telescope-media-files.nvim",
+			"nvim-telescope/telescope-packer.nvim",
+			"nvim-telescope/telescope-ui-select.nvim",
+			"jvgrootveld/telescope-zoxide",
+			"camgraff/telescope-tmux.nvim",
+			"anuvyklack/hydra.nvim",
+			"kazhala/close-buffers.nvim",
+			"folke/noice.nvim",
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
 		},
 	})
 
@@ -74,19 +66,6 @@ return require("packer").startup(function(use)
 		config = function()
 			require("dressing_setup")
 		end,
-	})
-
-	use({
-		"folke/noice.nvim",
-		event = "VimEnter",
-		config = function()
-			require("noice_setup")
-		end,
-		requires = {
-			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
-		},
 	})
 
 	use({
@@ -159,30 +138,13 @@ return require("packer").startup(function(use)
 		config = function()
 			require("goto_preview_setup")
 			require("autopairs_setup")
-			vim.g.coq_settings = {
-				auto_start = "shut-up",
-			}
-			require("coq")
-			require("coq_3p")({
-				{ src = "nvimlua", short_name = "nLUA" },
-				{ src = "dap" },
-			})
+
 			require("lsp_setup")
-			vim.cmd("COQnow")
-			require("lspkind_setup")
-			require("lsp_signature").setup({
-				toggle_key = "<C-l>",
-				handler_opts = { border = "single" },
-				floating_window = true,
-			})
 			-- require("test_setup")
 		end,
 		requires = {
 			{ "mfussenegger/nvim-jdtls" },
-			{ "ms-jpq/coq_nvim", { branch = "coq" } },
-			{ "ms-jpq/coq.artifacts", { branch = "artifacts" } },
 			{ "windwp/nvim-autopairs" },
-			{ "ms-jpq/coq.thirdparty", { branch = "3p" } },
 			{ "folke/trouble.nvim" },
 			{ "onsails/lspkind-nvim" },
 			{ "kyazdani42/nvim-web-devicons" },
@@ -415,5 +377,23 @@ return require("packer").startup(function(use)
 			require("null-ls").setup({})
 			require("nu").setup({})
 		end,
+	})
+
+	use({
+		"hrsh7th/nvim-cmp",
+		config = function()
+			require("cmp_setup")
+		end,
+		requires = {
+			{ "neovim/nvim-lspconfig" },
+			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "hrsh7th/cmp-buffer" },
+			{ "hrsh7th/cmp-path" },
+			{ "hrsh7th/cmp-cmdline" },
+			{ "hrsh7th/cmp-nvim-lua" },
+			{ "ray-x/cmp-treesitter" },
+			{ "L3MON4D3/LuaSnip", tag = "v1.*" },
+			{ "saadparwaiz1/cmp_luasnip" },
+		},
 	})
 end)

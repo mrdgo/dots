@@ -8,28 +8,6 @@ npairs.setup({
 	enable_check_bracket_line = false,
 })
 
-vim.g.coq_settings = {
-	auto_start = "shut-up",
-	keymap = { recommended = false },
-	clients = {
-		buffers = {
-			weight_adjust = 0.6,
-		},
-		tmux = {
-			weight_adjust = 0.6,
-		},
-		tree_sitter = {
-			weight_adjust = 0.8,
-		},
-	},
-}
-
--- these mappings are coq recommended mappings unrelated to nvim-autopairs
-remap("i", "<esc>", [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true, noremap = true })
-remap("i", "<c-c>", [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]], { expr = true, noremap = true })
-remap("i", "<tab>", [[pumvisible() ? "<c-n>" : "<tab>"]], { expr = true, noremap = true })
-remap("i", "<s-tab>", [[pumvisible() ? "<c-p>" : "<bs>"]], { expr = true, noremap = true })
-
 -- skip it, if you use another global object
 _G.MUtils = {}
 

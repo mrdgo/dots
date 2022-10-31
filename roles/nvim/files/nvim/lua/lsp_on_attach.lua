@@ -1,5 +1,4 @@
 local function on_attach(a, bufnr)
-	require("lsp_signature").on_attach(a, bufnr)
 	require("trouble").setup({
 		-- your configuration comes here
 		-- or leave it empty to use the default settings

@@ -6,7 +6,7 @@ vim.g.gruvbox_baby_variable_style = "NONE"
 vim.g.gruvbox_baby_background_color = "dark"
 
 vim.g.gruvbox_baby_telescope_theme = 0
-vim.g.gruvbox_baby_transparent_mode = 0
+vim.g.gruvbox_baby_transparent_mode = 1
 
 local c = require("gruvbox-baby.colors").config(require("gruvbox-baby.config"))
 vim.g.gruvbox_baby_highlights = {

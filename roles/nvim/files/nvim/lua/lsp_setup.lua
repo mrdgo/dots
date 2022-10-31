@@ -12,9 +12,13 @@ local servers = {
 }
 
 -- TODO: play around with vim.lsp.'server'.start({})
+-- Set up lspconfig.
+-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local capabilities = {}
 
 for _, lsp in ipairs(servers) do
-	nvim_lsp[lsp].setup(require("coq").lsp_ensure_capabilities({
+	nvim_lsp[lsp].setup({
+		capabilities = capabilities,
 		on_attach = require("lsp_on_attach").on_attach,
 		settings = {
 			yaml = {
@@ -50,7 +54,7 @@ for _, lsp in ipairs(servers) do
 				},
 			},
 		},
-	}))
+	})
 end
 
 vim.cmd([[
@@ -62,8 +66,9 @@ sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=
 
 return {
 	setup_ansible = function()
-		nvim_lsp.ansiblels.setup(require("coq").lsp_ensure_capabilities({
+		nvim_lsp.ansiblels.setup({
+			capabilities = capabilities,
 			on_attach = require("lsp_on_attach").on_attach,
-		}))
+		})
 	end,
 }

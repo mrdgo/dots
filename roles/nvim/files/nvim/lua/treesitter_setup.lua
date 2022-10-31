@@ -26,6 +26,7 @@ require("nvim-treesitter.configs").setup({
 		"html",
 		"css",
 		"clojure",
+		"markdown",
 	},
 	highlight = {
 		enable = true,
