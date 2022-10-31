@@ -54,7 +54,7 @@ myFont :: String
 myFont = "Mononoki:size=14:antialias=true:hinting=true,xft:FontAwesome:size=12"
 
 myTerminal :: String
-myTerminal = "alacritty"
+myTerminal = "wezterm"
 
 myStartupHook :: X ()
 myStartupHook = do
@@ -79,12 +79,8 @@ floats = renamed [Replace "flts"]
 -- The layout hook
 myLayoutHook = mouseResize $ windowArrange $
     mkToggle (NBFULL ?? NOBORDERS ?? EOT) $
-    --onWorkspaces [2, 4, 5, 8] monocle $
-    myDefaultLayout
-    where
-    myDefaultLayout =   tall
-                    ||| monocle
-                    ||| floats
+    onWorkspaces ["2", "4"] monocle $
+    tall ||| monocle ||| floats
 
 
 splitAtColon :: String -> Maybe (String, String)
@@ -156,7 +152,7 @@ replace a b = map (\c -> if c==a then b; else c)
 buildMaimString :: String -> String
 buildMaimString = wrap pre post . replace ' ' '_' . replace ':' '-' . take 19
     where
-        pre = "/usr/bin/maim -m 10 /home/maxim/bilder/screenshots/"
+        pre = "/usr/bin/maim -m 10 /home/maxim/images/screenshots/"
         post = ".png"
 
 myKeys :: [(String, X ())]
@@ -213,7 +209,7 @@ myKeys = [
     , ("M-u m", spawnFloatingTerm "doas alsamixer")
 
     -- Master thesis
-    , ("M-S-b", spawn "zathura ~/gps/pybullet_quickstartguide.pdf")
+    , ("M-S-b", spawn "zathura ~/doc/pybullet_api.pdf")
 
     -- Prompt
     , ("M-o", runOrRaisePrompt myXPConfig)
