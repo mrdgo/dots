@@ -10,6 +10,7 @@ local bundles = {
 }
 
 vim.list_extend(bundles, vim.split(vim.fn.glob("/opt/vscode-java-test/server/*.jar"), "\n"))
+-- vim.list_extend(bundles, vim.split(vim.fn.glob("/home/maxim/downloads/extensions/jars/*.jar"), "\n"))
 
 local config = {
 	cmd = {
@@ -78,3 +79,15 @@ local config = {
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
 jdtls.start_or_attach(config)
+
+-- vim.lsp.start({
+-- 	name = "sonarlint",
+-- 	cmd = function(...)
+-- 		os.execute(
+-- 			"/usr/lib/jvm/java-11-openjdk/bin/java /opt/sonarlint-language-server/target/sonarlint-language-server-2.13.0-SNAPSHOT.jar 5055 -analyzers /opt/sonarlint-language-server/target/plugins/sonarjava.jar"
+-- 		)
+-- 		return vim.lsp.rpc.connect("127.0.0.1", 5055)(...)
+-- 	end,
+-- 	-- "/opt/sonarlint-language-server/target/...",
+-- 	root_dir = vim.fs.dirname(vim.fs.find({ "pom.xml" }, { upward = true })[1]),
+-- })
