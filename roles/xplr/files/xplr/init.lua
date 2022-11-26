@@ -95,13 +95,15 @@ xplr.config.modes.builtin["action"].key_bindings.on_key["d"] = {
 	},
 }
 
--- Press `:p` to toggle preview mode.
-require("nnn_preview_wrapper").setup({
-	plugin_path = "/home/maxim/.config/nnn/plugins/preview-tabbed",
-	fifo_path = "/tmp/xplr.fifo",
-	mode = "action",
-	key = "p",
-})
+local function preview_setup()
+	-- Press `:p` to toggle preview mode.
+	require("nnn_preview_wrapper").setup({
+		plugin_path = "/home/maxim/.config/nnn/plugins/preview-tabbed",
+		fifo_path = "/tmp/xplr.fifo",
+		mode = "action",
+		key = "p",
+	})
+end
 
 local function setup_xclip()
 	-- Type `yy` to copy and `p` to paste whole files.
@@ -119,6 +121,7 @@ require("xpm").setup({
 	plugins = {
 		-- Let xpm manage itself
 		"dtomvan/xpm.xplr",
+		{ name = "sayanarijit/preview-tabbed.xplr", after = preview_setup },
 		{ name = "sayanarijit/zoxide.xplr" },
 		{
 			name = "sayanarijit/tri-pane.xplr",
@@ -133,6 +136,18 @@ require("xpm").setup({
 			end,
 		},
 		{ name = "sayanarijit/xclip.xplr", after = setup_xclip },
+		{
+			name = "sayanarijit/nvim-ctrl.xplr",
+			after = function()
+				require("nvim-ctrl").setup({
+					mode = "default",
+					keys = {
+						["ctrl-e"] = "tabedit",
+						["e"] = "e",
+					},
+				})
+			end,
+		},
 	},
 	auto_install = true,
 	auto_cleanup = true,
