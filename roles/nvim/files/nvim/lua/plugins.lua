@@ -69,14 +69,11 @@ return require("packer").startup(function(use)
 	})
 
 	use({
-		"ms-jpq/chadtree",
-		branch = "chad",
-		run = function()
-			vim.cmd("!python -m chadtree deps")
-		end,
+		"prichrd/netrw.nvim",
 		config = function()
-			require("chadtree_setup")
+			require("netrw_setup")
 		end,
+		requires = { "kyazdani42/nvim-web-devicons" },
 	})
 
 	use({
@@ -127,7 +124,6 @@ return require("packer").startup(function(use)
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope.nvim",
 		},
-		ft = { "hs" },
 		config = function()
 			require("hls_setup")
 		end,
@@ -204,9 +200,9 @@ return require("packer").startup(function(use)
 	})
 
 	use({
-		"luukvbaal/stabilize.nvim",
+		"xorid/swap-split.nvim",
 		config = function()
-			require("stabilize").setup()
+			vim.keymap.set("n", "<Leader>S", require("swap-split").swap, {})
 		end,
 	})
 
@@ -222,6 +218,9 @@ return require("packer").startup(function(use)
 		"ThePrimeagen/harpoon",
 		requires = { "nvim-lua/plenary.nvim" },
 		config = function()
+			require("harpoon").setup({
+				mark_branch = true,
+			})
 			vim.keymap.set("n", "<Leader>a", require("harpoon.mark").add_file)
 			vim.keymap.set("n", "<Leader>o", require("telescope").extensions.harpoon.marks)
 		end,
@@ -243,6 +242,31 @@ return require("packer").startup(function(use)
 		run = function()
 			vim.fn["firenvim#install"](0)
 		end,
+		config = function()
+			vim.cmd([[
+			if exists('g:started_by_firenvim')
+				let g:firenvim_config = {
+						\ 'globalSettings': {
+							\ 'alt': 'all',
+						\  },
+						\ 'localSettings': {
+							\ '.*': {
+								\ 'cmdline': 'firenvim',
+								\ 'content': 'text',
+								\ 'priority': 0,
+								\ 'selector': 'textarea',
+								\ 'takeover': 'always',
+							\ },
+							\ '(outlook|atlassian)*': {
+								\ 'takeover': 'never',
+								\ 'priority': 1
+							\ },
+						\ }
+					\ }
+				au BufEnter github.com_*.txt set filetype=markdown
+			endif
+			]])
+		end,
 	})
 
 	use("zsugabubus/crazy8.nvim")
@@ -256,34 +280,19 @@ return require("packer").startup(function(use)
 
 	use({
 		"melkster/modicator.nvim",
-		after = "gruvbox-baby", -- Add your colorscheme plugin here
+		after = "gruvbox-baby",
 		config = function()
 			require("modicator").setup({})
-		end,
-	})
-
-	use({
-		"vimpostor/vim-tpipeline",
-		config = function()
-			vim.g.tpipeline_autoembed = 0
-			vim.g.tpipeline_cursormoved = 1
 		end,
 	})
 
 	use("seandewar/nvimesweeper")
 	use("nagy135/typebreak.nvim")
 
-	use({ "kevinhwang91/nvim-bqf", ft = "qf" })
-
-	-- use({
-	-- 	"https://gitlab.com/yorickpeterse/nvim-pqf.git",
-	-- 	config = function()
-	-- 		require("pqf").setup()
-	-- 	end,
-	-- })
-
 	use("tpope/vim-endwise")
 	use("tpope/vim-repeat")
+
+	use({ "kevinhwang91/nvim-bqf", ft = "qf" })
 
 	use({
 		"kylechui/nvim-surround",
@@ -374,7 +383,7 @@ return require("packer").startup(function(use)
 			vim.cmd([[:TSInstall nu]])
 		end,
 		config = function()
-			require("null-ls").setup({})
+			require("null-ls_setup")
 			require("nu").setup({})
 		end,
 	})
@@ -396,4 +405,20 @@ return require("packer").startup(function(use)
 			{ "saadparwaiz1/cmp_luasnip" },
 		},
 	})
+
+	-- use({
+	-- 	"Jxstxs/conceal.nvim",
+	-- 	requires = "nvim-treesitter/nvim-treesitter",
+	-- 	config = function()
+	-- 		local conceal = require("conceal")
+	-- 		conceal.setup({
+	-- 			["java"] = {
+	-- 				["import"] = {
+	-- 					enabled = true,
+	-- 					conceal = "I",
+	-- 				},
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- })
 end)

@@ -30,7 +30,13 @@ local function on_attach(a, bufnr)
 		{ "S", vim.lsp.buf.signature_help, opts },
 		{ "R", vim.lsp.buf.rename, opts },
 		{ "r", trouble("lsp_references"), opts },
-		{ "f", vim.lsp.buf.formatting, opts },
+		{
+			"f",
+			function()
+				vim.lsp.buf.format({ async = true })
+			end,
+			opts,
+		},
 		{ "n", vim.diagnostic.goto_next, opts },
 		{ "p", vim.diagnostic.goto_prev, opts },
 		{ "g", telescope.diagnostics, opts },

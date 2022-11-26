@@ -19,7 +19,8 @@ vim.o.incsearch = true
 vim.o.smartcase = true
 
 vim.o.laststatus = 3
-vim.o.cmdheight = 0 -- TODO: 0
+vim.o.cmdheight = 0
+vim.o.splitkeep = "screen"
 vim.o.colorcolumn = "80"
 vim.o.splitbelow = true
 vim.o.splitright = true
