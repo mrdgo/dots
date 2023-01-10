@@ -1,0 +1,10 @@
+- name: setup .config/wezterm
+  file:
+    path: ~/.config/wezterm
+    state: directory
+
+- name: Configure wezterm
+  file:
+    src: "{{ dotfiles_home }}/roles/wezterm/files/wezterm.lua"
+    dest: "~/.config/wezterm/wezterm.lua"
+    state: link
