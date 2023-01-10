@@ -1,6 +1,8 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+
 local opts_nore_silent = { noremap = true, silent = true }
 local map = function(key, cmd)
 	vim.api.nvim_set_keymap("n", "<Leader>" .. key, "<cmd>" .. cmd .. "<CR>", opts_nore_silent)
@@ -41,9 +43,6 @@ vim.api.nvim_set_keymap("v", "J", ":m '>+1<CR>gv=gv", opts_re_silent)
 vim.api.nvim_set_keymap("v", "K", ":m '<-2<CR>gv=gv", opts_re_silent)
 vim.api.nvim_set_keymap("n", "<C-j>", ":m .+1<CR>==", opts_re_silent)
 vim.api.nvim_set_keymap("n", "<C-k>", ":m .-2<CR>==", opts_re_silent)
-
--- map madness
-vim.api.nvim_set_keymap("n", "<Leader>v", "<Cmd>e $MYVIMRC<CR>", { silent = true })
 
 -- motions
 vim.api.nvim_set_keymap("n", "gl", "$", opts_nore_silent)

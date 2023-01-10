@@ -1,14 +1,14 @@
 local nvim_lsp = require("lspconfig")
 
 local servers = {
-	"pylsp",
-	"vimls",
-	"texlab",
-	"ccls",
-	"tsserver",
+	"elmls",
 	"html",
-	"clojure_lsp",
+	"kotlin_language_server",
+	"pylsp",
 	"sumneko_lua",
+	"texlab",
+	"tsserver",
+	"vimls",
 }
 
 -- TODO: play around with vim.lsp.'server'.start({})
@@ -21,6 +21,29 @@ for _, lsp in ipairs(servers) do
 		capabilities = capabilities,
 		on_attach = require("lsp_on_attach").on_attach,
 		settings = {
+			texlab = {
+				auxDirectory = ".",
+				bibtexFormatter = "texlab",
+				build = {
+					args = { "-etex", "%f" },
+					executable = "xelatex",
+					forwardSearchAfter = false,
+					onSave = false,
+				},
+				chktex = {
+					onEdit = false,
+					onOpenAndSave = false,
+				},
+				diagnosticsDelay = 300,
+				formatterLineLength = 80,
+				forwardSearch = {
+					args = {},
+				},
+				latexFormatter = "latexindent",
+				latexindent = {
+					modifyLineBreaks = false,
+				},
+			},
 			yaml = {
 				schemas = {
 					["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = ".gitlab-ci.yaml",
