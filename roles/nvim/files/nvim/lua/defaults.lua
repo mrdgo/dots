@@ -18,6 +18,7 @@ vim.o.hlsearch = false
 vim.o.incsearch = true
 vim.o.smartcase = true
 
+vim.o.termguicolors = true
 vim.o.laststatus = 3
 vim.o.cmdheight = 0
 vim.o.splitkeep = "screen"
@@ -39,7 +40,7 @@ vim.o.foldmethod = "manual"
 vim.o.foldnestmax = 3
 vim.o.foldminlines = 1
 
--- vim.o.clipboard:append{'unnamedplus'}
+vim.o.clipboard = "unnamedplus"
 
 -- -- solid underscore
 -- vim.cmd[[let &t_SI .= "\<Esc>[4 q"]]
@@ -50,8 +51,6 @@ vim.o.foldminlines = 1
 
 -- vim.cmd[[filetype plugin indent on]]
 -- vim.cmd[[syntax enable]]
-
--- vim.o.termguicolors = true
 
 -- vim.cmd[[hi CursorLine cterm=NONE ctermbg=8 ctermfg=NONE]]
 -- vim.cmd[[hi Cursorline term=NONE cterm=NONE]]

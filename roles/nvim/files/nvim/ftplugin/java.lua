@@ -47,8 +47,8 @@ local config = {
 	init_options = {
 		bundles = bundles,
 	},
-	on_attach = function(a, bufnr)
-		require("lsp_on_attach").on_attach(a, bufnr)
+	on_attach = function()
+		require("lsp_on_attach").on_attach()
 
 		jdtls.setup_dap({ hotcodereplace = "auto" })
 		require("dap").configurations.java = {

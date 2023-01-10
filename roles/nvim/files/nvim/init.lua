@@ -11,28 +11,32 @@
 -- disable some builtin vim plugins
 local default_plugins = {
 	"2html_plugin",
+	"bugreport",
+	"compiler",
+	"ftplugin",
 	"getscript",
 	"getscriptPlugin",
 	"gzip",
 	"logipat",
+	"man",
 	"matchit",
-	"tar",
-	"tarPlugin",
+	"netrw",
+	"netrwFileHandlers",
+	"netrwPlugin",
+	"netrwSettings",
+	"optwin",
+	"rplugin",
 	"rrhelper",
 	"spellfile_plugin",
+	"synmenu",
+	"syntax",
+	"tar",
+	"tarPlugin",
+	"tutor",
 	"vimball",
 	"vimballPlugin",
 	"zip",
 	"zipPlugin",
-	"tutor",
-	"rplugin",
-	"syntax",
-	"synmenu",
-	"optwin",
-	"compiler",
-	"bugreport",
-	"ftplugin",
-	"man",
 }
 
 for _, plugin in pairs(default_plugins) do
@@ -51,24 +55,8 @@ require("defaults")
 
 require("leader")
 
-require("plugins")
+require("plug")
 
 -- <Leader>W saves file as root
 require("doas").setup()
 require("whitespace")
-
--- local async
--- async =vim.loop.new_async(
---     vim.schedule_wrap(
---     function()
---         require'leader'
---
---         require'plugins'
---         vim.cmd'source $HOME/.config/nvim/config/theme.vim'
---
---         async:close()
---     end
---     )
--- )
---
--- async:send()
