@@ -44,7 +44,8 @@ return {
 		end
 
 		math.randomseed(os.time())
-		local header_text_now = require("banners")[1]
+		local banners = require("banners")
+		local header_text_now = banners[math.random(1, #banners)]
 
 		require("alpha").setup({
 			layout = {

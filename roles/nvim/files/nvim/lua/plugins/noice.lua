@@ -16,7 +16,7 @@ return {
 				["cmp.entry.get_documentation"] = true,
 			},
 		},
-		messages = {
+		message = {
 			enabled = false,
 		},
 		presets = {

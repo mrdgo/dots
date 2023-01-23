@@ -47,8 +47,6 @@ vim.o.clipboard = "unnamedplus"
 -- -- solid block
 -- vim.cmd[[let &t_EI .= "\<Esc>[2 q"]]
 
--- vim.cmd[[let loaded_matchparen = 1]]
-
 -- vim.cmd[[filetype plugin indent on]]
 -- vim.cmd[[syntax enable]]
 
