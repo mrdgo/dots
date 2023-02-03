@@ -16,8 +16,13 @@ return {
 				["cmp.entry.get_documentation"] = true,
 			},
 		},
-		message = {
+		messages = {
 			enabled = false,
+			view = "messages",
+			view_error = "notify",
+			view_warn = "messages",
+			view_history = "messages",
+			view_search = "virtualtext",
 		},
 		presets = {
 			-- you can enable a preset by setting it to true, or a table that will override the preset config

@@ -12,6 +12,14 @@ return {
 			},
 		}
 
+		parser_configs.robot = {
+			install_info = {
+				url = "https://github.com/Hubro/tree-sitter-robot",
+				files = { "src/parser.c" },
+			},
+			filetype = "robot",
+		}
+
 		vim.g.ts_highlight_lua = true
 
 		require("nvim-treesitter.configs").setup({
@@ -30,6 +38,7 @@ return {
 				"norg",
 				"python",
 				"regex",
+				"robot",
 				"toml",
 				"typescript",
 				"vim",

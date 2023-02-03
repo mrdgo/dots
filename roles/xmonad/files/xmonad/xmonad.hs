@@ -301,6 +301,5 @@ main = do
         , workspaces         = myWorkspaces
         , manageHook         = myManageHook <+> manageIdeaCompletionWindow
         , logHook = mapM_ myPP xmprocs
-        --, logHook = mapM (liftIO . spawnBar) [0..n-1] >>= mapM_ myPP
     } `removeKeysP` myRemKeys `additionalKeysP` myKeys
 

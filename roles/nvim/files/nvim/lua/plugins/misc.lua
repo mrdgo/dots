@@ -9,6 +9,7 @@ return {
 	{ "kevinhwang91/nvim-bqf", ft = "qf" },
 	{ "kylechui/nvim-surround", config = true },
 	{ "karb94/neoscroll.nvim", config = true },
+	{ "Aasim-A/scrollEOF.nvim", config = true },
 	{ "shortcuts/no-neck-pain.nvim", version = "*", config = true },
 	{ "EtiamNullam/deferred-clipboard.nvim", config = true, opts = { lazy = true } },
 	-- 	{ -- TODO: check out
@@ -21,6 +22,12 @@ return {
 		"barrett-ruth/import-cost.nvim",
 		build = "sh install.sh npm",
 		config = true,
+	},
+	{
+		"xiyaowong/nvim-cursorword",
+		config = function()
+			vim.cmd([[let g:cursorword_disable_at_startup = v:false]])
+		end,
 	},
 	{
 		"princejoogie/chafa.nvim",
@@ -48,6 +55,7 @@ return {
 	{ "sQVe/sort.nvim", config = true },
 	{
 		"melkster/modicator.nvim",
+		dependencies = { "gruvbox.nvim" },
 		config = function()
 			vim.o.cursorline = true
 			vim.o.number = true

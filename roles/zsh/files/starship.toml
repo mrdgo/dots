@@ -23,3 +23,8 @@ style = "bold red"
 
 [gcloud]
 disabled = true
+
+[custom.starship_gitlab]
+command = "starship-gitlab -m dev"
+directories = [".git"]
+format = "[$output]($style)"

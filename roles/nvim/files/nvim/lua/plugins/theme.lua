@@ -15,6 +15,8 @@ return {
 			inverse = true, -- invert background for search, diffs, statuslines and errors
 			contrast = "hard", -- can be "hard", "soft" or empty string
 			overrides = {
+				NoiceCmdlinePopupBorder = { bg = "#161616", fg = "#ebdbb2" },
+				NoiceCmdlineIcon = { bg = "#161616", fg = "#7fa2ac" },
 				-- TelescopeBorder = { bg = c.dark },
 				-- TelescopePromptTitle = { fg = c.dark, bg = c.soft_green },
 				-- TelescopePromptCounter = { fg = c.milk, bg = c.background_light },

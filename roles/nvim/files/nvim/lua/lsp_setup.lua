@@ -5,6 +5,7 @@ local servers = {
 	"html",
 	"kotlin_language_server",
 	"pylsp",
+	"robotframework_ls",
 	"sumneko_lua",
 	"texlab",
 	"tsserver",
