@@ -54,7 +54,7 @@ myFont :: String
 myFont = "Mononoki:size=14:antialias=true:hinting=true,xft:FontAwesome:size=12"
 
 myTerminal :: String
-myTerminal = "wezterm"
+myTerminal = "kitty"
 
 myStartupHook :: X ()
 myStartupHook = do
