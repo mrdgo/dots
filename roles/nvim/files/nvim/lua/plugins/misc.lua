@@ -12,12 +12,9 @@ return {
 	{ "Aasim-A/scrollEOF.nvim", config = true },
 	{ "shortcuts/no-neck-pain.nvim", version = "*", config = true },
 	{ "EtiamNullam/deferred-clipboard.nvim", config = true, opts = { lazy = true } },
-	-- 	{ -- TODO: check out
-	-- 	"chrisgrieser/nvim-various-textobjs",
-	-- 	config = function ()
-	-- 		require("various-textobjs").setup({ useDefaultKeymaps = true })
-	-- 	end,
-	-- },
+	{ "tummetott/reticle.nvim", opts = {} },
+	{ "sQVe/sort.nvim", config = true },
+	{ "windwp/nvim-autopairs", dependencies = { "hrsh7th/nvim-cmp" }, config = true },
 	{
 		"barrett-ruth/import-cost.nvim",
 		build = "sh install.sh npm",
@@ -52,7 +49,6 @@ return {
 			require("nvim_comment").setup({})
 		end,
 	},
-	{ "sQVe/sort.nvim", config = true },
 	{
 		"melkster/modicator.nvim",
 		dependencies = { "gruvbox.nvim" },
@@ -62,7 +58,6 @@ return {
 			require("modicator").setup()
 		end,
 	},
-	{ "windwp/nvim-autopairs", dependencies = { "hrsh7th/nvim-cmp" }, config = true },
 	{
 		"xorid/swap-split.nvim",
 		keys = {

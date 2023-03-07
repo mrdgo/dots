@@ -11,3 +11,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
+
+
+-- TODO: look at https://github.com/miversen33/netman.nvim
