@@ -1,4 +1,4 @@
-Config { font = "xft:Mononoki Nerd Font:pixelsize=14:antialias=true:hinting=true"
+Config { font = "Mononoki Nerd Font 12"
        , additionalFonts = []
        , borderColor = "#161616"
        , border = TopB
