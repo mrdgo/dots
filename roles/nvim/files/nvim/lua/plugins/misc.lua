@@ -12,9 +12,38 @@ return {
 	{ "Aasim-A/scrollEOF.nvim", config = true },
 	{ "shortcuts/no-neck-pain.nvim", version = "*", config = true },
 	{ "EtiamNullam/deferred-clipboard.nvim", config = true, opts = { lazy = true } },
-	{ "tummetott/reticle.nvim", opts = {} },
 	{ "sQVe/sort.nvim", config = true },
 	{ "windwp/nvim-autopairs", dependencies = { "hrsh7th/nvim-cmp" }, config = true },
+	{
+		"tummetott/reticle.nvim",
+		opts = {
+			-- Define filetypes where the cursorline / cursorcolumn is never on,
+			-- regardless of the global setting
+			never = {
+				cursorline = {
+					"qf",
+					"alpha",
+					"TelescopePrompt",
+					"json",
+					"dapui_scopes",
+					"dapui_breakpoints",
+					"dapui_stacks",
+					"dapui_hover",
+				},
+				cursorcolumn = {
+					"qf",
+					"alpha",
+					"NvimTree",
+					"TelescopePrompt",
+					"json",
+					"dapui_scopes",
+					"dapui_breakpoints",
+					"dapui_stacks",
+					"dapui_hover",
+				},
+			},
+		},
+	},
 	{
 		"barrett-ruth/import-cost.nvim",
 		build = "sh install.sh npm",

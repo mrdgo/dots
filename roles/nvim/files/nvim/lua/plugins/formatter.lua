@@ -2,24 +2,8 @@ return {
 	"mhartington/formatter.nvim",
 	ft = { "typescript", "javascript", "java", "lua", "python", "kotlin", "elm" },
 	config = function()
-		local function prettier()
-			return {
-				exe = "npx",
-				args = {
-					"prettier",
-					"--stdin-filepath",
-					vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-					"--single-quote",
-				},
-				stdin = true,
-			}
-		end
-
 		require("formatter").setup({
 			filetype = {
-				typescript = { prettier },
-				javascript = { prettier },
-				html = { prettier },
 				kotlin = {
 					function()
 						return {
