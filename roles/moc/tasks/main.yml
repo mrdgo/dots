@@ -1,6 +1,7 @@
+---
 - name: Setup music on console
   file:
     src: "{{ dotfiles_home }}/roles/moc/files/moc"
     dest: "~/.moc"
     state: link
-    force: yes
+    force: true

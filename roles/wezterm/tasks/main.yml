@@ -1,3 +1,4 @@
+---
 - name: setup .config/wezterm
   file:
     path: ~/.config/wezterm

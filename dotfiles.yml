@@ -26,6 +26,9 @@
     - role: moc
       tags:
         - moc
+    - role: nushell
+      tags:
+        - nushell
     - role: nvim
       tags:
         - nvim

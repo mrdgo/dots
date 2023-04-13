@@ -1,9 +1,10 @@
+---
 - name: Configure xmonad and xmobar
   file:
     src: "{{ dotfiles_home }}/roles/xmonad/files/xmonad"
     dest: "~/.xmonad"
     state: link
-    force: yes
+    force: true
 
 - name: Install xinitrc
   file:
@@ -11,7 +12,7 @@
     dest: "~/.xinitrc"
     state: hard
     mode: 0755
-    force: yes
+    force: true
 
 - name: Install .profile
   file:
@@ -19,7 +20,7 @@
     dest: "~/.profile"
     mode: 0755
     state: hard
-    force: yes
+    force: true
 
 - name: Install down scripts
   file:
@@ -27,7 +28,7 @@
     dest: "~/.config/down_scripts"
     mode: 0755
     state: link
-    force: yes
+    force: true
 
 - name: Install Xresources
   file:
@@ -35,7 +36,7 @@
     dest: "~/.Xresources"
     mode: 0755
     state: hard
-    force: yes
+    force: true
 
 - name: Install Xresources gruvbox
   file:
@@ -43,7 +44,7 @@
     dest: "~/.Xresources.gruvbox"
     mode: 0755
     state: hard
-    force: yes
+    force: true
 
 - name: Install Xresources tokyonight
   file:
@@ -51,7 +52,7 @@
     dest: "~/.Xresources.tokyonight"
     mode: 0755
     state: hard
-    force: yes
+    force: true
 
 - name: Install Xsetup_0 to theme xdm
   file:
@@ -59,7 +60,7 @@
     dest: "/etc/X11/xdm/Xsetup_0"
     mode: 0755
     state: hard
-    force: yes
+    force: true
   become: true
 
 - name: Recompile xmonad
