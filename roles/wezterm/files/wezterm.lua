@@ -2,6 +2,7 @@ local wezterm = require("wezterm")
 
 return {
 	font = wezterm.font("mononoki"),
+	audible_bell = "Disabled",
 	keys = {
 		{ key = "+", mods = "CTRL", action = wezterm.action.IncreaseFontSize },
 		{ key = "-", mods = "CTRL", action = wezterm.action.DecreaseFontSize },
