@@ -1,13 +1,14 @@
+---
 - name: Configure xplr
   file:
     src: "{{ dotfiles_home }}/roles/xplr/files/xplr"
     dest: "~/.config/xplr"
     state: link
-    force: yes
+    force: true
 
 - name: nnn config that is used by xplr
   file:
     src: "{{ dotfiles_home }}/roles/xplr/files/nnn"
     dest: "~/.config/nnn"
     state: link
-    force: yes
+    force: true

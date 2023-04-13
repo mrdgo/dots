@@ -1,44 +1,45 @@
+---
 - name: Setup zshrc
   file:
     src: "{{ dotfiles_home }}/roles/zsh/files/zshrc"
     dest: "~/.zshrc"
     state: hard
-    force: yes
+    force: true
 
 - name: Setup zshenv
   file:
     src: "{{ dotfiles_home }}/roles/zsh/files/zshenv"
     dest: "~/.zshenv"
     state: hard
-    force: yes
+    force: true
 
 - name: Setup zprofile
   file:
     src: "{{ dotfiles_home }}/roles/zsh/files/zprofile"
     dest: "~/.zprofile"
     state: hard
-    force: yes
+    force: true
 
 - name: Setup zprofile
   file:
     src: "{{ dotfiles_home }}/roles/zsh/files/aliases"
     dest: "~/.aliases"
     state: hard
-    force: yes
+    force: true
 
 - name: Setup bin directories
   file:
     src: "{{ dotfiles_home }}/roles/zsh/files/bin_dirs"
     dest: "~/.bin_dirs"
     state: hard
-    force: yes
+    force: true
 
 - name: Setup starship
   file:
     src: "{{ dotfiles_home }}/roles/zsh/files/starship.toml"
     dest: "~/.config/starship.toml"
     state: hard
-    force: yes
+    force: true
 
 - name: zsh custom config dir
   file:
@@ -51,7 +52,7 @@
     src: "{{ dotfiles_home }}/roles/zsh/files/gico.completion.zsh"
     dest: "~/.zshcustom/gico.completion.zsh"
     state: hard
-    force: yes
+    force: true
 
 - name: ngrok config dir
   file:
@@ -64,4 +65,4 @@
     src: "{{ dotfiles_home }}/roles/zsh/files/ngrok.yml"
     dest: "~/.ngrok2/ngrok.yml"
     state: hard
-    force: yes
+    force: true

@@ -1,6 +1,7 @@
+---
 - name: Configure nvim
   file:
     src: "{{ dotfiles_home }}/roles/nvim/files/nvim"
     dest: "~/.config/nvim"
     state: link
-    force: yes
+    force: true

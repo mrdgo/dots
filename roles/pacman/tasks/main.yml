@@ -1,16 +1,17 @@
+---
 - name: create 'aur-bulider' user
-  become: yes
+  become: true
   ansible.builtin.user:
     name: aur_builder
-    create_home: yes
+    create_home: true
     group: wheel
 
 - name: allow aur_builder to run sudo
-  become: yes
+  become: true
   ansible.builtin.lineinfile:
     path: /etc/sudoers.d/11-install-aur_builder
     line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
-    create: yes
+    create: true
     validate: 'visudo -cf %s'
 
 - name: install paru
@@ -18,91 +19,22 @@
     name: paru
     use: makepkg
     state: present
-  become: yes
+  become: true
   become_user: aur_builder
-
-    #- name: Configure pacman
-    #  file:
-    #    src: "{{ dotfiles_home }}/roles/pacman/files/pacman.conf"
-    #    dest: "/etc/pacman.conf"
-    #    state: hard
-    #    force: yes
-    #  become: yes
-    #  become_user: root
 
 - name: Configure paru
   file:
     src: "{{ dotfiles_home }}/roles/pacman/files/paru.conf"
     dest: "/etc/paru.conf"
     state: hard
-    force: yes
-  become: yes
+    force: true
+  become: true
   become_user: root
 
 - name: pacman -Syu
   community.general.pacman:
-    update_cache: yes
-    upgrade: yes
-  become: yes
+    update_cache: true
+    upgrade: true
+  become: true
   become_user: root
   become_method: sudo
-
-    #- name: Install packages from repo
-    #  community.general.pacman:
-    #    name: "{{ packages }}"
-    #    state: present
-    #  become: yes
-    #  become_user: root
-    #  become_method: sudo
-
-    #- name: Install packages from AUR
-    #  kewlfft.aur.aur:
-    #    name: "{{ aur_packages }}"
-    #    state: present
-    #    use: makepkg
-
-# - name: Remove packages
-#   community.general.pacman:
-#     name: "{{ remove_packages }}"
-#     update_cache: yes
-#     state: absent
-#   become: yes
-#   become_user: root
-
-# - name: Install package bar from file
-#   community.general.pacman:
-#     name: ~/bar-1.0-1-any.pkg.tar.xz
-#     state: present
-
-# - name: Install package foo from repo and bar from file
-#   community.general.pacman:
-#     name:
-#       - foo
-#       - ~/bar-1.0-1-any.pkg.tar.xz
-#     state: present
-
-# - name: Upgrade package foo
-#   community.general.pacman:
-#     name: foo
-#     state: latest
-#     update_cache: yes
-
-# - name: Remove packages foo and bar
-#   community.general.pacman:
-#     name:
-#       - foo
-#       - bar
-#     state: absent
-
-# - name: Recursively remove package baz
-#   community.general.pacman:
-#     name: baz
-#     state: absent
-#     extra_args: --recursive
-
-# - name: Run the equivalent of "pacman -Rdd", force remove package baz
-#   community.general.pacman:
-#     name: baz
-#     state: absent
-#     force: yes
-
