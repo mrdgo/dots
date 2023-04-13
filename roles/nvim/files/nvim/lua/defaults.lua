@@ -18,6 +18,7 @@ vim.o.hlsearch = false
 vim.o.incsearch = true
 vim.o.smartcase = true
 
+vim.o.display = "lastline"
 vim.o.termguicolors = true
 vim.o.laststatus = 3
 vim.o.cmdheight = 0

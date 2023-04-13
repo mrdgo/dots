@@ -26,7 +26,7 @@ for _, lsp in ipairs(servers) do
 				auxDirectory = ".",
 				bibtexFormatter = "texlab",
 				build = {
-					args = { "-etex", "%f" },
+					args = { "-etex", "-shell-escape", "%f" },
 					executable = "xelatex",
 					forwardSearchAfter = false,
 					onSave = false,

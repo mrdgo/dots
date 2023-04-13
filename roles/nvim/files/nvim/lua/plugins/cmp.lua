@@ -60,7 +60,9 @@ return {
 				{ name = "treesitter" },
 				{ name = "buffer" },
 				{ name = "nvim_lua" },
-				{ name = "kitty" },
+				{ name = "kitty", option = {
+					listen_on = "unix:@kitty",
+				} },
 			}),
 		})
 

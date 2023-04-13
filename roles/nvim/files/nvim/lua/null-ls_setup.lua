@@ -18,25 +18,20 @@ end
 -- if you want to set up formatting on save, you can use this as a callback
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
--- add to your shared on_attach callback
-local on_attach = function(client, bufnr)
-	if client.supports_method("textDocument/formatting") then
-		vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			group = augroup,
-			buffer = bufnr,
-			callback = function()
-				lsp_formatting(bufnr)
-			end,
-		})
-	end
-end
-
 null_ls.setup({
 	capabilities = capabilities,
-	on_attach = function(...)
+	on_attach = function(client, bufnr)
 		require("lsp_on_attach").on_attach()
-		on_attach(...)
+		if client.supports_method("textDocument/formatting") then
+			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				group = augroup,
+				buffer = bufnr,
+				callback = function()
+					lsp_formatting(bufnr)
+				end,
+			})
+		end
 	end,
 	sources = {
 		-- refactoring.nvim code_actions,
@@ -59,9 +54,13 @@ null_ls.setup({
 			extra_args = { "-d", "{extends: default, rules: {line-length: {max: 100}}}" },
 		}),
 		-- markdown
+		diagnostics.write_good.with({ filetypes = { "markdown", "tex" } }),
 		diagnostics.markdownlint.with({
 			diagnostics_format = diagnostics_format,
 		}),
+		-- python
+		formatting.black,
+		-- diagnostics.vulture,
 		-- sql
 		formatting.sqlformat,
 		-- toml

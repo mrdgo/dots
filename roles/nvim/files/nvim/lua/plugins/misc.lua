@@ -14,6 +14,7 @@ return {
 	{ "EtiamNullam/deferred-clipboard.nvim", config = true, opts = { lazy = true } },
 	{ "sQVe/sort.nvim", config = true },
 	{ "windwp/nvim-autopairs", dependencies = { "hrsh7th/nvim-cmp" }, config = true },
+	{ "chrisgrieser/nvim-spider", lazy = true },
 	{
 		"tummetott/reticle.nvim",
 		opts = {
