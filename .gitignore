@@ -7,7 +7,11 @@ roles/moc/files/moc/last_directory
 roles/moc/files/moc/softmixer
 roles/moc/files/moc/pid
 roles/moc/files/moc/playlist.m3u
+roles/nushell/files/nushell/.SRCINFO
+roles/nushell/files/nushell/history.txt
 roles/xmonad/files/xmonad/prompt-history
+roles/xmonad/files/xmonad/build-x86_64-linux/Main.hi
+roles/xmonad/files/xmonad/build-x86_64-linux/Main.o
 roles/xmonad/files/xmonad/xmonad-x86_64-linux
 roles/xmonad/files/xmonad/xmonad.errors
 roles/xmonad/files/xmonad/xmonad.hi
