@@ -67,4 +67,4 @@ def ngrok_init [] {
   tmux send -t "$sess":1 "ngrok tcp --region=eu 4200" ENTER
 }
 
-alias myip = "wget -qO- https://ipecho.net/plain ; echo"
+# alias myip = "wget -qO- https://ipecho.net/plain ; echo"
