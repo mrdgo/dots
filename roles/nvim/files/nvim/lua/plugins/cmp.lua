@@ -126,6 +126,7 @@ return {
 		{ "ray-x/cmp-treesitter" },
 		{ "L3MON4D3/LuaSnip", tag = "v1.1.0" },
 		{ "saadparwaiz1/cmp_luasnip" },
+		{ "evesdropper/luasnip-latex-snippets.nvim" },
 		{ "windwp/nvim-autopairs" },
 		{ "garyhurtz/cmp_kitty" },
 	},
