@@ -1,5 +1,5 @@
 set selection-clipboard clipboard
-set font "Mononoki normal 12"
+set font "Mononoki Nerd Font"
 
 set window-title-page true
 set statusbar-home-tilde true
