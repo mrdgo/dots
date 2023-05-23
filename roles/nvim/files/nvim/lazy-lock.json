@@ -36,7 +36,7 @@
   "lualine.nvim": { "branch": "master", "commit": "e80465d721bdafcd234e890d1677ca4afb905144" },
   "maximizer.nvim": { "branch": "main", "commit": "ac884226dea7fe7631f30b008ddfd86c87041f9e" },
   "modicator.nvim": { "branch": "main", "commit": "28042ea94db52e19d02eb97cfc7f792d8f61f37a" },
-  "neorg": { "branch": "main", "commit": "01d8a9b2db38a28fd40851b894e9d146d279c892" },
+  "neorg": { "branch": "main", "commit": "c23310083857d30b27db821a41fbeeba0a7bd5c1" },
   "neoscroll.nvim": { "branch": "master", "commit": "d7601c26c8a183fa8994ed339e70c2d841253e93" },
   "neotest": { "branch": "master", "commit": "9f35041605ae0371fd94f669fe67eb5bd1574518" },
   "neotest-python": { "branch": "master", "commit": "6c06041cfb45f45e276068020baa06c06fe20d5c" },
