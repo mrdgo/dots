@@ -1,5 +1,11 @@
-# Don't print a new line at the start of the prompt
 add_newline = true
+
+[directory]
+style = "bold green"
+
+[hostname]
+ssh_only = false
+disabled = false
 
 # Replace the "❯" symbol in the prompt with "λ"
 [character]
