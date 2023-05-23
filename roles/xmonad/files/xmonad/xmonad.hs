@@ -113,27 +113,6 @@ xColorBg = xProp "*background"
 xColor :: String -> String
 xColor a = xProp $ "*color" ++ a
 
-myXPConfig :: XPConfig
-myXPConfig = def
-      { font                = "xft:Mononoki:size=18"
-      , bgColor             = xColor "10"
-      , fgColor             = xColorBg
-      , bgHLight            = xColorFg
-      , fgHLight            = xColor "11"
-      , borderColor         = xColor "10"
-      , promptBorderWidth   = 0
-      , position            = CenteredAt { xpCenterY = 0.2, xpWidth = 0.7 }
-      , height              = 50
-      , historySize         = 0
-      -- , historyFilter       = id
-      , defaultText         = []
-      , autoComplete        = Just 0  -- set Just 100000 for .1 sec
-      , showCompletionOnTab = True
-      , searchPredicate     = isPrefixOf
-      , alwaysHighlight     = True
-      , maxComplRows        = Nothing      -- set to Just 5 for 5 rows
-      }
-
 -- -d: dimensions, -t: title
 spawnFloatingTerm :: String -> X ()
 spawnFloatingTerm cmd = spawn $ "alacritty " ++ opt ++ " -e" ++ cmd
@@ -178,7 +157,7 @@ myKeys = [
     , ("M-d", sendMessage (IncMasterN (-1)))    -- one master fewer
 
     -- Lock, Reboot, Poweroff
-    , ("M-p", dirExecPrompt myXPConfig spawn "/home/maxim/.config/down_scripts")
+    , ("M-p", spawn "/home/maxim/.config/dmenu_down")
 
     -- Rofi
     --, ("M-S-o", spawn "rofi -modi drun -show drun -theme gruvbox-dark-soft")
@@ -208,11 +187,8 @@ myKeys = [
     , ("M-u <Space>", spawn "mocp --toggle-pause")
     , ("M-u m", spawnFloatingTerm "doas alsamixer")
 
-    -- Master thesis
-    , ("M-S-b", spawn "zathura ~/doc/pybullet_api.pdf")
-
     -- Prompt
-    , ("M-o", runOrRaisePrompt myXPConfig)
+    , ("M-o", spawn "dmenu_run_history -fn 'Mononoki Nerd Font' -nb '#161616' -nf '#665c54' -sb '#161616' -sf '#b8bb26'")
     ]
 
 myRemKeys :: [String]
