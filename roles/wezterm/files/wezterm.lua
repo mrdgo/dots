@@ -10,7 +10,7 @@ if wezterm.config_builder then
 end
 
 config.font = wezterm.font("Mononoki Nerd Font")
-config.font_size = 14
+config.font_size = 13
 config.audible_bell = "Disabled"
 config.keys = {
 	{ key = "+", mods = "CTRL", action = wezterm.action.IncreaseFontSize },
@@ -23,6 +23,13 @@ config.keys = {
 }
 
 config.default_prog = { "/usr/bin/nu" }
+
+config.window_padding = {
+	left = 2,
+	right = 2,
+	top = 0,
+	bottom = 0,
+}
 
 config.enable_tab_bar = false
 config.cursor_blink_rate = 0
