@@ -1,11 +1,12 @@
 local nvim_lsp = require("lspconfig")
 
 local servers = {
+	"ccls",
 	"elmls",
 	"html",
 	"kotlin_language_server",
 	"pylsp",
-	"robotframework_ls",
+	"rust_analyzer",
 	"lua_ls",
 	"texlab",
 	"tsserver",
@@ -14,20 +15,25 @@ local servers = {
 
 -- TODO: play around with vim.lsp.'server'.start({})
 -- Set up lspconfig.
--- local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local capabilities = {}
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- local capabilities = {}
 
 for _, lsp in ipairs(servers) do
 	nvim_lsp[lsp].setup({
 		capabilities = capabilities,
 		on_attach = require("lsp_on_attach").on_attach,
 		settings = {
+			Lua = {
+				diagnostics = {
+					globals = { "vim" },
+				},
+			},
 			texlab = {
 				auxDirectory = ".",
 				bibtexFormatter = "texlab",
 				build = {
-					args = { "-etex", "-shell-escape", "%f" },
-					executable = "xelatex",
+					args = {},
+					executable = "tectonic",
 					forwardSearchAfter = false,
 					onSave = false,
 				},
