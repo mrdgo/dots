@@ -60,9 +60,6 @@ return {
 				{ name = "treesitter" },
 				{ name = "buffer" },
 				{ name = "nvim_lua" },
-				{ name = "kitty", option = {
-					listen_on = "unix:@kitty",
-				} },
 			}),
 		})
 
@@ -102,7 +99,7 @@ return {
 			"confirm_done",
 			cmp_autopairs.on_confirm_done({
 				filetypes = {
-					-- "*" is a alias to all filetypes
+					-- "*" is an alias to all filetypes
 					["*"] = {
 						["("] = {
 							kind = {
@@ -126,7 +123,6 @@ return {
 		{ "ray-x/cmp-treesitter" },
 		{ "L3MON4D3/LuaSnip", tag = "v1.1.0" },
 		{ "saadparwaiz1/cmp_luasnip" },
-		{ "evesdropper/luasnip-latex-snippets.nvim" },
 		{ "windwp/nvim-autopairs" },
 		{ "garyhurtz/cmp_kitty" },
 	},
