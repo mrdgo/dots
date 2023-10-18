@@ -242,16 +242,13 @@ let light_theme = {
 
 
 # The default config record. This is where much of your global configuration is setup.
-let-env config = {
+$env.config = {
   ls: {
     use_ls_colors: true
     clickable_links: true # true or false to enable or disable clickable links in the ls listing. your terminal has to support links.
   }
   rm: {
     always_trash: false
-  }
-  cd: {
-    abbreviations: false # set to true to allow you to do things like cd s/o/f and nushell expand it to cd some/other/folder
   }
   history: {
     max_size: 10000 # Session has to be reloaded for this to take effect
@@ -293,15 +290,17 @@ let-env config = {
   show_banner: false # true or false to enable or disable the banner
 
   hooks: {
-    pre_prompt: [{||
-      $nothing  # replace with source code to run before the prompt is shown
+    pre_prompt: [{ ||
+      let direnv = (direnv export json | from json)
+      let direnv = if ($direnv | length) == 1 { $direnv } else { {} }
+      $direnv | load-env
     }]
     pre_execution: [{||
-      $nothing  # replace with source code to run before the repl input is run
+      null  # replace with source code to run before the repl input is run
     }]
     env_change: {
             # PWD: {|before, after| print $"changing directory from ($before) to ($after)" }
-            PWD: {|| $nothing}
+            PWD: {|| null}
         }
   }
   menus: [
