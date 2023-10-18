@@ -1,21 +1,17 @@
 return {
 	"cbochs/portal.nvim",
 	keys = {
-		{
-			"<Leader>O",
-			function()
-				require("portal").jump_backward()
-			end,
-		},
-		{
-			"<Leader>I",
-			function()
-				require("portal").jump_forward()
-			end,
-		},
+		{ "<Leader>O" },
+		{ "<Leader>I" },
 	},
-	-- dependencies = {
-	-- 	"cbochs/grapple.nvim", -- Optional: provides the "grapple" query item
-	-- 	"ThePrimeagen/harpoon", -- Optional: provides the "harpoon" query item
-	-- },
+	config = function()
+		vim.keymap.set("n", "<leader>O", "<cmd>Portal jumplist backward<cr>")
+		vim.keymap.set("n", "<leader>I", "<cmd>Portal jumplist forward<cr>")
+		vim.keymap.set("n", "<leader><leader>a", require("grapple").toggle)
+		vim.keymap.set("n", "<leader><leader>o", require("grapple").popup_tags)
+	end,
+	dependencies = {
+		"cbochs/grapple.nvim",
+		-- 	"ThePrimeagen/harpoon", -- Optional: provides the "harpoon" query item
+	},
 }

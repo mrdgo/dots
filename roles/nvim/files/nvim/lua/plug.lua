@@ -12,5 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
 
+vim.api.nvim_set_keymap("n", "<Leader>pu", "<cmd>Lazy<cr>", { noremap = true, silent = true })
 
 -- TODO: look at https://github.com/miversen33/netman.nvim

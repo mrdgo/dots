@@ -1,4 +1,4 @@
-version = "0.21.1"
+version = "0.21.3"
 local xplr = xplr
 local home = os.getenv("HOME")
 
@@ -40,11 +40,15 @@ xplr.config.node_types.file.meta.icon = " " .. utf8(0xf15c) .. " "
 xplr.config.node_types.symlink.meta.icon = " " .. utf8(0xf0c1) .. " "
 
 xplr.config.node_types.directory.style.fg = "Blue"
-xplr.config.node_types.file.style.fg = "LightGreen"
+xplr.config.node_types.file.style = { fg = "Green" }
 xplr.config.node_types.symlink.style.fg = "LightMagenta"
 
 xplr.config.general.selection_ui.style.fg = "LightYellow"
 xplr.config.general.focus_ui.style.fg = "Yellow"
+
+xplr.config.node_types.special["Cargo.toml"] = { meta = { icon = "" } }
+xplr.config.node_types.extension.md = { meta = { icon = "  " }, style = { fg = "Blue" } }
+xplr.config.node_types.extension.rs = { meta = { icon = " 🦀 " } }
 
 xplr.config.modes.builtin["action"].key_bindings.on_key["!"] = {
 	help = "shell",
@@ -56,6 +60,17 @@ xplr.config.modes.builtin["action"].key_bindings.on_key["!"] = {
 			},
 		},
 		"ExplorePwdAsync",
+		"PopMode",
+	},
+}
+xplr.config.modes.builtin["action"].key_bindings.on_key["e"] = {
+	help = "view pdf regular",
+	messages = {
+		{
+			BashExec = [===[
+            neovide --multigrid "${XPLR_FOCUS_PATH:?}"
+            ]===],
+		},
 		"PopMode",
 	},
 }
@@ -148,6 +163,7 @@ require("xpm").setup({
 				})
 			end,
 		},
+		"gitlab:hartan/web-devicons.xplr",
 	},
 	auto_install = true,
 	auto_cleanup = true,

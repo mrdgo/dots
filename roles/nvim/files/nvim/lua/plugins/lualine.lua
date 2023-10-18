@@ -4,6 +4,7 @@ return {
 		{ "nvim-tree/nvim-web-devicons", opt = true },
 		"WhoIsSethDaniel/lualine-lsp-progress",
 		"chrisgrieser/nvim-recorder",
+		"cbochs/grapple.nvim",
 	},
 	config = function()
 		local config = {
@@ -17,7 +18,17 @@ return {
 				lualine_a = {
 					{ "mode", right_padding = 2 },
 				},
-				lualine_b = { "filename", "branch" },
+				lualine_b = {
+					"filename",
+					"branch",
+					{
+						function()
+							local key = require("grapple").key()
+							return "  [" .. key .. "]"
+						end,
+						cond = require("grapple").exists,
+					},
+				},
 				lualine_c = { "fileformat" },
 				lualine_x = { require("recorder").displaySlots, "diff", "diagnostics", "searchcount" },
 				lualine_y = { "filetype", "progress" },

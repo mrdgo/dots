@@ -1,7 +1,7 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
 
-config = {}
+local config = {}
 
 -- In newer versions of wezterm, use the config_builder which will
 -- help provide clearer error messages
@@ -9,8 +9,9 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
+config.adjust_window_size_when_changing_font_size = false
 config.font = wezterm.font("Mononoki Nerd Font")
-config.font_size = 13
+config.font_size = 16
 config.audible_bell = "Disabled"
 config.keys = {
 	{ key = "+", mods = "CTRL", action = wezterm.action.IncreaseFontSize },

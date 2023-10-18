@@ -108,6 +108,7 @@ return {
 		filters = {
 			dotfiles = true,
 		},
+		sync_root_with_cwd = true,
 	},
 	keys = {
 		{ "<Leader>ut", "<cmd>NvimTreeToggle<CR>", desc = "Toggle file tree" },

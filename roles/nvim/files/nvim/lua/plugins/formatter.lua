@@ -1,9 +1,14 @@
 return {
 	"mhartington/formatter.nvim",
-	ft = { "typescript", "javascript", "java", "lua", "python", "kotlin", "elm" },
+	ft = { "typescript", "javascript", "java", "lua", "python", "kotlin", "elm", "rust" },
 	config = function()
 		require("formatter").setup({
 			filetype = {
+				rust = {
+					function()
+						return { exe = "rustfmt", args = {}, stdin = false }
+					end,
+				},
 				kotlin = {
 					function()
 						return {
@@ -61,27 +66,24 @@ return {
 		})
 
 		vim.cmd([[
-augroup FormatGroup
-	autocmd!
-	autocmd BufWritePost *.java,*.ts,*.lua,*.py,*.kt,*.elm FormatWrite
-augroup end
-]])
+		augroup FormatGroup
+			autocmd!
+		augroup end
+		]])
+		-- 	autocmd BufWritePost *.java,*.ts,*.lua,*.py,*.kt,*.elm,*.rs FormatWrite
 
-		-- local au_id = vim.api.nvim_create_augroup("format", { clear = true })
-		-- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-		-- 	pattern = "*.java,*.ts,*.lua,*.py,*.kt",
-		-- 	callback = function()
-		-- 		vim.cmd([[FormatWrite]])
-		-- 	end,
-		-- 	group = au_id,
-		-- })
-		--
-		-- vim.api.nvim_create_autocmd({ "User FormatterPost" }, {
-		-- 	pattern = "*.java, *.ts, *.lua, *.py ",
-		-- 	callback = function()
-		-- 		vim.cmd([[TSDisable rainbow | TSEnable rainbow]])
-		-- 	end,
-		-- 	group = au_id,
-		-- })
+		local au_id = vim.api.nvim_create_augroup("format", { clear = true })
+
+		vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+			pattern = "*.java,*.ts,*.lua,*.py,*.kt,*.elm,*.rs",
+			group = au_id,
+			command = "FormatWrite",
+		})
+
+		vim.api.nvim_create_autocmd({ "User" }, {
+			pattern = "FormatterPost",
+			group = au_id,
+			command = [[TSDisable rainbow | TSEnable rainbow]],
+		})
 	end,
 }

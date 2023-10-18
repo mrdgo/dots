@@ -2,11 +2,11 @@ local nvim_lsp = require("lspconfig")
 
 local servers = {
 	"ccls",
+	"cmake",
 	"elmls",
 	"html",
 	"kotlin_language_server",
 	"pylsp",
-	"rust_analyzer",
 	"lua_ls",
 	"texlab",
 	"tsserver",
@@ -17,6 +17,13 @@ local servers = {
 -- Set up lspconfig.
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 -- local capabilities = {}
+
+require("rust-tools").setup({
+	server = {
+		capabilities = require("cmp_nvim_lsp").default_capabilities(),
+		on_attach = require("lsp_on_attach").on_attach,
+	},
+})
 
 for _, lsp in ipairs(servers) do
 	nvim_lsp[lsp].setup({
