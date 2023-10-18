@@ -17,9 +17,9 @@ import XMonad.Util.EZConfig
 import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
 import XMonad.Hooks.EwmhDesktops (ewmh)
 
-import XMonad.Hooks.ManageDocks (docks, docksEventHook, manageDocks, ToggleStruts(..))
+import XMonad.Hooks.ManageDocks (avoidStruts, docks, docksEventHook, manageDocks, ToggleStruts(..))
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarStrip, xmobarColor, shorten, PP(..))
-import XMonad.Hooks.SetWMName
+import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.ManageHelpers (isDialog, doCenterFloat)
 
@@ -34,6 +34,7 @@ import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
 import XMonad.Layout.SimplestFloat (simplestFloat)
 import XMonad.Layout.IndependentScreens (countScreens)
 import XMonad.Layout.Maximize (maximizeWithPadding, maximizeRestore)
+import XMonad.Layout.ThreeColumns (ThreeCol(ThreeColMid))
 
 import XMonad.Actions.MouseResize (mouseResize)
 import XMonad.Actions.CycleWS (nextScreen)
@@ -67,20 +68,23 @@ myStartupHook = do
 tall     = renamed [Replace "tall"]
         -- $ spacingRaw False (Border 1 1 1 1) True (Border 1 1 1 1) True
         $ maximizeWithPadding 100
-        $ noBorders
+        -- $ noBorders
         $ ResizableTall 1 (3/100) (1/2) []
 monocle  = renamed [Replace "full"]
         $ noBorders
-        $ Full
+        Full
 floats = renamed [Replace "flts"]
         $ noBorders
-        $ simplestFloat
+        simplestFloat
+cols = renamed [Replace "cols"]
+        $ noBorders
+        $ ThreeColMid 1 (3/100) (1/2)
 
 -- The layout hook
 myLayoutHook = mouseResize $ windowArrange $
+    avoidStruts $
     mkToggle (NBFULL ?? NOBORDERS ?? EOT) $
-    onWorkspaces ["2", "4"] monocle $
-    tall ||| monocle ||| floats
+    tall ||| monocle ||| floats ||| cols
 
 
 splitAtColon :: String -> Maybe (String, String)
@@ -115,15 +119,7 @@ xColor a = xProp $ "*color" ++ a
 
 -- -d: dimensions, -t: title
 spawnFloatingTerm :: String -> X ()
-spawnFloatingTerm cmd = spawn $ "alacritty " ++ opt ++ " -e" ++ cmd
-    where
-        opt = col ++ lin ++ posx ++ posy ++ floatDecorator
-            where
-                col = "-o window.dimensions.columns=200 "   -- 123
-                lin = "-o window.dimensions.lines=35 "      -- 34
-                posx = "-o window.position.x=60 "           -- 10
-                posy = "-o window.position.y=40 "           -- 10
-                floatDecorator = "-t \"float\""
+spawnFloatingTerm cmd = spawn $ "wezterm start " ++ cmd
 
 replace :: Eq t => t -> t -> [t] -> [t]
 replace a b = map (\c -> if c==a then b; else c)
@@ -141,7 +137,7 @@ myKeys = [
     , ("M-S-r", spawn "xmonad --restart")       -- Restarts xmonad
     , ("M-S-c", io exitSuccess)                 -- Quits xmonad, dvorak 'e' and 'q' are too close
     , ("M-S-q", kill)                           -- kill client
-    -- , ("M-b", sendMessage ToggleStruts)         -- Toggle xmobar
+    , ("M-b", sendMessage ToggleStruts)         -- Toggle xmobar
     , ("M-t", withFocused $ windows . W.sink)   -- Tile client again
     , ("M-m", windows W.swapMaster)             -- Set master
     , ("M-n", sendMessage MirrorExpand)         -- expand tile
@@ -186,6 +182,7 @@ myKeys = [
     , ("M-u h", spawn "mocp --previous")
     , ("M-u <Space>", spawn "mocp --toggle-pause")
     , ("M-u m", spawnFloatingTerm "doas alsamixer")
+    , ("M-a", spawnFloatingTerm "taskell")
 
     -- Prompt
     , ("M-o", spawn "dmenu_run_history -fn 'Mononoki Nerd Font' -nb '#161616' -nf '#665c54' -sb '#161616' -sf '#b8bb26'")
@@ -211,21 +208,15 @@ myManageHook = insertPosition Below Newer <+> composeAll
     [ -- Firefox
       title =? "Mozilla Firefox"               --> doShift ( myWorkspaces !! 1 )
     , (className =? "Mozilla Firefox" <&&> resource =? "Dialog") --> doFloat
+    , className =? "qutebrowser"               --> doShift ( myWorkspaces !! 1 )
     , className =? "Nyxt"                      --> doShift (myWorkspaces !! 1 )
+    , stringProperty "WM_NAME" =? "taskell"    --> doFloat
 
     -- Teams
     , className =? "Microsoft Teams - Preview" --> doShift ( myWorkspaces !! 3 )
-    , title =? "Microsoft Teams-Benachrichtigung"   --> doFloat
-    -- Zoom
-    , className =? "zoom"                       --> doShift ( myWorkspaces !! 4 )
-    -- Android Dev
-    , title =? "Emulator"                      --> doShift ( myWorkspaces !! 7 )
-    , className =? "Android Emulator"          --> doShift ( myWorkspaces !! 7 )
-    , className =? "jetbrains-studio"          --> doShift ( myWorkspaces !! 8 )
-    , title =? "Android Virtual Device Manager"     --> doFloat
+    , title =? "Microsoft Teams-Benachrichtigung" --> doFloat
+    , className =? "zoom"                      --> doShift ( myWorkspaces !! 4 )
     , className =? "matplotlib"                     --> doFloat
-    , title =? "Emulator"                           --> doFloat
-    , className =? "Android Emulator"               --> doFloat
     -- Gimp
     , stringProperty "WM_WINDOW_ROLE" =? "gimp-message-dialog" --> doFloat
     -- Generic
@@ -234,9 +225,9 @@ myManageHook = insertPosition Below Newer <+> composeAll
     ]
 
 myPP :: Handle -> X ()
-myPP handle = dynamicLogWithPP $ xmobarPP
+myPP xmprocs = dynamicLogWithPP $ xmobarPP
    {
-       ppOutput = hPutStrLn handle
+       ppOutput = hPutStrLn xmprocs
        , ppCurrent = xmobarColor (xColor "10") ""                -- Current workspace in xmobar
        , ppVisible = xmobarColor (xColor "14") ""                -- Visible but not current ws
        , ppHidden = xmobarColor (xColor "13") ""                 -- Hidden workspaces in xmobar

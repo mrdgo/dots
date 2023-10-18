@@ -30,11 +30,11 @@ return {
 						--["y"] = actions.,
 						["d"] = actions.delete_buffer,
 
-						["<C-h>"] = require("telescope").extensions.send_to_harpoon.actions.send_selected_to_harpoon,
+						-- ["<C-h>"] = require("telescope").extensions.send_to_harpoon.actions.send_selected_to_harpoon,
 					},
-					i = {
-						["<C-h>"] = require("telescope").extensions.send_to_harpoon.actions.send_selected_to_harpoon,
-					},
+					-- i = {
+					-- 	["<C-h>"] = require("telescope").extensions.send_to_harpoon.actions.send_selected_to_harpoon,
+					-- },
 				},
 				file_ignore_patterns = { "node_modules", "ckeditor" },
 				vimgrep_arguments = {
@@ -83,11 +83,13 @@ return {
 				-- require("telescope.themes").get_dropdown({}),
 				-- },
 				zoxide = {
-					prompt_title = "z",
+					prompt_title = "zoxide",
 					mappings = {
 						default = {
 							after_action = function()
-								require("alpha").start()
+								if vim.api.nvim_buf_get_option(0, "filetype") ~= "alpha" then
+									require("alpha").start()
+								end
 								require("close_buffers").wipe({ type = "other" })
 							end,
 						},
@@ -99,10 +101,10 @@ return {
 		require("telescope").load_extension("fzy_native")
 		require("telescope").load_extension("media_files")
 		require("telescope").load_extension("ui-select")
-		require("telescope").load_extension("harpoon")
+		-- require("telescope").load_extension("harpoon")
 		require("telescope").load_extension("zoxide")
 		require("telescope").load_extension("noice")
-		require("telescope").load_extension("send_to_harpoon")
+		-- require("telescope").load_extension("send_to_harpoon")
 
 		local telescope_maps = {
 			u = {
@@ -158,7 +160,7 @@ return {
 		"anuvyklack/hydra.nvim",
 		"kazhala/close-buffers.nvim",
 		"folke/noice.nvim",
-		"ThePrimeagen/harpoon",
-		"asbjornhaland/telescope-send-to-harpoon.nvim",
+		-- "ThePrimeagen/harpoon",
+		-- "asbjornhaland/telescope-send-to-harpoon.nvim",
 	},
 }

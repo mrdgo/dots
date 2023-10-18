@@ -60,3 +60,5 @@ require("plug")
 -- <Leader>W saves file as root
 require("doas").setup()
 require("whitespace")
+
+require("neovide")
