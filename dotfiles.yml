@@ -1,19 +1,19 @@
 - name: Set up local workstation
   hosts: local
   roles:
-    - role: alacritty
-      tags:
-        - alacritty
-        - zsh
+    # - role: alacritty
+    #   tags:
+    #     - alacritty
+    #     - zsh
     # - role: bash
     #   tags:
     #     - bash
     #- role: doas
     #  tags:
     #    - doas
-    - role: dunst
-      tags:
-        - dunst
+    # - role: dunst
+    #   tags:
+    #     - dunst
     # - role: dwm
     #   tags:
     #     - dwm
@@ -35,9 +35,9 @@
     # - role: pacman
     #   tags:
     #     - pacman
-    - role: picom
-      tags:
-        - picom
+    # - role: picom
+    #   tags:
+    #     - picom
     - role: tmux
       tags:
         - tmux
