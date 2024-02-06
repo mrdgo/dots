@@ -1,4 +1,4 @@
-version = "0.21.3"
+version = "0.21.5"
 local xplr = xplr
 local home = os.getenv("HOME")
 
@@ -68,7 +68,7 @@ xplr.config.modes.builtin["action"].key_bindings.on_key["e"] = {
 	messages = {
 		{
 			BashExec = [===[
-            neovide --multigrid "${XPLR_FOCUS_PATH:?}"
+            nvim "${XPLR_FOCUS_PATH:?}"
             ]===],
 		},
 		"PopMode",
