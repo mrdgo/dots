@@ -40,6 +40,7 @@ set render-loading-bg           "#161616" # bg
 set render-loading-fg           "#ebdbb2" # fg
 
 # Recolor book content's color
+
 set recolor-lightcolor          "#161616" # bg
 set recolor-darkcolor           "#ebdbb2" # fg
 set recolor                     "true"
