@@ -1,5 +1,4 @@
 if vim.g.neovide then
-	-- Put anything you want to happen only in Neovide here
 	vim.o.guifont = "Mononoki Nerd Font:h14" -- text below applies for VimScript
 
 	vim.g.neovide_padding_top = 10

@@ -6,15 +6,15 @@ return {
 		"nvim-telescope/telescope.nvim",
 	},
 	ft = "haskell",
-	keys = {
-		{ "<Leader>sc", vim.lsp.codelens.run },
-		{
-			"<Leader>sh",
-			function()
-				require("haskell-tools").hoogle.hoogle_signature()
-			end,
-		},
-	},
+	keys = function()
+		return {
+			{ "<Leader>sc", vim.lsp.codelens.run },
+			{
+				"<Leader>sh",
+				require("haskell-tools").hoogle.hoogle_signature,
+			},
+		}
+	end,
 	config = true,
 	opts = {
 		hls = {

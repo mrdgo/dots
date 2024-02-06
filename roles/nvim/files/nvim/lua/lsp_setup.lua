@@ -18,13 +18,6 @@ local servers = {
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 -- local capabilities = {}
 
-require("rust-tools").setup({
-	server = {
-		capabilities = require("cmp_nvim_lsp").default_capabilities(),
-		on_attach = require("lsp_on_attach").on_attach,
-	},
-})
-
 for _, lsp in ipairs(servers) do
 	nvim_lsp[lsp].setup({
 		capabilities = capabilities,

@@ -19,8 +19,10 @@ return {
 			inverse = true, -- invert background for search, diffs, statuslines and errors
 			contrast = "hard", -- can be "hard", "soft" or empty string
 			overrides = {
+				["@variable"] = { fg = "#d5c4a1" },
 				NoiceCmdlinePopupBorder = { bg = "#161616", fg = "#ebdbb2" },
 				NoiceCmdlineIcon = { bg = "#161616", fg = "#7fa2ac" },
+				Delimiter = { fg = "#fe8019" },
 				-- TelescopeBorder = { bg = c.dark },
 				-- TelescopePromptTitle = { fg = c.dark, bg = c.soft_green },
 				-- TelescopePromptCounter = { fg = c.milk, bg = c.background_light },

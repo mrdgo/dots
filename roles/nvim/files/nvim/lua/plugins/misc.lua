@@ -1,4 +1,5 @@
 return {
+	{ "dylon/vim-antlr" },
 	{ "zsugabubus/crazy8.nvim" },
 	{ "tpope/vim-endwise" },
 	{ "tpope/vim-repeat" },
@@ -9,7 +10,7 @@ return {
 	{ "kwakzalver/duckytype.nvim", config = true },
 	{ "kevinhwang91/nvim-bqf", ft = "qf" },
 	{ "kylechui/nvim-surround", config = true },
-	-- { "karb94/neoscroll.nvim", config = true },
+	{ "karb94/neoscroll.nvim", config = true },
 	{ "Aasim-A/scrollEOF.nvim", config = true },
 	{ "shortcuts/no-neck-pain.nvim", version = "*", config = true },
 	{ "EtiamNullam/deferred-clipboard.nvim", config = true, opts = { lazy = true } },
@@ -17,17 +18,6 @@ return {
 	{ "windwp/nvim-autopairs", dependencies = { "hrsh7th/nvim-cmp" }, config = true },
 	{ "chrisgrieser/nvim-spider", lazy = true },
 	{ "kchmck/vim-coffee-script", config = false },
-	{
-		"tummetott/reticle.nvim",
-		opts = {
-			-- Define filetypes where the cursorline / cursorcolumn is never on,
-			-- regardless of the global setting
-			never = {
-				cursorline = { "alpha" },
-				cursorcolumn = { "alpha" },
-			},
-		},
-	},
 	{
 		"barrett-ruth/import-cost.nvim",
 		build = "sh install.sh npm",
@@ -63,39 +53,33 @@ return {
 		end,
 	},
 	{
-		"melkster/modicator.nvim",
-		dependencies = { "gruvbox.nvim" },
-		config = function()
-			vim.o.cursorline = true
-			vim.o.number = true
-			require("modicator").setup()
-		end,
-	},
-	{
 		"xorid/swap-split.nvim",
-		keys = {
-			{
-				"<Leader>S",
-				function()
-					require("swap-split").swap()
-				end,
-				{},
-			},
-		},
+		keys = function()
+			return {
+				{
+					"<Leader>S",
+					require("swap-split").swap,
+					{},
+				},
+			}
+		end,
 	},
 	{
 		"0x00-ketsu/maximizer.nvim",
 		config = true,
-		keys = {
-			{
-				"<Leader>mt",
-				function()
-					require("maximizer").toggle()
-				end,
-				silent = true,
-				noremap = true,
-			},
-		},
+		keys = function()
+			return {
+				{
+					"<Leader>mt",
+					require("maximizer").toggle,
+					{
+
+						silent = true,
+						noremap = true,
+					},
+				},
+			}
+		end,
 	},
 	{
 		"max397574/better-escape.nvim",
@@ -117,9 +101,13 @@ return {
 			vim.cmd([[TSInstall nu]])
 		end,
 	},
-	-- {
-	-- 	"altermo/ultimate-autopair.nvim",
-	-- 	event = { "InsertEnter", "CmdlineEnter" },
-	-- 	branch = "v0.6",
-	-- },
+	{
+		"sychen52/smart-term-esc.nvim",
+		config = function()
+			require("smart-term-esc").setup({
+				key = "<Esc>",
+				except = { "nvim", "fzf" },
+			})
+		end,
+	},
 }

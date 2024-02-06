@@ -23,7 +23,7 @@ alias ytv-best = youtube-dl -f bestvideo+bestaudio
 alias g = git
 alias ci = glab ci view (git branch | awk '/\*/{print $2}')
 alias lg = lazygit
-alias tmux = TERM=xterm-256color tmux -f ~/.config/tmux.conf
+alias tmux = tmux -f ~/.config/tmux.conf
 
 alias ... = cd ../..
 alias .t = cd ../../..

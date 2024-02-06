@@ -29,7 +29,24 @@ return {
 						cond = require("grapple").exists,
 					},
 				},
-				lualine_c = { "fileformat" },
+				lualine_c = {
+					"fileformat",
+					-- {
+					-- 	function()
+					-- 		local tabs = io.popen([[~/.config/nvim/get_tmux_info.sh]])
+					-- 		-- TODO: transform to bubbles
+					-- 		if tabs == nil then
+					-- 			return ""
+					-- 		end
+					--
+					-- 		return tabs.read(tabs, "*l")
+					-- 	end,
+					-- 	cond = function()
+					-- 		-- check if TERM_PROGRAM == tmux
+					-- 		return os.getenv("TERM_PROGRAM") == "tmux"
+					-- 	end,
+					-- },
+				},
 				lualine_x = { require("recorder").displaySlots, "diff", "diagnostics", "searchcount" },
 				lualine_y = { "filetype", "progress" },
 				-- lualine_y = { "lsp_progress", "filetype", "progress" },
@@ -50,7 +67,8 @@ return {
 			tabline = {},
 			extensions = {
 				"quickfix",
-				"chadtree",
+				"nvim-tree",
+				"lazy",
 				"toggleterm",
 				"nvim-dap-ui",
 			},

@@ -41,7 +41,7 @@ vim.o.foldmethod = "manual"
 vim.o.foldnestmax = 3
 vim.o.foldminlines = 1
 
-vim.o.clipboard = "unnamedplus"
+vim.opt.clipboard:append({ "unnamed", "unnamedplus" })
 
 -- -- solid underscore
 -- vim.cmd[[let &t_SI .= "\<Esc>[4 q"]]

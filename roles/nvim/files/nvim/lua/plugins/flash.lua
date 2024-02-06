@@ -251,46 +251,38 @@ return {
 			},
 		},
 	},
-	keys = {
-		{
-			"<leader>f",
-			mode = { "n", "x", "o" },
-			function()
-				require("flash").jump()
-			end,
-			desc = "Flash",
-		},
-		{
-			"<leader>F",
-			mode = { "n", "o", "x" },
-			function()
-				require("flash").treesitter()
-			end,
-			desc = "Flash Treesitter",
-		},
-		{
-			"r",
-			mode = "o",
-			function()
-				require("flash").remote()
-			end,
-			desc = "Remote Flash",
-		},
-		{
-			"R",
-			mode = { "o", "x" },
-			function()
-				require("flash").treesitter_search()
-			end,
-			desc = "Flash Treesitter Search",
-		},
-		{
-			"<c-s>",
-			mode = { "c" },
-			function()
-				require("flash").toggle()
-			end,
-			desc = "Toggle Flash Search",
-		},
-	},
+	keys = function()
+		return {
+			{
+				"<leader>f",
+				require("flash").jump,
+				mode = { "n", "x", "o" },
+				desc = "Flash",
+			},
+			{
+				"<leader>F",
+				require("flash").treesitter,
+				mode = { "n", "o", "x" },
+				desc = "Flash Treesitter",
+			},
+			{
+				"r",
+				require("flash").remote(),
+				mode = "o",
+				desc = "Remote Flash",
+			},
+			{
+				"R",
+				require("flash").treesitter_search,
+				mode = { "o", "x" },
+				desc = "Flash Treesitter Search",
+			},
+			{
+				"<c-s>",
+				mode = { "c" },
+				require("flash").toggle,
+				desc = "Toggle Flash Search",
+			},
+		}
+	end,
 }

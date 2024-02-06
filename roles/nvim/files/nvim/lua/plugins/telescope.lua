@@ -104,6 +104,7 @@ return {
 		-- require("telescope").load_extension("harpoon")
 		require("telescope").load_extension("zoxide")
 		require("telescope").load_extension("noice")
+		require("telescope").load_extension("tmux")
 		-- require("telescope").load_extension("send_to_harpoon")
 
 		local telescope_maps = {
@@ -140,6 +141,26 @@ return {
 				{ "b", require("telescope.builtin").git_branches },
 				{ "t", require("telescope.builtin").git_stash },
 			},
+			t = {
+				{
+					"w",
+					function()
+						require("telescope").extensions.tmux.windows({})
+					end,
+				},
+				{
+					"s",
+					function()
+						require("telescope").extensions.tmux.sessions({})
+					end,
+				},
+				{
+					"p",
+					function()
+						require("telescope").extensions.tmux.pane_contents({})
+					end,
+				},
+			},
 		}
 
 		for leader, mappings in pairs(telescope_maps) do
@@ -153,7 +174,6 @@ return {
 		"nvim-lua/plenary.nvim",
 		"nvim-telescope/telescope-fzy-native.nvim",
 		"nvim-telescope/telescope-media-files.nvim",
-		"nvim-telescope/telescope-packer.nvim",
 		"nvim-telescope/telescope-ui-select.nvim",
 		"jvgrootveld/telescope-zoxide",
 		"camgraff/telescope-tmux.nvim",

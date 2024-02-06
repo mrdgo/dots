@@ -10,36 +10,54 @@ local bundles = {
 }
 
 vim.list_extend(bundles, vim.split(vim.fn.glob("/opt/vscode-java-test/server/*.jar"), "\n"))
--- vim.list_extend(bundles, vim.split(vim.fn.glob("/home/maxim/downloads/extensions/jars/*.jar"), "\n"))
 
 local config = {
 	cmd = {
-		"/usr/lib/jvm/java-17-openjdk/bin/java",
-		"-Declipse.application=org.eclipse.jdt.ls.core.id1",
-		"-Dosgi.bundles.defaultStartLevel=4",
-		"-Declipse.product=org.eclipse.jdt.ls.core.product",
-		"-Dlog.protocol=true",
-		"-Dlog.level=ALL",
-		"-Xms1g",
-		"--add-modules=ALL-SYSTEM",
-		"--add-opens",
-		"java.base/java.util=ALL-UNNAMED",
-		"--add-opens",
-		"java.base/java.lang=ALL-UNNAMED",
-		"-javaagent:/home/maxim/.config/nvim/config/lombok.jar",
-		"-jar",
-		"/usr/share/java/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar",
-		"-configuration",
-		"/usr/share/java/jdtls/config_linux",
-		"-data",
-		workspace_folder,
+		"jdtls",
+		"--jvm-arg=-javaagent:" .. home .. "/.config/nvim/config/lombok.jar",
+
+		-- "/usr/lib/jvm/java-17-openjdk/bin/java",
+		-- "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+		-- "-Dosgi.bundles.defaultStartLevel=4",
+		-- "-Declipse.product=org.eclipse.jdt.ls.core.product",
+		-- "-Dlog.protocol=true",
+		-- "-Dlog.level=ALL",
+		-- "-Xms1g",
+		-- "--add-modules=ALL-SYSTEM",
+		-- "--add-opens",
+		-- "java.base/java.util=ALL-UNNAMED",
+		-- "--add-opens",
+		-- "java.base/java.lang=ALL-UNNAMED",
+		-- "-javaagent:" .. home .. "/.config/nvim/config/lombok.jar",
+		-- "-jar",
+		-- "/usr/share/java/jdtls/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar",
+		-- "-configuration",
+		-- "/usr/share/java/jdtls/config_linux",
+		-- "-data",
+		-- workspace_folder,
 	},
 	root_dir = jdtls.setup.find_root({ ".git", "mvnw", "gradlew" }),
 	settings = {
 		java = {
+			signatureHelp = { enabled = true },
 			format = {
 				settings = {
 					url = " https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+				},
+			},
+			configuration = {
+				-- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
+				-- And search for `interface RuntimeOption`
+				-- The `name` is NOT arbitrary, but must match one of the elements from `enum ExecutionEnvironment` in the link above
+				runtimes = {
+					{
+						name = "JavaSE-17",
+						path = "/usr/lib/jvm/java-17-openjdk/",
+					},
+					{
+						name = "JavaSE-21",
+						path = "/usr/lib/jvm/java-21-openjdk/",
+					},
 				},
 			},
 		},
@@ -79,15 +97,3 @@ local config = {
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
 jdtls.start_or_attach(config)
-
--- vim.lsp.start({
--- 	name = "sonarlint",
--- 	cmd = function(...)
--- 		os.execute(
--- 			"/usr/lib/jvm/java-11-openjdk/bin/java /opt/sonarlint-language-server/target/sonarlint-language-server-2.13.0-SNAPSHOT.jar 5055 -analyzers /opt/sonarlint-language-server/target/plugins/sonarjava.jar"
--- 		)
--- 		return vim.lsp.rpc.connect("127.0.0.1", 5055)(...)
--- 	end,
--- 	-- "/opt/sonarlint-language-server/target/...",
--- 	root_dir = vim.fs.dirname(vim.fs.find({ "pom.xml" }, { upward = true })[1]),
--- })

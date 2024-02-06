@@ -2,9 +2,25 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
 	config = function()
-		local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
+		local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
-		parser_configs.norg = {
+		parser_config.e2 = {
+			install_info = {
+				url = "https://github.com/mrdgo/tree-sitter-e2.git", -- local path or git repo
+				files = { "src/parser.c" }, -- note that some parsers also require src/scanner.c or src/scanner.cc
+			},
+			filetype = "e2", -- if filetype does not match the parser name
+		}
+
+		parser_config.e2ir = {
+			install_info = {
+				url = "~/proj/tree-sitter-e2ir", -- local path or git repo
+				files = { "src/parser.c" }, -- note that some parsers also require src/scanner.c or src/scanner.cc
+			},
+			filetype = "e2ir", -- if filetype does not match the parser name
+		}
+
+		parser_config.norg = {
 			install_info = {
 				url = "https://github.com/nvim-neorg/tree-sitter-norg",
 				files = { "src/parser.c", "src/scanner.cc" },
@@ -16,6 +32,8 @@ return {
 
 		require("nvim-treesitter.configs").setup({
 			ensure_installed = {
+				"e2",
+				"e2ir",
 				"bash",
 				"css",
 				"haskell",
@@ -30,6 +48,7 @@ return {
 				"norg",
 				"python",
 				"regex",
+				-- "review",
 				"toml",
 				"typescript",
 				"vim",

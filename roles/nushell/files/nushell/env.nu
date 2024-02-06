@@ -37,8 +37,8 @@ $env.PROMPT_INDICATOR_VI_INSERT = {|| "" }
 $env.PROMPT_INDICATOR_VI_NORMAL = {|| "" }
 $env.PROMPT_MULTILINE_INDICATOR = {|| "::: " }
 
-
-$env.BROWSER = "qutebrowser"
+$env.TERM = "xterm-256color"
+$env.BROWSER = "firefox"
 $env.PAGER = "nvimpager"
 $env.BAT_THEME = "gruvbox-dark"
 $env.EDITOR = "nvim"

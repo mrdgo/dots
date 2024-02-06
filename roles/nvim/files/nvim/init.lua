@@ -43,6 +43,12 @@ for _, plugin in pairs(default_plugins) do
 	vim.g["loaded_" .. plugin] = 1
 end
 
+vim.filetype.add({
+	e2 = "e2",
+	e2ir = "ir",
+	review = "review",
+})
+
 vim.g.python3_host_prog = "/usr/bin/python"
 
 -- vim.cmd[[scriptencoding utf-8]]
@@ -60,5 +66,7 @@ require("plug")
 -- <Leader>W saves file as root
 require("doas").setup()
 require("whitespace")
+
+-- require("tmux")
 
 require("neovide")

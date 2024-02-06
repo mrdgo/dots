@@ -3,22 +3,20 @@ return {
 	dependencies = {
 		"mfussenegger/nvim-dap",
 	},
-	keys = {
-		{
-			"<Leader>eu",
-			function()
-				require("dapui").toggle()
-			end,
-			{ desc = "dapui", exit = true },
-		},
-		{
-			"<Leader>ee",
-			function()
-				require("dapui").eval()
-			end,
-			{ desc = "eval", exit = true },
-		},
-	},
+	keys = function()
+		return {
+			{
+				"<Leader>eu",
+				require("dapui").toggle,
+				{ desc = "dapui", exit = true },
+			},
+			{
+				"<Leader>ee",
+				require("dapui").eval,
+				{ desc = "eval", exit = true },
+			},
+		}
+	end,
 	config = true,
 	opts = {
 		layouts = {
