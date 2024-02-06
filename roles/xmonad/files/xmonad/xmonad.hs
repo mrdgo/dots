@@ -61,8 +61,9 @@ myStartupHook :: X ()
 myStartupHook = do
     setWMName "LG3D"
     spawn "/usr/bin/dunst"
-    -- spawn "/usr/bin/picom"
     spawn "/home/maxim/.fehbg"
+    spawn "/usr/bin/autorandr --change"
+    spawn "/usr/bin/doas dhclient"
 
 -- spacingRaw :: smartBorder (Screenborder) sbEnabled (WindowBorder) wbEnabled
 tall     = renamed [Replace "tall"]
@@ -144,8 +145,6 @@ myKeys = [
     , ("M-S-n", sendMessage MirrorShrink)       -- shrink tile
     , ("M-g", nextScreen)       -- shrink tile
 
-    --, ("M-e", spawn "eww close-all")            -- close all widgets
-    , ("M-n", spawn "/usr/bin/firefox")
     , ("M-s", liftIO (fmap show getCurrentTime) >>= spawn . buildMaimString )
     , ("M-S-s", spawn "/usr/bin/maim --select -m 10 | xclip -selection clipboard -target image/png")
 
@@ -175,13 +174,6 @@ myKeys = [
     , ("S-<XF86AudioLowerVolume>", spawn "doas light -U 5")
     , ("S-<XF86AudioRaiseVolume>", spawn "doas light -A 5")
 
-    -- Controls for mocp music player.
-    , ("M-u o", spawnFloatingTerm "mocp")
-    , ("M-u p", spawn "mocp --play")
-    , ("M-u l", spawn "mocp --next")
-    , ("M-u h", spawn "mocp --previous")
-    , ("M-u <Space>", spawn "mocp --toggle-pause")
-    , ("M-u m", spawnFloatingTerm "doas alsamixer")
     , ("M-a", spawnFloatingTerm "taskell")
 
     -- Prompt
@@ -208,6 +200,7 @@ myManageHook = insertPosition Below Newer <+> composeAll
     [ -- Firefox
       title =? "Mozilla Firefox"               --> doShift ( myWorkspaces !! 1 )
     , (className =? "Mozilla Firefox" <&&> resource =? "Dialog") --> doFloat
+    , fmap ("join?action=join&" `isInfixOf`) className --> doFloat
     , className =? "qutebrowser"               --> doShift ( myWorkspaces !! 1 )
     , className =? "Nyxt"                      --> doShift (myWorkspaces !! 1 )
     , stringProperty "WM_NAME" =? "taskell"    --> doFloat
