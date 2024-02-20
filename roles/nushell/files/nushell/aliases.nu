@@ -24,6 +24,7 @@ alias g = git
 alias ci = glab ci view (git branch | awk '/\*/{print $2}')
 alias lg = lazygit
 alias tmux = tmux -f ~/.config/tmux.conf
+alias zj = zellij
 
 alias ... = cd ../..
 alias .t = cd ../../..
