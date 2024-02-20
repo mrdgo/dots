@@ -41,7 +41,17 @@ vim.o.foldmethod = "manual"
 vim.o.foldnestmax = 3
 vim.o.foldminlines = 1
 
-vim.opt.clipboard:append({ "unnamed", "unnamedplus" })
+vim.g.clipboard = {
+	name = "OSC 52",
+	copy = {
+		["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+		["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+	},
+	paste = {
+		["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+		["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+	},
+}
 
 -- -- solid underscore
 -- vim.cmd[[let &t_SI .= "\<Esc>[4 q"]]

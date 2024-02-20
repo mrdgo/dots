@@ -19,6 +19,12 @@ return {
 	{ "chrisgrieser/nvim-spider", lazy = true },
 	{ "kchmck/vim-coffee-script", config = false },
 	{
+		"vimpostor/vim-tpipeline",
+		config = function()
+			vim.g.tpipeline_autoembed = 0
+		end,
+	},
+	{
 		"barrett-ruth/import-cost.nvim",
 		build = "sh install.sh npm",
 		config = true,
