@@ -10,7 +10,7 @@ return {
 	{ "kwakzalver/duckytype.nvim", config = true },
 	{ "kevinhwang91/nvim-bqf", ft = "qf" },
 	{ "kylechui/nvim-surround", config = true },
-	{ "karb94/neoscroll.nvim", config = true },
+	-- { "karb94/neoscroll.nvim", config = true },
 	{ "Aasim-A/scrollEOF.nvim", config = true },
 	{ "shortcuts/no-neck-pain.nvim", version = "*", config = true },
 	{ "EtiamNullam/deferred-clipboard.nvim", config = true, opts = { lazy = true } },

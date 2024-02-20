@@ -88,4 +88,3 @@
   "vim-repeat": { "branch": "master", "commit": "24afe922e6a05891756ecf331f39a1f6743d3d5a" },
   "vim-tpipeline": { "branch": "master", "commit": "649f079a0bee19565978b82b672d831c6641d952" },
   "vimtex": { "branch": "master", "commit": "9df79e15bf035d1cfb32c11fffed38dd7b6a0501" }
-}
